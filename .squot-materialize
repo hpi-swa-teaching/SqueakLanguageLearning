@@ -1,0 +1,10 @@
+[
+	SquotTonelMapper {
+		#package : MCPackage {
+			#name : 'SqueakLanguageLearning'
+		},
+		#path : FSAbsolutePath [
+			'src'
+		]
+	}
+]
