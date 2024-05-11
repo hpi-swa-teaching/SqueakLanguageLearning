@@ -1,4 +1,4 @@
 Package {
-	#'squeak_changestamp' : true,
-	#name : #SqueakLanguageLearning
+	#name : #SqueakLanguageLearning,
+	#'squeak_changestamp' : true
 }
