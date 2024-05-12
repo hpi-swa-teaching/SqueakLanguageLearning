@@ -5,18 +5,17 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/12/2024 11:21'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 5/11/2024 19:26'
 }
 SLGSubpage >> backToHomepage [
 	SLGHomepage open.
 	self delete
-
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/12/2024 11:21'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 5/10/2024 12:10'
 }
 SLGSubpage >> createBackButton [
 	|backButton|
@@ -28,13 +27,14 @@ SLGSubpage >> createBackButton [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/12/2024 14:11'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 5/10/2024 16:56'
 }
-SLGSubpage >> initialize [ 
-super initialize.
-	"self color: Color white;
+SLGSubpage >> initialize [
+	
+	super initialize.
+	self color: Color white;
 		extent: 600@900.
 	self createBackButton
-"
+	
 ]
