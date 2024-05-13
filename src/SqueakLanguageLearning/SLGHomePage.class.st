@@ -1,9 +1,6 @@
 Class {
 	#name : #SLGHomePage,
 	#superclass : #AbstractPage,
-	#instVars : [
-		'ContentManager'
-	],
 	#category : #SqueakLanguageLearning
 }
 

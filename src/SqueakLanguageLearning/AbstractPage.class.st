@@ -2,17 +2,17 @@ Class {
 	#name : #AbstractPage,
 	#superclass : #Morph,
 	#instVars : [
-		'ContentManager'
+		'contentManager'
 	],
 	#category : #SqueakLanguageLearning
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:10'
+	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:45'
 }
 AbstractPage >> initialize [
-	|contentManager|
+
 	super initialize.
 	self color: Color white;
 		extent: 1200@900;
