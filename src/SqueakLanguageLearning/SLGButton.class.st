@@ -1,19 +1,19 @@
 Class {
-	#name : #SLGButtons,
+	#name : #SLGButton,
 	#superclass : #SimpleButtonMorph,
 	#category : #SqueakLanguageLearning
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/12/2024 13:36'
+	#'squeak_changestamp' : 'SW 5/13/2024 11:58'
 }
-SLGButtons >> initialize [
+SLGButton >> initialize [
 
 	super initialize.
 	self 
 	extent: 50@20;
-	color: Color blue.
+	color: Color lightBlue.
 	
 	
 	

@@ -6,20 +6,22 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/13/2024 10:34'
+	#'squeak_changestamp' : 'SW 5/13/2024 11:50'
 }
 AbstractPage >> initialize [
-|closeButton|
-super initialize.
-
-closeButton := FunctionButtons new.
-closeButton closeButton.
-self color: Color white;
-	extent: 1200@900;
-	borderWidth: 10;
-	borderColor: Color black;
-	center: Display center;
-	addMorph: closeButton.
-closeButton position: (self position + closeButton position).
+	super initialize.
+	self color: Color white;
+		extent: 1200@900;
+		borderWidth: 10;
+		borderColor: Color gray;
+		center: Display center.
 	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'SW 5/13/2024 11:16'
+}
+AbstractPage >> open [
+	self openInWorld
 ]

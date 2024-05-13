@@ -6,12 +6,14 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/12/2024 14:07'
+	#'squeak_changestamp' : 'SW 5/13/2024 11:48'
 }
 SLGHomePage >> initialize [
-	|topicbutton|
+	|topicbutton subpage|
 	super initialize.
-	topicbutton := TopicButtons newTopicButtonWithLabel: 'Data Structure' at: self center with: (SLGSubpage new).
+	subpage := SLGTopicPage new.
+	subpage homepage: self.
+	topicbutton := SLGTopicButton newTopicButtonWithLabel: 'Data Structure' at: self center with: subpage.
 	self addMorph: topicbutton.
 	
 ]

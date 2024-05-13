@@ -1,6 +1,9 @@
 Class {
 	#name : #SLGApp,
 	#superclass : #Object,
+	#instVars : [
+		'homepage'
+	],
 	#category : #SqueakLanguageLearning
 }
 
@@ -16,9 +19,9 @@ SLGApp class >> open [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/12/2024 13:32'
+	#'squeak_changestamp' : 'SW 5/13/2024 11:39'
 }
 SLGApp class >> openWithProgress [
 	"read from a file in the directory"
-	SLGHomePage new openInWorld center: Display center.
+	SLGHomePage new open.
 ]
