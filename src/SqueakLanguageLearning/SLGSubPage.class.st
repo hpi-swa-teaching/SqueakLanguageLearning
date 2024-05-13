@@ -1,5 +1,5 @@
 Class {
-	#name : #SLGTopicPage,
+	#name : #SLGSubPage,
 	#superclass : #AbstractPage,
 	#instVars : [
 		'homepage'
@@ -11,7 +11,7 @@ Class {
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 5/13/2024 13:24'
 }
-SLGTopicPage >> backToHomepage [
+SLGSubPage >> backToHomepage [
 	
 	self hide.
 	self homepage show
@@ -21,7 +21,7 @@ SLGTopicPage >> backToHomepage [
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 5/13/2024 12:17'
 }
-SLGTopicPage >> createBackButton [
+SLGSubPage >> createBackButton [
 
 	| backButton |
 	backButton := SLGBackButton newGoBackButton: self.
@@ -33,7 +33,7 @@ SLGTopicPage >> createBackButton [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/13/2024 11:39'
 }
-SLGTopicPage >> homepage [
+SLGSubPage >> homepage [
 	^ homepage
 ]
 
@@ -41,7 +41,7 @@ SLGTopicPage >> homepage [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/13/2024 11:39'
 }
-SLGTopicPage >> homepage: aSLGHomepage [
+SLGSubPage >> homepage: aSLGHomepage [
 	homepage := aSLGHomepage
 ]
 
@@ -49,7 +49,7 @@ SLGTopicPage >> homepage: aSLGHomepage [
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 5/13/2024 11:49'
 }
-SLGTopicPage >> initialize [
+SLGSubPage >> initialize [
 	
 	super initialize.
 	self createBackButton
