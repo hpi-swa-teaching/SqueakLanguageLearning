@@ -9,21 +9,6 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/12/2024 13:42'
-}
-TopicButtons class >> newTopicButtonWithLabel: aLabel at: aPosition [ 
-	|topicbutton|
-	topicbutton := self new.
-	topicbutton 
-	label: aLabel;
-	center: aPosition;
-	color: Color gray. "if it's completed, then it is marked with green"
-	
-	
-]
-
-{
-	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'xiaoshi 5/12/2024 14:00'
 }
 TopicButtons class >> newTopicButtonWithLabel: aLabel at: aPosition with: aSubpage [
