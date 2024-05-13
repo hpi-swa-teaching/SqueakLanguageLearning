@@ -6,14 +6,24 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 5/13/2024 11:48'
+	#'squeak_changestamp' : 'SW 5/13/2024 14:46'
 }
-SLGHomePage >> initialize [
-	|topicbutton subpage|
-	super initialize.
+SLGHomePage >> createSubpage: aLabel at: aPosition [
+	
+	| subpage topicbutton |
 	subpage := SLGTopicPage new.
 	subpage homepage: self.
-	topicbutton := SLGTopicButton newTopicButtonWithLabel: 'Data Structure' at: self center with: subpage.
+	topicbutton := SLGTopicButton newTopicButtonWithLabel: aLabel at: aPosition with: subpage.
 	self addMorph: topicbutton.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'SW 5/13/2024 14:47'
+}
+SLGHomePage >> initialize [
+	super initialize.
+	self createSubpage: 'Data Structures' at: self center.
+	self createSubpage: 'Data Types' at: self center.
 	
 ]
