@@ -30,6 +30,19 @@ SLGHomePage >> createButtonsWith: aTopicList [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi park 5/14/2024 14:26'
+}
+SLGHomePage >> createMenupage: aLabel at: aPosition [
+	
+	| menupage menubutton |
+	menupage := SLGMenuPage new.
+	menupage homepage: self.
+	menubutton := SLGMenuButton newTopicButtonWithLabel: aLabel at: aPosition with: menupage.
+	self addMorph: menubutton.
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:03'
 }
 SLGHomePage >> createSubpage: aLabel at: aPosition [
@@ -43,12 +56,13 @@ SLGHomePage >> createSubpage: aLabel at: aPosition [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/14/2024 11:15'
+	#'squeak_changestamp' : 'yegi park 5/14/2024 14:02'
 }
 SLGHomePage >> initialize [
 	super initialize.
 	"self createSubpage: 'Data Structures' at: self center."
 	"self createSubpage: 'Data Types' at: self center."
+	self createMenupage: 'Menu' at: self topLeft + (80@60).
 	self topicList ifNil: [Transcript show: 'A collection is nill'].
 	self createButtonsWith: self topicList.
 	
