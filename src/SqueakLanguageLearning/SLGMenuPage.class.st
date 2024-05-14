@@ -47,11 +47,11 @@ SLGMenuPage >> homepage: aSLGHomepage [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/13/2024 11:49'
+	#'squeak_changestamp' : 'yegi park 5/14/2024 12:29'
 }
 SLGMenuPage >> initialize [
 	
 	super initialize.
-	self createBackButton
-	
+	self createBackButton.
+		
 ]
