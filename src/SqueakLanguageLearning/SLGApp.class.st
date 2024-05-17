@@ -10,6 +10,15 @@ Class {
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'SW 5/17/2024 09:26'
+}
+SLGApp class >> initialize [
+
+	TheWorldMenu registerOpenCommand: {'SqueakLingo'. {self. #open}}
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'xiaoshi 5/12/2024 13:31'
 }
 SLGApp class >> open [
