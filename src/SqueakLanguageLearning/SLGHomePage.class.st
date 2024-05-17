@@ -9,13 +9,13 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/14/2024 12:09'
+	#'squeak_changestamp' : 'EB 5/15/2024 15:03'
 }
 SLGHomePage >> createButtonsWith: aTopicList [
   |yPos xPos buttonSpacing buttonNames |
    
       buttonSpacing := 50. 
-  	buttonNames := {'Data Types'. 'Control Flow'. 'Data Structures'. 'Classes'. 'Methods'. 'Morphic'. 'Squeak'}.
+  	buttonNames := {'Squeak'.'Morphic'.'Methods'.'Classes'.'Data Structures'.'Control Flow'.'Data Types'}.
 
 	 yPos := self bounds top + (self bounds height // 2).
 	 xPos := self bounds center x.
