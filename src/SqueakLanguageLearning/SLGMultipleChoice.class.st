@@ -11,13 +11,16 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alex 5/18/2024 20:21'
+	#'squeak_changestamp' : 'Alex 5/18/2024 21:04'
 }
 SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestions: aList1 withAnswers: aList2 [
 	^self new
 		description: aString;
 		questions: aList1;
-		answers: aList2
+		answers: aList2;
+		setup;
+		yourself
+		
 ]
 
 {
@@ -66,15 +69,39 @@ SLGMultipleChoice >> description: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/18/2024 20:33'
+	#'squeak_changestamp' : 'Alex 5/18/2024 21:49'
 }
 SLGMultipleChoice >> initialize [
 	super initialize.
-	Transcript show: self description.
 	self
 		extent: 600@400;
 		color: Color veryVeryLightGray.
-	Transcript show: self description.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/18/2024 22:24'
+}
+SLGMultipleChoice >> newTextElement: content at: position maxWidth: width [
+	| textMorph |
+	textMorph := TextMorph new
+		contents: content;
+		wrapFlag: true;
+		extent: width@0;
+		position: position;
+		lock.
+	self addMorph: textMorph.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/18/2024 22:52'
+}
+SLGMultipleChoice >> newToggleButtonWithState: state withPosition: position [
+	|a|
+	a := SLGToggleButton newToggleButtonWithState: false withPosition: position.
+	self addMorph: a.
+	
 ]
 
 {
@@ -91,4 +118,21 @@ SLGMultipleChoice >> questions [
 }
 SLGMultipleChoice >> questions: anObject [
 	questions := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/18/2024 22:57'
+}
+SLGMultipleChoice >> setup [
+	self newTextElement: self description at: 0@0 maxWidth: 600.
+	
+	questions doWithIndex: [:each :i |
+		|y margin toggleButtonWidth|
+		margin := 10.
+		toggleButtonWidth := 50.
+		y := 100 + ((toggleButtonWidth+margin)*(i-1)).
+		self newToggleButtonWithState: false withPosition: 0@y.
+		self newTextElement: each at: (toggleButtonWidth+margin)@y maxWidth: 600.
+	 ]
 ]
