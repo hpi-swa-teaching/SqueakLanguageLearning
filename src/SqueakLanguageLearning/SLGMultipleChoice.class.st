@@ -24,6 +24,17 @@ SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestio
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alex 5/18/2024 23:01'
+}
+SLGMultipleChoice class >> testMultipleChoice [
+	|a|
+	a := SLGMultipleChoice newMultipleChoiceWithDescription: 'Do we like Squeak?' 	withQuestions: #('Yes' 'No' 'Maybe') withAnswers: #(true false false).
+
+	a openInWorld
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alex 5/18/2024 20:19'
 }
