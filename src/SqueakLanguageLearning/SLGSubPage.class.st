@@ -1,6 +1,6 @@
 Class {
 	#name : #SLGSubPage,
-	#superclass : #AbstractPage,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'homepage'
 	],
@@ -47,7 +47,7 @@ SLGSubPage >> homepage: aSLGHomepage [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/13/2024 11:49'
+	#'squeak_changestamp' : 'SW 5/21/2024 10:07'
 }
 SLGSubPage >> initialize [
 	

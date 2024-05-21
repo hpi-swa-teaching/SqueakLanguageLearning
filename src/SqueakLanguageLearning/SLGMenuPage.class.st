@@ -1,6 +1,6 @@
 Class {
 	#name : #SLGMenuPage,
-	#superclass : #AbstractPage,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'homepage'
 	],

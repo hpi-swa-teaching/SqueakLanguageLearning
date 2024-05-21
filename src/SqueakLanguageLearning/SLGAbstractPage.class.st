@@ -1,5 +1,5 @@
 Class {
-	#name : #AbstractPage,
+	#name : #SLGAbstractPage,
 	#superclass : #Morph,
 	#instVars : [
 		'contentManager'
@@ -9,9 +9,9 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:45'
+	#'squeak_changestamp' : 'SW 5/18/2024 16:03'
 }
-AbstractPage >> initialize [
+SLGAbstractPage >> initialize [
 
 	super initialize.
 	self color: Color white;
@@ -19,7 +19,7 @@ AbstractPage >> initialize [
 		borderWidth: 10;
 		borderColor: Color gray;
 		center: Display center.
-	contentManager := ContentManager new. "add a ContentManager to each page"
+	contentManager := SLGContentManager new. "add a ContentManager to each page"
 	contentManager page: self.
 	
 ]
@@ -28,6 +28,6 @@ AbstractPage >> initialize [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'SW 5/13/2024 11:16'
 }
-AbstractPage >> open [
+SLGAbstractPage >> open [
 	self openInWorld
 ]

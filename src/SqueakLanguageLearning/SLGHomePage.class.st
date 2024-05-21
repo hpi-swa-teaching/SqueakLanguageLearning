@@ -1,6 +1,6 @@
 Class {
 	#name : #SLGHomePage,
-	#superclass : #AbstractPage,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'topicList'
 	],
@@ -9,7 +9,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/15/2024 15:03'
+	#'squeak_changestamp' : 'SW 5/18/2024 16:04'
 }
 SLGHomePage >> createButtonsWith: aTopicList [
   |yPos xPos buttonSpacing buttonNames |
@@ -19,8 +19,6 @@ SLGHomePage >> createButtonsWith: aTopicList [
 
 	 yPos := self bounds top + (self bounds height // 2).
 	 xPos := self bounds center x.
-  
- 	buttonNames ifNil: [Transcript show: 'A collection is nil.'].	
 	 	 
 	buttonNames do: [ :buttonName |
           self createSubpage: buttonName at: xPos @ yPos.
@@ -56,14 +54,11 @@ SLGHomePage >> createSubpage: aLabel at: aPosition [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi park 5/14/2024 14:02'
+	#'squeak_changestamp' : 'SW 5/18/2024 16:03'
 }
 SLGHomePage >> initialize [
 	super initialize.
-	"self createSubpage: 'Data Structures' at: self center."
-	"self createSubpage: 'Data Types' at: self center."
 	self createMenupage: 'Menu' at: self topLeft + (80@60).
-	self topicList ifNil: [Transcript show: 'A collection is nill'].
 	self createButtonsWith: self topicList.
 	
 	
