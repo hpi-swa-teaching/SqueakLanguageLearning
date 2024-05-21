@@ -27,6 +27,24 @@ SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestio
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'xiaoshi 5/21/2024 12:20'
+}
+SLGMultipleChoice class >> pageMargin [
+
+	^ (self class pageSize) x / 60.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'xiaoshi 5/21/2024 12:16'
+}
+SLGMultipleChoice class >> pageSize [
+
+	^ 600@400.
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alex 5/19/2024 00:08'
 }
 SLGMultipleChoice class >> testMultipleChoice [
@@ -82,41 +100,44 @@ SLGMultipleChoice >> description: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/18/2024 23:24'
+	#'squeak_changestamp' : 'xiaoshi 5/21/2024 12:17'
 }
 SLGMultipleChoice >> initialize [
 	super initialize.
 	self
-		extent: 600@400;
+		extent: self class pageSize;
+		center: Display center; "initialize at center"
 		color: Color veryVeryLightGray;
 		toggleButtonList: OrderedCollection new.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/19/2024 00:03'
+	#'squeak_changestamp' : 'xiaoshi 5/21/2024 12:01'
 }
-SLGMultipleChoice >> newTextElement: content at: position maxWidth: width [
+SLGMultipleChoice >> newTextElement: aContent at: aPosition maxWidth: aWidth [
 	| textMorph |
 	textMorph := TextMorph new
-		contents: content;
+		contents: aContent;
 		wrapFlag: true;
-		extent: width@0;
-		position: position;
+		extent: aWidth@0;
+		"position: position;"
 		lock.
 	self addMorph: textMorph.
+	textMorph position: self position + aPosition.
 	^ textMorph
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/18/2024 23:34'
+	#'squeak_changestamp' : 'xiaoshi 5/21/2024 11:59'
 }
-SLGMultipleChoice >> newToggleButtonWithState: state withPosition: position [
+SLGMultipleChoice >> newToggleButtonWithState: aState withPosition: aPosition [
 	|a|
-	a := SLGToggleButton newToggleButtonWithState: false withPosition: position.
+	a := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition.
 	self addMorph: a.
 	self toggleButtonList add: a.
+	a position: (self position) + aPosition.
 	
 ]
 
@@ -138,11 +159,11 @@ SLGMultipleChoice >> questions: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/19/2024 00:04'
+	#'squeak_changestamp' : 'xiaoshi 5/21/2024 12:42'
 }
 SLGMultipleChoice >> setup [
-	| submitButton y |	
-	self newTextElement: self description at: 0@0 maxWidth: 600.
+	| submitButton y|
+	self newTextElement: self description at: 0@0 maxWidth:600.
 	
 	y := 100.
 	questions doWithIndex: [:each :i |
@@ -158,11 +179,11 @@ SLGMultipleChoice >> setup [
 		y :=  y + (toggleButtonWidth+margin).
 	 ].
 	submitButton := SLGButton new
-		label: 'Submit';
-		position: 0@(y+10).
+		label: 'Submit'.
 	submitButton target: [self validate].
 	submitButton actionSelector: #value.
 	self addMorph: submitButton.
+	submitButton position: self position + (0@(y+10)).
 	
 	self statusText: (self newTextElement: ' ' at: 0@(y+10+60) maxWidth: 600).
 	
