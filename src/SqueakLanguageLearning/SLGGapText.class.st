@@ -6,7 +6,8 @@ Class {
 		'gapText',
 		'answerText',
 		'queryString',
-		'answerString'
+		'answerString',
+		'statusText'
 	],
 	#category : #SqueakLanguageLearning
 }
@@ -59,7 +60,7 @@ SLGGapText >> answerText: aString [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/22/2024 14:40'
+	#'squeak_changestamp' : 'SW 5/22/2024 15:43'
 }
 SLGGapText >> compareStrings [
 
@@ -71,8 +72,8 @@ SLGGapText >> compareStrings [
 	answerString := (self answerText select: [:char | char isSeparator not]) asLowercase.
 	
 	(currentString = answerString)
-		ifTrue: [Transcript show: 'Success!'; cr.]
-		ifFalse: [Transcript show: 'Wrong answer!'; cr.]
+		ifTrue: [self statusText contents: 'Success!'. Transcript show: 'Success!'; cr.]
+		ifFalse: [self statusText contents: 'Wrong Answer!'. Transcript show: 'Wrong answer!'; cr.]
 	
 	
 ]
@@ -94,7 +95,7 @@ SLGGapText >> createGapText [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/22/2024 14:52'
+	#'squeak_changestamp' : 'SW 5/22/2024 15:22'
 }
 SLGGapText >> createSubmitButton [
 
@@ -141,6 +142,24 @@ SLGGapText >> initialize [
 ]
 
 {
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 5/22/2024 16:00'
+}
+SLGGapText >> newTextElement: content at: aPosition maxWidth: width [
+
+	| textMorph |
+	textMorph := TextMorph new
+		contents: content;
+		wrapFlag: true;
+		extent: width@0;
+		center: aPosition;
+		lock.
+	self addMorph: textMorph.
+	^ textMorph
+	
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/22/2024 14:31'
 }
@@ -158,12 +177,29 @@ SLGGapText >> queryString: aTextMorph [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/22/2024 14:51'
+	#'squeak_changestamp' : 'SW 5/22/2024 16:04'
 }
 SLGGapText >> setup [
 
 	self createGapText.
 	self createSubmitButton.
+	self statusText: (self newTextElement: ' ' at: (self center + (0@130)) maxWidth: 170). 
 	self openInWorld	
 	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 5/22/2024 15:35'
+}
+SLGGapText >> statusText [
+	^ statusText
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 5/22/2024 15:35'
+}
+SLGGapText >> statusText: anObject [
+	statusText := anObject
 ]
