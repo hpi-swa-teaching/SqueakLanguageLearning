@@ -22,7 +22,7 @@ DragAndDropMorph class >> newWithTask: aTask [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 22:18'
+	#'squeak_changestamp' : 'EB 5/24/2024 22:24'
 }
 DragAndDropMorph >> createItemsAndTargets [
     
@@ -102,7 +102,7 @@ DragAndDropMorph >> highlightTarget [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 12:19'
+	#'squeak_changestamp' : 'EB 5/24/2024 22:35'
 }
 DragAndDropMorph >> initializeWithTask: aTask [
 
@@ -110,7 +110,7 @@ DragAndDropMorph >> initializeWithTask: aTask [
         dragAndDropTask := aTask.
         itemMorphs := OrderedCollection new.
         targetMorphs := OrderedCollection new.
-        itemTargetMap := Dictionary new.
+        itemTargetMap := OrderedDictionary new.
 
         self setupLayout.
         self setupSubmitButton.
@@ -122,14 +122,13 @@ DragAndDropMorph >> initializeWithTask: aTask [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 22:14'
+	#'squeak_changestamp' : 'EB 5/24/2024 22:26'
 }
 DragAndDropMorph >> isAnswerCorrect [
 
 	| isValid itemsAtTarget anAnswer |
 	isValid := true.
 	
-	Transcript clear.
 	Transcript show: 'ItemTargetMap: '.
 	itemTargetMap keysAndValuesDo: [:key :value | Transcript show: key; show: ': '; show: value; cr. ].
 	

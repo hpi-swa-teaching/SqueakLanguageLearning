@@ -36,7 +36,7 @@ DraggableItemMorph >> drag: anEvent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 22:09'
+	#'squeak_changestamp' : 'EB 5/24/2024 22:31'
 }
 DraggableItemMorph >> handleDrop: anEvent [
 
