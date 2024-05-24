@@ -1,5 +1,5 @@
 Class {
-	#name : #ContentManager,
+	#name : #SLGContentManager,
 	#superclass : #Object,
 	#instVars : [
 		'topicList',
@@ -13,7 +13,7 @@ Class {
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:37'
 }
-ContentManager >> initialize [
+SLGContentManager >> initialize [
 	
 	"keeps an OrderedCollection storing the topics as strings and a Dictionary storing the progress as booleans. Initialized by owner page."
 	super initialize.
@@ -24,7 +24,7 @@ ContentManager >> initialize [
 	#category : #accessing,
 	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:07'
 }
-ContentManager >> page [
+SLGContentManager >> page [
 	^ page
 ]
 
@@ -32,7 +32,7 @@ ContentManager >> page [
 	#category : #accessing,
 	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:07'
 }
-ContentManager >> page: anObject [
+SLGContentManager >> page: anObject [
 	page := anObject
 ]
 
@@ -40,7 +40,7 @@ ContentManager >> page: anObject [
 	#category : #accessing,
 	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:07'
 }
-ContentManager >> progressList [
+SLGContentManager >> progressList [
 	^ progressList
 ]
 
@@ -48,7 +48,7 @@ ContentManager >> progressList [
 	#category : #accessing,
 	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:35'
 }
-ContentManager >> progressList: aList [	
+SLGContentManager >> progressList: aList [	
 	"this is a Dictionary of {topic : bool} that indicates if a topic is completed."	
 	aList do: [:t | progressList add: #t->false].
 	
@@ -65,7 +65,7 @@ ContentManager >> progressList: aList [
 	#category : #accessing,
 	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:07'
 }
-ContentManager >> topicList [
+SLGContentManager >> topicList [
 	^ topicList
 ]
 
@@ -73,7 +73,7 @@ ContentManager >> topicList [
 	#category : #accessing,
 	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:18'
 }
-ContentManager >> topicList: aList [
+SLGContentManager >> topicList: aList [
 
 	topicList := aList
 ]

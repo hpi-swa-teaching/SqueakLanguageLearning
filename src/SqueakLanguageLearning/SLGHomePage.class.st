@@ -1,6 +1,6 @@
 Class {
 	#name : #SLGHomePage,
-	#superclass : #AbstractPage,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'topicList'
 	],
@@ -9,20 +9,17 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/15/2024 15:03'
+	#'squeak_changestamp' : 'SW 5/21/2024 20:55'
 }
 SLGHomePage >> createButtonsWith: aTopicList [
-  |yPos xPos buttonSpacing buttonNames |
+  |yPos xPos buttonSpacing |
    
-      buttonSpacing := 50. 
-  	buttonNames := {'Squeak'.'Morphic'.'Methods'.'Classes'.'Data Structures'.'Control Flow'.'Data Types'}.
+      buttonSpacing := 50.
 
 	 yPos := self bounds top + (self bounds height // 2).
 	 xPos := self bounds center x.
-  
- 	buttonNames ifNil: [Transcript show: 'A collection is nil.'].	
 	 	 
-	buttonNames do: [ :buttonName |
+	self topicList do: [ :buttonName |
           self createSubpage: buttonName at: xPos @ yPos.
           yPos := yPos - buttonSpacing.
       ].
@@ -43,7 +40,7 @@ SLGHomePage >> createMenupage: aLabel at: aPosition [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/13/2024 22:03'
+	#'squeak_changestamp' : 'SW 5/21/2024 20:53'
 }
 SLGHomePage >> createSubpage: aLabel at: aPosition [
 	
@@ -56,14 +53,11 @@ SLGHomePage >> createSubpage: aLabel at: aPosition [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi park 5/14/2024 14:02'
+	#'squeak_changestamp' : 'SW 5/18/2024 16:03'
 }
 SLGHomePage >> initialize [
 	super initialize.
-	"self createSubpage: 'Data Structures' at: self center."
-	"self createSubpage: 'Data Types' at: self center."
 	self createMenupage: 'Menu' at: self topLeft + (80@60).
-	self topicList ifNil: [Transcript show: 'A collection is nill'].
 	self createButtonsWith: self topicList.
 	
 	
@@ -74,16 +68,8 @@ SLGHomePage >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/14/2024 10:25'
+	#'squeak_changestamp' : 'SW 5/21/2024 20:54'
 }
 SLGHomePage >> topicList [
-	^ topicList
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/14/2024 10:26'
-}
-SLGHomePage >> topicList: aTopicCollection [	
-	topicList := aTopicCollection
+	^ {'Squeak'.'Morphic'.'Methods'.'Classes'.'Data Structures'.'Control Flow'.'Data Types'}
 ]
