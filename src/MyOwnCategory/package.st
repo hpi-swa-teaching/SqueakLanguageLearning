@@ -1,4 +1,4 @@
 Package {
-	#'squeak_changestamp' : true,
-	#name : #MyOwnCategory
+	#name : #MyOwnCategory,
+	#'squeak_changestamp' : true
 }

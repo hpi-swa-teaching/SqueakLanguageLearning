@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'topicButtons'
 	],
-	#category : #MyOwnCategory
+	#category : #'MyOwnCategory-Pages'
 }
 
 {

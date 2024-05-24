@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'lessonPages'
 	],
-	#category : #MyOwnCategory
+	#category : #'MyOwnCategory-Pages'
 }
 
 {

@@ -1,7 +1,7 @@
 Class {
 	#name : #Page,
 	#superclass : #Morph,
-	#category : #MyOwnCategory
+	#category : #'MyOwnCategory-Pages'
 }
 
 {

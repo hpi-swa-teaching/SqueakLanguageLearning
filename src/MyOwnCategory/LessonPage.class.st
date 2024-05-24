@@ -1,7 +1,7 @@
 Class {
 	#name : #LessonPage,
 	#superclass : #Page,
-	#category : #MyOwnCategory
+	#category : #'MyOwnCategory-Pages'
 }
 
 {
