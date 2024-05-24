@@ -1,0 +1,109 @@
+Class {
+	#name : #DraggableItemMorph,
+	#superclass : #Morph,
+	#instVars : [
+		'label',
+		'parentMorph',
+		'isDragging',
+		'offset'
+	],
+	#category : #MyOwnCategory
+}
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/22/2024 13:38'
+}
+DraggableItemMorph class >> newWithLabel: aString inMorph: aDragAndDropMorph [
+
+	^ self new initializeWithLabel: aString inMorph: aDragAndDropMorph
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/23/2024 11:57'
+}
+DraggableItemMorph >> drag: anEvent [
+
+        isDragging ifTrue: [
+            self position: anEvent position - offset.
+        ]
+	
+	
+
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/23/2024 12:00'
+}
+DraggableItemMorph >> handleDrop: anEvent [
+
+        isDragging := false.
+        parentMorph ifNotNil: [
+            parentMorph updateItemTargetMap: self target: (parentMorph findTargetUnderCursor).
+        ].
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/23/2024 11:54'
+}
+DraggableItemMorph >> initializeWithLabel: aString inMorph: aMorph [
+
+        self initialize.
+        label := aString.
+        isDragging := false.
+        offset := 0@0.
+        parentMorph := aMorph. "Set the parent morph"
+        self position: 0@0. "Initial position"
+        self extent: 100@50. "Set dimensions"
+        self borderWidth: 1.
+        self borderColor: Color black.
+        self color: Color lightGray.
+        self addMorph: (StringMorph contents: aString).
+
+        self on: #mouseDown send: #startDrag: to: self.
+        self on: #mouseUp send: #handleDrop: to: self.
+        self on: #mouseMove send: #drag: to: self.
+        ^ self
+	
+
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 5/21/2024 19:29'
+}
+DraggableItemMorph >> label [
+
+	^ label
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/22/2024 21:46'
+}
+DraggableItemMorph >> setupLabel [
+
+        | labelMorph |
+        labelMorph := StringMorph contents: label.
+        labelMorph center: self center.
+        self addMorph: labelMorph
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/23/2024 11:59'
+}
+DraggableItemMorph >> startDrag: anEvent [
+        
+	isDragging := true.
+	offset := anEvent position - self position.
+	
+	
+	
+
+]

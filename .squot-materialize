@@ -6,5 +6,11 @@
 		#path : FSAbsolutePath [
 			'src'
 		]
+	},
+	SquotTonelMapper {
+		#package : MCPackage {
+			#name : 'MyOwnCategory'
+		},
+		#path : @4
 	}
 ]
