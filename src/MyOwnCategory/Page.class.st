@@ -1,6 +1,9 @@
 Class {
 	#name : #Page,
 	#superclass : #Morph,
+	#instVars : [
+		'dataReader'
+	],
 	#category : #'MyOwnCategory-Pages'
 }
 
@@ -58,7 +61,7 @@ Page >> hide [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 21:12'
+	#'squeak_changestamp' : 'EB 5/26/2024 14:38'
 }
 Page >> initialize [
 	
@@ -67,6 +70,7 @@ Page >> initialize [
 		color: Color white; 
 		center: Display center.
 	self addBackButton.
+	dataReader := DataAccessObject new.
 		
 	^self
 	

@@ -2,7 +2,8 @@ Class {
 	#name : #HomePage,
 	#superclass : #Page,
 	#instVars : [
-		'topicPages'
+		'topicPages',
+		'topics'
 	],
 	#classInstVars : [
 		'topicButtons'
@@ -12,12 +13,13 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 21:18'
+	#'squeak_changestamp' : 'EB 5/26/2024 15:52'
 }
 HomePage >> addButtons [
 
         | topics |
-        topics := #('Squeak' 'Morphic' 'Methods' 'Classes' 'Data Structures' 'Control Flow' 'Data Types').
+	topics := dataReader readFileAsCollection: '/Applications/SWT2024.app/Contents/Resources/list-of-topics.txt'.
+        "topics := #('Squeak' 'Morphic' 'Methods' 'Classes' 'Data Structures' 'Control Flow' 'Data Types')."
         topics withIndexDo: [:topic :index |
             | button |
 	button := SimpleButtonMorph new label: topic.
@@ -33,12 +35,14 @@ HomePage >> addButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:29'
+	#'squeak_changestamp' : 'EB 5/26/2024 15:52'
 }
 HomePage >> createTopicPages [
+
         | topics |
-        topics := #('Squeak' 'Morphic' 'Methods' 'Classes' 'Data Structures' 'Control Flow' 'Data Types').
-        topics do: [:topic |
+	topics := dataReader readFileAsCollection: '/Applications/SWT2024.app/Contents/Resources/list-of-topics.txt'.
+	"topics := #('Squeak' 'Morphic' 'Methods' 'Classes' 'Data Structures' 'Control Flow' 'Data Types') asOrderedCollection. "
+	topics do: [:topic |
             | topicPage |
             topicPage := TopicPage new.
             topicPage addTitle: topic.

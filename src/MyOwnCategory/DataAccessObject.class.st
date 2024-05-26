@@ -1,7 +1,7 @@
 Class {
 	#name : #DataAccessObject,
 	#superclass : #Object,
-	#category : #'MyOwnCategory-Core'
+	#category : #MyOwnCategory
 }
 
 {
@@ -11,6 +11,22 @@ Class {
 DataAccessObject class >> new [
 
 	^super new initialize
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/26/2024 15:52'
+}
+DataAccessObject >> readFileAsCollection: fileName [
+
+	| contents linesArray |
+	contents := self readFromFile: fileName.
+	contents ifNotNil: [
+            "Split contents into lines"
+            linesArray := contents findTokens: ','.
+            ^ linesArray.
+	] ifNil: [ ^ nil ]
 	
 ]
 

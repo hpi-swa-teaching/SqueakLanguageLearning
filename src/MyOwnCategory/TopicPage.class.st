@@ -9,7 +9,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:25'
+	#'squeak_changestamp' : 'EB 5/26/2024 15:42'
 }
 TopicPage >> createSubtopicPagesFor: aTopic [
 
@@ -29,7 +29,7 @@ TopicPage >> createSubtopicPagesFor: aTopic [
             button actionSelector: #navigateToSubTopic:.
             button arguments: { subTopic }.
             self addMorph: button.
-        ]. "Period or right bracket expected ->"
+        ]. 
 ]
 
 {
