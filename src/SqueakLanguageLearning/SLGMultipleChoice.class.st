@@ -7,24 +7,11 @@ Class {
 		'answers',
 		'toggleButtonList',
 		'statusText',
-		'exercisePage'
+		'exercisePage',
+		'singleChoice'
 	],
-	#category : #SqueakLanguageLearning
+	#category : 'SqueakLanguageLearning'
 }
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alex 5/18/2024 21:04'
-}
-SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestions: aList1 withAnswers: aList2 [
-	^self new
-		description: aString;
-		questions: aList1;
-		answers: aList2;
-		setup;
-		yourself
-		
-]
 
 {
 	#category : #'as yet unclassified',
@@ -38,6 +25,21 @@ SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestio
 		answers: aList2;
 		exercisePage: aSubpage;
 		setupExercisepage;
+		yourself
+		
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:26'
+}
+SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestions: aList1 withAnswers: aList2 withSingleChoice: aBoolean [
+	^self new
+		description: aString;
+		questions: aList1;
+		answers: aList2;
+		singleChoice: aBoolean;
+		setup;
 		yourself
 		
 ]
@@ -62,11 +64,11 @@ SLGMultipleChoice class >> pageSize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alex 5/19/2024 00:08'
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:59'
 }
 SLGMultipleChoice class >> testMultipleChoice [
 	|a|
-	a := SLGMultipleChoice newMultipleChoiceWithDescription: 'Do we like Squeak?' 	withQuestions: #('Yes' 'No' 'Maybe') withAnswers: #(true true false).
+	a := SLGMultipleChoice newMultipleChoiceWithDescription: 'Do we like Squeak?' 	withQuestions: #('Yes' 'No' 'Maybe') withAnswers: #(true false false) withSingleChoice: false.
 
 	a openInWorld
 ]
@@ -177,19 +179,6 @@ SLGMultipleChoice >> newTextElement: aContent at: aPosition maxWidth: aWidth onP
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 5/26/2024 13:42'
-}
-SLGMultipleChoice >> newToggleButtonWithState: aState withPosition: aPosition [
-	|a|
-	a := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition.
-	(self exercisePage) addMorph: a.
-	self toggleButtonList add: a.
-	a position: ((self exercisePage) position) + aPosition.
-	
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:00'
 }
 SLGMultipleChoice >> newToggleButtonWithState: aState withPosition: aPosition onPage: anExercisepage [
@@ -198,6 +187,18 @@ SLGMultipleChoice >> newToggleButtonWithState: aState withPosition: aPosition on
 	anExercisepage addMorph: a.
 	self toggleButtonList add: a.
 	a position: (anExercisepage position) + aPosition.
+	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:54'
+}
+SLGMultipleChoice >> newToggleButtonWithState: state withPosition: position withButtonPressed: aBlock [
+	|a|
+	a := SLGToggleButton newToggleButtonWithState: false withPosition: position withButtonPressed: aBlock.
+	self addMorph: a.
+	self toggleButtonList add: a.
 	
 ]
 
@@ -219,7 +220,20 @@ SLGMultipleChoice >> questions: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 5/21/2024 12:42'
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:55'
+}
+SLGMultipleChoice >> resetToggleButtons [
+	self toggleButtonList doWithIndex: [:each :i |
+		self singleChoice ifTrue: [
+			each state: false.
+			each update.
+		]
+	].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:25'
 }
 SLGMultipleChoice >> setup [
 	| submitButton y|
@@ -229,9 +243,10 @@ SLGMultipleChoice >> setup [
 	questions doWithIndex: [:each :i |
 		|margin toggleButtonWidth|
 		margin := 10.
-		toggleButtonWidth := 50.
+		toggleButtonWidth := 50. 
 		
-		self newToggleButtonWithState: false withPosition: 0@y.
+		self newToggleButtonWithState: false withPosition: 0@y withButtonPressed: [
+			self resetToggleButtons].
 		self newTextElement: each at: (toggleButtonWidth+margin)@y maxWidth: 600.
 		
 		Transcript show: y; cr.
@@ -249,7 +264,6 @@ SLGMultipleChoice >> setup [
 	
 	
 	
-
 ]
 
 {
@@ -286,6 +300,22 @@ SLGMultipleChoice >> setupExercisepage [
 	
 	
 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:25'
+}
+SLGMultipleChoice >> singleChoice [
+	^ singleChoice
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:25'
+}
+SLGMultipleChoice >> singleChoice: anObject [
+	singleChoice := anObject
 ]
 
 {

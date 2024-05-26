@@ -2,20 +2,38 @@ Class {
 	#name : #SLGToggleButton,
 	#superclass : #SLGButton,
 	#instVars : [
-		'state'
+		'state',
+		'buttonPressed'
 	],
 	#category : #SqueakLanguageLearning
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alex 5/18/2024 22:16'
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:35'
 }
-SLGToggleButton class >> newToggleButtonWithState: aBoolean withPosition: aPoint [
+SLGToggleButton class >> newToggleButtonWithState: aBoolean withPosition: aPoint withButtonPressed: aBlock [
 	^self new
 		state: aBoolean;
 		position: aPoint;
+		buttonPressed: aBlock;
 		yourself
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:32'
+}
+SLGToggleButton >> buttonPressed [
+	^ buttonPressed
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:32'
+}
+SLGToggleButton >> buttonPressed: anObject [
+	buttonPressed := anObject
 ]
 
 {
@@ -34,9 +52,10 @@ SLGToggleButton >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alex 5/18/2024 22:42'
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:54'
 }
 SLGToggleButton >> onPressed [
+	self buttonPressed value.
 	self toggle.
 	self update
 ]
