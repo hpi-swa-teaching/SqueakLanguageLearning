@@ -7,7 +7,7 @@ Class {
 		'isDragging',
 		'offset'
 	],
-	#category : #MyOwnCategory
+	#category : #'MyOwnCategory-Tasks'
 }
 
 {
@@ -51,7 +51,7 @@ DraggableItemMorph >> handleDrop: anEvent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 11:54'
+	#'squeak_changestamp' : 'EB 5/25/2024 10:54'
 }
 DraggableItemMorph >> initializeWithLabel: aString inMorph: aMorph [
 
@@ -70,9 +70,9 @@ DraggableItemMorph >> initializeWithLabel: aString inMorph: aMorph [
         self on: #mouseDown send: #startDrag: to: self.
         self on: #mouseUp send: #handleDrop: to: self.
         self on: #mouseMove send: #drag: to: self.
-        ^ self
-	
 
+	^ self
+	
 ]
 
 {
@@ -83,18 +83,6 @@ DraggableItemMorph >> label [
 
 	^ label
 	
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/22/2024 21:46'
-}
-DraggableItemMorph >> setupLabel [
-
-        | labelMorph |
-        labelMorph := StringMorph contents: label.
-        labelMorph center: self center.
-        self addMorph: labelMorph
 ]
 
 {

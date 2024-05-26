@@ -8,7 +8,7 @@ Class {
 		'itemTargetMap',
 		'submitButton'
 	],
-	#category : #MyOwnCategory
+	#category : #'MyOwnCategory-Tasks'
 }
 
 {
@@ -82,13 +82,15 @@ DragAndDropMorph >> createTargetWithLabel: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/22/2024 21:33'
+	#'squeak_changestamp' : 'EB 5/24/2024 23:28'
 }
 DragAndDropMorph >> findTargetUnderCursor [
 
-        | cursorPos |
-        cursorPos := Sensor cursorPoint.
-        ^ targetMorphs detect: [:target | target bounds containsPoint: cursorPos] ifNone: [nil]
+	| cursorPos |
+	cursorPos := Sensor cursorPoint.
+	
+	^ targetMorphs detect: [:target | target bounds containsPoint: cursorPos] ifNone: [nil]
+	
 ]
 
 {
@@ -122,34 +124,23 @@ DragAndDropMorph >> initializeWithTask: aTask [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 22:26'
+	#'squeak_changestamp' : 'EB 5/24/2024 23:25'
 }
 DragAndDropMorph >> isAnswerCorrect [
 
-	| isValid itemsAtTarget anAnswer |
-	isValid := true.
-	
-	Transcript show: 'ItemTargetMap: '.
-	itemTargetMap keysAndValuesDo: [:key :value | Transcript show: key; show: ': '; show: value; cr. ].
-	
+	| isValid itemsAtTarget anAnswer |	
 	itemsAtTarget := OrderedCollection new.
 	itemTargetMap keysAndValuesDo: [:target :item |
-		Transcript show: 'Checking target: ', target asString, ' with item: ', item asString; cr.
 		(item isKindOf: DraggableItemMorph) ifTrue: [
-			Transcript show: 'Item label: ', item label asString; cr.
-			Transcript show: 'Target label: ', target label asString; cr.
 			itemsAtTarget add: item label.
-			Transcript show: itemsAtTarget; cr.
 		].
 	].
 	
-	anAnswer := itemsAtTarget asArray.  
-	Transcript show: anAnswer; cr.
-	isValid := isValid and: (dragAndDropTask isAnswerCorrect: anAnswer).
+	anAnswer := itemsAtTarget asArray.
+	isValid := dragAndDropTask isAnswerCorrect: anAnswer.
 
 	self inform: (isValid ifTrue: ['Correct!'] ifFalse: ['Incorrect, try again.']).
-	
-	
+		
 ]
 
 {
@@ -158,14 +149,6 @@ DragAndDropMorph >> isAnswerCorrect [
 }
 DragAndDropMorph >> itemTargetMap [
 	^ itemTargetMap
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/24/2024 21:02'
-}
-DragAndDropMorph >> itemTargetMap: anObject [
-	itemTargetMap := anObject
 ]
 
 {

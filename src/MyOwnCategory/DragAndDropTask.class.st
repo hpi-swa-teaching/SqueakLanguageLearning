@@ -5,7 +5,7 @@ Class {
 		'taskDescription',
 		'correctAnswer'
 	],
-	#category : #MyOwnCategory
+	#category : #'MyOwnCategory-Tasks'
 }
 
 {
