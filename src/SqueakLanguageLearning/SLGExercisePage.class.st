@@ -25,7 +25,7 @@ SLGExercisePage >> exercise: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:22'
+	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:35'
 }
 SLGExercisePage >> initialize [
 	
@@ -33,7 +33,7 @@ SLGExercisePage >> initialize [
 	super initialize.
 	"multiplechoice should take a subpage as owner morph and display the content based on subpage"
 	"test multi choice question"
-	multichoice := SLGMultipleChoice newMultipleChoiceWithDescription: 'Do we like Squeak?'  withQuestions: #('Yes' 'No' 'Maybe') withAnswers: #(true true false) onSubpage: self. 
+	multichoice := SLGMultipleChoice newMultipleChoiceWithDescription: 'Do we like Squeak?'  withQuestions: #('Yes' 'No' 'Maybe') withAnswers: #(true true false) withSingleChoice: true on: self. 
 	self exercise: multichoice.
 	
 ]

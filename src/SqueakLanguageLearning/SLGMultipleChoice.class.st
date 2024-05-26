@@ -46,6 +46,22 @@ SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestio
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:36'
+}
+SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestions: aList1 withAnswers: aList2 withSingleChoice: aBoolean on: anExercisePage [
+	^self new
+		description: aString;
+		questions: aList1;
+		answers: aList2;
+		singleChoice: aBoolean;
+		exercisePage: anExercisePage;
+		setup;
+		yourself
+		
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'xiaoshi 5/21/2024 12:20'
 }
 SLGMultipleChoice class >> pageMargin [
@@ -71,18 +87,6 @@ SLGMultipleChoice class >> testMultipleChoice [
 	a := SLGMultipleChoice newMultipleChoiceWithDescription: 'Do we like Squeak?' 	withQuestions: #('Yes' 'No' 'Maybe') withAnswers: #(true false false) withSingleChoice: false.
 
 	a openInWorld
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/18/2024 20:19'
-}
-SLGMultipleChoice >> addTextMorph [
-	| textMorph |
-	textMorph := StringMorph new.
-	textMorph contents: self description.
-	textMorph position: 50@50. "Set the position of the text morph within the base morph"
-	self addMorph: textMorph.
 ]
 
 {
@@ -145,23 +149,6 @@ SLGMultipleChoice >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 5/26/2024 13:41'
-}
-SLGMultipleChoice >> newTextElement: aContent at: aPosition maxWidth: aWidth [
-	| textMorph |
-	textMorph := TextMorph new
-		contents: aContent;
-		wrapFlag: true;
-		extent: aWidth@0;
-		"position: position;"
-		lock.
-	(self exercisePage) addMorph: textMorph.
-	textMorph position: (self exercisePage) position + aPosition.
-	^ textMorph
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:01'
 }
 SLGMultipleChoice >> newTextElement: aContent at: aPosition maxWidth: aWidth onPage: anExercisepage [
@@ -179,25 +166,12 @@ SLGMultipleChoice >> newTextElement: aContent at: aPosition maxWidth: aWidth onP
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:00'
+	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:38'
 }
-SLGMultipleChoice >> newToggleButtonWithState: aState withPosition: aPosition onPage: anExercisepage [
+SLGMultipleChoice >> newToggleButtonWithState: state withPosition: position withButtonPressed: aBlock onPage: aSubpage [
 	|a|
-	a := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition.
-	anExercisepage addMorph: a.
-	self toggleButtonList add: a.
-	a position: (anExercisepage position) + aPosition.
-	
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/26/2024 13:54'
-}
-SLGMultipleChoice >> newToggleButtonWithState: state withPosition: position withButtonPressed: aBlock [
-	|a|
-	a := SLGToggleButton newToggleButtonWithState: false withPosition: position withButtonPressed: aBlock.
-	self addMorph: a.
+	a := SLGToggleButton newToggleButtonWithState: false withPosition: (aSubpage position + position) withButtonPressed: aBlock.
+	aSubpage addMorph: a.
 	self toggleButtonList add: a.
 	
 ]
@@ -233,44 +207,9 @@ SLGMultipleChoice >> resetToggleButtons [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:25'
+	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:34'
 }
 SLGMultipleChoice >> setup [
-	| submitButton y|
-	self newTextElement: self description at: 0@0 maxWidth:600.
-	
-	y := 100.
-	questions doWithIndex: [:each :i |
-		|margin toggleButtonWidth|
-		margin := 10.
-		toggleButtonWidth := 50. 
-		
-		self newToggleButtonWithState: false withPosition: 0@y withButtonPressed: [
-			self resetToggleButtons].
-		self newTextElement: each at: (toggleButtonWidth+margin)@y maxWidth: 600.
-		
-		Transcript show: y; cr.
-	
-		y :=  y + (toggleButtonWidth+margin).
-	 ].
-	submitButton := SLGButton new
-		label: 'Submit'.
-	submitButton target: [self validate].
-	submitButton actionSelector: #value.
-	self addMorph: submitButton.
-	submitButton position: self position + (0@(y+10)).
-	
-	self statusText: (self newTextElement: ' ' at: 0@(y+10+60) maxWidth: 600).
-	
-	
-	
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:05'
-}
-SLGMultipleChoice >> setupExercisepage [
 	|myExercisePage submitButton y|
 	myExercisePage := self exercisePage.
 	self newTextElement: self description at: 0@0 maxWidth:600 onPage: myExercisePage.
@@ -279,9 +218,10 @@ SLGMultipleChoice >> setupExercisepage [
 	questions doWithIndex: [:each :i |
 		|margin toggleButtonWidth|
 		margin := 10.
-		toggleButtonWidth := 50.
+		toggleButtonWidth := 50. 
 		
-		self newToggleButtonWithState: false withPosition: 0@y onPage: myExercisePage.
+		self newToggleButtonWithState: false withPosition: 0@y withButtonPressed: [
+			self resetToggleButtons] onPage: myExercisePage.
 		self newTextElement: each at: (toggleButtonWidth+margin)@y maxWidth: 600 onPage: myExercisePage.
 		
 		Transcript show: y; cr.
@@ -293,13 +233,12 @@ SLGMultipleChoice >> setupExercisepage [
 	submitButton target: [self validate].
 	submitButton actionSelector: #value.
 	myExercisePage addMorph: submitButton.
-	submitButton position: myExercisePage position + (0@(y+10)). "can the relative position be defined bfore adding to a parent morph?"
+	submitButton position: myExercisePage position + (0@(y+10)).
 	
 	self statusText: (self newTextElement: ' ' at: 0@(y+10+60) maxWidth: 600 onPage: myExercisePage).
 	
 	
 	
-
 ]
 
 {
