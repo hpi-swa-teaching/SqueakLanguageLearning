@@ -1,5 +1,5 @@
 Class {
-	#name : #FileHandler,
+	#name : #DataAccessObject,
 	#superclass : #Object,
 	#category : #'MyOwnCategory-Core'
 }
@@ -8,7 +8,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/25/2024 11:21'
 }
-FileHandler class >> new [
+DataAccessObject class >> new [
 
 	^super new initialize
 	
@@ -18,7 +18,7 @@ FileHandler class >> new [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/26/2024 00:07'
 }
-FileHandler >> readFromFile: fileName [
+DataAccessObject >> readFromFile: fileName [
 	
 	| fileStream contents |
 	fileStream := StandardFileStream readOnlyFileNamed: fileName.
@@ -37,7 +37,7 @@ FileHandler >> readFromFile: fileName [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/25/2024 11:38'
 }
-FileHandler >> writeToFile: filePath contents: contentString [
+DataAccessObject >> writeToFile: filePath contents: contentString [
 
         | fileStream |
         [
