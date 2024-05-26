@@ -6,20 +6,22 @@ Class {
 		'questions',
 		'answers',
 		'toggleButtonList',
-		'statusText'
+		'statusText',
+		'singleChoice'
 	],
 	#category : #SqueakLanguageLearning
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alex 5/18/2024 21:04'
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:26'
 }
-SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestions: aList1 withAnswers: aList2 [
+SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestions: aList1 withAnswers: aList2 withSingleChoice: aBoolean [
 	^self new
 		description: aString;
 		questions: aList1;
 		answers: aList2;
+		singleChoice: aBoolean;
 		setup;
 		yourself
 		
@@ -27,11 +29,11 @@ SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestio
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alex 5/19/2024 00:08'
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:59'
 }
 SLGMultipleChoice class >> testMultipleChoice [
 	|a|
-	a := SLGMultipleChoice newMultipleChoiceWithDescription: 'Do we like Squeak?' 	withQuestions: #('Yes' 'No' 'Maybe') withAnswers: #(true true false).
+	a := SLGMultipleChoice newMultipleChoiceWithDescription: 'Do we like Squeak?' 	withQuestions: #('Yes' 'No' 'Maybe') withAnswers: #(true false false) withSingleChoice: false.
 
 	a openInWorld
 ]
@@ -82,13 +84,13 @@ SLGMultipleChoice >> description: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/18/2024 23:24'
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:21'
 }
 SLGMultipleChoice >> initialize [
 	super initialize.
 	self
 		extent: 600@400;
-		color: Color veryVeryLightGray;
+		color: Color white;
 		toggleButtonList: OrderedCollection new.
 ]
 
@@ -110,11 +112,11 @@ SLGMultipleChoice >> newTextElement: content at: position maxWidth: width [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/18/2024 23:34'
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:54'
 }
-SLGMultipleChoice >> newToggleButtonWithState: state withPosition: position [
+SLGMultipleChoice >> newToggleButtonWithState: state withPosition: position withButtonPressed: aBlock [
 	|a|
-	a := SLGToggleButton newToggleButtonWithState: false withPosition: position.
+	a := SLGToggleButton newToggleButtonWithState: false withPosition: position withButtonPressed: aBlock.
 	self addMorph: a.
 	self toggleButtonList add: a.
 	
@@ -138,7 +140,20 @@ SLGMultipleChoice >> questions: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/19/2024 00:04'
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:55'
+}
+SLGMultipleChoice >> resetToggleButtons [
+	self toggleButtonList doWithIndex: [:each :i |
+		self singleChoice ifTrue: [
+			each state: false.
+			each update.
+		]
+	].
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:54'
 }
 SLGMultipleChoice >> setup [
 	| submitButton y |	
@@ -148,9 +163,10 @@ SLGMultipleChoice >> setup [
 	questions doWithIndex: [:each :i |
 		|margin toggleButtonWidth|
 		margin := 10.
-		toggleButtonWidth := 50.
+		toggleButtonWidth := 50. 
 		
-		self newToggleButtonWithState: false withPosition: 0@y.
+		self newToggleButtonWithState: false withPosition: 0@y withButtonPressed: [
+			self resetToggleButtons].
 		self newTextElement: each at: (toggleButtonWidth+margin)@y maxWidth: 600.
 		
 		Transcript show: y; cr.
@@ -169,6 +185,22 @@ SLGMultipleChoice >> setup [
 	
 	
 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:25'
+}
+SLGMultipleChoice >> singleChoice [
+	^ singleChoice
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alex 5/26/2024 13:25'
+}
+SLGMultipleChoice >> singleChoice: anObject [
+	singleChoice := anObject
 ]
 
 {
