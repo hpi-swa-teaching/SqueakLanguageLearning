@@ -9,6 +9,14 @@ Class {
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/26/2024 22:55'
+}
+TopicPage class >> newWithTopic: aTopic [
+	^super new initializeWithTopic: aTopic
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/26/2024 15:42'
 }
 TopicPage >> createSubtopicPagesFor: aTopic [
@@ -34,13 +42,34 @@ TopicPage >> createSubtopicPagesFor: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:21'
+	#'squeak_changestamp' : 'EB 5/26/2024 22:52'
 }
 TopicPage >> initialize [
 
 	super initialize.
 	self addBackButton.
-	subtopicPages := Dictionary new
+	subtopicPages := Dictionary new.
+	
+	 "topicPage addTitle: topic title.
+       topicPage addBackButton.
+       topicPage createSubtopicPagesFor: topic."
+	
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/26/2024 22:54'
+}
+TopicPage >> initializeWithTopic: aTopic [
+
+	super initialize.
+	
+	 self addTitle: aTopic title.
+       self addBackButton.
+       "topicPage createSubtopicPagesFor: topic."
+	
+	"subtopicPages := Dictionary new."
 	
 	
 ]

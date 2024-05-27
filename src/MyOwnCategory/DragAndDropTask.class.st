@@ -1,11 +1,11 @@
 Class {
 	#name : #DragAndDropTask,
-	#superclass : #Object,
+	#superclass : #Task,
 	#instVars : [
 		'taskDescription',
 		'correctAnswer'
 	],
-	#category : #'MyOwnCategory-Tasks'
+	#category : #MyOwnCategory
 }
 
 {

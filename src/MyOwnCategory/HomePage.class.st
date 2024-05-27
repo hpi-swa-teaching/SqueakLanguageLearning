@@ -2,14 +2,23 @@ Class {
 	#name : #HomePage,
 	#superclass : #Page,
 	#instVars : [
-		'topicPages',
-		'topics'
+		'topics',
+		'topicPagesTabPanel'
 	],
 	#classInstVars : [
 		'topicButtons'
 	],
 	#category : #'MyOwnCategory-Pages'
 }
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/26/2024 22:39'
+}
+HomePage class >> newWithTopics: topics [
+
+	^ super new initializeWithTopics: topics
+]
 
 {
 	#category : #'as yet unclassified',
@@ -35,7 +44,28 @@ HomePage >> addButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 15:52'
+	#'squeak_changestamp' : 'EB 5/26/2024 22:44'
+}
+HomePage >> addButtonsWithTopics: topics [
+
+	 "topics := dataReader readFileAsCollection: '/Applications/SWT2024.app/Contents/Resources/list-of-topics.txt'.
+        topics := #('Squeak' 'Morphic' 'Methods' 'Classes' 'Data Structures' 'Control Flow' 'Data Types')."
+        topics withIndexDo: [:topic :index |
+            | button |
+		button := SimpleButtonMorph new label: topic title.
+		button position: (self position + (500@(index * 75))).
+		button target: self.
+		button actionSelector: #navigateToTopic:.
+	            "button on: #mouseUp send: #navigateToTopic: to: self."
+	            "button argument: topic.  Store the topic as an argument"
+		button arguments: { topic title }.
+	      self addMorph: button.
+	].
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/26/2024 23:42'
 }
 HomePage >> createTopicPages [
 
@@ -48,20 +78,40 @@ HomePage >> createTopicPages [
             topicPage addTitle: topic.
             topicPage addBackButton.
             topicPage createSubtopicPagesFor: topic.
-            topicPages at: topic put: topicPage.
+            topicPagesTabPanel at: topic put: topicPage.
         ].
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:29'
+	#'squeak_changestamp' : 'EB 5/26/2024 23:42'
+}
+HomePage >> createTopicPagesWithTopics: topics [
+
+
+	"topics := dataReader readFileAsCollection: '/Applications/SWT2024.app/Contents/Resources/list-of-topics.txt'.
+	topics := #('Squeak' 'Morphic' 'Methods' 'Classes' 'Data Structures' 'Control Flow' 'Data Types') asOrderedCollection. "
+	topics do: [:topic |
+            | topicPage |
+            topicPage := TopicPage newWithTopic: topic.
+           " topicPage addTitle: topic title.
+            topicPage addBackButton.
+            topicPage createSubtopicPagesFor: topic."
+            topicPagesTabPanel at: topic title put: topicPage.
+        ].
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/26/2024 23:42'
 }
 HomePage >> initialize [
 
 	super initialize.
 	self addTitle: 'Welcome to Squeak Language Learning'.
+	
 	self addButtons.
-	topicPages := Dictionary new.
+	topicPagesTabPanel := Dictionary new.
 	self createTopicPages
 	
 	
@@ -69,12 +119,36 @@ HomePage >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:29'
+	#'squeak_changestamp' : 'EB 5/26/2024 23:47'
 }
-HomePage >> navigateToTopic: aTopic [
+HomePage >> initializeWithTopics: topics [
+	
+	| topicPagesDictionary |
+	super initialize.
+	self addTitle: 'Welcome to Squeak Language Learning'.
+	
+	topicPagesDictionary := Dictionary new.
+	topics do: [:topic |
+            | topicPage |
+            topicPage := TopicPage newWithTopic: topic.
+            topicPagesDictionary at: topic title put: topicPage.
+        ].
+	
+	topicPagesTabPanel := TabPanel newWithPagesDictionary: topicPagesDictionary.
+	self addMorph: topicPagesTabPanel.
+	
+
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/26/2024 23:42'
+}
+HomePage >> navigateToTopic: aTopicTitle [
 
         | topicPage |
-        topicPage := topicPages at: aTopic.
+        topicPage := topicPagesTabPanel at: aTopicTitle.
         self owner allMorphsDo: [:morph |
             (morph isKindOf: Page) ifTrue: [ morph hide ].
         ].
