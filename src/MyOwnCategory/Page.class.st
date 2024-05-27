@@ -61,7 +61,7 @@ Page >> hide [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 14:38'
+	#'squeak_changestamp' : 'EB 5/27/2024 22:18'
 }
 Page >> initialize [
 	
@@ -70,7 +70,6 @@ Page >> initialize [
 		color: Color white; 
 		center: Display center.
 	self addBackButton.
-	dataReader := DataAccessObject new.
 		
 	^self
 	

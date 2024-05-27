@@ -1,6 +1,6 @@
 Class {
-	#name : #TabPanel,
-	#superclass : #Morph,
+	#name : #NavigationPage,
+	#superclass : #Page,
 	#instVars : [
 		'pagesDictionary'
 	],
@@ -11,7 +11,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/26/2024 23:22'
 }
-TabPanel class >> newWithPagesDictionary: aPagesDictionary [
+NavigationPage class >> newWithPagesDictionary: aPagesDictionary [
 
 	^super new initializeWithPagesDictionary: aPagesDictionary
 ]
@@ -20,7 +20,7 @@ TabPanel class >> newWithPagesDictionary: aPagesDictionary [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/27/2024 00:06'
 }
-TabPanel >> addButtonsWithTitles: titles [
+NavigationPage >> addButtonsWithTitles: titles [
 
         titles withIndexDo: [:title :index |
             | button |
@@ -35,15 +35,15 @@ TabPanel >> addButtonsWithTitles: titles [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 23:53'
+	#'squeak_changestamp' : 'EB 5/27/2024 21:35'
 }
-TabPanel >> initializeWithPagesDictionary: aPagesDictionary [
+NavigationPage >> initializeWithPagesDictionary: aPagesDictionary [
 
 	pagesDictionary := aPagesDictionary.
 	self addButtonsWithTitles: aPagesDictionary keys.
 	
 	self bounds: (0@0 extent: 1200@900);
-            color: Color transparent;
+            color: Color white;
             center: World bounds center.
 	
 	
@@ -52,9 +52,9 @@ TabPanel >> initializeWithPagesDictionary: aPagesDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 23:25'
+	#'squeak_changestamp' : 'EB 5/27/2024 22:23'
 }
-TabPanel >> navigateToPage: aTitle [
+NavigationPage >> navigateToPage: aTitle [
 
         | page |
         page := pagesDictionary at: aTitle.

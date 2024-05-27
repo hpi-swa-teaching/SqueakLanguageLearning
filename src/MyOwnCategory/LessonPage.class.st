@@ -6,21 +6,22 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 20:59'
+	#'squeak_changestamp' : 'EB 5/27/2024 21:54'
 }
-LessonPage >> addTitle: aString [ 
+LessonPage class >> newWithLesson: aLesson [
 
-        super addTitle: aString.
+	^super new initializeWithLesson: aLesson
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:38'
+	#'squeak_changestamp' : 'EB 5/27/2024 21:53'
 }
-LessonPage >> initialize [
+LessonPage >> initializeWithLesson: aLesson [
  
 	super initialize.
-	self addBackButton
+	self addBackButton;
+		addTitle: 'LessonTitle'
 	
 
 ]
