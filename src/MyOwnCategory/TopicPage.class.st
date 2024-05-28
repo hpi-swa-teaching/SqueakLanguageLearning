@@ -37,7 +37,7 @@ TopicPage >> addDescriptionTo: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/28/2024 11:54'
+	#'squeak_changestamp' : 'EB 5/28/2024 21:14'
 }
 TopicPage >> initializeWithTopic: aTopic [
 
@@ -51,6 +51,7 @@ TopicPage >> initializeWithTopic: aTopic [
             | subtopicPage |
             subtopicPage := SubtopicPage newWithSubtopic: subtopic.
             subtopicPagesDictionary at: subtopic title put: subtopicPage.
+		World addMorph: subtopicPage.
         ].
 	
 	super initializeWithPagesDictionary: subtopicPagesDictionary.	

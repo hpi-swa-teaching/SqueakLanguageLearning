@@ -18,7 +18,7 @@ SubtopicPage class >> newWithSubtopic: aSubtopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/27/2024 21:49'
+	#'squeak_changestamp' : 'EB 5/28/2024 21:14'
 }
 SubtopicPage >> initializeWithSubtopic: aSubtopic [
 
@@ -29,9 +29,10 @@ SubtopicPage >> initializeWithSubtopic: aSubtopic [
 	
 	aSubtopic lessons do: [:lesson |
             | lessonPage |
-            lessonPage := LessonPage newWithLesson: lesson.
-		"TODO change a description to smth else"
+            lessonPage := LessonPage newWithTask: lesson.
+		"TODO change a description to smth else and consider task-lesson"
             lessonPagesDictionary at: lesson description put: lessonPage.
+		World addMorph: lessonPage.
         ].
 	
 	super initializeWithPagesDictionary: lessonPagesDictionary.	

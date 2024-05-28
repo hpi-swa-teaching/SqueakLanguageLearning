@@ -21,7 +21,7 @@ HomePage class >> newWithTopics: topics [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/27/2024 21:28'
+	#'squeak_changestamp' : 'EB 5/28/2024 21:13'
 }
 HomePage >> initializeWithTopics: topics [
 	
@@ -34,6 +34,7 @@ HomePage >> initializeWithTopics: topics [
             | topicPage |
             topicPage := TopicPage newWithTopic: topic.
             topicPagesDictionary at: topic title put: topicPage.
+		World addMorph: topicPage.
         ].
 	
 	super initializeWithPagesDictionary: topicPagesDictionary.	

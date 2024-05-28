@@ -51,16 +51,6 @@ Page >> addTitle: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:15'
-}
-Page >> hide [
-
-	self visible: false
-	
-]
-
-{
-	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/27/2024 22:51'
 }
 Page >> initialize [
@@ -104,15 +94,5 @@ Page >> navigateTo: aPage [
 
 	self hide.
 	aPage show
-	
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:14'
-}
-Page >> show [
-
-	self visible: true
 	
 ]

@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'id',
 		'description',
+		'task',
 		'isCompleted'
 	],
 	#category : #MyOwnCategory
@@ -42,4 +43,14 @@ Task >> description [
 Task >> initializeWithDescription: aDescription [
 
 	description := aDescription
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/28/2024 19:53'
+}
+Task >> initializeWithDescription: aDescription andTask: aTask [
+
+	description := aDescription.
+	task := aTask
 ]

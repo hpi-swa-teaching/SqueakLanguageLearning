@@ -55,7 +55,7 @@ NavigationPage >> initializeWithPagesDictionary: aPagesDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/27/2024 22:23'
+	#'squeak_changestamp' : 'EB 5/28/2024 21:16'
 }
 NavigationPage >> navigateToPage: aTitle [
 
@@ -64,7 +64,6 @@ NavigationPage >> navigateToPage: aTitle [
         self owner allMorphsDo: [:morph |
             (morph isKindOf: Page) ifTrue: [ morph hide ].
         ].
-        self owner addMorph: page.
         page show.
 	
 ]
