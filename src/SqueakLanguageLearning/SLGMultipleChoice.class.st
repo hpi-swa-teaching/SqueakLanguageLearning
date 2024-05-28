@@ -15,37 +15,6 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:11'
-}
-SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestions: aList1 withAnswers: aList2 onSubpage: aSubpage [ 
-	
-	^self new
-		description: aString;
-		questions: aList1;
-		answers: aList2;
-		exercisePage: aSubpage;
-		setupExercisepage;
-		yourself
-		
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alex 5/26/2024 13:26'
-}
-SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestions: aList1 withAnswers: aList2 withSingleChoice: aBoolean [
-	^self new
-		description: aString;
-		questions: aList1;
-		answers: aList2;
-		singleChoice: aBoolean;
-		setup;
-		yourself
-		
-]
-
-{
-	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:36'
 }
 SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestions: aList1 withAnswers: aList2 withSingleChoice: aBoolean on: anExercisePage [
@@ -58,24 +27,6 @@ SLGMultipleChoice class >> newMultipleChoiceWithDescription: aString withQuestio
 		setup;
 		yourself
 		
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/21/2024 12:20'
-}
-SLGMultipleChoice class >> pageMargin [
-
-	^ (self class pageSize) x / 60.
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/21/2024 12:16'
-}
-SLGMultipleChoice class >> pageSize [
-
-	^ 600@400.
 ]
 
 {
@@ -149,7 +100,7 @@ SLGMultipleChoice >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:01'
+	#'squeak_changestamp' : 'xiaoshi 5/28/2024 00:32'
 }
 SLGMultipleChoice >> newTextElement: aContent at: aPosition maxWidth: aWidth onPage: anExercisepage [
 	| textMorph |
@@ -157,7 +108,6 @@ SLGMultipleChoice >> newTextElement: aContent at: aPosition maxWidth: aWidth onP
 		contents: aContent;
 		wrapFlag: true;
 		extent: aWidth@0;
-		"position: position;"
 		lock.
 	anExercisepage addMorph: textMorph.
 	textMorph position: anExercisepage position + aPosition.
@@ -207,12 +157,13 @@ SLGMultipleChoice >> resetToggleButtons [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 5/26/2024 14:34'
+	#'squeak_changestamp' : 'xiaoshi 5/28/2024 10:26'
 }
 SLGMultipleChoice >> setup [
-	|myExercisePage submitButton y|
+	|myExercisePage submitButton y myPageExtent|
 	myExercisePage := self exercisePage.
-	self newTextElement: self description at: 0@0 maxWidth:600 onPage: myExercisePage.
+	myPageExtent := myExercisePage class pageExtent.
+	self newTextElement: self description at: 0@0 maxWidth:1200 onPage: myExercisePage.
 	
 	y := 100.
 	questions doWithIndex: [:each :i |
