@@ -61,13 +61,15 @@ Page >> hide [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/27/2024 22:18'
+	#'squeak_changestamp' : 'EB 5/27/2024 22:51'
 }
 Page >> initialize [
 	
 	super initialize.
 	self extent: 1200@900;
 		color: Color white; 
+		borderWidth: 10;
+		borderColor: Color lightGray;
 		center: Display center.
 	self addBackButton.
 		

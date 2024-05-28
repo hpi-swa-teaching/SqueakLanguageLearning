@@ -18,19 +18,22 @@ NavigationPage class >> newWithPagesDictionary: aPagesDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/27/2024 00:06'
+	#'squeak_changestamp' : 'EB 5/28/2024 12:24'
 }
 NavigationPage >> addButtonsWithTitles: titles [
 
-        titles withIndexDo: [:title :index |
-            | button |
+ 	| button |  
+	     
+	titles withIndexDo: [:title :index |
 		button := SimpleButtonMorph new label: title.
-		button position: (self position + (500@(index * 75))).
+		button position: (self position + (500@(index * 100)));
+			shadowOffset: 5 @ 5;
+			shadowColor: Color gray.
 		button target: self.
 		button actionSelector: #navigateToPage:.
 		button arguments: { title }.
 	      self addMorph: button.
-	].
+	]
 ]
 
 {

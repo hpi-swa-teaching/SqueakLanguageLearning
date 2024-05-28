@@ -19,7 +19,7 @@ DataAccessService class >> new [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 22:00'
+	#'squeak_changestamp' : 'EB 5/28/2024 11:39'
 }
 DataAccessService >> initialize [
 
@@ -30,11 +30,19 @@ DataAccessService >> initialize [
 		lessons at: index put: (Lesson newWithDescription: 'LessonDescription', index asString andTask: task).
 	].
 
-	subtopics := Array new: 1.
-	subtopics at: 1 put: (Subtopic newWithTitle: 'SubtopicTitle' andLessons: lessons).
+	subtopics := Array new: 3.
+	subtopics at: 1 put: (Subtopic newWithTitle: 'SubtopicTitle1' andLessons: lessons).
+	subtopics at: 2 put: (Subtopic newWithTitle: 'SubtopicTitle2' andLessons: lessons).
+	subtopics at: 3 put: (Subtopic newWithTitle: 'SubtopicTitle3' andLessons: lessons).
 	
-	topics := Array new: 1.
-	topics at: 1 put: (Topic newWithTitle: 'TopicTitle' Description: 'TopicDescription' andSubtopics: subtopics).
+	topics := Array new: 7.
+	topics at: 1 put: (Topic newWithTitle: 'Data Types' Description: 'In Smalltalk, datatypes are the essential building blocks like numbers, strings, and booleans that form the foundation of all your programming adventures. Each datatype has unique properties and uses, making your code powerful and versatile. Ready to dive into datatypes? Let’s get started!' andSubtopics: subtopics).
+	topics at: 2 put: (Topic newWithTitle: 'Control Flow' Description: 'Control flow in Smalltalk is your toolkit for directing the sequence of operations in your code. With loops, conditionals, and more, you can make your programs dynamic and responsive. Excited to take control? Let’s jump into control flow!' andSubtopics: subtopics).
+	topics at: 3 put: (Topic newWithTitle: 'Data Structures' Description: 'Data structures in Smalltalk, such as arrays, dictionaries, and sets, are your secret weapons for organizing and managing data efficiently. They help you structure your programs for better performance and readability. Ready to conquer data structures? Let’s dive in!' andSubtopics: subtopics).
+	topics at: 4 put: (Topic newWithTitle: 'Classes' Description: 'Classes are the heart and soul of Smalltalk, defining the blueprints for creating objects. They encapsulate data and behavior, bringing your ideas to life in code. Ready to craft some classes? Let’s get started!' andSubtopics: subtopics).
+	topics at: 5 put: (Topic newWithTitle: 'Methods' Description: 'Methods are the dynamic performers in Smalltalk, defining the actions that objects can take. They allow you to add functionality and bring your objects to life. Ready to write some methods? Let’s begin the journey!' andSubtopics: subtopics).
+	topics at: 6 put: (Topic newWithTitle: 'Morphic' Description: 'Morphic is the vibrant, graphical framework in Smalltalk, perfect for creating interactive user interfaces. It lets you build and manipulate graphical objects with ease, making your applications visually stunning. Ready to explore Morphic? Let’s dive into the magic!' andSubtopics: subtopics).
+	topics at: 7 put: (Topic newWithTitle: 'Squeak Walkthrough' Description: 'Squeak is the dynamic, open-source Smalltalk programming environment that empowers you to create, explore, and innovate. With its rich set of tools and libraries, Squeak opens up endless possibilities for your programming journey. Excited to explore Squeak? Let’s jump right in!' andSubtopics: subtopics).
 	
 
 	 

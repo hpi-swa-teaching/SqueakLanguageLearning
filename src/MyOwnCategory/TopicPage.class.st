@@ -2,7 +2,8 @@ Class {
 	#name : #TopicPage,
 	#superclass : #NavigationPage,
 	#instVars : [
-		'subtopicPages'
+		'subtopicPages',
+		'description'
 	],
 	#category : #'MyOwnCategory-Pages'
 }
@@ -17,13 +18,33 @@ TopicPage class >> newWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/27/2024 21:42'
+	#'squeak_changestamp' : 'EB 5/28/2024 12:28'
+}
+TopicPage >> addDescriptionTo: aTopic [
+
+	| descriptionForm |
+
+	description := aTopic description.
+	descriptionForm := TextMorph new.
+	descriptionForm contents:  description asText;
+					wrapFlag: true;
+					width: 1000;
+					position: (self position + (100@500)). 
+	
+	
+	self addMorph: descriptionForm.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/28/2024 11:54'
 }
 TopicPage >> initializeWithTopic: aTopic [
 
 	| subtopicPagesDictionary |
 	
 	self addTitle: aTopic title.
+	self addDescriptionTo: aTopic.
 	subtopicPagesDictionary := Dictionary new.
 	
 	aTopic subtopics do: [:subtopic |

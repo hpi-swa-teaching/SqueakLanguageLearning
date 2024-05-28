@@ -2,7 +2,9 @@ Class {
 	#name : #Task,
 	#superclass : #Object,
 	#instVars : [
-		'description'
+		'id',
+		'description',
+		'isCompleted'
 	],
 	#category : #MyOwnCategory
 }
