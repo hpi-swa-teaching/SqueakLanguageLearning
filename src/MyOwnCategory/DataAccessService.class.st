@@ -19,14 +19,16 @@ DataAccessService class >> new [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/28/2024 11:39'
+	#'squeak_changestamp' : 'EB 5/29/2024 14:46'
 }
 DataAccessService >> initialize [
 
 	| task lessons subtopics |
-	lessons := Array new: 7.
-	1 to: 7 do: [:index |
-  		task := Task newWithDescription: 'TaskDescription', index asString.
+	lessons := Array new: 2.
+	1 to: 2 do: [:index |
+  		"task := Task newWithDescription: 'TaskDescription', index asString."
+		task := DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4' '5').
+		"task := DragAndDropTask task: aString correctAnswer: aCollection."
 		lessons at: index put: (Lesson newWithDescription: 'LessonDescription', index asString andTask: task).
 	].
 

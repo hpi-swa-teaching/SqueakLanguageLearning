@@ -153,12 +153,12 @@ DragAndDropMorph >> itemTargetMap [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:34'
+	#'squeak_changestamp' : 'EB 5/29/2024 15:08'
 }
 DragAndDropMorph >> setupLayout [ 
 
         | taskLabel |
-        self bounds: (0@0 extent: 1200@900);
+        self bounds: (0@0 extent: 100@600);
             color: Color white;
             center: World bounds center.
 

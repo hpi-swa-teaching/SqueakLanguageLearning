@@ -88,9 +88,10 @@ Page >> navigateBack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:14'
+	#'squeak_changestamp' : 'EB 5/28/2024 21:28'
 }
 Page >> navigateTo: aPage [
+"TODO to delete?"
 
 	self hide.
 	aPage show
