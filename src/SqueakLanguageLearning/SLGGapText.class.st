@@ -80,12 +80,12 @@ SLGGapText >> compareStrings [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/22/2024 14:35'
+	#'squeak_changestamp' : 'yegi 5/30/2024 10:22'
 }
 SLGGapText >> createGapText [
 
 	self queryString: (TextMorph new contents: self gapText).
-	self queryString center: self center.
+	self queryString center: self center -(0 @ 100).
 	
 	self answerString: (TextMorph new contents: self answerText).
 	
@@ -95,7 +95,7 @@ SLGGapText >> createGapText [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/22/2024 15:22'
+	#'squeak_changestamp' : 'yegi 5/30/2024 10:28'
 }
 SLGGapText >> createSubmitButton [
 
@@ -103,7 +103,7 @@ SLGGapText >> createSubmitButton [
 	
 	button := SimpleButtonMorph new.
 	button label: 'Submit'.
-	button position: self center + 50.
+	button position: self center + (80 @ 0).
 	button on: #mouseUp send: #compareStrings to: self.
 	
 	self addMorph: button
@@ -129,13 +129,15 @@ SLGGapText >> gapText: aString [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/22/2024 14:58'
+	#'squeak_changestamp' : 'yegi 5/30/2024 10:31'
 }
 SLGGapText >> initialize [
 
 	super initialize.
-	self extent: 600 @ 450;
-		color: Color veryVeryLightGray;
+	self extent: 1200 @ 900;
+		color: Color white;
+		borderWidth: 10;
+		borderColor: Color lightGray;
 	 	center: Display center
 
 	
@@ -177,13 +179,13 @@ SLGGapText >> queryString: aTextMorph [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/22/2024 16:04'
+	#'squeak_changestamp' : 'yegi 5/30/2024 10:24'
 }
 SLGGapText >> setup [
 
 	self createGapText.
 	self createSubmitButton.
-	self statusText: (self newTextElement: ' ' at: (self center + (0@130)) maxWidth: 170). 
+	self statusText: (self newTextElement: ' ' at: (self center + (0 @ 130)) maxWidth: 300). 
 	self openInWorld	
 	
 ]
