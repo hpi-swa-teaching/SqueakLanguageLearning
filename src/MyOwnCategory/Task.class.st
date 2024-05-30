@@ -3,6 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
+		'taskType',
 		'description',
 		'task',
 		'isCompleted'
@@ -34,4 +35,12 @@ Task >> description [
 Task >> initializeWithDescription: aDescription [
 
 	description := aDescription
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 5/30/2024 13:53'
+}
+Task >> taskType [
+	^ taskType
 ]

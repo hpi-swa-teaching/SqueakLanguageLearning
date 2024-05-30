@@ -9,6 +9,24 @@ Class {
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/29/2024 22:28'
+}
+SLGToggleButton class >> newToggleButton [
+	
+	^self initialize.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/29/2024 23:00'
+}
+SLGToggleButton class >> newToggleButtonWithState: aBoolean [
+	
+	^self initialize.
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alex 5/18/2024 22:16'
 }
 SLGToggleButton class >> newToggleButtonWithState: aBoolean withPosition: aPoint [
