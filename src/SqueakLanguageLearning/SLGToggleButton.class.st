@@ -20,7 +20,7 @@ SLGToggleButton class >> newToggleButtonWithState: aBoolean [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 5/30/2024 17:47'
+	#'squeak_changestamp' : 'SW 5/30/2024 22:04'
 }
 SLGToggleButton class >> newToggleButtonWithState: aBoolean withPosition: aPoint [
 	^self new
