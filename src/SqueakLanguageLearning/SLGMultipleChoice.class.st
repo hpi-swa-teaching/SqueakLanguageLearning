@@ -144,20 +144,19 @@ SLGMultipleChoice >> questions: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/26/2024 13:55'
+	#'squeak_changestamp' : 'SW 6/1/2024 13:46'
 }
 SLGMultipleChoice >> resetToggleButtons [
-	self toggleButtonList doWithIndex: [:each :i |
-		self singleChoice ifTrue: [
-			each state: false.
-			each update.
-		]
-	].
+
+	self singleChoice
+		ifTrue: [self toggleButtonList doWithIndex: [:each :i |
+				each state: false.
+				each update]]
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 5/28/2024 10:26'
+	#'squeak_changestamp' : 'SW 6/1/2024 13:46'
 }
 SLGMultipleChoice >> setup [
 	|myExercisePage submitButton y myPageExtent|
@@ -174,8 +173,6 @@ SLGMultipleChoice >> setup [
 		self newToggleButtonWithState: false withPosition: 0@y withButtonPressed: [
 			self resetToggleButtons] onPage: myExercisePage.
 		self newTextElement: each at: (toggleButtonWidth+margin)@y maxWidth: 600 onPage: myExercisePage.
-		
-		Transcript show: y; cr.
 	
 		y :=  y + (toggleButtonWidth+margin).
 	 ].

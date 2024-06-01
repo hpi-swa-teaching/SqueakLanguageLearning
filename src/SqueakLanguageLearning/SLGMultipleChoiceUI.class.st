@@ -42,6 +42,20 @@ SLGMultipleChoiceUI >> createToggleButton [
 ]
 
 {
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 5/31/2024 13:45'
+}
+SLGMultipleChoiceUI >> createToggleButtonAtPosition: aPosition [
+
+	| button |
+	button := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition.
+	"self toggleButtonList add: button."
+	
+	^ button
+	
+]
+
+{
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 5/30/2024 17:27'
 }
@@ -50,6 +64,17 @@ SLGMultipleChoiceUI >> initialize [
 	super initialize.
 	
 	self toggleButtonList: OrderedCollection new
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/1/2024 14:50'
+}
+SLGMultipleChoiceUI >> printFailureWithPercentage: aPercentage [
+
+	self status contents: ((self class failureMessage), ' [', aPercentage asString, '% correct]')
+	
+	
 ]
 
 {
@@ -74,7 +99,7 @@ SLGMultipleChoiceUI >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:03'
+	#'squeak_changestamp' : 'SW 5/31/2024 13:47'
 }
 SLGMultipleChoiceUI >> setupToggleButtons: anOptionArray [
 
@@ -88,7 +113,10 @@ SLGMultipleChoiceUI >> setupToggleButtons: anOptionArray [
 	anOptionArray do: [:option |
 		"toggle := self createToggleButton. 
 		toggle position: (self position + (50 @ yPos))."
-		toggle := SLGToggleButton newToggleButtonWithState: false withPosition: (self position + (150@yPos)).
+		"toggle := SLGToggleButton newToggleButtonWithState: false withPosition: (self position + (150@yPos)).
+		self toggleButtonList add: toggle."
+		
+		toggle := self createToggleButtonAtPosition: (self position + (150 @ yPos)).
 		self toggleButtonList add: toggle.
 		
 		toggleDescription := self createTextFieldWithContent: option withBorder: false.
@@ -127,7 +155,7 @@ SLGMultipleChoiceUI >> toggleButtonList: anOrderedCollection [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 5/30/2024 22:04'
+	#'squeak_changestamp' : 'SW 6/1/2024 14:48'
 }
 SLGMultipleChoiceUI >> validate [
 
@@ -137,8 +165,8 @@ SLGMultipleChoiceUI >> validate [
 	result := self task validate: userInput.
 	
 	(result = 100)
-		ifTrue: [self status contents: 'Success!']
-		ifFalse: [self status contents: ('Wrong answer! ', result asString, '%')]
+		ifTrue: [self printSuccess]
+		ifFalse: [self printFailureWithPercentage: result]
 	
 	
 ]

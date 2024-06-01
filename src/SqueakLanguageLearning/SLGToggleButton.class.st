@@ -51,10 +51,10 @@ SLGToggleButton >> buttonPressed [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alex 5/26/2024 13:32'
+	#'squeak_changestamp' : 'SW 6/1/2024 13:48'
 }
-SLGToggleButton >> buttonPressed: anObject [
-	buttonPressed := anObject
+SLGToggleButton >> buttonPressed: aBlock [
+	buttonPressed := aBlock
 ]
 
 {

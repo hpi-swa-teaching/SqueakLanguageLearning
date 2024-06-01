@@ -16,6 +16,24 @@ Class {
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/1/2024 14:46'
+}
+SLGTaskUI class >> failureMessage [
+
+	^ 'Wrong Answer!'
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/1/2024 14:46'
+}
+SLGTaskUI class >> successMessage [
+
+	^ 'Success!'
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:24'
 }
 SLGTaskUI class >> taskDescription [
@@ -128,6 +146,28 @@ SLGTaskUI >> initialize [
 	
 		
 
+	
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/1/2024 14:47'
+}
+SLGTaskUI >> printFailure [
+
+	self status contents: self class failureMessage
+	
+	
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/1/2024 14:47'
+}
+SLGTaskUI >> printSuccess [
+
+	self status contents: self class successMessage
+	
 	
 ]
 

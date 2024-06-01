@@ -56,6 +56,29 @@ SLGMultipleChoiceTask >> answers: anArray [
 ]
 
 {
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 5/31/2024 11:39'
+}
+SLGMultipleChoiceTask >> calculatePercentage: aValue with: aTotal [
+
+	| percentage |
+	percentage := ((aValue / aTotal) * 100) rounded.
+	
+	^ percentage
+
+	
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/1/2024 13:26'
+}
+SLGMultipleChoiceTask >> findMatches: aReferenceArray with: anInputArray [
+
+	^ (1 to: aReferenceArray size) select: [:index | (aReferenceArray at: index) = (anInputArray at: index)] thenCollect: [:index | aReferenceArray at: index].
+]
+
+{
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 5/29/2024 16:08'
 }
@@ -82,13 +105,13 @@ SLGMultipleChoiceTask >> question: anObject [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 5/30/2024 18:17'
+	#'squeak_changestamp' : 'SW 6/1/2024 13:26'
 }
 SLGMultipleChoiceTask >> validate: anUserInput [
 
 	| comparison percentage |
-	comparison := (1 to: (answers size min: anUserInput size)) select: [:index | (answers at: index) = (anUserInput at: index)] thenCollect: [:index | answers at: index].
-	percentage := (((comparison size) / (answers size)) * 100) rounded.
+	comparison := self findMatches: self answers with: anUserInput.
+	percentage := self calculatePercentage: (comparison size) with: (answers size).
 	
 	^ percentage
 ]

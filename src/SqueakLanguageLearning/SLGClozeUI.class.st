@@ -122,7 +122,7 @@ SLGClozeUI >> taskCloze: anObject [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 5/31/2024 11:02'
+	#'squeak_changestamp' : 'SW 6/1/2024 14:44'
 }
 SLGClozeUI >> validate [
 	
@@ -131,8 +131,8 @@ SLGClozeUI >> validate [
 	userInput := self clozeField contents asString.
 	
 	(self task validate: userInput)
-		ifTrue: [self status contents: 'Success!']
-		ifFalse: [self status contents: 'Wrong Answer!']
+		ifTrue: [self printSuccess]
+		ifFalse: [self printFailure]
 	
 	
 ]
