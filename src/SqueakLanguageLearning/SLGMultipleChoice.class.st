@@ -156,23 +156,25 @@ SLGMultipleChoice >> resetToggleButtons [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 6/1/2024 13:46'
+	#'squeak_changestamp' : 'yegi 5/30/2024 10:18'
 }
 SLGMultipleChoice >> setup [
 	|myExercisePage submitButton y myPageExtent|
 	myExercisePage := self exercisePage.
 	myPageExtent := myExercisePage class pageExtent.
-	self newTextElement: self description at: 0@0 maxWidth:1200 onPage: myExercisePage.
+	self newTextElement: self description at: 20 @ 10 maxWidth:1200 onPage: myExercisePage.
 	
 	y := 100.
 	questions doWithIndex: [:each :i |
 		|margin toggleButtonWidth|
-		margin := 10.
+		margin := 20.
 		toggleButtonWidth := 50. 
 		
-		self newToggleButtonWithState: false withPosition: 0@y withButtonPressed: [
+		self newToggleButtonWithState: false withPosition: 20 @ y withButtonPressed: [
 			self resetToggleButtons] onPage: myExercisePage.
-		self newTextElement: each at: (toggleButtonWidth+margin)@y maxWidth: 600 onPage: myExercisePage.
+		self newTextElement: each at: (toggleButtonWidth+margin+20)@y maxWidth: 600 onPage: myExercisePage.
+		
+		Transcript show: y; cr.
 	
 		y :=  y + (toggleButtonWidth+margin).
 	 ].
@@ -181,9 +183,9 @@ SLGMultipleChoice >> setup [
 	submitButton target: [self validate].
 	submitButton actionSelector: #value.
 	myExercisePage addMorph: submitButton.
-	submitButton position: myExercisePage position + (0@(y+10)).
+	submitButton position: myExercisePage position + (20 @(y+10)).
 	
-	self statusText: (self newTextElement: ' ' at: 0@(y+10+60) maxWidth: 600 onPage: myExercisePage).
+	self statusText: (self newTextElement: ' ' at: 20 @ (y+10+60) maxWidth: 600 onPage: myExercisePage).
 	
 	
 	
