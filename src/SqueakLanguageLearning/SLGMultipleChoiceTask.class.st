@@ -3,8 +3,7 @@ Class {
 	#superclass : #SLGTask,
 	#instVars : [
 		'answerOptions',
-		'answers',
-		'question'
+		'answers'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
@@ -85,22 +84,6 @@ SLGMultipleChoiceTask >> findMatches: aReferenceArray with: anInputArray [
 SLGMultipleChoiceTask >> initialize [
 
 	super initialize
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/30/2024 14:28'
-}
-SLGMultipleChoiceTask >> question [
-	^ question
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/30/2024 14:28'
-}
-SLGMultipleChoiceTask >> question: anObject [
-	question := anObject
 ]
 
 {

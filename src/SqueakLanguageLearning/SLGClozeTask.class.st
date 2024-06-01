@@ -3,7 +3,6 @@ Class {
 	#superclass : #SLGTask,
 	#instVars : [
 		'answer',
-		'question',
 		'cloze'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
@@ -62,22 +61,6 @@ SLGClozeTask >> cloze: aString [
 SLGClozeTask >> initialize [
 
 	super initialize
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:25'
-}
-SLGClozeTask >> question [
-	^ question
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:25'
-}
-SLGClozeTask >> question: anObject [
-	question := anObject
 ]
 
 {

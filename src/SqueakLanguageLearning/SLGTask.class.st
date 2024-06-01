@@ -1,6 +1,9 @@
 Class {
 	#name : #SLGTask,
 	#superclass : #Object,
+	#instVars : [
+		'question'
+	],
 	#classInstVars : [
 		'taskDescription'
 	],
@@ -14,4 +17,20 @@ Class {
 SLGTask >> initialize [
 
 	super initialize
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/1/2024 17:37'
+}
+SLGTask >> question [
+	^ question
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/1/2024 17:37'
+}
+SLGTask >> question: anObject [
+	question := anObject
 ]
