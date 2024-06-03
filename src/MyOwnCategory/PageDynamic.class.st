@@ -1,27 +1,27 @@
 Class {
-	#name : #Page,
+	#name : #PageDynamic,
 	#superclass : #Morph,
 	#instVars : [
-		'dataReader'
+		'controller'
 	],
-	#category : #'MyOwnCategory-Pages'
+	#category : #'MyOwnCategory-DynamicPages'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 20:51'
+	#'squeak_changestamp' : 'EB 6/3/2024 00:08'
 }
-Page class >> new [
+PageDynamic class >> newWithController: aController [
 
-	^super new initialize
+	^super basicNew initializeWithController: aController
 	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 21:16'
+	#'squeak_changestamp' : 'EB 6/3/2024 00:20'
 }
-Page >> addBackButton [
+PageDynamic >> addBackButton [
 
          | backButton |
         backButton := SimpleButtonMorph new label: 'Back'.
@@ -31,36 +31,46 @@ Page >> addBackButton [
         backButton position: (self position + (50@20)).
         backButton target: self.
         backButton actionSelector: #navigateBack.
+
         self addMorph: backButton.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/2/2024 23:34'
+	#'squeak_changestamp' : 'EB 6/3/2024 10:51'
 }
-Page >> addTitle: aString [
+PageDynamic >> addTitle: aString [
 
 	| title |
 	title := StringMorph new contents: aString.
-	title font: (TextStyle default fontOfSize: 30).
+	title font: (TextStyle default fontOfSize: 35).
 	title
-    		align: title topCenter with: self topCenter.
+    		align: title topCenter - 35 with: self topCenter.
         self addMorph: title
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/27/2024 22:51'
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/3/2024 00:15'
 }
-Page >> initialize [
+PageDynamic >> controller [
+	^ controller
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/3/2024 00:19'
+}
+PageDynamic >> initializeWithController: aController [
 	
 	super initialize.
+	controller := aController.
+	
 	self extent: 1200@900;
 		color: Color white; 
 		borderWidth: 10;
 		borderColor: Color lightGray;
 		center: Display center.
-	self addBackButton.
 		
 	^self
 	
@@ -72,27 +82,10 @@ Page >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:16'
+	#'squeak_changestamp' : 'EB 6/3/2024 00:08'
 }
-Page >> navigateBack [
+PageDynamic >> navigateBack [
  
-	self owner allMorphsDo: [:morph |
-		(morph isKindOf: Page) ifTrue: [ morph hide ].
-	].
-	self owner allMorphsDo: [:morph |
-		(morph isKindOf: HomePage) ifTrue: [ morph show ].
-	]
-	
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/28/2024 21:28'
-}
-Page >> navigateTo: aPage [
-"TODO to delete?"
-
-	self hide.
-	aPage show
+	controller navigateBack.
 	
 ]

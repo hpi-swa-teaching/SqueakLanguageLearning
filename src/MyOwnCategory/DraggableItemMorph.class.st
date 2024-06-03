@@ -12,11 +12,11 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/22/2024 13:38'
+	#'squeak_changestamp' : 'EB 6/1/2024 15:23'
 }
 DraggableItemMorph class >> newWithLabel: aString inMorph: aDragAndDropMorph [
 
-	^ self new initializeWithLabel: aString inMorph: aDragAndDropMorph
+	^ self basicNew initializeWithLabel: aString inMorph: aDragAndDropMorph
 	
 ]
 
@@ -36,22 +36,26 @@ DraggableItemMorph >> drag: anEvent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 22:31'
+	#'squeak_changestamp' : 'EB 6/1/2024 16:35'
 }
 DraggableItemMorph >> handleDrop: anEvent [
 
- 	| targetUnderCursor |       
+ 	| targetUnderCursor key value  |       
 	isDragging := false.
         parentMorph ifNotNil: [
             targetUnderCursor := parentMorph findTargetUnderCursor.
-		parentMorph updateItemTargetMap: self target: targetUnderCursor.
-		Transcript show: 'itemTargetMap after drop: ', parentMorph itemTargetMap printString; cr.
-        ].
+		parentMorph updateItemTargetMap: self target: targetUnderCursor ].
+	
+	Transcript show: 'itemTargetMap after drop:'; cr.
+	parentMorph itemTargetMap keysAndValuesDo: [ :k :v |
+	    key := k asString.
+	    value := v label asString.
+    Transcript show: 'Key: ', key, ', Value: ', value; cr].
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/25/2024 10:54'
+	#'squeak_changestamp' : 'EB 6/1/2024 15:46'
 }
 DraggableItemMorph >> initializeWithLabel: aString inMorph: aMorph [
 

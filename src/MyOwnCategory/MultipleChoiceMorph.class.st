@@ -19,6 +19,20 @@ MultipleChoiceMorph class >> newWithTask: aTask [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/1/2024 22:45'
+}
+MultipleChoiceMorph >> checkAnswer [
+
+	| isValid |	
+		
+	isValid := multipleChoiceTask isAnswerCorrect: answers.
+
+	"self inform: (isValid ifTrue: ['Correct!'] ifFalse: ['Incorrect, try again.'])."
+		
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/30/2024 17:41'
 }
 MultipleChoiceMorph >> createTogglesWithAnswerOptions: answerOptions [
@@ -65,18 +79,4 @@ MultipleChoiceMorph >> initializeWithTask: aTask [
 	
 	self createTogglesWithAnswerOptions: multipleChoiceTask answerOptions.
 	
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/29/2024 22:58'
-}
-MultipleChoiceMorph >> isAnswerCorrect [
-
-	| isValid |	
-		
-	isValid := multipleChoiceTask isAnswerCorrect: answers.
-
-	"self inform: (isValid ifTrue: ['Correct!'] ifFalse: ['Incorrect, try again.'])."
-		
 ]

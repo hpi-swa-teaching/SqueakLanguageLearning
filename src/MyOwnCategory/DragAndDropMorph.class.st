@@ -3,10 +3,10 @@ Class {
 	#superclass : #Morph,
 	#instVars : [
 		'dragAndDropTask',
-		'itemMorphs',
-		'targetMorphs',
-		'itemTargetMap',
-		'submitButton'
+		'submitButton',
+		'draggableItems',
+		'answerSlots',
+		'itemSlotMap'
 	],
 	#category : #'MyOwnCategory-Tasks'
 }
@@ -22,74 +22,106 @@ DragAndDropMorph class >> newWithTask: aTask [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 22:24'
+	#'squeak_changestamp' : 'EB 6/1/2024 23:16'
+}
+DragAndDropMorph >> checkAnswer [
+
+	| isValid itemsAtTarget anAnswer targetCorrectMap |
+	
+	targetCorrectMap := Dictionary new.	
+	itemsAtTarget := OrderedCollection new.
+	itemSlotMap keysAndValuesDo: [:target :item |
+		(item isKindOf: DraggableItemMorph) ifTrue: [
+			itemsAtTarget add: item label ].
+		targetCorrectMap at: target put: (item label = target label) ].
+	
+	anAnswer := itemsAtTarget asArray.
+	isValid := dragAndDropTask isAnswerCorrect: anAnswer.
+	
+	targetCorrectMap keysAndValuesDo: [:target :correct |
+            target color: (correct ifTrue: [Color lightGreen] ifFalse: [Color red]).
+        ].
+
+	self inform: (isValid ifTrue: ['Correct!'] ifFalse: ['Incorrect, try again.']).
+		
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/1/2024 23:07'
 }
 DragAndDropMorph >> createItemsAndTargets [
     
-	| xPosTarget xPosItem shuffledOptions correctAnswers |
-	xPosTarget := 100.
+	| container xPosItem shuffledOptions correctAnswers answerSlots item "numAnswers step" |
+	container := Morph new.
+	container bounds: (0@0 extent: 900@500);
+            color: Color white. 
+
 	xPosItem := 100.
+
 	shuffledOptions := dragAndDropTask getShuffledOptions.
 	correctAnswers := dragAndDropTask getCorrectAnswer.
-
-    correctAnswers do: [:correctAnswer |
-        | target |
-	target := self createTargetWithLabel: correctAnswer.
-	"target := DraggableItemMorph newWithLabel: correctAnswer inMorph: self."
-	target position: (self position + (xPosTarget@180)).
-        self addMorph: target.
-        targetMorphs add: target.
-
-	xPosTarget := xPosTarget + 90.
-    ].
-
-    shuffledOptions do: [:option |
-        | item |
+	
+	answerSlots := self createSlotsWith: correctAnswers.
+	answerSlots position: (container position + (0 @ 50)).
+	container addMorph: answerSlots.   
+	
+	shuffledOptions do: [:option |
         item := DraggableItemMorph newWithLabel: option inMorph: self.
-        item position: (self position + (xPosItem@280)).
-        self addMorph: item.
-        itemMorphs add: item.
+	item position: (container position + (xPosItem@280)).
+        container addMorph: item.
+        draggableItems add: item.
+        xPosItem := xPosItem + 150 ].
 
-        xPosItem := xPosItem + 90.
-    ].
+	^container
+	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 21:36'
+	#'squeak_changestamp' : 'EB 6/1/2024 23:14'
 }
-DragAndDropMorph >> createTargetWithLabel: aString [
+DragAndDropMorph >> createSlotsWith: correctAnswers [
 
-    | targetMorph labelMorph |
-    "targetMorph := Morph new.
-    labelMorph := StringMorph contents: aString.
-    labelMorph visible: false.
-    targetMorph addMorph: labelMorph."
+	| container slot numAnswers step |
+	container := Morph new.
+	container color: Color transparent; 
+	extent: 900 @ 150. "TODO change the size of a container"
 
-	"item := DraggableItemMorph newWithLabel: option inMorph: self."
-	
-	targetMorph := DraggableItemMorph newWithLabel:aString inMorph: self.
-	labelMorph := StringMorph contents: aString.
-	labelMorph visible: false.
-	targetMorph addMorph: labelMorph.
+	numAnswers := correctAnswers size.
+	step := container width / (numAnswers * 2 + 1).
+	 
+	correctAnswers do: [:correctAnswer |
+		"slot := Morph new."
+		"slot label: correctAnswer."
+		slot := AnswerSlotMorph newWithLabel: correctAnswer.
+		answerSlots add: slot.
+		slot lock.
+		"slot color: Color lightGray;
+			extent: 150 @ 100;
+			borderWidth: 2;
+			borderColor: Color black;
+			lock."
 
-	^ targetMorph
-	"^ {targetMorph. labelMorph}"
-	
-	
+	slot position: container position + (step @ 100).
+	step := (step + 200). "TODO should be calculated"
+	container addMorph: slot. ].
 
+	^container.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 23:28'
+	#'squeak_changestamp' : 'EB 6/1/2024 23:07'
 }
 DragAndDropMorph >> findTargetUnderCursor [
 
 	| cursorPos |
 	cursorPos := Sensor cursorPoint.
 	
-	^ targetMorphs detect: [:target | target bounds containsPoint: cursorPos] ifNone: [nil]
+	^ answerSlots detect: [:target | 
+		target bounds containsPoint: cursorPos] 
+		ifNone: [nil]
 	
 ]
 
@@ -104,63 +136,45 @@ DragAndDropMorph >> highlightTarget [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 22:35'
+	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
 }
 DragAndDropMorph >> initializeWithTask: aTask [
-
+	|intercative |
         self initialize.
         dragAndDropTask := aTask.
-        itemMorphs := OrderedCollection new.
-        targetMorphs := OrderedCollection new.
-        itemTargetMap := OrderedDictionary new.
+        draggableItems := OrderedCollection new.
+        answerSlots := OrderedCollection new.
+        itemSlotMap := OrderedDictionary new.
 
-        self setupLayout.
-        self setupSubmitButton.
-        self createItemsAndTargets.
+	self setupLayout.
+	self setupSubmitButton.
+	intercative := self createItemsAndTargets.
+	intercative position: (self position + (50 @ 100)).
+	self addMorph: intercative.
 
 	^ self
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/24/2024 23:25'
-}
-DragAndDropMorph >> isAnswerCorrect [
-
-	| isValid itemsAtTarget anAnswer |	
-	itemsAtTarget := OrderedCollection new.
-	itemTargetMap keysAndValuesDo: [:target :item |
-		(item isKindOf: DraggableItemMorph) ifTrue: [
-			itemsAtTarget add: item label.
-		].
-	].
-	
-	anAnswer := itemsAtTarget asArray.
-	isValid := dragAndDropTask isAnswerCorrect: anAnswer.
-
-	self inform: (isValid ifTrue: ['Correct!'] ifFalse: ['Incorrect, try again.']).
-		
-]
-
-{
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/24/2024 21:02'
+	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
 }
 DragAndDropMorph >> itemTargetMap [
-	^ itemTargetMap
+	^ itemSlotMap
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/29/2024 15:08'
+	#'squeak_changestamp' : 'EB 6/1/2024 17:04'
 }
 DragAndDropMorph >> setupLayout [ 
 
         | taskLabel |
-        self bounds: (0@0 extent: 100@600);
-            color: Color white;
+        self bounds: (0@0 extent: 1000@700);
+            color: Color veryVeryLightGray; "TODO change back to white"
             center: World bounds center.
+		"center: self owner."
 
 	taskLabel := StringMorph contents: dragAndDropTask getTaskDescription.
 	taskLabel
@@ -179,7 +193,7 @@ DragAndDropMorph >> setupLayout [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 23:35'
+	#'squeak_changestamp' : 'EB 6/1/2024 22:45'
 }
 DragAndDropMorph >> setupSubmitButton [
 
@@ -187,7 +201,7 @@ DragAndDropMorph >> setupSubmitButton [
     	submitButton := SimpleButtonMorph new.
     	submitButton label: 'Submit'.
     	submitButton target: self.
-    	submitButton actionSelector: #isAnswerCorrect.
+    	submitButton actionSelector: #checkAnswer.
     	"submitButton position: (self position + (350@120))."
 	submitButton
     		align: submitButton bottomCenter
@@ -208,9 +222,9 @@ DragAndDropMorph >> unhighlightTarget [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/22/2024 21:25'
+	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
 }
 DragAndDropMorph >> updateItemTargetMap: anItemMorph target: aTargetMorph [
 
-        itemTargetMap at: anItemMorph put: aTargetMorph.
+        itemSlotMap at: aTargetMorph put: anItemMorph.
 ]
