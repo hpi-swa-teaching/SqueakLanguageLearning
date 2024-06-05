@@ -1,0 +1,98 @@
+Class {
+	#name : #Page,
+	#superclass : #Morph,
+	#instVars : [
+		'dataReader'
+	],
+	#category : #'MyOwnCategory-Pages'
+}
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/23/2024 20:51'
+}
+Page class >> new [
+
+	^super new initialize
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/23/2024 21:16'
+}
+Page >> addBackButton [
+
+         | backButton |
+        backButton := SimpleButtonMorph new label: 'Back'.
+        backButton color: Color gray.
+        backButton borderWidth: 2.
+        backButton borderColor: Color black.
+        backButton position: (self position + (50@20)).
+        backButton target: self.
+        backButton actionSelector: #navigateBack.
+        self addMorph: backButton.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/2/2024 23:34'
+}
+Page >> addTitle: aString [
+
+	| title |
+	title := StringMorph new contents: aString.
+	title font: (TextStyle default fontOfSize: 30).
+	title
+    		align: title topCenter with: self topCenter.
+        self addMorph: title
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/27/2024 22:51'
+}
+Page >> initialize [
+	
+	super initialize.
+	self extent: 1200@900;
+		color: Color white; 
+		borderWidth: 10;
+		borderColor: Color lightGray;
+		center: Display center.
+	self addBackButton.
+		
+	^self
+	
+		
+		
+		
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/23/2024 23:16'
+}
+Page >> navigateBack [
+ 
+	self owner allMorphsDo: [:morph |
+		(morph isKindOf: Page) ifTrue: [ morph hide ].
+	].
+	self owner allMorphsDo: [:morph |
+		(morph isKindOf: HomePage) ifTrue: [ morph show ].
+	]
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 5/28/2024 21:28'
+}
+Page >> navigateTo: aPage [
+"TODO to delete?"
+
+	self hide.
+	aPage show
+	
+]
