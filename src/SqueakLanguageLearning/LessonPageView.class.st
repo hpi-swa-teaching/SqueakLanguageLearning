@@ -1,35 +1,36 @@
 Class {
-	#name : #LessonPageDynamic,
-	#superclass : #PageDynamic,
+	#name : #LessonPageView,
+	#superclass : #AbstractPage,
 	#instVars : [
 		'task'
 	],
 	#classInstVars : [
 		'taskTypeDictionary'
 	],
-	#category : #'MyOwnCategory-DynamicPages'
+	#category : #'SqueakLanguageLearning-Pages'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/31/2024 01:17'
+	#'squeak_changestamp' : 'EB 6/5/2024 22:42'
 }
-LessonPageDynamic class >> initializeTaskTypeDictionary [
+LessonPageView class >> initializeTaskTypeDictionary [
 	
 	"key is a name of object class for the type of task"
 	taskTypeDictionary := Dictionary new.
 	
-    	taskTypeDictionary at: 'DragAndDropTask' put: (Array with: DragAndDropMorph with: #newWithTask:).
-    	taskTypeDictionary at: 'MultipleChoiceTask' put: (Array with: MultipleChoiceMorph with: #newWithTask:).
-    	taskTypeDictionary at: 'TrueFalseTask' put: #method3.
-    	taskTypeDictionary at: 'FillGapsTask' put: #method4.
+    	taskTypeDictionary at: 'DragAndDropTask' put: (Array with: SLGDragAndDropView with: #newWithTask:).
+	taskTypeDictionary at: 'SLGClozeTask' put: (Array with: SLGClozeUI with:#newClozeUIwithTask:).
+    	taskTypeDictionary at: 'SLGMultipleChoiceTask' put: (Array with: SLGMultipleChoiceUI with: #newMultipleChoiceUIwithTask:).
+    	taskTypeDictionary at: 'SLGSingleChoiceTask' put: (Array with: SLGSingleChoiceUI with: #newSingleChoiceUIwithTask:).
+    	
 ]
 
 {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 14:10'
 }
-LessonPageDynamic class >> newWithLesson: aLesson andController: aController [
+LessonPageView class >> newWithLesson: aLesson andController: aController [
 
 	^self basicNew initializeWithLesson: aLesson andController: aController
 ]
@@ -38,7 +39,7 @@ LessonPageDynamic class >> newWithLesson: aLesson andController: aController [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/31/2024 00:42'
 }
-LessonPageDynamic class >> taskTypeDictionary [
+LessonPageView class >> taskTypeDictionary [
 	
 	taskTypeDictionary isNil ifTrue: self initializeTaskTypeDictionary.
 	^ taskTypeDictionary
@@ -46,14 +47,15 @@ LessonPageDynamic class >> taskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/31/2024 01:17'
+	#'squeak_changestamp' : 'EB 6/5/2024 18:46'
 }
-LessonPageDynamic >> createViewForTask: aTask [
+LessonPageView >> createViewForTask: aTask [
 
 	| dict method targetClass methodName key parameters|
 	dict := self getTaskTypeDictionary.
 	key := (aTask  class name) asString.
-	method := dict at: key. "ifAbsent: [ ^Transcript show: 'Key not found'; cr ]."
+	Transcript show: key.
+	method := dict at: key.
 	
 	targetClass := method first.
 	methodName := method second.
@@ -67,11 +69,11 @@ LessonPageDynamic >> createViewForTask: aTask [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/31/2024 00:43'
+	#'squeak_changestamp' : 'EB 6/5/2024 16:39'
 }
-LessonPageDynamic >> getTaskTypeDictionary [
+LessonPageView >> getTaskTypeDictionary [
 	
-	^LessonPage taskTypeDictionary
+	^self class taskTypeDictionary
 	
 ]
 
@@ -79,7 +81,7 @@ LessonPageDynamic >> getTaskTypeDictionary [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 14:50'
 }
-LessonPageDynamic >> initializeWithLesson: aLesson andController: aController [
+LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
 	| tasks taskView |
 	super initializeWithController: aController.

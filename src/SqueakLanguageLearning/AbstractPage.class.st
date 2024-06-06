@@ -1,17 +1,17 @@
 Class {
-	#name : #PageDynamic,
+	#name : #AbstractPage,
 	#superclass : #Morph,
 	#instVars : [
 		'controller'
 	],
-	#category : #'MyOwnCategory-DynamicPages'
+	#category : #'SqueakLanguageLearning-Pages'
 }
 
 {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 00:08'
 }
-PageDynamic class >> newWithController: aController [
+AbstractPage class >> newWithController: aController [
 
 	^super basicNew initializeWithController: aController
 	
@@ -21,7 +21,7 @@ PageDynamic class >> newWithController: aController [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 00:20'
 }
-PageDynamic >> addBackButton [
+AbstractPage >> addBackButton [
 
          | backButton |
         backButton := SimpleButtonMorph new label: 'Back'.
@@ -39,7 +39,7 @@ PageDynamic >> addBackButton [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 10:51'
 }
-PageDynamic >> addTitle: aString [
+AbstractPage >> addTitle: aString [
 
 	| title |
 	title := StringMorph new contents: aString.
@@ -53,7 +53,7 @@ PageDynamic >> addTitle: aString [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 6/3/2024 00:15'
 }
-PageDynamic >> controller [
+AbstractPage >> controller [
 	^ controller
 ]
 
@@ -61,7 +61,7 @@ PageDynamic >> controller [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 00:19'
 }
-PageDynamic >> initializeWithController: aController [
+AbstractPage >> initializeWithController: aController [
 	
 	super initialize.
 	controller := aController.
@@ -84,7 +84,7 @@ PageDynamic >> initializeWithController: aController [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 00:08'
 }
-PageDynamic >> navigateBack [
+AbstractPage >> navigateBack [
  
 	controller navigateBack.
 	

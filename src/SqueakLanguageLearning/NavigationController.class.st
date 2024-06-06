@@ -11,7 +11,7 @@ Class {
 		'currentSubtopic',
 		'currentLesson'
 	],
-	#category : #MyOwnCategory
+	#category : #SqueakLanguageLearning
 }
 
 {
@@ -115,11 +115,12 @@ NavigationController >> navigateBack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/2/2024 23:31'
+	#'squeak_changestamp' : 'EB 6/5/2024 14:48'
 }
 NavigationController >> showHomepage [
 
-	homePage := HomePageDynamic newWithTopics: topics andController: self.
+	"homePage := HomePageDynamic newWithTopics: topics andController: self."
+	homePage := HomePageDynamic newWithController: self.
 	World addMorph: homePage. 
 	
 	
@@ -159,4 +160,12 @@ NavigationController >> showTopicPage: aTopic [
 	topicPage := TopicPageDynamic newWithTopic: aTopic andController: self.
 	World addMorph: topicPage. 
 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/5/2024 14:50'
+}
+NavigationController >> topics [
+	^ topics
 ]

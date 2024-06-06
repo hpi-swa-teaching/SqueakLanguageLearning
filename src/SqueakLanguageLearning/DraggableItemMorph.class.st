@@ -7,7 +7,7 @@ Class {
 		'isDragging',
 		'offset'
 	],
-	#category : #'MyOwnCategory-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks'
 }
 
 {

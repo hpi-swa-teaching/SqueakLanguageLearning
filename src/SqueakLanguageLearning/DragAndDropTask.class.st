@@ -5,8 +5,17 @@ Class {
 		'taskDescription',
 		'correctAnswer'
 	],
-	#category : #MyOwnCategory
+	#category : #'SqueakLanguageLearning-Tasks'
 }
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/5/2024 22:37'
+}
+DragAndDropTask class >> newWithTask: aTask [ 
+
+	^self new
+]
 
 {
 	#category : #'as yet unclassified',
@@ -21,12 +30,20 @@ DragAndDropTask class >> task: aString correctAnswer: aCollection [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/22/2024 22:48'
+	#'squeak_changestamp' : 'EB 6/5/2024 19:58'
 }
-DragAndDropTask >> getCorrectAnswer [
+DragAndDropTask >> correctAnswer [
 
 	^ correctAnswer
 	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/5/2024 19:57'
+}
+DragAndDropTask >> correctAnswer: anObject [
+	correctAnswer := anObject
 ]
 
 {
@@ -38,14 +55,6 @@ DragAndDropTask >> getShuffledOptions [
 	^correctAnswer shuffled
 	
 
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/22/2024 22:48'
-}
-DragAndDropTask >> getTaskDescription [
-	^ taskDescription
 ]
 
 {
@@ -68,4 +77,20 @@ DragAndDropTask >> initializeWithTask: aString andAnswers: aCollection [
 DragAndDropTask >> isAnswerCorrect:anAnswer [ 
 
 	^ anAnswer = correctAnswer
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/5/2024 19:58'
+}
+DragAndDropTask >> taskDescription [
+	^ taskDescription
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/5/2024 19:57'
+}
+DragAndDropTask >> taskDescription: anObject [
+	taskDescription := anObject
 ]

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'topics'
 	],
-	#category : #MyOwnCategory
+	#category : #SqueakLanguageLearning
 }
 
 {
@@ -19,15 +19,15 @@ DataAccessService class >> new [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 19:10'
+	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
 }
 DataAccessService >> createSubtopicsForClasses [
 
-	| tasks task lessons subtopics |
-	
+| tasks task lessons subtopics |
+
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4' '5')).
-	tasks at: 2 put: (MultipleChoiceTask task: 'Do you like Squeak?' answerOptions: #('Yes' 'No' 'Dont know') correctAnswers: #(true, true, false)).
+	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	
 	
 	lessons := Array new: 2.
 	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
@@ -47,15 +47,15 @@ DataAccessService >> createSubtopicsForClasses [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 19:10'
+	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
 }
 DataAccessService >> createSubtopicsForControlFlow [
 
-	| tasks task lessons subtopics |
-	
+| tasks task lessons subtopics |
+
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4' '5')).
-	tasks at: 2 put: (MultipleChoiceTask task: 'Do you like Squeak?' answerOptions: #('Yes' 'No' 'Dont know') correctAnswers: #(true, true, false)).
+	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	
 	
 	lessons := Array new: 2.
 	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
@@ -75,15 +75,15 @@ DataAccessService >> createSubtopicsForControlFlow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 23:23'
+	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
 }
 DataAccessService >> createSubtopicsForDataStructures [
 
-	| tasks task lessons subtopics |
-	
+| tasks task lessons subtopics |
+
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4' '5')).
-	tasks at: 2 put: (MultipleChoiceTask task: 'Do you like Squeak?' answerOptions: #('Yes' 'No' 'Dont know') correctAnswers: #(true, true, false)).
+	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	
 	
 	lessons := Array new: 2.
 	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
@@ -103,18 +103,21 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 23:23'
+	#'squeak_changestamp' : 'EB 6/5/2024 16:08'
 }
 DataAccessService >> createSubtopicsForDataTypes [
 
 	| tasks task lessons subtopics |
 	
-	tasks := Array new: 2.
+	tasks := Array new: 5.
 	tasks at: 1 put: (DragAndDropTask task: 'Assign 5 to x' correctAnswer: #('x' ':' '=' '5')).
 	tasks at: 2 put: (DragAndDropTask task: 'Assign 6 to x and y' correctAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' )).
+	tasks at: 3 put: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true true false)).
+	tasks at: 4 put: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true false false)).
+	tasks at: 5 put: (SLGClozeTask newClozeWithQuestion: '' withCloze: 'a_lozeString' withAnswer: 'aClozeString').
 	
-	lessons := Array new: 2.
-	1 to: 2 do: [:index |
+	lessons := Array new: 5.
+	1 to: 5 do: [:index |
 		task := tasks at: index.
 		lessons at: index put: (Lesson newWithDescription: 'LessonDescriptionDT', index asString andTask: task).
 	].
@@ -130,15 +133,15 @@ DataAccessService >> createSubtopicsForDataTypes [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 19:09'
+	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
 }
 DataAccessService >> createSubtopicsForMethods [
 
-	| tasks task lessons subtopics |
-	
+| tasks task lessons subtopics |
+
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4' '5')).
-	tasks at: 2 put: (MultipleChoiceTask task: 'Do you like Squeak?' answerOptions: #('Yes' 'No' 'Dont know') correctAnswers: #(true, true, false)).
+	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	
 	
 	lessons := Array new: 2.
 	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
@@ -158,15 +161,15 @@ DataAccessService >> createSubtopicsForMethods [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 19:09'
+	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
 }
 DataAccessService >> createSubtopicsForMorphic [
 
 	| tasks task lessons subtopics |
-	
+
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4' '5')).
-	tasks at: 2 put: (MultipleChoiceTask task: 'Do you like Squeak?' answerOptions: #('Yes' 'No' 'Dont know') correctAnswers: #(true, true, false)).
+	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	
 	
 	lessons := Array new: 2.
 	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
@@ -186,15 +189,15 @@ DataAccessService >> createSubtopicsForMorphic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 19:09'
+	#'squeak_changestamp' : 'EB 6/5/2024 16:07'
 }
 DataAccessService >> createSubtopicsForSqueak [
 
 	| tasks task lessons subtopics |
 
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4' '5')).
-	tasks at: 2 put: (MultipleChoiceTask task: 'Do you like Squeak?' answerOptions: #('Yes' 'No' 'Dont know') correctAnswers: #(true, true, false)).
+	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	
 	
 	lessons := Array new: 2.
 	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."

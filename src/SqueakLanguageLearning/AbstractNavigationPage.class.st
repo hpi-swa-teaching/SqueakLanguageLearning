@@ -1,14 +1,14 @@
 Class {
-	#name : #NavigationPageDynamic,
-	#superclass : #PageDynamic,
-	#category : #'MyOwnCategory-DynamicPages'
+	#name : #AbstractNavigationPage,
+	#superclass : #AbstractPage,
+	#category : #'SqueakLanguageLearning-Pages'
 }
 
 {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 00:11'
 }
-NavigationPageDynamic class >> newWithWithController: aController [
+AbstractNavigationPage class >> newWithWithController: aController [
 
 	^super basicNew initializeWithController: aController
 ]
@@ -17,7 +17,7 @@ NavigationPageDynamic class >> newWithWithController: aController [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/2/2024 23:03'
 }
-NavigationPageDynamic >> addButtonsWithTitles: titles [
+AbstractNavigationPage >> addButtonsWithTitles: titles [
 
  	| button |  
 	     
@@ -37,7 +37,7 @@ NavigationPageDynamic >> addButtonsWithTitles: titles [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/2/2024 23:08'
 }
-NavigationPageDynamic >> buttonClicked: buttonIndex [
+AbstractNavigationPage >> buttonClicked: buttonIndex [
 
 	self subclassResponsibility.
 
@@ -50,7 +50,7 @@ NavigationPageDynamic >> buttonClicked: buttonIndex [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 00:22'
 }
-NavigationPageDynamic >> initializeWithController: aController [
+AbstractNavigationPage >> initializeWithController: aController [
 	
 	super initializeWithController: aController.
 	self bounds: (0@0 extent: 1200@900);

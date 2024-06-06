@@ -1,17 +1,17 @@
 Class {
-	#name : #SubtopicPageDynamic,
-	#superclass : #NavigationPageDynamic,
+	#name : #SubtopicPageView,
+	#superclass : #AbstractNavigationPage,
 	#instVars : [
 		'lessons'
 	],
-	#category : #'MyOwnCategory-DynamicPages'
+	#category : #'SqueakLanguageLearning-Pages'
 }
 
 {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 10:41'
 }
-SubtopicPageDynamic class >> newWithSubtopic: aSubtopic andController: aController [
+SubtopicPageView class >> newWithSubtopic: aSubtopic andController: aController [
 	
 	^super basicNew initializeWithSubtopic: aSubtopic andController: aController
 ]
@@ -20,7 +20,7 @@ SubtopicPageDynamic class >> newWithSubtopic: aSubtopic andController: aControll
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 14:43'
 }
-SubtopicPageDynamic >> buttonClicked: buttonIndex [
+SubtopicPageView >> buttonClicked: buttonIndex [
 
 	| lesson |
 	lesson := lessons at: buttonIndex.
@@ -31,7 +31,7 @@ SubtopicPageDynamic >> buttonClicked: buttonIndex [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 14:44'
 }
-SubtopicPageDynamic >> initializeWithSubtopic: aSubtopic andController: aController [
+SubtopicPageView >> initializeWithSubtopic: aSubtopic andController: aController [
 	
 	| lessonsTitles lessonTitle |
 	super initializeWithController: aController.

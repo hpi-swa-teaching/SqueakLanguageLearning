@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'label'
 	],
-	#category : #'MyOwnCategory-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks'
 }
 
 {

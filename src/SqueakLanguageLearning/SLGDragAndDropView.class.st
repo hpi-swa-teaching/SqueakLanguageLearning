@@ -1,5 +1,5 @@
 Class {
-	#name : #DragAndDropMorph,
+	#name : #SLGDragAndDropView,
 	#superclass : #Morph,
 	#instVars : [
 		'dragAndDropTask',
@@ -8,23 +8,32 @@ Class {
 		'answerSlots',
 		'itemSlotMap'
 	],
-	#category : #'MyOwnCategory-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks'
 }
 
 {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/22/2024 21:30'
 }
-DragAndDropMorph class >> newWithTask: aTask [
+SLGDragAndDropView class >> newWithTask: aTask [
 
         ^ self new initializeWithTask: aTask
 ]
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/5/2024 22:32'
+}
+SLGDragAndDropView class >> taskDescription [
+
+	^ 'Drag the item to the correct gap.'
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 23:16'
 }
-DragAndDropMorph >> checkAnswer [
+SLGDragAndDropView >> checkAnswer [
 
 	| isValid itemsAtTarget anAnswer targetCorrectMap |
 	
@@ -48,9 +57,9 @@ DragAndDropMorph >> checkAnswer [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 23:07'
+	#'squeak_changestamp' : 'EB 6/5/2024 19:58'
 }
-DragAndDropMorph >> createItemsAndTargets [
+SLGDragAndDropView >> createItemsAndTargets [
     
 	| container xPosItem shuffledOptions correctAnswers answerSlots item "numAnswers step" |
 	container := Morph new.
@@ -60,7 +69,7 @@ DragAndDropMorph >> createItemsAndTargets [
 	xPosItem := 100.
 
 	shuffledOptions := dragAndDropTask getShuffledOptions.
-	correctAnswers := dragAndDropTask getCorrectAnswer.
+	correctAnswers := dragAndDropTask correctAnswer.
 	
 	answerSlots := self createSlotsWith: correctAnswers.
 	answerSlots position: (container position + (0 @ 50)).
@@ -81,7 +90,7 @@ DragAndDropMorph >> createItemsAndTargets [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 23:14'
 }
-DragAndDropMorph >> createSlotsWith: correctAnswers [
+SLGDragAndDropView >> createSlotsWith: correctAnswers [
 
 	| container slot numAnswers step |
 	container := Morph new.
@@ -114,7 +123,7 @@ DragAndDropMorph >> createSlotsWith: correctAnswers [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 23:07'
 }
-DragAndDropMorph >> findTargetUnderCursor [
+SLGDragAndDropView >> findTargetUnderCursor [
 
 	| cursorPos |
 	cursorPos := Sensor cursorPoint.
@@ -129,7 +138,7 @@ DragAndDropMorph >> findTargetUnderCursor [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/22/2024 21:43'
 }
-DragAndDropMorph >> highlightTarget [ 
+SLGDragAndDropView >> highlightTarget [ 
 
         self color: Color yellow.
 ]
@@ -138,7 +147,7 @@ DragAndDropMorph >> highlightTarget [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
 }
-DragAndDropMorph >> initializeWithTask: aTask [
+SLGDragAndDropView >> initializeWithTask: aTask [
 	|intercative |
         self initialize.
         dragAndDropTask := aTask.
@@ -160,15 +169,15 @@ DragAndDropMorph >> initializeWithTask: aTask [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
 }
-DragAndDropMorph >> itemTargetMap [
+SLGDragAndDropView >> itemTargetMap [
 	^ itemSlotMap
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 17:04'
+	#'squeak_changestamp' : 'EB 6/5/2024 19:58'
 }
-DragAndDropMorph >> setupLayout [ 
+SLGDragAndDropView >> setupLayout [ 
 
         | taskLabel |
         self bounds: (0@0 extent: 1000@700);
@@ -176,7 +185,7 @@ DragAndDropMorph >> setupLayout [
             center: World bounds center.
 		"center: self owner."
 
-	taskLabel := StringMorph contents: dragAndDropTask getTaskDescription.
+	taskLabel := StringMorph contents: dragAndDropTask taskDescription.
 	taskLabel
     		align: taskLabel topCenter
     		with: self topCenter.
@@ -195,7 +204,7 @@ DragAndDropMorph >> setupLayout [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 22:45'
 }
-DragAndDropMorph >> setupSubmitButton [
+SLGDragAndDropView >> setupSubmitButton [
 
     	| submitButton |
     	submitButton := SimpleButtonMorph new.
@@ -215,7 +224,7 @@ DragAndDropMorph >> setupSubmitButton [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/22/2024 21:43'
 }
-DragAndDropMorph >> unhighlightTarget [
+SLGDragAndDropView >> unhighlightTarget [
 
         self color: Color gray.
 ]
@@ -224,7 +233,7 @@ DragAndDropMorph >> unhighlightTarget [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
 }
-DragAndDropMorph >> updateItemTargetMap: anItemMorph target: aTargetMorph [
+SLGDragAndDropView >> updateItemTargetMap: anItemMorph target: aTargetMorph [
 
         itemSlotMap at: aTargetMorph put: anItemMorph.
 ]

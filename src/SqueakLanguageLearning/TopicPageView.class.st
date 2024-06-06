@@ -1,17 +1,17 @@
 Class {
-	#name : #TopicPageDynamic,
-	#superclass : #NavigationPageDynamic,
+	#name : #TopicPageView,
+	#superclass : #AbstractNavigationPage,
 	#instVars : [
 		'subtopics'
 	],
-	#category : #'MyOwnCategory-DynamicPages'
+	#category : #'SqueakLanguageLearning-Pages'
 }
 
 {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 00:14'
 }
-TopicPageDynamic class >> newWithTopic: aTopic andController: aController [
+TopicPageView class >> newWithTopic: aTopic andController: aController [
 
 	^super basicNew initializeWithTopic: aTopic andController: aController
 ]
@@ -20,7 +20,7 @@ TopicPageDynamic class >> newWithTopic: aTopic andController: aController [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 14:24'
 }
-TopicPageDynamic >> addDescriptionTo: aTopic [
+TopicPageView >> addDescriptionTo: aTopic [
 
 	| description descriptionForm |
 
@@ -39,7 +39,7 @@ TopicPageDynamic >> addDescriptionTo: aTopic [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 13:47'
 }
-TopicPageDynamic >> buttonClicked: buttonIndex [
+TopicPageView >> buttonClicked: buttonIndex [
 
 	| subtopic |
 	subtopic := subtopics at: buttonIndex.
@@ -50,7 +50,7 @@ TopicPageDynamic >> buttonClicked: buttonIndex [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 10:59'
 }
-TopicPageDynamic >> initializeWithTopic: aTopic andController: aController [
+TopicPageView >> initializeWithTopic: aTopic andController: aController [
 	
 	| subtopicTitles subtopicTitle |
 	super initializeWithController: aController.

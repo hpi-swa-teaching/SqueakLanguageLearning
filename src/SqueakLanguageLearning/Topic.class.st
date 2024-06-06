@@ -6,7 +6,7 @@ Class {
 		'description',
 		'subtopics'
 	],
-	#category : #MyOwnCategory
+	#category : #SqueakLanguageLearning
 }
 
 {
