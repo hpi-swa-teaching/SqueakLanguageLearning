@@ -19,14 +19,14 @@ DataAccessService class >> new [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:23'
 }
 DataAccessService >> createSubtopicsForClasses [
 
 | tasks task lessons subtopics |
 
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
 	
 	
 	lessons := Array new: 2.
@@ -47,14 +47,14 @@ DataAccessService >> createSubtopicsForClasses [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:23'
 }
 DataAccessService >> createSubtopicsForControlFlow [
 
 | tasks task lessons subtopics |
 
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
 	
 	
 	lessons := Array new: 2.
@@ -75,14 +75,14 @@ DataAccessService >> createSubtopicsForControlFlow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:23'
 }
 DataAccessService >> createSubtopicsForDataStructures [
 
 | tasks task lessons subtopics |
 
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
 	
 	
 	lessons := Array new: 2.
@@ -103,15 +103,15 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 16:08'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:24'
 }
 DataAccessService >> createSubtopicsForDataTypes [
 
 	| tasks task lessons subtopics |
 	
 	tasks := Array new: 5.
-	tasks at: 1 put: (DragAndDropTask task: 'Assign 5 to x' correctAnswer: #('x' ':' '=' '5')).
-	tasks at: 2 put: (DragAndDropTask task: 'Assign 6 to x and y' correctAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' )).
+	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Assign 5 to x' withCorrectAnswer: #('x' ':' '=' '5')).
+	tasks at: 2 put: (SLGDragAndDropTask newWithQuestion: 'Assign 6 to x and y' withCorrectAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' )).
 	tasks at: 3 put: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true true false)).
 	tasks at: 4 put: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true false false)).
 	tasks at: 5 put: (SLGClozeTask newClozeWithQuestion: '' withCloze: 'a_lozeString' withAnswer: 'aClozeString').
@@ -133,14 +133,14 @@ DataAccessService >> createSubtopicsForDataTypes [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:24'
 }
 DataAccessService >> createSubtopicsForMethods [
 
 | tasks task lessons subtopics |
 
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
 	
 	
 	lessons := Array new: 2.
@@ -161,14 +161,14 @@ DataAccessService >> createSubtopicsForMethods [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 19:55'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:24'
 }
 DataAccessService >> createSubtopicsForMorphic [
 
 	| tasks task lessons subtopics |
 
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
 	
 	
 	lessons := Array new: 2.
@@ -189,14 +189,14 @@ DataAccessService >> createSubtopicsForMorphic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 16:07'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:25'
 }
 DataAccessService >> createSubtopicsForSqueak [
 
 	| tasks task lessons subtopics |
 
 	tasks := Array new: 2.
-	tasks at: 1 put: (DragAndDropTask task: 'Drag the correct answer to the corresponding gap' correctAnswer: #('1' '2' '3' '4')).
+	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
 	
 	
 	lessons := Array new: 2.

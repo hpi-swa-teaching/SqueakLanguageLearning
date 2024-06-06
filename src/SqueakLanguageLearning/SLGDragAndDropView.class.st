@@ -1,8 +1,7 @@
 Class {
 	#name : #SLGDragAndDropView,
-	#superclass : #Morph,
+	#superclass : #SLGTaskView,
 	#instVars : [
-		'dragAndDropTask',
 		'submitButton',
 		'draggableItems',
 		'answerSlots',
@@ -12,16 +11,20 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/22/2024 21:30'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'SW 6/6/2024 15:57'
 }
-SLGDragAndDropView class >> newWithTask: aTask [
+SLGDragAndDropView class >> newWithTask: aSLGDragAndDropTask [
 
-        ^ self new initializeWithTask: aTask
+	^ self new
+		task: aSLGDragAndDropTask;
+		taskQuestion: aSLGDragAndDropTask question;
+		setup;
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'EB 6/5/2024 22:32'
 }
 SLGDragAndDropView class >> taskDescription [
@@ -30,8 +33,24 @@ SLGDragAndDropView class >> taskDescription [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 23:16'
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/6/2024 15:55'
+}
+SLGDragAndDropView >> answerSlots [
+	^ answerSlots
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/6/2024 15:55'
+}
+SLGDragAndDropView >> answerSlots: anObject [
+	answerSlots := anObject
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/6/2024 16:50'
 }
 SLGDragAndDropView >> checkAnswer [
 
@@ -45,7 +64,7 @@ SLGDragAndDropView >> checkAnswer [
 		targetCorrectMap at: target put: (item label = target label) ].
 	
 	anAnswer := itemsAtTarget asArray.
-	isValid := dragAndDropTask isAnswerCorrect: anAnswer.
+	isValid := self task validate: anAnswer.
 	
 	targetCorrectMap keysAndValuesDo: [:target :correct |
             target color: (correct ifTrue: [Color lightGreen] ifFalse: [Color red]).
@@ -56,8 +75,8 @@ SLGDragAndDropView >> checkAnswer [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 19:58'
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 6/6/2024 15:58'
 }
 SLGDragAndDropView >> createItemsAndTargets [
     
@@ -68,8 +87,8 @@ SLGDragAndDropView >> createItemsAndTargets [
 
 	xPosItem := 100.
 
-	shuffledOptions := dragAndDropTask getShuffledOptions.
-	correctAnswers := dragAndDropTask correctAnswer.
+	shuffledOptions := self task getShuffledOptions.
+	correctAnswers := self task correctAnswer.
 	
 	answerSlots := self createSlotsWith: correctAnswers.
 	answerSlots position: (container position + (0 @ 50)).
@@ -87,7 +106,7 @@ SLGDragAndDropView >> createItemsAndTargets [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #setup,
 	#'squeak_changestamp' : 'EB 6/1/2024 23:14'
 }
 SLGDragAndDropView >> createSlotsWith: correctAnswers [
@@ -120,7 +139,23 @@ SLGDragAndDropView >> createSlotsWith: correctAnswers [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/6/2024 15:55'
+}
+SLGDragAndDropView >> draggableItems [
+	^ draggableItems
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/6/2024 15:55'
+}
+SLGDragAndDropView >> draggableItems: anObject [
+	draggableItems := anObject
+]
+
+{
+	#category : #setup,
 	#'squeak_changestamp' : 'EB 6/1/2024 23:07'
 }
 SLGDragAndDropView >> findTargetUnderCursor [
@@ -135,7 +170,7 @@ SLGDragAndDropView >> findTargetUnderCursor [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #setup,
 	#'squeak_changestamp' : 'EB 5/22/2024 21:43'
 }
 SLGDragAndDropView >> highlightTarget [ 
@@ -144,25 +179,25 @@ SLGDragAndDropView >> highlightTarget [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 6/6/2024 15:55'
 }
-SLGDragAndDropView >> initializeWithTask: aTask [
-	|intercative |
-        self initialize.
-        dragAndDropTask := aTask.
-        draggableItems := OrderedCollection new.
-        answerSlots := OrderedCollection new.
-        itemSlotMap := OrderedDictionary new.
+SLGDragAndDropView >> initialize [
 
-	self setupLayout.
-	self setupSubmitButton.
-	intercative := self createItemsAndTargets.
-	intercative position: (self position + (50 @ 100)).
-	self addMorph: intercative.
-
-	^ self
+	super initialize.
 	
+	self draggableItems: OrderedCollection new.
+	self answerSlots: OrderedCollection new.
+	self itemSlotMap: OrderedDictionary new.
+	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/6/2024 15:55'
+}
+SLGDragAndDropView >> itemSlotMap: anObject [
+	itemSlotMap := anObject
 ]
 
 {
@@ -174,8 +209,26 @@ SLGDragAndDropView >> itemTargetMap [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 19:58'
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 6/6/2024 15:57'
+}
+SLGDragAndDropView >> setup [
+
+	|intercative |
+
+	self setupLayout.
+	self setupSubmitButton.
+	intercative := self createItemsAndTargets.
+	intercative position: (self position + (50 @ 100)).
+	self addMorph: intercative.
+
+	"^ self"
+	
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 6/6/2024 15:58'
 }
 SLGDragAndDropView >> setupLayout [ 
 
@@ -185,7 +238,7 @@ SLGDragAndDropView >> setupLayout [
             center: World bounds center.
 		"center: self owner."
 
-	taskLabel := StringMorph contents: dragAndDropTask taskDescription.
+	taskLabel := StringMorph contents: self task question .
 	taskLabel
     		align: taskLabel topCenter
     		with: self topCenter.
@@ -201,7 +254,7 @@ SLGDragAndDropView >> setupLayout [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #setup,
 	#'squeak_changestamp' : 'EB 6/1/2024 22:45'
 }
 SLGDragAndDropView >> setupSubmitButton [
@@ -221,7 +274,7 @@ SLGDragAndDropView >> setupSubmitButton [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #setup,
 	#'squeak_changestamp' : 'EB 5/22/2024 21:43'
 }
 SLGDragAndDropView >> unhighlightTarget [
@@ -230,7 +283,7 @@ SLGDragAndDropView >> unhighlightTarget [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #setup,
 	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
 }
 SLGDragAndDropView >> updateItemTargetMap: anItemMorph target: aTargetMorph [

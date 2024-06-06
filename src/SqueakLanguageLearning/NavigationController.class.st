@@ -115,12 +115,12 @@ NavigationController >> navigateBack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 14:48'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:26'
 }
 NavigationController >> showHomepage [
 
 	"homePage := HomePageDynamic newWithTopics: topics andController: self."
-	homePage := HomePageDynamic newWithController: self.
+	homePage := HomePageView newWithController: self.
 	World addMorph: homePage. 
 	
 	
@@ -130,11 +130,11 @@ NavigationController >> showHomepage [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 14:27'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:27'
 }
 NavigationController >> showLessonPage: aLesson [
 
-	lessonPage := LessonPageDynamic newWithLesson: aLesson andController: self.
+	lessonPage := LessonPageView newWithLesson: aLesson andController: self.
 	World addMorph: lessonPage.
 	
 
@@ -142,22 +142,22 @@ NavigationController >> showLessonPage: aLesson [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 13:46'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:27'
 }
 NavigationController >> showSubtopicPage: aSubtopic [
 
-	subtopicPage := SubtopicPageDynamic newWithSubtopic: aSubtopic andController: self.
+	subtopicPage := SubtopicPageView newWithSubtopic: aSubtopic andController: self.
 	World addMorph: subtopicPage. 
 
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 00:16'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:26'
 }
 NavigationController >> showTopicPage: aTopic [
 
-	topicPage := TopicPageDynamic newWithTopic: aTopic andController: self.
+	topicPage := TopicPageView newWithTopic: aTopic andController: self.
 	World addMorph: topicPage. 
 
 ]

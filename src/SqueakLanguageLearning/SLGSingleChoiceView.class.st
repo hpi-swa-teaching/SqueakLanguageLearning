@@ -1,6 +1,6 @@
 Class {
-	#name : #SLGSingleChoiceUI,
-	#superclass : #SLGMultipleChoiceUI,
+	#name : #SLGSingleChoiceView,
+	#superclass : #SLGMultipleChoiceView,
 	#category : #'SqueakLanguageLearning-Tasks'
 }
 
@@ -8,7 +8,7 @@ Class {
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 6/1/2024 13:16'
 }
-SLGSingleChoiceUI class >> newSingleChoiceUIwithTask: aSLGSingleChoiceTask [
+SLGSingleChoiceView class >> newSingleChoiceUIwithTask: aSLGSingleChoiceTask [
 
  	^ self new
 		task: aSLGSingleChoiceTask;
@@ -21,7 +21,7 @@ SLGSingleChoiceUI class >> newSingleChoiceUIwithTask: aSLGSingleChoiceTask [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:05'
 }
-SLGSingleChoiceUI >> createToggleButtonAtPosition: aPosition [
+SLGSingleChoiceView >> createToggleButtonAtPosition: aPosition [
 
 	| button |
 	button := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition withButtonPressed: [self resetToggleButtons].
@@ -34,7 +34,7 @@ SLGSingleChoiceUI >> createToggleButtonAtPosition: aPosition [
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 6/1/2024 13:32'
 }
-SLGSingleChoiceUI >> initialize [
+SLGSingleChoiceView >> initialize [
 
 	super initialize
 ]
@@ -43,7 +43,7 @@ SLGSingleChoiceUI >> initialize [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:07'
 }
-SLGSingleChoiceUI >> resetToggleButtons [
+SLGSingleChoiceView >> resetToggleButtons [
 
 	self toggleButtonList do: [:each |
 				each state: false.
@@ -54,7 +54,7 @@ SLGSingleChoiceUI >> resetToggleButtons [
 	#category : #validation,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:49'
 }
-SLGSingleChoiceUI >> validate [
+SLGSingleChoiceView >> validate [
 
 	| userInput result |
 	userInput := OrderedCollection new.

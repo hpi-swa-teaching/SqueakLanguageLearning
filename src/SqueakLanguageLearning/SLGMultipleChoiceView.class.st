@@ -1,6 +1,6 @@
 Class {
-	#name : #SLGMultipleChoiceUI,
-	#superclass : #SLGTaskUI,
+	#name : #SLGMultipleChoiceView,
+	#superclass : #SLGTaskView,
 	#instVars : [
 		'toggleButtonList'
 	],
@@ -11,7 +11,7 @@ Class {
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'EB 6/5/2024 22:50'
 }
-SLGMultipleChoiceUI class >> newMultipleChoiceUIwithTask: aSLGMultipleChoiceTask [
+SLGMultipleChoiceView class >> newMultipleChoiceUIwithTask: aSLGMultipleChoiceTask [
 
  	^ self new
 		task: aSLGMultipleChoiceTask;
@@ -24,7 +24,7 @@ SLGMultipleChoiceUI class >> newMultipleChoiceUIwithTask: aSLGMultipleChoiceTask
 	#category : #constants,
 	#'squeak_changestamp' : 'SW 5/30/2024 15:18'
 }
-SLGMultipleChoiceUI class >> taskDescription [
+SLGMultipleChoiceView class >> taskDescription [
 
 	^ 'Choose the correct answers.'
 ]
@@ -33,7 +33,7 @@ SLGMultipleChoiceUI class >> taskDescription [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/29/2024 17:02'
 }
-SLGMultipleChoiceUI >> createToggleButton [
+SLGMultipleChoiceView >> createToggleButton [
 
 	| button |
 	button := SLGToggleButton newToggleButtonWithState: false.
@@ -45,7 +45,7 @@ SLGMultipleChoiceUI >> createToggleButton [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 13:45'
 }
-SLGMultipleChoiceUI >> createToggleButtonAtPosition: aPosition [
+SLGMultipleChoiceView >> createToggleButtonAtPosition: aPosition [
 
 	| button |
 	button := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition.
@@ -59,7 +59,7 @@ SLGMultipleChoiceUI >> createToggleButtonAtPosition: aPosition [
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 5/30/2024 17:27'
 }
-SLGMultipleChoiceUI >> initialize [
+SLGMultipleChoiceView >> initialize [
 
 	super initialize.
 	
@@ -70,7 +70,7 @@ SLGMultipleChoiceUI >> initialize [
 	#category : #validation,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:50'
 }
-SLGMultipleChoiceUI >> printFailureWithPercentage: aPercentage [
+SLGMultipleChoiceView >> printFailureWithPercentage: aPercentage [
 
 	self status contents: ((self class failureMessage), ' [', aPercentage asString, '% correct]')
 	
@@ -81,7 +81,7 @@ SLGMultipleChoiceUI >> printFailureWithPercentage: aPercentage [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:31'
 }
-SLGMultipleChoiceUI >> setup [
+SLGMultipleChoiceView >> setup [
 
 	"1. Description 2. Question 3. ToogleButtons 4. Status 5. SubmitButton"
 	super setup.
@@ -101,7 +101,7 @@ SLGMultipleChoiceUI >> setup [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 13:47'
 }
-SLGMultipleChoiceUI >> setupToggleButtons: anOptionArray [
+SLGMultipleChoiceView >> setupToggleButtons: anOptionArray [
 
 	| container yPos toggle toggleDescription |
 	"container := Morph new.
@@ -141,7 +141,7 @@ SLGMultipleChoiceUI >> setupToggleButtons: anOptionArray [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/29/2024 16:58'
 }
-SLGMultipleChoiceUI >> toggleButtonList [
+SLGMultipleChoiceView >> toggleButtonList [
 	^ toggleButtonList
 ]
 
@@ -149,7 +149,7 @@ SLGMultipleChoiceUI >> toggleButtonList [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/29/2024 16:59'
 }
-SLGMultipleChoiceUI >> toggleButtonList: anOrderedCollection [
+SLGMultipleChoiceView >> toggleButtonList: anOrderedCollection [
 	toggleButtonList := anOrderedCollection
 ]
 
@@ -157,7 +157,7 @@ SLGMultipleChoiceUI >> toggleButtonList: anOrderedCollection [
 	#category : #validation,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:48'
 }
-SLGMultipleChoiceUI >> validate [
+SLGMultipleChoiceView >> validate [
 
 	| userInput result |
 	userInput := OrderedCollection new.

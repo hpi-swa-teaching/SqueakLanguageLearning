@@ -1,5 +1,5 @@
 Class {
-	#name : #SLGTaskUI,
+	#name : #SLGTaskView,
 	#superclass : #Morph,
 	#instVars : [
 		'status',
@@ -18,7 +18,7 @@ Class {
 	#category : #constants,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:46'
 }
-SLGTaskUI class >> failureMessage [
+SLGTaskView class >> failureMessage [
 
 	^ 'Wrong Answer!'
 ]
@@ -27,7 +27,7 @@ SLGTaskUI class >> failureMessage [
 	#category : #constants,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:46'
 }
-SLGTaskUI class >> successMessage [
+SLGTaskView class >> successMessage [
 
 	^ 'Success!'
 ]
@@ -36,7 +36,7 @@ SLGTaskUI class >> successMessage [
 	#category : #constants,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:24'
 }
-SLGTaskUI class >> taskDescription [
+SLGTaskView class >> taskDescription [
 	
 	self subclassResponsibility
 ]
@@ -45,7 +45,7 @@ SLGTaskUI class >> taskDescription [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:59'
 }
-SLGTaskUI >> createSubmitButton [
+SLGTaskView >> createSubmitButton [
 
 	| submitButton |
 	submitButton := SimpleButtonMorph new.
@@ -63,7 +63,7 @@ SLGTaskUI >> createSubmitButton [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:05'
 }
-SLGTaskUI >> createTextFieldWithContent: aString [
+SLGTaskView >> createTextFieldWithContent: aString [
 	"Currently unused. User createTextFieldWithContent:withBorder: instead"
 	| textField |
 	textField := TextMorph new.
@@ -88,7 +88,7 @@ SLGTaskUI >> createTextFieldWithContent: aString [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:02'
 }
-SLGTaskUI >> createTextFieldWithContent: aString withBorder: aBoolean [
+SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
 	| textField |
 	textField := TextMorph new.
@@ -116,7 +116,7 @@ SLGTaskUI >> createTextFieldWithContent: aString withBorder: aBoolean [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:48'
 }
-SLGTaskUI >> descriptionField [
+SLGTaskView >> descriptionField [
 	^ descriptionField
 ]
 
@@ -124,7 +124,7 @@ SLGTaskUI >> descriptionField [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:48'
 }
-SLGTaskUI >> descriptionField: anObject [
+SLGTaskView >> descriptionField: anObject [
 	descriptionField := anObject
 ]
 
@@ -132,7 +132,7 @@ SLGTaskUI >> descriptionField: anObject [
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 5/31/2024 09:33'
 }
-SLGTaskUI >> initialize [
+SLGTaskView >> initialize [
 
 	super initialize.
 	
@@ -153,7 +153,7 @@ SLGTaskUI >> initialize [
 	#category : #validation,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:47'
 }
-SLGTaskUI >> printFailure [
+SLGTaskView >> printFailure [
 
 	self status contents: self class failureMessage
 	
@@ -164,7 +164,7 @@ SLGTaskUI >> printFailure [
 	#category : #validation,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:47'
 }
-SLGTaskUI >> printSuccess [
+SLGTaskView >> printSuccess [
 
 	self status contents: self class successMessage
 	
@@ -175,7 +175,7 @@ SLGTaskUI >> printSuccess [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:50'
 }
-SLGTaskUI >> questionField [
+SLGTaskView >> questionField [
 	^ questionField
 ]
 
@@ -183,7 +183,7 @@ SLGTaskUI >> questionField [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:50'
 }
-SLGTaskUI >> questionField: anObject [
+SLGTaskView >> questionField: anObject [
 	questionField := anObject
 ]
 
@@ -191,7 +191,7 @@ SLGTaskUI >> questionField: anObject [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:03'
 }
-SLGTaskUI >> setup [
+SLGTaskView >> setup [
 
 	self createSubmitButton.
 	
@@ -210,7 +210,7 @@ SLGTaskUI >> setup [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/30/2024 16:08'
 }
-SLGTaskUI >> status [
+SLGTaskView >> status [
 	^ status
 ]
 
@@ -218,7 +218,7 @@ SLGTaskUI >> status [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/30/2024 16:08'
 }
-SLGTaskUI >> status: anObject [
+SLGTaskView >> status: anObject [
 	status := anObject
 ]
 
@@ -226,7 +226,7 @@ SLGTaskUI >> status: anObject [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:17'
 }
-SLGTaskUI >> task [
+SLGTaskView >> task [
 	^ task
 ]
 
@@ -234,7 +234,7 @@ SLGTaskUI >> task [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:18'
 }
-SLGTaskUI >> task: aSLGTask [
+SLGTaskView >> task: aSLGTask [
 	task := aSLGTask
 ]
 
@@ -242,7 +242,7 @@ SLGTaskUI >> task: aSLGTask [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:29'
 }
-SLGTaskUI >> taskQuestion [
+SLGTaskView >> taskQuestion [
 	^ taskQuestion
 ]
 
@@ -250,7 +250,7 @@ SLGTaskUI >> taskQuestion [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 09:29'
 }
-SLGTaskUI >> taskQuestion: anObject [
+SLGTaskView >> taskQuestion: anObject [
 	taskQuestion := anObject
 ]
 
@@ -258,7 +258,7 @@ SLGTaskUI >> taskQuestion: anObject [
 	#category : #validation,
 	#'squeak_changestamp' : 'SW 5/30/2024 14:37'
 }
-SLGTaskUI >> validate [
+SLGTaskView >> validate [
 
 	self subclassResponsibility
 	

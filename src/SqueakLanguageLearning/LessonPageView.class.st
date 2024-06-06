@@ -12,17 +12,17 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 22:42'
+	#'squeak_changestamp' : 'SW 6/6/2024 15:28'
 }
 LessonPageView class >> initializeTaskTypeDictionary [
 	
 	"key is a name of object class for the type of task"
 	taskTypeDictionary := Dictionary new.
 	
-    	taskTypeDictionary at: 'DragAndDropTask' put: (Array with: SLGDragAndDropView with: #newWithTask:).
-	taskTypeDictionary at: 'SLGClozeTask' put: (Array with: SLGClozeUI with:#newClozeUIwithTask:).
-    	taskTypeDictionary at: 'SLGMultipleChoiceTask' put: (Array with: SLGMultipleChoiceUI with: #newMultipleChoiceUIwithTask:).
-    	taskTypeDictionary at: 'SLGSingleChoiceTask' put: (Array with: SLGSingleChoiceUI with: #newSingleChoiceUIwithTask:).
+    	taskTypeDictionary at: 'SLGDragAndDropTask' put: (Array with: SLGDragAndDropView with: #newWithTask:).
+	taskTypeDictionary at: 'SLGClozeTask' put: (Array with: SLGClozeView with:#newClozeUIwithTask:).
+    	taskTypeDictionary at: 'SLGMultipleChoiceTask' put: (Array with: SLGMultipleChoiceView with: #newMultipleChoiceUIwithTask:).
+    	taskTypeDictionary at: 'SLGSingleChoiceTask' put: (Array with: SLGSingleChoiceView with: #newSingleChoiceUIwithTask:).
     	
 ]
 

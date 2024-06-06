@@ -1,6 +1,6 @@
 Class {
-	#name : #SLGClozeUI,
-	#superclass : #SLGTaskUI,
+	#name : #SLGClozeView,
+	#superclass : #SLGTaskView,
 	#instVars : [
 		'taskCloze',
 		'clozeField'
@@ -12,7 +12,7 @@ Class {
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 5/31/2024 10:41'
 }
-SLGClozeUI class >> newClozeUIwithTask: aSLGClozeTask [
+SLGClozeView class >> newClozeUIwithTask: aSLGClozeTask [
 
  	^ self new
 		task: aSLGClozeTask;
@@ -26,7 +26,7 @@ SLGClozeUI class >> newClozeUIwithTask: aSLGClozeTask [
 	#category : #constants,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:11'
 }
-SLGClozeUI class >> taskDescription [
+SLGClozeView class >> taskDescription [
 
 	^ 'Fill in the gaps.'
 ]
@@ -35,7 +35,7 @@ SLGClozeUI class >> taskDescription [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:42'
 }
-SLGClozeUI >> clozeField [
+SLGClozeView >> clozeField [
 	^ clozeField
 ]
 
@@ -43,7 +43,7 @@ SLGClozeUI >> clozeField [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:42'
 }
-SLGClozeUI >> clozeField: aTextMorph [
+SLGClozeView >> clozeField: aTextMorph [
 	clozeField := aTextMorph
 ]
 
@@ -51,7 +51,7 @@ SLGClozeUI >> clozeField: aTextMorph [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:59'
 }
-SLGClozeUI >> createCloze [
+SLGClozeView >> createCloze [
 
 	self clozeField: (self createClozeFieldWithContent: self task cloze).
 	self clozeField center: (self center).
@@ -64,7 +64,7 @@ SLGClozeUI >> createCloze [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:59'
 }
-SLGClozeUI >> createClozeFieldWithContent: aString [
+SLGClozeView >> createClozeFieldWithContent: aString [
 
 	| textField |
 	textField := TextMorph new.
@@ -88,7 +88,7 @@ SLGClozeUI >> createClozeFieldWithContent: aString [
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 5/31/2024 10:19'
 }
-SLGClozeUI >> initialize [
+SLGClozeView >> initialize [
 
 	super initialize
 ]
@@ -97,7 +97,7 @@ SLGClozeUI >> initialize [
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:43'
 }
-SLGClozeUI >> setup [
+SLGClozeView >> setup [
 
 	super setup.
 	
@@ -108,7 +108,7 @@ SLGClozeUI >> setup [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:40'
 }
-SLGClozeUI >> taskCloze [
+SLGClozeView >> taskCloze [
 	^ taskCloze
 ]
 
@@ -116,7 +116,7 @@ SLGClozeUI >> taskCloze [
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:40'
 }
-SLGClozeUI >> taskCloze: anObject [
+SLGClozeView >> taskCloze: anObject [
 	taskCloze := anObject
 ]
 
@@ -124,7 +124,7 @@ SLGClozeUI >> taskCloze: anObject [
 	#category : #validation,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:44'
 }
-SLGClozeUI >> validate [
+SLGClozeView >> validate [
 	
 	| userInput |
 	
