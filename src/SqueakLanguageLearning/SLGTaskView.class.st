@@ -4,8 +4,6 @@ Class {
 	#instVars : [
 		'status',
 		'taskQuestion',
-		'descriptionField',
-		'questionField',
 		'task'
 	],
 	#classInstVars : [
@@ -16,11 +14,11 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:46'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:22'
 }
 SLGTaskView class >> failureMessage [
 
-	^ 'Wrong Answer!'
+	^ 'Wrong Answer! Please try again.'
 ]
 
 {
@@ -113,24 +111,8 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 09:48'
-}
-SLGTaskView >> descriptionField [
-	^ descriptionField
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 09:48'
-}
-SLGTaskView >> descriptionField: anObject [
-	descriptionField := anObject
-]
-
-{
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 6/7/2024 11:09'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:24'
 }
 SLGTaskView >> initialize [
 
@@ -140,10 +122,6 @@ SLGTaskView >> initialize [
 		extent: 1000@600;
 		color: Color veryVeryLightGray;
 		center: World bounds center
-		
-	"self description: (self createTextFieldWithContent: self class taskDescription).
-	self question: (self createTextFieldWithContent: self taskQuestion).
-	self status: (self createTextFieldWithContent: '')"
 	
 		
 
@@ -152,58 +130,41 @@ SLGTaskView >> initialize [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/7/2024 10:14'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:21'
 }
 SLGTaskView >> printFailure [
 
-	self status contents: self class failureMessage.
-	Transcript show: self class failureMessage; cr.
+	self status contents: self class failureMessage
 	
 	
 ]
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/7/2024 10:15'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:21'
 }
 SLGTaskView >> printSuccess [
 
-	self status contents: self class successMessage.
-	Transcript show: self class successMessage; cr.
+	self status contents: self class successMessage
 	
 	
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 09:50'
-}
-SLGTaskView >> questionField [
-	^ questionField
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 09:50'
-}
-SLGTaskView >> questionField: anObject [
-	questionField := anObject
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:03'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:19'
 }
 SLGTaskView >> setup [
 
+	| descriptionField questionField |
 	self createSubmitButton.
 	
-	self descriptionField: (self createTextFieldWithContent: self class taskDescription withBorder: true).
-	self questionField: (self createTextFieldWithContent: self taskQuestion withBorder: true).
+	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
+	questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true).
 	self status: (self createTextFieldWithContent: '' withBorder: true).
 	
-	self descriptionField center: (self topCenter + (0 @ 50)).
-	self questionField center: (self descriptionField center + (0 @ 50)).
+	descriptionField center: (self topCenter + (0 @ 50)).
+	questionField center: (descriptionField center + (0 @ 50)).
 	self status center: (self bottomCenter - (0 @ 125))
 	
 	
@@ -219,10 +180,10 @@ SLGTaskView >> status [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/30/2024 16:08'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:24'
 }
-SLGTaskView >> status: anObject [
-	status := anObject
+SLGTaskView >> status: aTextMorph [
+	status := aTextMorph
 ]
 
 {
@@ -251,10 +212,10 @@ SLGTaskView >> taskQuestion [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 09:29'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:24'
 }
-SLGTaskView >> taskQuestion: anObject [
-	taskQuestion := anObject
+SLGTaskView >> taskQuestion: aString [
+	taskQuestion := aString
 ]
 
 {

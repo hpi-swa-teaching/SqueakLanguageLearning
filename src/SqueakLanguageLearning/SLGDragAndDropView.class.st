@@ -145,15 +145,6 @@ SLGDragAndDropView >> findTargetUnderCursor [
 ]
 
 {
-	#category : #setup,
-	#'squeak_changestamp' : 'EB 5/22/2024 21:43'
-}
-SLGDragAndDropView >> highlightTarget [ 
-
-        self color: Color yellow.
-]
-
-{
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 6/6/2024 15:55'
 }
@@ -203,15 +194,6 @@ SLGDragAndDropView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'EB 5/22/2024 21:43'
-}
-SLGDragAndDropView >> unhighlightTarget [
-
-        self color: Color gray.
-]
-
-{
-	#category : #setup,
 	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
 }
 SLGDragAndDropView >> updateItemTargetMap: anItemMorph target: aTargetMorph [
@@ -221,7 +203,7 @@ SLGDragAndDropView >> updateItemTargetMap: anItemMorph target: aTargetMorph [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/7/2024 10:36'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:27'
 }
 SLGDragAndDropView >> validate [
 
@@ -243,7 +225,5 @@ SLGDragAndDropView >> validate [
 	(self task validate: anAnswer)
 		ifTrue: [self printSuccess]
 		ifFalse: [self printFailure].
-
-	"self inform: (isValid ifTrue: ['Correct!'] ifFalse: ['Incorrect, try again.'])."
 		
 ]

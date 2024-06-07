@@ -79,15 +79,12 @@ SLGMultipleChoiceView >> printFailureWithPercentage: aPercentage [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 09:31'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:17'
 }
 SLGMultipleChoiceView >> setup [
 
-	"1. Description 2. Question 3. ToogleButtons 4. Status 5. SubmitButton"
 	super setup.
 	
-	"self description contents: self class taskDescription.
-	self question contents: self task question."
 	self setupToggleButtons: self task answerOptions
 	
 	
@@ -144,11 +141,12 @@ SLGMultipleChoiceView >> toggleButtonList: anOrderedCollection [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:48'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:27'
 }
 SLGMultipleChoiceView >> validate [
 
 	| userInput result |
+	
 	userInput := OrderedCollection new.
 	self toggleButtonList do: [:each | userInput add: each state].
 	result := self task validate: userInput.

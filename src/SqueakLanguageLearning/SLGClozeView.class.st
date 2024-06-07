@@ -114,10 +114,10 @@ SLGClozeView >> taskCloze [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:40'
+	#'squeak_changestamp' : 'SW 6/7/2024 12:25'
 }
-SLGClozeView >> taskCloze: anObject [
-	taskCloze := anObject
+SLGClozeView >> taskCloze: aString [
+	taskCloze := aString
 ]
 
 {
