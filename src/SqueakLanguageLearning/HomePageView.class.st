@@ -41,7 +41,7 @@ HomePageView >> buttonClicked: buttonIndex [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 19:47'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:20'
 }
 HomePageView >> initializeWithController: aController [
 	
@@ -49,7 +49,7 @@ HomePageView >> initializeWithController: aController [
 	super initializeWithController: aController.
 	self addTitle: 'Welcome to Squeak Language Learning!'.
 	controller := aController.
-	topics := controller topics.
+	topics := controller dataAccessService topics.
 	
 	topicTitles := Array new: (topics size).
 	topics withIndexDo: [:topic :index |
@@ -64,7 +64,7 @@ HomePageView >> initializeWithController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 00:13'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:21'
 }
 HomePageView >> initializeWithTopics: topicsList andController: aController [
 	
@@ -72,7 +72,7 @@ HomePageView >> initializeWithTopics: topicsList andController: aController [
 	super initializeWithController: aController.
 	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
 	controller := aController.
-	topics := topicsList.
+	topics := controller dataAccessService topics.
 	
 	topicTitles := Array new: (topics size).
 	topics withIndexDo: [:topic :index |

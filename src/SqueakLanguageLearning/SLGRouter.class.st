@@ -6,61 +6,23 @@ Class {
 		'routeHistory',
 		'currentRouteIndex'
 	],
-	#classVars : [
-		'Instance'
-	],
 	#category : #'SqueakLanguageLearning-Controllers'
 }
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 23:38'
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:14'
 }
-SLGRouter class >> addRoute: aString withPage: aPage [
-	self instance addRouteWithRoute: (SLGRoute newRouteWithPath: aString withPage: aPage).
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 16:44'
-}
-SLGRouter class >> initRouter [
-	self instance: nil
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 17:03'
-}
-SLGRouter class >> instance [
-	Instance == nil ifTrue: [
-		self instance: SLGRouter new.
-	].
-	^ Instance
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 16:43'
-}
-SLGRouter class >> instance: anObject [
-	Instance := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 23:34'
-}
-SLGRouter class >> navigateTo: aString [
-	self instance navigateToWithPath: aString.
+SLGRouter >> addRouteWithPath: aString withPage: aPage [
+	self addRouteWithRoute: (SLGRoute newRouteWithPath: aString withPage: aPage).
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 17:31'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:12'
 }
 SLGRouter >> addRouteWithRoute: aRoute [
-	aRoute page open.
+	aRoute page openInWorld.
 	aRoute page hide.
 	self routes at: (aRoute path) put: aRoute.
 ]
@@ -83,7 +45,7 @@ SLGRouter >> currentRouteIndex: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 18:24'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:08'
 }
 SLGRouter >> initialize [
 	super initialize.
@@ -94,7 +56,7 @@ SLGRouter >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/5/2024 00:31'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:12'
 }
 SLGRouter >> navigateBack [
 	
@@ -103,7 +65,6 @@ SLGRouter >> navigateBack [
 	self currentRouteIndex - 1 > 0 ifFalse: [
 		^false	
 	].
-
 
 	curRoute := self routeHistory at: (self currentRouteIndex).
 	prevRoute := self routeHistory at: (self currentRouteIndex - 1).
@@ -114,6 +75,14 @@ SLGRouter >> navigateBack [
 	self routeHistory removeLast.
 	self currentRouteIndex: self routeHistory size.
 	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:06'
+}
+SLGRouter >> navigateTo: aString [
+	self navigateToWithPath: aString.
 ]
 
 {
@@ -157,11 +126,11 @@ SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 23:59'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:06'
 }
 SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistory: aBoolean [
 	| route curPage |
-
+	Transcript show: self routes.
 	self routeHistory size > 0 ifTrue: [
 		Transcript show: 'From "', (self routeHistory last path) ,'" navigate to "', aString, '"'; cr.
 	].
