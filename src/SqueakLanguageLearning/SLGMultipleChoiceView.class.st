@@ -30,32 +30,6 @@ SLGMultipleChoiceView class >> taskDescription [
 ]
 
 {
-	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/29/2024 17:02'
-}
-SLGMultipleChoiceView >> createToggleButton [
-
-	| button |
-	button := SLGToggleButton newToggleButtonWithState: false.
-	self toggleButtonList add: button
-	
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 13:45'
-}
-SLGMultipleChoiceView >> createToggleButtonAtPosition: aPosition [
-
-	| button |
-	button := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition.
-	"self toggleButtonList add: button."
-	
-	^ button
-	
-]
-
-{
 	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 5/30/2024 17:27'
 }
@@ -96,7 +70,7 @@ SLGMultipleChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:55'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:58'
 }
 SLGMultipleChoiceView >> setupToggleButtons: anOptionArray [
 	| rows cols |
@@ -144,13 +118,6 @@ SLGMultipleChoiceView >> setupToggleButtons: anOptionArray [
 	
 	cols center: self center.
 	self addMorph: cols.
-
-	
-	
-	
-	
-
-	
 ]
 
 {
