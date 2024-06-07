@@ -9,7 +9,7 @@ Class {
 	#classVars : [
 		'Instance'
 	],
-	#category : #SqueakLanguageLearning
+	#category : #'SqueakLanguageLearning-Controllers'
 }
 
 {

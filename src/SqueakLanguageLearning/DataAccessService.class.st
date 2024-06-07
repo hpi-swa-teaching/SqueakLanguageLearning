@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'topics'
 	],
-	#category : #SqueakLanguageLearning
+	#category : #'SqueakLanguageLearning-Controllers'
 }
 
 {

@@ -5,7 +5,7 @@ Class {
 		'description',
 		'task'
 	],
-	#category : #SqueakLanguageLearning
+	#category : #'SqueakLanguageLearning-Data'
 }
 
 {

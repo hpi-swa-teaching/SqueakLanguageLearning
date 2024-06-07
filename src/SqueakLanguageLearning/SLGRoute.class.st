@@ -5,7 +5,7 @@ Class {
 		'path',
 		'page'
 	],
-	#category : #SqueakLanguageLearning
+	#category : #'SqueakLanguageLearning-Controllers'
 }
 
 {
