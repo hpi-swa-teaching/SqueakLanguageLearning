@@ -61,10 +61,10 @@ SLGTaskView >> createSubmitButton [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:05'
+	#'squeak_changestamp' : 'SW 6/7/2024 10:47'
 }
 SLGTaskView >> createTextFieldWithContent: aString [
-	"Currently unused. User createTextFieldWithContent:withBorder: instead"
+	"Currently unused. Use createTextFieldWithContent:withBorder: instead"
 	| textField |
 	textField := TextMorph new.
 	textField
@@ -130,7 +130,7 @@ SLGTaskView >> descriptionField: anObject [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/31/2024 09:33'
+	#'squeak_changestamp' : 'SW 6/7/2024 11:09'
 }
 SLGTaskView >> initialize [
 
@@ -138,7 +138,8 @@ SLGTaskView >> initialize [
 	
 	self
 		extent: 1000@600;
-		color: Color white.
+		color: Color veryVeryLightGray;
+		center: World bounds center
 		
 	"self description: (self createTextFieldWithContent: self class taskDescription).
 	self question: (self createTextFieldWithContent: self taskQuestion).
@@ -151,22 +152,24 @@ SLGTaskView >> initialize [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:47'
+	#'squeak_changestamp' : 'SW 6/7/2024 10:14'
 }
 SLGTaskView >> printFailure [
 
-	self status contents: self class failureMessage
+	self status contents: self class failureMessage.
+	Transcript show: self class failureMessage; cr.
 	
 	
 ]
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:47'
+	#'squeak_changestamp' : 'SW 6/7/2024 10:15'
 }
 SLGTaskView >> printSuccess [
 
-	self status contents: self class successMessage
+	self status contents: self class successMessage.
+	Transcript show: self class successMessage; cr.
 	
 	
 ]

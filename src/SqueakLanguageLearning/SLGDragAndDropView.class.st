@@ -49,41 +49,16 @@ SLGDragAndDropView >> answerSlots: anObject [
 ]
 
 {
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/6/2024 16:50'
-}
-SLGDragAndDropView >> checkAnswer [
-
-	| isValid itemsAtTarget anAnswer targetCorrectMap |
-	
-	targetCorrectMap := Dictionary new.	
-	itemsAtTarget := OrderedCollection new.
-	itemSlotMap keysAndValuesDo: [:target :item |
-		(item isKindOf: DraggableItemMorph) ifTrue: [
-			itemsAtTarget add: item label ].
-		targetCorrectMap at: target put: (item label = target label) ].
-	
-	anAnswer := itemsAtTarget asArray.
-	isValid := self task validate: anAnswer.
-	
-	targetCorrectMap keysAndValuesDo: [:target :correct |
-            target color: (correct ifTrue: [Color lightGreen] ifFalse: [Color red]).
-        ].
-
-	self inform: (isValid ifTrue: ['Correct!'] ifFalse: ['Incorrect, try again.']).
-		
-]
-
-{
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/6/2024 15:58'
+	#'squeak_changestamp' : 'SW 6/7/2024 10:52'
 }
 SLGDragAndDropView >> createItemsAndTargets [
     
 	| container xPosItem shuffledOptions correctAnswers answerSlots item "numAnswers step" |
 	container := Morph new.
-	container bounds: (0@0 extent: 900@500);
-            color: Color white. 
+	container bounds: "(0@0 extent: 900@500);" (0@0 extent: 500@500);
+            "color: Color white."
+		color: Color transparent. 
 
 	xPosItem := 100.
 
@@ -210,67 +185,20 @@ SLGDragAndDropView >> itemTargetMap [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/6/2024 15:57'
+	#'squeak_changestamp' : 'SW 6/7/2024 11:06'
 }
 SLGDragAndDropView >> setup [
 
 	|intercative |
 
-	self setupLayout.
-	self setupSubmitButton.
+	super setup.
+	
 	intercative := self createItemsAndTargets.
 	intercative position: (self position + (50 @ 100)).
 	self addMorph: intercative.
 
 	"^ self"
 	
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/6/2024 15:58'
-}
-SLGDragAndDropView >> setupLayout [ 
-
-        | taskLabel |
-        self bounds: (0@0 extent: 1000@700);
-            color: Color veryVeryLightGray; "TODO change back to white"
-            center: World bounds center.
-		"center: self owner."
-
-	taskLabel := StringMorph contents: self task question .
-	taskLabel
-    		align: taskLabel topCenter
-    		with: self topCenter.
-	self addMorph: taskLabel
-	
-	
-		
-		
-		
-        
-        
-	
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'EB 6/1/2024 22:45'
-}
-SLGDragAndDropView >> setupSubmitButton [
-
-    	| submitButton |
-    	submitButton := SimpleButtonMorph new.
-    	submitButton label: 'Submit'.
-    	submitButton target: self.
-    	submitButton actionSelector: #checkAnswer.
-    	"submitButton position: (self position + (350@120))."
-	submitButton
-    		align: submitButton bottomCenter
-    		with: self bottomCenter.
-	self addMorph: submitButton
-	
-
 ]
 
 {
@@ -289,4 +217,33 @@ SLGDragAndDropView >> unhighlightTarget [
 SLGDragAndDropView >> updateItemTargetMap: anItemMorph target: aTargetMorph [
 
         itemSlotMap at: aTargetMorph put: anItemMorph.
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/7/2024 10:36'
+}
+SLGDragAndDropView >> validate [
+
+	| itemsAtTarget anAnswer targetCorrectMap |
+	
+	targetCorrectMap := Dictionary new.	
+	itemsAtTarget := OrderedCollection new.
+	itemSlotMap keysAndValuesDo: [:target :item |
+		(item isKindOf: DraggableItemMorph) ifTrue: [
+			itemsAtTarget add: item label ].
+		targetCorrectMap at: target put: (item label = target label) ].
+	
+	targetCorrectMap keysAndValuesDo: [:target :correct |
+            target color: (correct ifTrue: [Color lightGreen] ifFalse: [Color red]).
+        ].
+
+	anAnswer := itemsAtTarget asArray.
+	
+	(self task validate: anAnswer)
+		ifTrue: [self printSuccess]
+		ifFalse: [self printFailure].
+
+	"self inform: (isValid ifTrue: ['Correct!'] ifFalse: ['Incorrect, try again.'])."
+		
 ]
