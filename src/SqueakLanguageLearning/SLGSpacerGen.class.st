@@ -16,9 +16,9 @@ SLGSpacerGen class >> newSpacerWithDim: aPoint [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 16:00'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:29'
 }
 SLGSpacerGen >> initialize [
 	super initialize.
-	self color: Color transparent.
+	self color: Color red.
 ]

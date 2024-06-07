@@ -10,15 +10,26 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:33'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:55'
 }
 SLGLayout class >> columnWithMorphs: anArray [
-	| container |
+	| container maxWidth sumHeight |
 	
 	container := Morph new.
+	
+	maxWidth := (anArray collect: [:a | a width]) inject: 0 into: [:a :c | (a > c)
+	   ifTrue: [a]
+	   ifFalse: [c]
+	].
+	sumHeight := 0. anArray do: [:a | sumHeight := sumHeight + (a height)]. sumHeight.	
+	
+	container width: maxWidth.
+	container height: sumHeight.
+	
 	container layoutPolicy: TableLayout new.
 	container listDirection: #bottomToTop.
-
+	container color: Color transparent.
+	
 	anArray do: [:each |
 		container addMorph: each.
 	].
@@ -28,15 +39,25 @@ SLGLayout class >> columnWithMorphs: anArray [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:33'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:55'
 }
 SLGLayout class >> rowWithMorphs: anArray [
-	| container |
+	| container sumWidth maxHeight |
 	
 	container := Morph new.
+	
+	sumWidth := 0. anArray do: [:a | sumWidth := sumWidth + (a width)]. sumWidth.
+	maxHeight := (anArray collect: [:a | a height]) inject: 0 into: [:a :c | (a > c)
+	   ifTrue: [a]
+	   ifFalse: [c]
+	].
+
+	container width: sumWidth.
+	container height: maxHeight.
+	
 	container layoutPolicy: TableLayout new.
 	container listDirection: #rightToLeft.
-
+	container color: Color transparent.
 	anArray do: [:each |
 		container addMorph: each.
 	].

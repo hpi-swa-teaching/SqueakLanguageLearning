@@ -33,11 +33,12 @@ SLGToggleButtonGen class >> testToggleButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:45'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:14'
 }
 SLGToggleButtonGen >> initialize [
 	super initialize.
 	self state: false.
+	self label: ' '.
 ]
 
 {
