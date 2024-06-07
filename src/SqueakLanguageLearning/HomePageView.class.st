@@ -30,7 +30,7 @@ HomePageView class >> newWithTopics: topics andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:43'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:43'
 }
 HomePageView >> initializeWithController: aController [
 	| cols rows |
@@ -43,7 +43,7 @@ HomePageView >> initializeWithController: aController [
 		| btn |
 		self controller routerController addRouteWithPath: ('/home/', topic title) withPage: (TopicPageView new initializeWithTopic: topic andController: controller).
 		
-		btn := SLGButtonGen new
+		btn := SLGNavigationButtonGen new
 			label: topic title;
 			width: 400;
 			 onClickWithBlock: [

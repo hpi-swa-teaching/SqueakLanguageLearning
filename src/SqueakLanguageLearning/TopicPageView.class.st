@@ -18,7 +18,7 @@ TopicPageView class >> newWithTopic: aTopic andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:33'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:43'
 }
 TopicPageView >> initializeWithTopic: aTopic andController: aController [
 	
@@ -34,7 +34,7 @@ TopicPageView >> initializeWithTopic: aTopic andController: aController [
 		| btn |
 		self controller routerController addRouteWithPath: ('/home/', aTopic title, '/', subtopic title) withPage: (SubtopicPageView new initializeWithTopic: aTopic andSubtopic: subtopic andController: self controller).
 		
-		btn := SLGButtonGen new
+		btn := SLGNavigationButtonGen new
 			label: subtopic title;
 			width: 400;
 			 onClickWithBlock: [

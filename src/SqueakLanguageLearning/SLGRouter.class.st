@@ -28,6 +28,17 @@ SLGRouter >> addRouteWithRoute: aRoute [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:51'
+}
+SLGRouter >> closeWindow [
+	| curRoute |
+
+	curRoute := self routeHistory at: (self currentRouteIndex).
+	curRoute page delete.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 18:13'
 }

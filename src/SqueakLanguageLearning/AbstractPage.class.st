@@ -22,22 +22,39 @@ AbstractPage class >> newWithController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:02'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:44'
 }
 AbstractPage >> addBackButton [
 
 	| backButton |
 	
-	backButton := SLGButtonGen new
+	backButton := SLGNavigationButtonGen new
 		label: 'Back';
-		color: Color gray;
-		borderColor: Color black;
 		center: self header leftCenter + (60@0);
+		width: 100;
 		onClickWithBlock: [
 			self controller routerController navigateBack.
 		].
 		
         self header addMorph: backButton.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:51'
+}
+AbstractPage >> addCloseButton [
+	| closeButton |
+	
+	closeButton := SLGNavigationButtonGen new
+		label: 'Close';
+		center: self header rightCenter - (70@0);
+		width: 100;
+		onClickWithBlock: [
+			self controller routerController closeWindow.
+		].
+		
+        self header addMorph: closeButton.
 ]
 
 {
@@ -113,7 +130,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:04'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:49'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -149,6 +166,7 @@ AbstractPage >> initializeWithController: aController [
 		center: Display center.
 	
 	self addBackButton.
+	self addCloseButton.
 		
 	^self
 	
