@@ -75,7 +75,7 @@ DataAccessService >> createSubtopicsForControlFlow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:23'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:22'
 }
 DataAccessService >> createSubtopicsForDataStructures [
 
@@ -83,8 +83,7 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 	tasks := Array new: 2.
 	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
-	
-	
+
 	lessons := Array new: 2.
 	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
 	1 to: 2 do: [:index |

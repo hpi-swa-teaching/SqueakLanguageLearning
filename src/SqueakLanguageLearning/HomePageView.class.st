@@ -30,7 +30,7 @@ HomePageView class >> newWithTopics: topics andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:46'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:43'
 }
 HomePageView >> initializeWithController: aController [
 	| cols rows |
@@ -60,6 +60,6 @@ HomePageView >> initializeWithController: aController [
 	
 	cols center: self center.
 	
-	self addMorph: cols.
+	self body addMorph: cols.
 	
 ]

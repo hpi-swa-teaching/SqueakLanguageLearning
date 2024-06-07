@@ -37,26 +37,24 @@ LessonPageView class >> newWithLesson: aLesson andController: aController [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/31/2024 00:42'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:12'
 }
 LessonPageView class >> taskTypeDictionary [
 	
-	taskTypeDictionary isNil ifTrue: self initializeTaskTypeDictionary.
+	taskTypeDictionary ifNil: [self initializeTaskTypeDictionary].
 	^ taskTypeDictionary
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 18:46'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:32'
 }
 LessonPageView >> createViewForTask: aTask [
 
 	| dict method targetClass methodName key parameters|
 	dict := self getTaskTypeDictionary.
 	key := (aTask  class name) asString.
-	Transcript show: key.
-	method := dict at: key.
-	
+	method := dict at: key ifAbsent: [].
 	targetClass := method first.
 	methodName := method second.
 	parameters := Array new: 1.
@@ -79,10 +77,22 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:08'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:34'
 }
 LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
+	| taskView |
+	super initializeWithController: aController.
+	self addTitle: 'Lesson Title'. "TODO substitute with the one stored in DataAccessService"
+	"self addDescriptionTo: aLesson."
 	
+	task := aLesson task.
+	Transcript show: task; cr.
+	task ifNil: [
+		^self.	
+	].
+	taskView := self createViewForTask: task.
+	self body addMorph: taskView. 
+	"tasks at: 1 put: 'Task Title'." "TODO substitute with the one stored in DataAccessService"
 	
 ]

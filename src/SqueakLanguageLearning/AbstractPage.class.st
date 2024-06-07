@@ -2,7 +2,10 @@ Class {
 	#name : #AbstractPage,
 	#superclass : #Morph,
 	#instVars : [
-		'controller'
+		'controller',
+		'header',
+		'body',
+		'footer'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
@@ -19,34 +22,53 @@ AbstractPage class >> newWithController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 00:20'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:02'
 }
 AbstractPage >> addBackButton [
 
-         | backButton |
-        backButton := SimpleButtonMorph new label: 'Back'.
-        backButton color: Color gray.
-        backButton borderWidth: 2.
-        backButton borderColor: Color black.
-        backButton position: (self position + (50@20)).
-        backButton target: self.
-        backButton actionSelector: #navigateBack.
-
-        self addMorph: backButton.
+	| backButton |
+	
+	backButton := SLGButtonGen new
+		label: 'Back';
+		color: Color gray;
+		borderColor: Color black;
+		center: self header leftCenter + (60@0);
+		onClickWithBlock: [
+			self controller routerController navigateBack.
+		].
+		
+        self header addMorph: backButton.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 10:51'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:49'
 }
 AbstractPage >> addTitle: aString [
 
 	| title |
-	title := StringMorph new contents: aString.
-	title font: (TextStyle default fontOfSize: 35).
-	title
-    		align: title topCenter - 35 with: self topCenter.
-        self addMorph: title
+	
+	title := SLGTextGen new
+		setText: aString;
+		center: self header center.
+		
+        self header addMorph: title
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:39'
+}
+AbstractPage >> body [
+	^ body
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:39'
+}
+AbstractPage >> body: anObject [
+	body := anObject
 ]
 
 {
@@ -58,19 +80,75 @@ AbstractPage >> controller [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:40'
+}
+AbstractPage >> footer [
+	^ footer
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:40'
+}
+AbstractPage >> footer: anObject [
+	footer := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:39'
+}
+AbstractPage >> header [
+	^ header
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:39'
+}
+AbstractPage >> header: anObject [
+	header := anObject
+]
+
+{
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 00:19'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:04'
 }
 AbstractPage >> initializeWithController: aController [
 	
 	super initialize.
 	controller := aController.
+		
+	self header: (Morph new
+		width: 1200;
+		height: 80;
+		position: self position + (2@2);
+		color: Color white).
+		
+	self body: (Morph new
+		width: 1200;
+		height: 740;
+		position: self position + (2@82);
+		color: Color white).
+		
+	self footer: (Morph new
+		width: 1200;
+		height: 80;
+		position: self position + (2@822);
+		color: Color white).
+		
+	self addMorph: header.
+	self addMorph: body.
+	self addMorph: footer.
 	
-	self extent: 1200@900;
+	self extent: 1204@904;
 		color: Color white; 
-		borderWidth: 10;
-		borderColor: Color lightGray;
+		borderWidth: 2;
+		borderColor: Color orange;
 		center: Display center.
+	
+	self addBackButton.
 		
 	^self
 	

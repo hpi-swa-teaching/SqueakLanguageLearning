@@ -18,14 +18,13 @@ SubtopicPageView class >> newWithSubtopic: aSubtopic andController: aController 
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:35'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:35'
 }
 SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
 	
 	| rows cols lessonsTitles index |
 	
 	super initializeWithController: aController.
-	Transcript show: self controller.
 	self addTitle: aSubtopic title.
 	
 	lessons := aSubtopic lessons.
@@ -40,7 +39,7 @@ SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andContro
 		self controller routerController addRouteWithPath: routePath withPage: (LessonPageView new initializeWithLesson: lesson andController: controller).
 		
 		btn := SLGButtonGen new
-			label: ('/', index);
+			label: ('Lesson ', index);
 			width: 400;
 			 onClickWithBlock: [
 				self controller routerController navigateTo: routePath.
@@ -56,6 +55,6 @@ SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andContro
 	
 	cols center: self center.
 	
-	self addMorph: cols.
+	self body addMorph: cols.
 
 ]

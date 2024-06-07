@@ -15,47 +15,10 @@ AbstractNavigationPage class >> newWithWithController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/2/2024 23:03'
-}
-AbstractNavigationPage >> addButtonsWithTitles: titles [
-
- 	| button |  
-	     
-	titles withIndexDo: [:title :index |
-		button := SimpleButtonMorph new label: title.
-		button position: (self position + (500@(index * 100)));
-			shadowOffset: 5 @ 5;
-			shadowColor: Color gray.
-		button target: self.
-		button actionSelector: #buttonClicked:.
-		button arguments: { index }.
-	      self addMorph: button.
-	]
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/2/2024 23:08'
-}
-AbstractNavigationPage >> buttonClicked: buttonIndex [
-
-	self subclassResponsibility.
-
-
-
-
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 00:22'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:59'
 }
 AbstractNavigationPage >> initializeWithController: aController [
-	
 	super initializeWithController: aController.
-	self bounds: (0@0 extent: 1200@900);
-            color: Color white;
-            center: World bounds center.
 	
 	
 
