@@ -99,36 +99,25 @@ SLGMultipleChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 13:47'
+	#'squeak_changestamp' : 'SW 6/7/2024 11:54'
 }
 SLGMultipleChoiceView >> setupToggleButtons: anOptionArray [
 
-	| container yPos toggle toggleDescription |
-	"container := Morph new.
-	container
-		color: Color transparent;
-		position: (self position)."
+	| yPos toggle toggleDescription |
 
 	yPos := 150.
 	anOptionArray do: [:option |
-		"toggle := self createToggleButton. 
-		toggle position: (self position + (50 @ yPos))."
-		"toggle := SLGToggleButton newToggleButtonWithState: false withPosition: (self position + (150@yPos)).
-		self toggleButtonList add: toggle."
 		
 		toggle := self createToggleButtonAtPosition: (self position + (150 @ yPos)).
 		self toggleButtonList add: toggle.
 		
-		toggleDescription := self createTextFieldWithContent: option withBorder: false.
-		toggleDescription position: (toggle position + (toggle width + (20 @ 0))).
-	
-		"container addMorph: toggle.
-		container addMorph: toggleDescription."
+		toggleDescription := TextMorph new contents: option.
+		toggleDescription position: (toggle center + (toggle width @ ((toggle height - toggleDescription height)/2 negated))).
+
 		self addMorph: toggle.
 		self addMorph: toggleDescription.
 		yPos := yPos + 100].
 
-	"self addMorph: container"
 	
 	
 	
