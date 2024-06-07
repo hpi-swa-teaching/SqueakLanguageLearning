@@ -1,6 +1,6 @@
 Class {
 	#name : #TopicPageView,
-	#superclass : #AbstractNavigationPage,
+	#superclass : #AbstractPage,
 	#instVars : [
 		'subtopics'
 	],

@@ -1,6 +1,6 @@
 Class {
 	#name : #HomePageView,
-	#superclass : #AbstractNavigationPage,
+	#superclass : #AbstractPage,
 	#instVars : [
 		'topics'
 	],
