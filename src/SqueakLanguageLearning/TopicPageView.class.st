@@ -18,54 +18,40 @@ TopicPageView class >> newWithTopic: aTopic andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 14:24'
-}
-TopicPageView >> addDescriptionTo: aTopic [
-
-	| description descriptionForm |
-
-	description := aTopic description.
-	descriptionForm := TextMorph new.
-	descriptionForm contents:  description asText;
-					wrapFlag: true;
-					width: 1000;
-					position: (self position + (100@500)). 
-	
-	
-	self addMorph: descriptionForm.
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 13:47'
-}
-TopicPageView >> buttonClicked: buttonIndex [
-
-	| subtopic |
-	subtopic := subtopics at: buttonIndex.
-	controller handleSubtopicSelected: subtopic.
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 10:59'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:33'
 }
 TopicPageView >> initializeWithTopic: aTopic andController: aController [
 	
-	| subtopicTitles subtopicTitle |
+	| rows cols subtopicTitles |
 	super initializeWithController: aController.
 	self addTitle: aTopic title.
-	self addDescriptionTo: aTopic.
+	"self addDescriptionTo: aTopic."
 	
 	subtopics := aTopic subtopics.
 	subtopicTitles := Array new: (subtopics size).
-	subtopics withIndexDo: [:subtopic :index |
-		subtopicTitle := subtopic title.
-		subtopicTitles at: index put: subtopicTitle.
-        ].
 	
-	self addButtonsWithTitles: subtopicTitles.
-	self addBackButton.
+	rows := subtopics collect: [:subtopic |
+		| btn |
+		self controller routerController addRouteWithPath: ('/home/', aTopic title, '/', subtopic title) withPage: (SubtopicPageView new initializeWithTopic: aTopic andSubtopic: subtopic andController: self controller).
+		
+		btn := SLGButtonGen new
+			label: subtopic title;
+			width: 400;
+			 onClickWithBlock: [
+				self controller routerController navigateTo: ('/home/', aTopic title, '/', subtopic title).
+			].
+		
+		SLGLayout columnWithMorphs: {
+			btn.
+			SLGSpacerGen newSpacerWithDim: (0@20)
+		}
+	].
+	
+	cols := SLGLayout columnWithMorphs: rows.
+	
+	cols center: self center.
+	
+	self addMorph: cols.
 	
 	
 	

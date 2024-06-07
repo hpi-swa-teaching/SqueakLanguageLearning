@@ -59,10 +59,10 @@ SLGMainController >> navigationController: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:14'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:33'
 }
 SLGMainController >> registerRoutes [
-	self routerController addRouteWithPath: '/home' withPage: (HomePageView newWithController: self).
+	self routerController addRouteWithPath: '/home' withPage: (HomePageView new initializeWithController: self).
 ]
 
 {

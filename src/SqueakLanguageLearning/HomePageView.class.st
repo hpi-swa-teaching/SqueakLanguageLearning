@@ -30,57 +30,36 @@ HomePageView class >> newWithTopics: topics andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 13:47'
-}
-HomePageView >> buttonClicked: buttonIndex [
-
-	| topic |
-	topic := topics at: buttonIndex.
-	controller handleTopicSelected: topic.
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:20'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:46'
 }
 HomePageView >> initializeWithController: aController [
-	
-	| topicTitles topicTitle |
-	super initializeWithController: aController.
-	self addTitle: 'Welcome to Squeak Language Learning!'.
-	controller := aController.
-	topics := controller dataAccessService topics.
-	
-	topicTitles := Array new: (topics size).
-	topics withIndexDo: [:topic :index |
-		topicTitle := topic title.
-		topicTitles at: index put: topicTitle.
-        ].
-	
-	self addButtonsWithTitles: topicTitles.
-	
-	
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:21'
-}
-HomePageView >> initializeWithTopics: topicsList andController: aController [
-	
-	| topicTitles topicTitle |
+	| cols rows |
 	super initializeWithController: aController.
 	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
 	controller := aController.
 	topics := controller dataAccessService topics.
 	
-	topicTitles := Array new: (topics size).
-	topics withIndexDo: [:topic :index |
-		topicTitle := topic title.
-		topicTitles at: index put: topicTitle.
-        ].
+	rows := topics collect: [:topic |
+		| btn |
+		self controller routerController addRouteWithPath: ('/home/', topic title) withPage: (TopicPageView new initializeWithTopic: topic andController: controller).
+		
+		btn := SLGButtonGen new
+			label: topic title;
+			width: 400;
+			 onClickWithBlock: [
+				self controller routerController navigateTo: ('/home/', topic title).
+			].
+		
+		SLGLayout columnWithMorphs: {
+			btn.
+			SLGSpacerGen newSpacerWithDim: (0@20)
+		}
+	].
 	
-	self addButtonsWithTitles: topicTitles.
+	cols := SLGLayout columnWithMorphs: rows.
 	
+	cols center: self center.
+	
+	self addMorph: cols.
 	
 ]
