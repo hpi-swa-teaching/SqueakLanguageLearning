@@ -79,7 +79,7 @@ SLGMultipleChoiceView >> printFailureWithPercentage: aPercentage [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 12:17'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:21'
 }
 SLGMultipleChoiceView >> setup [
 
@@ -96,24 +96,54 @@ SLGMultipleChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 11:54'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:55'
 }
 SLGMultipleChoiceView >> setupToggleButtons: anOptionArray [
+	| rows cols |
 
-	| yPos toggle toggleDescription |
-
-	yPos := 150.
-	anOptionArray do: [:option |
+	rows := anOptionArray collect: [:option |
 		
-		toggle := self createToggleButtonAtPosition: (self position + (150 @ yPos)).
-		self toggleButtonList add: toggle.
+		| row toggleBtn text |
 		
-		toggleDescription := TextMorph new contents: option.
-		toggleDescription position: (toggle center + (toggle width @ ((toggle height - toggleDescription height)/2 negated))).
+		toggleBtn := SLGToggleButtonGen new
+			extent: (50@50);
+			borderWidth: 10;
+			color: Color gray.
+	
+		toggleBtn onClickWithBlock: [
+			toggleBtn state ifTrue: [
+				toggleBtn color: Color green.
+			].
 
-		self addMorph: toggle.
-		self addMorph: toggleDescription.
-		yPos := yPos + 100].
+			toggleBtn state ifFalse: [
+				toggleBtn color: Color gray.
+			].
+		].
+	
+		self toggleButtonList add: toggleBtn.
+		
+		text := SLGMultilineTextGen new
+			setText: option;
+			width: 400;
+			color: Color black.
+			
+		row := SLGLayout rowWithMorphs: 
+			{
+				toggleBtn.
+				SLGSpacerGen newSpacerWithDim: (20@0).
+				text
+			}.
+		
+		SLGLayout columnWithMorphs: {
+			row.
+			SLGSpacerGen newSpacerWithDim: (0@20)
+		}
+	].
+
+	cols := SLGLayout columnWithMorphs: rows.
+	
+	cols center: self center.
+	self addMorph: cols.
 
 	
 	
