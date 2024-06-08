@@ -77,7 +77,7 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:34'
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:23'
 }
 LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
@@ -87,7 +87,6 @@ LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	"self addDescriptionTo: aLesson."
 	
 	task := aLesson task.
-	Transcript show: task; cr.
 	task ifNil: [
 		^self.	
 	].

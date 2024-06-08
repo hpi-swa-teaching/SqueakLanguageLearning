@@ -137,11 +137,11 @@ SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:06'
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:24'
 }
 SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistory: aBoolean [
 	| route curPage |
-	Transcript show: self routes.
+
 	self routeHistory size > 0 ifTrue: [
 		Transcript show: 'From "', (self routeHistory last path) ,'" navigate to "', aString, '"'; cr.
 	].

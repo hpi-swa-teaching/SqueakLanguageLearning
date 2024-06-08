@@ -2,7 +2,8 @@ Class {
 	#name : #SLGMultipleChoiceView,
 	#superclass : #SLGTaskView,
 	#instVars : [
-		'toggleButtonList'
+		'toggleButtonList',
+		'singleChoice'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
@@ -31,12 +32,12 @@ SLGMultipleChoiceView class >> taskDescription [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/30/2024 17:27'
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:22'
 }
 SLGMultipleChoiceView >> initialize [
 
 	super initialize.
-	
+	self singleChoice: false.
 	self toggleButtonList: OrderedCollection new
 ]
 
@@ -49,6 +50,17 @@ SLGMultipleChoiceView >> printFailureWithPercentage: aPercentage [
 	self status contents: ((self class failureMessage), ' [', aPercentage asString, '% correct]')
 	
 	
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:22'
+}
+SLGMultipleChoiceView >> resetToggleButtons [
+	self toggleButtonList do: [:each |
+		each state: false.
+		each updateUI.
+	]
 ]
 
 {
@@ -70,7 +82,7 @@ SLGMultipleChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:58'
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:20'
 }
 SLGMultipleChoiceView >> setupToggleButtons: anOptionArray [
 	| rows cols |
@@ -83,14 +95,24 @@ SLGMultipleChoiceView >> setupToggleButtons: anOptionArray [
 			extent: (50@50);
 			borderWidth: 10;
 			color: Color gray.
-	
-		toggleBtn onClickWithBlock: [
+		
+		toggleBtn stateUI:  [
 			toggleBtn state ifTrue: [
 				toggleBtn color: Color green.
 			].
 
 			toggleBtn state ifFalse: [
 				toggleBtn color: Color gray.
+			].
+		].
+	
+		toggleBtn onClickWithBlock: [
+			| state |
+			
+			self singleChoice ifTrue: [
+				state := toggleBtn state.
+				self resetToggleButtons.
+				toggleBtn state: state.
 			].
 		].
 	
@@ -118,6 +140,22 @@ SLGMultipleChoiceView >> setupToggleButtons: anOptionArray [
 	
 	cols center: self center.
 	self addMorph: cols.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:04'
+}
+SLGMultipleChoiceView >> singleChoice [
+	^ singleChoice
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:04'
+}
+SLGMultipleChoiceView >> singleChoice: anObject [
+	singleChoice := anObject
 ]
 
 {

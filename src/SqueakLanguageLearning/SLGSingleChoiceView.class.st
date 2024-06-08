@@ -32,22 +32,12 @@ SLGSingleChoiceView >> createToggleButtonAtPosition: aPosition [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 6/1/2024 13:32'
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:05'
 }
 SLGSingleChoiceView >> initialize [
 
-	super initialize
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:07'
-}
-SLGSingleChoiceView >> resetToggleButtons [
-
-	self toggleButtonList do: [:each |
-				each state: false.
-				each update]
+	super initialize.
+	self singleChoice: true.
 ]
 
 {

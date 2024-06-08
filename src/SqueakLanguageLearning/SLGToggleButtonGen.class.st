@@ -2,7 +2,8 @@ Class {
 	#name : #SLGToggleButtonGen,
 	#superclass : #SLGButtonGen,
 	#instVars : [
-		'state'
+		'state',
+		'stateUI'
 	],
 	#category : #'SqueakLanguageLearning-UI-Components'
 }
@@ -43,12 +44,13 @@ SLGToggleButtonGen >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:40'
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:15'
 }
 SLGToggleButtonGen >> onClickWithBlock: aBlock [
 	self callback: [
-		self toggle.
-		aBlock value.	
+		self toggle.	
+		aBlock value.
+		self updateUI.
 	].
 ]
 
@@ -69,9 +71,33 @@ SLGToggleButtonGen >> state: anObject [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:17'
+}
+SLGToggleButtonGen >> stateUI [
+	^ stateUI
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:17'
+}
+SLGToggleButtonGen >> stateUI: anObject [
+	stateUI := anObject
+]
+
+{
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:45'
 }
 SLGToggleButtonGen >> toggle [
 	self state: (self state) not
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:17'
+}
+SLGToggleButtonGen >> updateUI [
+	self stateUI value.
 ]
