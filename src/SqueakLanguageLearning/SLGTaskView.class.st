@@ -152,7 +152,7 @@ SLGTaskView >> printSuccess [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 12:19'
+	#'squeak_changestamp' : 'SW 6/7/2024 15:47'
 }
 SLGTaskView >> setup [
 
@@ -160,12 +160,16 @@ SLGTaskView >> setup [
 	self createSubmitButton.
 	
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
-	questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true).
 	self status: (self createTextFieldWithContent: '' withBorder: true).
 	
 	descriptionField center: (self topCenter + (0 @ 50)).
-	questionField center: (descriptionField center + (0 @ 50)).
-	self status center: (self bottomCenter - (0 @ 125))
+	self status center: (self bottomCenter - (0 @ 125)).
+	
+	self taskQuestion ifNotNil: [
+		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true).
+		questionField center: (descriptionField center + (0 @ 50)).]
+	
+	
 	
 	
 ]

@@ -103,7 +103,7 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:24'
+	#'squeak_changestamp' : 'SW 6/7/2024 15:44'
 }
 DataAccessService >> createSubtopicsForDataTypes [
 
@@ -114,7 +114,7 @@ DataAccessService >> createSubtopicsForDataTypes [
 	tasks at: 2 put: (SLGDragAndDropTask newWithQuestion: 'Assign 6 to x and y' withCorrectAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' )).
 	tasks at: 3 put: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true true false)).
 	tasks at: 4 put: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true false false)).
-	tasks at: 5 put: (SLGClozeTask newClozeWithQuestion: '' withCloze: 'a_lozeString' withAnswer: 'aClozeString').
+	tasks at: 5 put: (SLGClozeTask newClozeWithQuestion: nil withCloze: 'a_lozeString' withAnswer: 'aClozeString').
 	
 	lessons := Array new: 5.
 	1 to: 5 do: [:index |
