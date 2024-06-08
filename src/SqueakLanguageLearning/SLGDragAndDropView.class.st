@@ -11,6 +11,15 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:35'
+}
+SLGDragAndDropView class >> errorMessage [
+
+	^ 'Please position all of the given items.'
+]
+
+{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 6/6/2024 15:57'
 }

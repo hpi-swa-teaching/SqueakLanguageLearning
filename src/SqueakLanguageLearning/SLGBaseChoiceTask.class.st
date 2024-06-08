@@ -22,3 +22,14 @@ SLGBaseChoiceTask >> answerOptions [
 SLGBaseChoiceTask >> answerOptions: anArray [
 	answerOptions := anArray
 ]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/8/2024 17:47'
+}
+SLGBaseChoiceTask >> isValid: anOrderedCollection [
+	
+	^ (anOrderedCollection allSatisfy: [:each | each = false]) not
+	
+
+]

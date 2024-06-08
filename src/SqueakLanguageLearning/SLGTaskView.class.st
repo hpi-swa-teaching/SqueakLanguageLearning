@@ -15,6 +15,15 @@ Class {
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:30'
+}
+SLGTaskView class >> errorMessage [
+
+	self subclassResponsibility
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 6/7/2024 12:22'
 }
 SLGTaskView class >> failureMessage [
@@ -38,6 +47,21 @@ SLGTaskView class >> successMessage [
 SLGTaskView class >> taskDescription [
 	
 	self subclassResponsibility
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/8/2024 17:15'
+}
+SLGTaskView >> checkResult [
+
+	(self result = 100)
+		ifTrue: [self printSuccess]
+		ifFalse: [self printFailure]
+	
+		
+	
+	
 ]
 
 {
@@ -136,6 +160,17 @@ SLGTaskView >> initialize [
 SLGTaskView >> passUserInput [
 
 	self subclassResponsibility
+	
+	
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/8/2024 17:00'
+}
+SLGTaskView >> printError [
+
+	self status contents: self class errorMessage
 	
 	
 ]
@@ -252,7 +287,7 @@ SLGTaskView >> taskQuestion: aString [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/8/2024 14:05'
+	#'squeak_changestamp' : 'SW 6/8/2024 17:39'
 }
 SLGTaskView >> validate [
 
@@ -260,9 +295,9 @@ SLGTaskView >> validate [
 	userInput := self passUserInput.
 	self result: (self task validate: userInput).
 	
-	(self result = 100)
-		ifTrue: [self printSuccess]
-		ifFalse: [self printFailure]
+	(self result = -1)
+		ifTrue: [self printError]
+		ifFalse: [self checkResult]
 		
 	
 	

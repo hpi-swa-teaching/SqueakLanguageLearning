@@ -5,6 +5,15 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:33'
+}
+SLGSingleChoiceView class >> errorMessage [
+
+	^ 'Please choose an answer.'
+]
+
+{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 6/1/2024 13:16'
 }

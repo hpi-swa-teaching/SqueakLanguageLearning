@@ -9,6 +9,15 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:34'
+}
+SLGClozeView class >> errorMessage [
+
+	^ 'Please change xx to your answer.'
+]
+
+{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 5/31/2024 10:41'
 }

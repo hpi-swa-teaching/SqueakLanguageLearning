@@ -26,3 +26,12 @@ SLGDragAndDropTask >> getShuffledOptions [
 	
 
 ]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/8/2024 17:49'
+}
+SLGDragAndDropTask >> isValid: anArray [
+	
+	^ true
+]

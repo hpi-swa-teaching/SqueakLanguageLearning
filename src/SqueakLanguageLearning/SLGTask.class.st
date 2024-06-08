@@ -26,6 +26,23 @@ SLGTask >> calculatePercentage: aValue with: aTotal [
 ]
 
 {
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/8/2024 17:41'
+}
+SLGTask >> calculateResult: anUserInput [
+
+	| comparison percentage |
+	
+	Transcript show: 'No Error occured.'; cr.
+	
+	comparison := self findMatches: self correctAnswer with: anUserInput.
+	percentage := self calculatePercentage: (comparison size) with: (self correctAnswer size).
+	
+	^ percentage
+
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 6/8/2024 14:24'
 }
@@ -51,6 +68,15 @@ SLGTask >> findMatches: aReferenceArray with: anInputArray [
 ]
 
 {
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:47'
+}
+SLGTask >> isValid: anUserInput [
+
+	self subclassResponsibility
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 6/1/2024 17:37'
 }
@@ -68,14 +94,29 @@ SLGTask >> question: anObject [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/8/2024 14:41'
+	#'squeak_changestamp' : 'SW 6/8/2024 17:41'
+}
+SLGTask >> sendError [
+
+	"Negative result shows, that something went wrong"
+	Transcript show: 'Error occured.'; cr.
+	
+	^ -1
+]
+
+{
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/8/2024 17:40'
 }
 SLGTask >> validate: anUserInput [
 
-	| comparison percentage |
+	| output |
 	
-	comparison := self findMatches: self correctAnswer with: anUserInput.
-	percentage := self calculatePercentage: (comparison size) with: (self correctAnswer size).
+	Transcript show: 'isValid: ', (self isValid: anUserInput); cr.
 	
-	^ percentage
+	(self isValid: anUserInput)
+		ifTrue: [output := self calculateResult: anUserInput.]
+		ifFalse: [output := self sendError].
+		
+	^ output
 ]
