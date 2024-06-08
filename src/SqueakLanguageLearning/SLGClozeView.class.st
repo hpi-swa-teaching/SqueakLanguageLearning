@@ -85,12 +85,14 @@ SLGClozeView >> createClozeFieldWithContent: aString [
 ]
 
 {
-	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/31/2024 10:19'
+	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/8/2024 13:56'
 }
-SLGClozeView >> initialize [
-
-	super initialize
+SLGClozeView >> passUserInput [
+	
+	^ self clozeField contents asString.
+	
+	
 ]
 
 {
@@ -118,21 +120,4 @@ SLGClozeView >> taskCloze [
 }
 SLGClozeView >> taskCloze: aString [
 	taskCloze := aString
-]
-
-{
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:44'
-}
-SLGClozeView >> validate [
-	
-	| userInput |
-	
-	userInput := self clozeField contents asString.
-	
-	(self task validate: userInput)
-		ifTrue: [self printSuccess]
-		ifFalse: [self printFailure]
-	
-	
 ]

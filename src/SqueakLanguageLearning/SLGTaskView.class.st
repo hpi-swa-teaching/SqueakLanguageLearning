@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'status',
 		'taskQuestion',
-		'task'
+		'task',
+		'result'
 	],
 	#classInstVars : [
 		'taskDescription'
@@ -130,6 +131,17 @@ SLGTaskView >> initialize [
 
 {
 	#category : #validation,
+	#'squeak_changestamp' : 'SW 6/8/2024 13:55'
+}
+SLGTaskView >> passUserInput [
+
+	self subclassResponsibility
+	
+	
+]
+
+{
+	#category : #validation,
 	#'squeak_changestamp' : 'SW 6/7/2024 12:21'
 }
 SLGTaskView >> printFailure [
@@ -148,6 +160,22 @@ SLGTaskView >> printSuccess [
 	self status contents: self class successMessage
 	
 	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/8/2024 14:05'
+}
+SLGTaskView >> result [
+	^ result
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/8/2024 14:05'
+}
+SLGTaskView >> result: anObject [
+	result := anObject
 ]
 
 {
@@ -224,11 +252,18 @@ SLGTaskView >> taskQuestion: aString [
 
 {
 	#category : #validation,
-	#'squeak_changestamp' : 'SW 5/30/2024 14:37'
+	#'squeak_changestamp' : 'SW 6/8/2024 14:05'
 }
 SLGTaskView >> validate [
 
-	self subclassResponsibility
+	| userInput |
+	userInput := self passUserInput.
+	self result: (self task validate: userInput).
+	
+	(self result = 100)
+		ifTrue: [self printSuccess]
+		ifFalse: [self printFailure]
+		
 	
 	
 ]

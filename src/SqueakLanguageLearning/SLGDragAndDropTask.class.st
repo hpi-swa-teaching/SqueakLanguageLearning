@@ -1,9 +1,6 @@
 Class {
 	#name : #SLGDragAndDropTask,
 	#superclass : #SLGTask,
-	#instVars : [
-		'correctAnswer'
-	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
 
@@ -20,25 +17,7 @@ SLGDragAndDropTask class >> newWithQuestion: aString withCorrectAnswer: anArray 
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/5/2024 19:58'
-}
-SLGDragAndDropTask >> correctAnswer [
-
-	^ correctAnswer
-	
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/5/2024 19:57'
-}
-SLGDragAndDropTask >> correctAnswer: anObject [
-	correctAnswer := anObject
-]
-
-{
-	#category : #'as yet unclassified',
+	#category : #setup,
 	#'squeak_changestamp' : 'SW 6/6/2024 15:35'
 }
 SLGDragAndDropTask >> getShuffledOptions [
@@ -46,13 +25,4 @@ SLGDragAndDropTask >> getShuffledOptions [
 	^ self correctAnswer shuffled
 	
 
-]
-
-{
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/6/2024 16:50'
-}
-SLGDragAndDropTask >> validate: anAnswer [ 
-
-	^ anAnswer = self correctAnswer
 ]
