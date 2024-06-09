@@ -6,12 +6,13 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'SW 6/1/2024 13:16'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:32'
 }
 SLGSingleChoiceView class >> newSingleChoiceUIwithTask: aSLGSingleChoiceTask [
 
  	^ self new
 		task: aSLGSingleChoiceTask;
+		code: aSLGSingleChoiceTask code;
 		taskQuestion: aSLGSingleChoiceTask question;
 		setup;
 		yourself

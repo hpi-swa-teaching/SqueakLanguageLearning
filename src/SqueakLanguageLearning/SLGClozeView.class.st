@@ -10,12 +10,13 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'SW 5/31/2024 10:41'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:32'
 }
 SLGClozeView class >> newClozeUIwithTask: aSLGClozeTask [
 
  	^ self new
 		task: aSLGClozeTask;
+		code: aSLGClozeTask code;
 		taskQuestion: aSLGClozeTask question;
 		taskCloze: aSLGClozeTask cloze;
 		setup;

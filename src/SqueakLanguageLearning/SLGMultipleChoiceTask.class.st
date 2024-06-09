@@ -10,6 +10,21 @@ Class {
 
 {
 	#category : #'instance creation',
+	#'squeak_changestamp' : 'xiaoshi 6/9/2024 23:58'
+}
+SLGMultipleChoiceTask class >> newMultipleChoiceWithQuestion: aQuestionString withCode: aCodeString withOptions: anOptionArray withAnswers: anAnswerArray [
+
+	^ self new
+			setQuestion: aQuestionString;
+        		setCode: aCodeString;
+			answerOptions: anOptionArray;
+			answers: anAnswerArray;
+			yourself
+	
+]
+
+{
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 5/31/2024 10:28'
 }
 SLGMultipleChoiceTask class >> newMultipleChoiceWithQuestion: aQuestionString withOptions: anOptionArray withAnswers: anAnswerArray [

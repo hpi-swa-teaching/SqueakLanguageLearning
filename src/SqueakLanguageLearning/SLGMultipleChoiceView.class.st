@@ -9,12 +9,13 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'EB 6/5/2024 22:50'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:32'
 }
 SLGMultipleChoiceView class >> newMultipleChoiceUIwithTask: aSLGMultipleChoiceTask [
 
  	^ self new
 		task: aSLGMultipleChoiceTask;
+		code: aSLGMultipleChoiceTask code;
 		taskQuestion: aSLGMultipleChoiceTask question;
 		setup";".
 		"yourself"

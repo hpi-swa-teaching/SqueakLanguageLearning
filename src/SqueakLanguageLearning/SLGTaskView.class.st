@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'status',
 		'taskQuestion',
-		'task'
+		'task',
+		'code'
 	],
 	#classInstVars : [
 		'taskDescription'
@@ -37,6 +38,50 @@ SLGTaskView class >> successMessage [
 SLGTaskView class >> taskDescription [
 	
 	self subclassResponsibility
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:30'
+}
+SLGTaskView >> code [
+	^ code
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:30'
+}
+SLGTaskView >> code: anObject [
+	code := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:42'
+}
+SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
+
+	|codeField|
+
+	codeField := (ToolBuilder build:
+			(Workspace new
+				contents: aCodeString;
+				buildCodePaneWith: ToolBuilder default))
+				wrapFlag: true;
+				extent: 600@400; "automatically change size based on the size of input?"
+				lock. "why lock?"
+	(aBoolean)
+		ifTrue: [codeField
+					borderWidth: 2;
+					borderColor: Color veryLightGray].	
+	
+	self addMorph: codeField.
+	
+	^ codeField
+	
+	
+	
 ]
 
 {
@@ -152,19 +197,28 @@ SLGTaskView >> printSuccess [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 12:19'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:47'
 }
 SLGTaskView >> setup [
 
-	| descriptionField questionField |
+	| descriptionField questionField codeField topBound|
 	self createSubmitButton.
 	
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
-	questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true).
 	self status: (self createTextFieldWithContent: '' withBorder: true).
 	
-	descriptionField center: (self topCenter + (0 @ 50)).
+	"if a task does not have code, then SLGWhateverTask code = nil. Same with question"
+	
+	self code ifNotNil: [codeField := (self createCodeBlockWithContent: self code withBorder: true).].
+	self taskQuestion ifNotNil: [questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true)].
+	
+	"layout: code - description - question - interactive - status (see miro)"
+	topBound := self topCenter.
+	codeField ifNotNil: [codeField center: (topBound + (0 @ 50)). 
+		topBound += codeField topCenter]. 
+	descriptionField center: (topBound + (0 @ 50)).
 	questionField center: (descriptionField center + (0 @ 50)).
+
 	self status center: (self bottomCenter - (0 @ 125))
 	
 	

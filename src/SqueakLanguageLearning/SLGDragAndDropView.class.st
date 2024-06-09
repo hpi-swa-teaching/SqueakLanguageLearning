@@ -12,12 +12,13 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:57'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:32'
 }
 SLGDragAndDropView class >> newWithTask: aSLGDragAndDropTask [
 
 	^ self new
 		task: aSLGDragAndDropTask;
+		code: aSLGDragAndDropTask code;
 		taskQuestion: aSLGDragAndDropTask question;
 		setup;
 		yourself
