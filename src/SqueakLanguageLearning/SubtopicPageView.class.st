@@ -1,7 +1,9 @@
 Class {
 	#name : #SubtopicPageView,
-	#superclass : #AbstractNavigationPage,
+	#superclass : #AbstractPage,
 	#instVars : [
+		'topic',
+		'subtopic',
 		'lessons'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
@@ -18,35 +20,124 @@ SubtopicPageView class >> newWithSubtopic: aSubtopic andController: aController 
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 14:43'
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:42'
 }
-SubtopicPageView >> buttonClicked: buttonIndex [
-
-	| lesson |
-	lesson := lessons at: buttonIndex.
-	controller handleLessonSelected: lesson.
+SubtopicPageView >> constructView [
+	| rows cols |
+	
+	rows :=  OrderedCollection new.
+	
+	rows addAll: self getLessonButtons.
+	
+	cols := SLGLayout columnWithMorphs: rows withGap: 20.
+	
+	cols center: self center.
+	
+	self body addMorph: cols.
+	
+	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 14:44'
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:35'
 }
-SubtopicPageView >> initializeWithSubtopic: aSubtopic andController: aController [
+SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRouteKey: aString [
+	| routeKey index| 
 	
-	| lessonsTitles lessonTitle |
+	routeKey := aString.
+	index := anInt.
+	
+	self controller routerController 
+		addRouteWithPath: routeKey withPage: (LessonPageView new initializeWithLesson: aLesson andController: controller).
+		
+		^ SLGNavigationButtonGen new
+			label: ('Lesson ', index);
+			width: 400;
+			 onClickWithBlock: [
+				self controller routerController navigateTo: routeKey.
+			].
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:44'
+}
+SubtopicPageView >> getLessonButtons [
+	|index|
+	
+	index := 0.
+	
+	^self subtopic lessons collect: [:lesson |
+		| button |
+		button := self getLessonButtonWithLesson: lesson
+			withIndex: index
+			withRouteKey: ('/home/', self topic title, '/', self subtopic title, '/', index).
+			
+		index := index + 1.
+		
+		button
+	]
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:40'
+}
+SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
+	
 	super initializeWithController: aController.
+	self topic: aTopic.
+	self subtopic: aSubtopic.
 	self addTitle: aSubtopic title.
 	
-	lessons := aSubtopic lessons.
-	lessonsTitles := Array new: (lessons size).
-	lessons withIndexDo: [:lesson :index |
-		lessonTitle := 'Lesson title', index asString.
-		lessonsTitles at: index put: lessonTitle.
-        ].
-	
-	self addButtonsWithTitles: lessonsTitles.
-	self addBackButton.
-	
-	
-	
+	self constructView.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> lessons [
+	^ lessons
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> lessons: anObject [
+	lessons := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> subtopic [
+	^ subtopic
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> subtopic: anObject [
+	subtopic := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> topic [
+	^ topic
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> topic: anObject [
+	topic := anObject
 ]
