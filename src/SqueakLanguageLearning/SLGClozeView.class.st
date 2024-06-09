@@ -94,7 +94,7 @@ SLGClozeView >> createClozeFieldWithContent: aString [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 13:56'
 }
 SLGClozeView >> passUserInput [

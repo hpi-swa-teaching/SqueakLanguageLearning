@@ -24,7 +24,7 @@ SLGBaseChoiceTask >> answerOptions: anArray [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 17:47'
 }
 SLGBaseChoiceTask >> isValid: anOrderedCollection [

@@ -27,7 +27,7 @@ SLGMultipleChoiceView class >> newMultipleChoiceUIwithTask: aSLGMultipleChoiceTa
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 14:06'
 }
 SLGMultipleChoiceView >> printFailure [
@@ -36,7 +36,7 @@ SLGMultipleChoiceView >> printFailure [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:50'
 }
 SLGMultipleChoiceView >> printFailureWithPercentage: aPercentage [

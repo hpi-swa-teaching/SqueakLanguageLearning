@@ -50,7 +50,7 @@ SLGTaskView class >> taskDescription [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 17:15'
 }
 SLGTaskView >> checkResult [
@@ -66,7 +66,7 @@ SLGTaskView >> checkResult [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 09:59'
+	#'squeak_changestamp' : 'SW 6/9/2024 21:04'
 }
 SLGTaskView >> createSubmitButton [
 
@@ -75,7 +75,7 @@ SLGTaskView >> createSubmitButton [
 	submitButton 
 			label: 'Submit';
 			center: (self bottomRight + (-100@(-70)));
-			on: #mouseUp send: #validate to: self.
+			on: #mouseUp send: #verifyAnswer to: self.
 	
 	self addMorph: submitButton
 	
@@ -154,7 +154,7 @@ SLGTaskView >> initialize [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 13:55'
 }
 SLGTaskView >> passUserInput [
@@ -165,7 +165,7 @@ SLGTaskView >> passUserInput [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 17:00'
 }
 SLGTaskView >> printError [
@@ -176,7 +176,7 @@ SLGTaskView >> printError [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/7/2024 12:21'
 }
 SLGTaskView >> printFailure [
@@ -187,7 +187,7 @@ SLGTaskView >> printFailure [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/7/2024 12:21'
 }
 SLGTaskView >> printSuccess [
@@ -286,14 +286,14 @@ SLGTaskView >> taskQuestion: aString [
 ]
 
 {
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/8/2024 17:39'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/9/2024 21:09'
 }
-SLGTaskView >> validate [
+SLGTaskView >> verifyAnswer [
 
 	| userInput |
 	userInput := self passUserInput.
-	self result: (self task validate: userInput).
+	self result: (self task verifyAnswer: userInput).
 	
 	(self result = -1)
 		ifTrue: [self printError]

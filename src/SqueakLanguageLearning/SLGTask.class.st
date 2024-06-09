@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 14:32'
 }
 SLGTask >> calculatePercentage: aValue with: aTotal [
@@ -26,7 +26,7 @@ SLGTask >> calculatePercentage: aValue with: aTotal [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 17:41'
 }
 SLGTask >> calculateResult: anUserInput [
@@ -59,7 +59,7 @@ SLGTask >> correctAnswer: anObject [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 14:33'
 }
 SLGTask >> findMatches: aReferenceArray with: anInputArray [
@@ -68,7 +68,7 @@ SLGTask >> findMatches: aReferenceArray with: anInputArray [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 16:47'
 }
 SLGTask >> isValid: anUserInput [
@@ -93,7 +93,7 @@ SLGTask >> question: anObject [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 17:41'
 }
 SLGTask >> sendError [
@@ -105,10 +105,10 @@ SLGTask >> sendError [
 ]
 
 {
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/8/2024 17:40'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/9/2024 21:08'
 }
-SLGTask >> validate: anUserInput [
+SLGTask >> verifyAnswer: anUserInput [
 
 	| output |
 	

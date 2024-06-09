@@ -54,7 +54,7 @@ SLGBaseChoiceView >> initialize [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 13:55'
 }
 SLGBaseChoiceView >> passUserInput [
@@ -64,17 +64,6 @@ SLGBaseChoiceView >> passUserInput [
 	self toggleButtonList do: [:each | userInput add: each state].
 	
 	^ userInput
-	
-]
-
-{
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:50'
-}
-SLGBaseChoiceView >> printFailureWithPercentage: aPercentage [
-
-	self status contents: ((self class failureMessage), ' [', aPercentage asString, '% correct]')
-	
 	
 ]
 

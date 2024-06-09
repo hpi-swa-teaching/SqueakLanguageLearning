@@ -22,7 +22,7 @@ SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCloze: aClozeStr
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 16:50'
 }
 SLGClozeTask >> calculateResult: anUserInput [
@@ -60,7 +60,7 @@ SLGClozeTask >> cloze: aString [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 14:40'
 }
 SLGClozeTask >> customizeInputAndAnswers: anUserInput [
@@ -76,7 +76,7 @@ SLGClozeTask >> customizeInputAndAnswers: anUserInput [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 17:48'
 }
 SLGClozeTask >> isValid: aString [
@@ -86,7 +86,7 @@ SLGClozeTask >> isValid: aString [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 5/31/2024 11:07'
 }
 SLGClozeTask >> removeSpacesAndLowercase: aString [
