@@ -2,6 +2,7 @@ Class {
 	#name : #TopicPageView,
 	#superclass : #AbstractPage,
 	#instVars : [
+		'topic',
 		'subtopics'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
@@ -18,41 +19,121 @@ TopicPageView class >> newWithTopic: aTopic andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:43'
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:04'
 }
-TopicPageView >> initializeWithTopic: aTopic andController: aController [
+TopicPageView >> constructView [
+	| rows cols |
+	rows := OrderedCollection new.
 	
-	| rows cols subtopicTitles |
-	super initializeWithController: aController.
-	self addTitle: aTopic title.
-	"self addDescriptionTo: aTopic."
-	
-	subtopics := aTopic subtopics.
-	subtopicTitles := Array new: (subtopics size).
-	
-	rows := subtopics collect: [:subtopic |
-		| btn |
-		self controller routerController addRouteWithPath: ('/home/', aTopic title, '/', subtopic title) withPage: (SubtopicPageView new initializeWithTopic: aTopic andSubtopic: subtopic andController: self controller).
-		
-		btn := SLGNavigationButtonGen new
-			label: subtopic title;
-			width: 400;
-			 onClickWithBlock: [
-				self controller routerController navigateTo: ('/home/', aTopic title, '/', subtopic title).
-			].
-		
-		SLGLayout columnWithMorphs: {
-			btn.
-			SLGSpacerGen newSpacerWithDim: (0@20)
-		}
-	].
-	
-	cols := SLGLayout columnWithMorphs: rows.
+	rows add: self getDescription.
+	rows addAll: self getSubtopicButtons.
+
+	cols := SLGLayout columnWithMorphs: rows withGap: 20.
 	
 	cols center: self center.
 	
-	self addMorph: cols.
+	self body addMorph: cols.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:05'
+}
+TopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [
+	^SubtopicPageView new
+		initializeWithTopic: (self topic)
+		andSubtopic: aSubtopic
+		andController: self controller
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:52'
+}
+TopicPageView >> getDescription [
+	^SLGMultilineTextGen new 
+		setFontSize: 20;
+		width: 600;
+		setText: (self topic description);
+		yourself.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:31'
+}
+TopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
+	|routeString  |
+	routeString := aString.
+	
+	self controller routerController addRouteWithPath: 
+	routeString withPage: (self createSubtopicPageWithSubtopic: aSubtopic).
+	
+	^SLGNavigationButtonGen new
+		label: aSubtopic title;
+		width: 400;
+		 onClickWithBlock: [
+			self controller routerController navigateTo: routeString.
+		];
+		yourself.
+
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:31'
+}
+TopicPageView >> getSubtopicButtons [
+	^self subtopics collect: [:subtopic |
+		self getSubtopicButtonWithSubtopic: subtopic
+			withRouteKey:  ('/home/', self topic title, '/', subtopic title)
+	].
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:50'
+}
+TopicPageView >> initializeWithTopic: aTopic andController: aController [
+	
+	super initializeWithController: aController.
+	self topic: aTopic.
+	self subtopics: aTopic subtopics.
+	self addTitle: aTopic title.
+	
+	self constructView.
 	
 	
-	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:47'
+}
+TopicPageView >> subtopics [
+	^ subtopics
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:47'
+}
+TopicPageView >> subtopics: anObject [
+	subtopics := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:22'
+}
+TopicPageView >> topic [
+	^ topic
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:22'
+}
+TopicPageView >> topic: anObject [
+	topic := anObject
 ]

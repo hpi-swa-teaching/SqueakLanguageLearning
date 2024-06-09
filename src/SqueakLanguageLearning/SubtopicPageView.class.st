@@ -2,6 +2,8 @@ Class {
 	#name : #SubtopicPageView,
 	#superclass : #AbstractPage,
 	#instVars : [
+		'topic',
+		'subtopic',
 		'lessons'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
@@ -18,43 +20,124 @@ SubtopicPageView class >> newWithSubtopic: aSubtopic andController: aController 
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:43'
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:42'
 }
-SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
+SubtopicPageView >> constructView [
+	| rows cols |
 	
-	| rows cols lessonsTitles index |
+	rows :=  OrderedCollection new.
 	
-	super initializeWithController: aController.
-	self addTitle: aSubtopic title.
+	rows addAll: self getLessonButtons.
 	
-	lessons := aSubtopic lessons.
-	lessonsTitles := Array new: (lessons size).
-	index := 0.
-	
-	rows := lessons collect: [:lesson |
-		| btn routePath |
-		
-		 routePath := ('/home/', aTopic title, '/', aSubtopic title, '/', index).
-		
-		self controller routerController addRouteWithPath: routePath withPage: (LessonPageView new initializeWithLesson: lesson andController: controller).
-		
-		btn := SLGNavigationButtonGen new
-			label: ('Lesson ', index);
-			width: 400;
-			 onClickWithBlock: [
-				self controller routerController navigateTo: routePath.
-			].
-		index := index +1.
-		SLGLayout columnWithMorphs: {
-			btn.
-			SLGSpacerGen newSpacerWithDim: (0@20)
-		}
-	].
-	
-	cols := SLGLayout columnWithMorphs: rows.
+	cols := SLGLayout columnWithMorphs: rows withGap: 20.
 	
 	cols center: self center.
 	
 	self body addMorph: cols.
+	
+	
+]
 
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:35'
+}
+SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRouteKey: aString [
+	| routeKey index| 
+	
+	routeKey := aString.
+	index := anInt.
+	
+	self controller routerController 
+		addRouteWithPath: routeKey withPage: (LessonPageView new initializeWithLesson: aLesson andController: controller).
+		
+		^ SLGNavigationButtonGen new
+			label: ('Lesson ', index);
+			width: 400;
+			 onClickWithBlock: [
+				self controller routerController navigateTo: routeKey.
+			].
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:44'
+}
+SubtopicPageView >> getLessonButtons [
+	|index|
+	
+	index := 0.
+	
+	^self subtopic lessons collect: [:lesson |
+		| button |
+		button := self getLessonButtonWithLesson: lesson
+			withIndex: index
+			withRouteKey: ('/home/', self topic title, '/', self subtopic title, '/', index).
+			
+		index := index + 1.
+		
+		button
+	]
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:40'
+}
+SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
+	
+	super initializeWithController: aController.
+	self topic: aTopic.
+	self subtopic: aSubtopic.
+	self addTitle: aSubtopic title.
+	
+	self constructView.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> lessons [
+	^ lessons
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> lessons: anObject [
+	lessons := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> subtopic [
+	^ subtopic
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> subtopic: anObject [
+	subtopic := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> topic [
+	^ topic
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+}
+SubtopicPageView >> topic: anObject [
+	topic := anObject
 ]

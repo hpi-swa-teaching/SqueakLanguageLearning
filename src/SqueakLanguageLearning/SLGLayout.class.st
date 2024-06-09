@@ -10,7 +10,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:55'
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:02'
 }
 SLGLayout class >> columnWithMorphs: anArray [
 	| container maxWidth sumHeight |
@@ -34,6 +34,19 @@ SLGLayout class >> columnWithMorphs: anArray [
 		container addMorph: each.
 	].
 
+	^container
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:02'
+}
+SLGLayout class >> columnWithMorphs: anArray withGap: anInt [
+	| container |
+	
+	container := self columnWithMorphs: anArray.
+	container cellGap: anInt.
+	
 	^container
 ]
 

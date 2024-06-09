@@ -30,36 +30,87 @@ HomePageView class >> newWithTopics: topics andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:43'
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:26'
 }
-HomePageView >> initializeWithController: aController [
-	| cols rows |
-	super initializeWithController: aController.
-	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
-	controller := aController.
-	topics := controller dataAccessService topics.
+HomePageView >> constructView [
+	| rows cols |
+	rows := OrderedCollection new.
 	
-	rows := topics collect: [:topic |
-		| btn |
-		self controller routerController addRouteWithPath: ('/home/', topic title) withPage: (TopicPageView new initializeWithTopic: topic andController: controller).
-		
-		btn := SLGNavigationButtonGen new
-			label: topic title;
-			width: 400;
-			 onClickWithBlock: [
-				self controller routerController navigateTo: ('/home/', topic title).
-			].
-		
-		SLGLayout columnWithMorphs: {
-			btn.
-			SLGSpacerGen newSpacerWithDim: (0@20)
-		}
-	].
-	
-	cols := SLGLayout columnWithMorphs: rows.
+	rows addAll: self getTopicButtons.
+
+	cols := SLGLayout columnWithMorphs: rows withGap: 20.
 	
 	cols center: self center.
 	
 	self body addMorph: cols.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:18'
+}
+HomePageView >> createTopicPageWithTopic: aTopic [
+	^TopicPageView new
+		initializeWithTopic: aTopic
+		andController: self controller;
+		yourself.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:27'
+}
+HomePageView >> getTopicButtonWithTopic: aTopic [
+	| routeString |
 	
+	routeString := ('/home/', aTopic title).
+	
+	self controller routerController
+		addRouteWithPath: routeString 
+		withPage: (self createTopicPageWithTopic: aTopic).
+	
+	^SLGNavigationButtonGen new
+		label: aTopic title;
+		width: 400;
+		 onClickWithBlock: [
+			self controller routerController navigateTo: routeString.
+		];
+		yourself.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:28'
+}
+HomePageView >> getTopicButtons [
+	^self topics collect: [:topic |
+		self getTopicButtonWithTopic: topic
+	].
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:27'
+}
+HomePageView >> initializeWithController: aController [
+	super initializeWithController: aController.
+	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
+	self topics: self controller dataAccessService topics.
+	self constructView.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:20'
+}
+HomePageView >> topics [
+	^ topics
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:20'
+}
+HomePageView >> topics: anObject [
+	topics := anObject
 ]
