@@ -36,7 +36,7 @@ DraggableItemMorph >> drag: anEvent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 16:35'
+	#'squeak_changestamp' : 'EB 6/10/2024 15:31'
 }
 DraggableItemMorph >> handleDrop: anEvent [
 
@@ -44,12 +44,16 @@ DraggableItemMorph >> handleDrop: anEvent [
 	isDragging := false.
         parentMorph ifNotNil: [
             targetUnderCursor := parentMorph findTargetUnderCursor.
-		parentMorph updateItemTargetMap: self target: targetUnderCursor ].
+		targetUnderCursor ifNotNil: [ parentMorph updateItemSlotMap: self atSlot: targetUnderCursor ].
+	].
 	
 	Transcript show: 'itemTargetMap after drop:'; cr.
-	parentMorph itemTargetMap keysAndValuesDo: [ :k :v |
-	    key := k asString.
-	    value := v label asString.
+	parentMorph itemSlotMap keysAndValuesDo: [ :k :v |
+		key := k asString.
+		(v isNil not)
+			ifTrue: [ value := v label asString ]
+			ifFalse: [ value := 'empty' ].
+
     Transcript show: 'Key: ', key, ', Value: ', value; cr].
 ]
 
