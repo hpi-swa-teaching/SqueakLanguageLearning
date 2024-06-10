@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'topics'
 	],
-	#category : #SqueakLanguageLearning
+	#category : #'SqueakLanguageLearning-Controllers'
 }
 
 {
@@ -75,7 +75,7 @@ DataAccessService >> createSubtopicsForControlFlow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:23'
+	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:22'
 }
 DataAccessService >> createSubtopicsForDataStructures [
 
@@ -83,8 +83,7 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 	tasks := Array new: 2.
 	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
-	
-	
+
 	lessons := Array new: 2.
 	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
 	1 to: 2 do: [:index |
@@ -103,7 +102,7 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:24'
+	#'squeak_changestamp' : 'SW 6/7/2024 15:44'
 }
 DataAccessService >> createSubtopicsForDataTypes [
 
@@ -114,7 +113,7 @@ DataAccessService >> createSubtopicsForDataTypes [
 	tasks at: 2 put: (SLGDragAndDropTask newWithQuestion: 'Assign 6 to x and y' withCorrectAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' )).
 	tasks at: 3 put: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true true false)).
 	tasks at: 4 put: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true false false)).
-	tasks at: 5 put: (SLGClozeTask newClozeWithQuestion: '' withCloze: 'a_lozeString' withAnswer: 'aClozeString').
+	tasks at: 5 put: (SLGClozeTask newClozeWithQuestion: nil withCloze: 'a_lozeString' withAnswer: 'aClozeString').
 	
 	lessons := Array new: 5.
 	1 to: 5 do: [:index |

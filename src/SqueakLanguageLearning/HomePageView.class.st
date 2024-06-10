@@ -1,6 +1,6 @@
 Class {
 	#name : #HomePageView,
-	#superclass : #AbstractNavigationPage,
+	#superclass : #AbstractPage,
 	#instVars : [
 		'topics'
 	],
@@ -30,57 +30,87 @@ HomePageView class >> newWithTopics: topics andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 13:47'
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:26'
 }
-HomePageView >> buttonClicked: buttonIndex [
+HomePageView >> constructView [
+	| rows cols |
+	rows := OrderedCollection new.
+	
+	rows addAll: self getTopicButtons.
 
-	| topic |
-	topic := topics at: buttonIndex.
-	controller handleTopicSelected: topic.
+	cols := SLGLayout columnWithMorphs: rows withGap: 20.
+	
+	cols center: self center.
+	
+	self body addMorph: cols.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 19:47'
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:18'
+}
+HomePageView >> createTopicPageWithTopic: aTopic [
+	^TopicPageView new
+		initializeWithTopic: aTopic
+		andController: self controller;
+		yourself.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:27'
+}
+HomePageView >> getTopicButtonWithTopic: aTopic [
+	| routeString |
+	
+	routeString := ('/home/', aTopic title).
+	
+	self controller routerController
+		addRouteWithPath: routeString 
+		withPage: (self createTopicPageWithTopic: aTopic).
+	
+	^SLGNavigationButtonGen new
+		label: aTopic title;
+		width: 400;
+		 onClickWithBlock: [
+			self controller routerController navigateTo: routeString.
+		];
+		yourself.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:28'
+}
+HomePageView >> getTopicButtons [
+	^self topics collect: [:topic |
+		self getTopicButtonWithTopic: topic
+	].
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:27'
 }
 HomePageView >> initializeWithController: aController [
-	
-	| topicTitles topicTitle |
 	super initializeWithController: aController.
-	self addTitle: 'Welcome to Squeak Language Learning!'.
-	controller := aController.
-	topics := controller topics.
-	
-	topicTitles := Array new: (topics size).
-	topics withIndexDo: [:topic :index |
-		topicTitle := topic title.
-		topicTitles at: index put: topicTitle.
-        ].
-	
-	self addButtonsWithTitles: topicTitles.
-	
-	
+	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
+	self topics: self controller dataAccessService topics.
+	self constructView.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 00:13'
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:20'
 }
-HomePageView >> initializeWithTopics: topicsList andController: aController [
-	
-	| topicTitles topicTitle |
-	super initializeWithController: aController.
-	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
-	controller := aController.
-	topics := topicsList.
-	
-	topicTitles := Array new: (topics size).
-	topics withIndexDo: [:topic :index |
-		topicTitle := topic title.
-		topicTitles at: index put: topicTitle.
-        ].
-	
-	self addButtonsWithTitles: topicTitles.
-	
-	
+HomePageView >> topics [
+	^ topics
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:20'
+}
+HomePageView >> topics: anObject [
+	topics := anObject
 ]

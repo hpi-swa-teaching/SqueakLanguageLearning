@@ -9,6 +9,15 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:34'
+}
+SLGClozeView class >> errorMessage [
+
+	^ 'Please change xx to your answer.'
+]
+
+{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:32'
 }
@@ -86,12 +95,14 @@ SLGClozeView >> createClozeFieldWithContent: aString [
 ]
 
 {
-	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/31/2024 10:19'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/8/2024 13:56'
 }
-SLGClozeView >> initialize [
-
-	super initialize
+SLGClozeView >> passUserInput [
+	
+	^ self clozeField contents asString.
+	
+	
 ]
 
 {
@@ -119,21 +130,4 @@ SLGClozeView >> taskCloze [
 }
 SLGClozeView >> taskCloze: aString [
 	taskCloze := aString
-]
-
-{
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:44'
-}
-SLGClozeView >> validate [
-	
-	| userInput |
-	
-	userInput := self clozeField contents asString.
-	
-	(self task validate: userInput)
-		ifTrue: [self printSuccess]
-		ifFalse: [self printFailure]
-	
-	
 ]
