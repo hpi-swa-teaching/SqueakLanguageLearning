@@ -130,40 +130,46 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:49'
+	#'squeak_changestamp' : 'SW 6/10/2024 16:20'
 }
 AbstractPage >> initializeWithController: aController [
 	
+	| margin |
+	
 	super initialize.
+	
 	controller := aController.
-		
+
+	self extent: 1204@904;
+		"extent: 1404@904;"
+		color: Color white; 
+		borderWidth: 2;
+		borderColor: Color orange;
+		center: Display center.
+
+	margin := 2.
+			
 	self header: (Morph new
-		width: 1200;
-		height: 80;
-		position: self position + (2@2);
+		width: self width - (2 * margin);
+		height: (10 * (self height - (2 * margin)))/100; "header has 10% of height of page"
+		position: self position + (margin asPoint);
 		color: Color white).
 		
 	self body: (Morph new
-		width: 1200;
-		height: 740;
-		position: self position + (2@82);
+		width: self width - (2 * margin);
+		height: (80 * (self height - (2 * margin)))/100; "body has 80% of height of page"
+		position: self position + (margin @ (self header height + margin));
 		color: Color white).
 		
 	self footer: (Morph new
-		width: 1200;
-		height: 80;
-		position: self position + (2@822);
+		width: self width - (2 * margin);
+		height: (10 * (self height - (2 * margin)))/100; "footer has 10% of height of page"
+		position: self position + (margin @ (self header height + self body height + margin));
 		color: Color white).
 		
 	self addMorph: header.
 	self addMorph: body.
 	self addMorph: footer.
-	
-	self extent: 1204@904;
-		color: Color white; 
-		borderWidth: 2;
-		borderColor: Color orange;
-		center: Display center.
 	
 	self addBackButton.
 	self addCloseButton.
