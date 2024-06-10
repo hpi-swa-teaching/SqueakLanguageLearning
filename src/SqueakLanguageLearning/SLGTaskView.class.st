@@ -7,9 +7,6 @@ Class {
 		'task',
 		'result'
 	],
-	#classInstVars : [
-		'taskDescription'
-	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
 

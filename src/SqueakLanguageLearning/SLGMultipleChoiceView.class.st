@@ -14,6 +14,15 @@ SLGMultipleChoiceView class >> errorMessage [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/10/2024 09:33'
+}
+SLGMultipleChoiceView class >> isSingleChoice [
+
+	^ false
+]
+
+{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 6/8/2024 16:42'
 }
@@ -24,17 +33,6 @@ SLGMultipleChoiceView class >> newMultipleChoiceUIwithTask: aSLGMultipleChoiceTa
 		taskQuestion: aSLGMultipleChoiceTask question;
 		setup;
 		yourself
-]
-
-{
-	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 6/10/2024 09:21'
-}
-SLGMultipleChoiceView >> initialize [
-
-	super initialize.
-	
-	self singleChoice: false
 ]
 
 {

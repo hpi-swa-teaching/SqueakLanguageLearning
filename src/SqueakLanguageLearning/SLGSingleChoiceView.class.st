@@ -14,6 +14,15 @@ SLGSingleChoiceView class >> errorMessage [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/10/2024 09:33'
+}
+SLGSingleChoiceView class >> isSingleChoice [
+
+	^ true
+]
+
+{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 6/1/2024 13:16'
 }
@@ -24,15 +33,4 @@ SLGSingleChoiceView class >> newSingleChoiceUIwithTask: aSLGSingleChoiceTask [
 		taskQuestion: aSLGSingleChoiceTask question;
 		setup;
 		yourself
-]
-
-{
-	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 6/10/2024 09:22'
-}
-SLGSingleChoiceView >> initialize [
-
-	super initialize.
-	
-	self singleChoice: true
 ]

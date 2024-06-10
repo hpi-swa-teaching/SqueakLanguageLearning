@@ -2,11 +2,19 @@ Class {
 	#name : #SLGBaseChoiceView,
 	#superclass : #SLGTaskView,
 	#instVars : [
-		'toggleButtonList',
-		'singleChoice'
+		'toggleButtonList'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/10/2024 09:33'
+}
+SLGBaseChoiceView class >> isSingleChoice [
+
+	self subclassResponsibility
+]
 
 {
 	#category : #constants,
@@ -73,7 +81,7 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/10/2024 09:23'
+	#'squeak_changestamp' : 'SW 6/10/2024 09:33'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
@@ -101,7 +109,7 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		toggleBtn onClickWithBlock: [
 			| state |
 			
-			self singleChoice ifTrue: [
+			self class isSingleChoice ifTrue: [
 				state := toggleBtn state.
 				self resetToggleButtons.
 				toggleBtn state: state.
@@ -132,22 +140,6 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 	
 	cols center: self center.
 	self addMorph: cols.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 6/10/2024 09:24'
-}
-SLGBaseChoiceView >> singleChoice [
-	^ singleChoice
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 6/10/2024 09:24'
-}
-SLGBaseChoiceView >> singleChoice: anObject [
-	singleChoice := anObject
 ]
 
 {
