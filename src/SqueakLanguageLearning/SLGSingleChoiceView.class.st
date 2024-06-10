@@ -27,24 +27,12 @@ SLGSingleChoiceView class >> newSingleChoiceUIwithTask: aSLGSingleChoiceTask [
 ]
 
 {
-	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:05'
-}
-SLGSingleChoiceView >> createToggleButtonAtPosition: aPosition [
-
-	| button |
-	button := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition withButtonPressed: [self resetToggleButtons].
-	"self toggleButtonList add: button."
-	
-	^ button
-]
-
-{
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:05'
+	#'squeak_changestamp' : 'SW 6/10/2024 09:22'
 }
 SLGSingleChoiceView >> initialize [
 
 	super initialize.
-	self singleChoice: true.
+	
+	self singleChoice: true
 ]

@@ -2,7 +2,8 @@ Class {
 	#name : #SLGBaseChoiceView,
 	#superclass : #SLGTaskView,
 	#instVars : [
-		'toggleButtonList'
+		'toggleButtonList',
+		'singleChoice'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
@@ -14,32 +15,6 @@ Class {
 SLGBaseChoiceView class >> taskDescription [
 
 	^ 'Choose the correct answers.'
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/29/2024 17:02'
-}
-SLGBaseChoiceView >> createToggleButton [
-
-	| button |
-	button := SLGToggleButton newToggleButtonWithState: false.
-	self toggleButtonList add: button
-	
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 13:45'
-}
-SLGBaseChoiceView >> createToggleButtonAtPosition: aPosition [
-
-	| button |
-	button := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition.
-	"self toggleButtonList add: button."
-	
-	^ button
-	
 ]
 
 {
@@ -69,7 +44,19 @@ SLGBaseChoiceView >> passUserInput [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 12:17'
+	#'squeak_changestamp' : 'SW 6/10/2024 09:23'
+}
+SLGBaseChoiceView >> resetToggleButtons [
+
+	self toggleButtonList do: [:each |
+		each state: false.
+		each updateUI.
+	]
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 6/10/2024 09:20'
 }
 SLGBaseChoiceView >> setup [
 
@@ -86,31 +73,81 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 11:54'
+	#'squeak_changestamp' : 'SW 6/10/2024 09:23'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
-	| yPos toggle toggleDescription |
+	| rows cols |
 
-	yPos := 150.
-	anOptionArray do: [:option |
+	rows := anOptionArray collect: [:option |
 		
-		toggle := self createToggleButtonAtPosition: (self position + (150 @ yPos)).
-		self toggleButtonList add: toggle.
+		| row toggleBtn text |
 		
-		toggleDescription := TextMorph new contents: option.
-		toggleDescription position: (toggle center + (toggle width @ ((toggle height - toggleDescription height)/2 negated))).
+		toggleBtn := SLGToggleButtonGen new
+			extent: (50@50);
+			borderWidth: 10;
+			color: Color gray.
+		
+		toggleBtn stateUI:  [
+			toggleBtn state ifTrue: [
+				toggleBtn color: Color green.
+			].
 
-		self addMorph: toggle.
-		self addMorph: toggleDescription.
-		yPos := yPos + 100].
+			toggleBtn state ifFalse: [
+				toggleBtn color: Color gray.
+			].
+		].
+	
+		toggleBtn onClickWithBlock: [
+			| state |
+			
+			self singleChoice ifTrue: [
+				state := toggleBtn state.
+				self resetToggleButtons.
+				toggleBtn state: state.
+			].
+		].
+	
+		self toggleButtonList add: toggleBtn.
+		
+		text := SLGMultilineTextGen new
+			setText: option;
+			width: 400;
+			color: Color black.
+			
+		row := SLGLayout rowWithMorphs: 
+			{
+				toggleBtn.
+				SLGSpacerGen newSpacerWithDim: (20@0).
+				text
+			}.
+		
+		SLGLayout columnWithMorphs: {
+			row.
+			SLGSpacerGen newSpacerWithDim: (0@20)
+		}
+	].
 
+	cols := SLGLayout columnWithMorphs: rows.
 	
-	
-	
-	
+	cols center: self center.
+	self addMorph: cols.
+]
 
-	
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/10/2024 09:24'
+}
+SLGBaseChoiceView >> singleChoice [
+	^ singleChoice
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/10/2024 09:24'
+}
+SLGBaseChoiceView >> singleChoice: anObject [
+	singleChoice := anObject
 ]
 
 {
