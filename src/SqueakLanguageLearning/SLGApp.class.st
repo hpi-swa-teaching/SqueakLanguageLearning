@@ -29,9 +29,9 @@ SLGApp class >> open [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/14/2024 12:09'
+	#'squeak_changestamp' : 'SW 6/10/2024 09:41'
 }
 SLGApp class >> openWithProgress [
 	"read from a file in the directory"
-	SLGHomePage new open
+	SLGMainController new
 ]
