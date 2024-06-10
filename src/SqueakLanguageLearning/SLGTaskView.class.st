@@ -5,7 +5,9 @@ Class {
 		'status',
 		'taskQuestion',
 		'task',
-		'result'
+		'result',
+		'code',
+		'staticLowerBound'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
@@ -79,7 +81,7 @@ SLGTaskView >> code: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:42'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 11:26'
 }
 SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
@@ -87,11 +89,11 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
 	codeField := (ToolBuilder build:
 			(Workspace new
-				contents: aCodeString;
+				contents: (aCodeString copyReplaceAll: '\n' with: '', Character cr,'');
 				buildCodePaneWith: ToolBuilder default))
 				wrapFlag: true;
-				extent: 600@400; "automatically change size based on the size of input?"
-				lock. "why lock?"
+				extent: 600@145.
+
 	(aBoolean)
 		ifTrue: [codeField
 					borderWidth: 2;
@@ -256,26 +258,57 @@ SLGTaskView >> result: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 15:47'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:11'
 }
 SLGTaskView >> setup [
 
-	| descriptionField questionField |
+	| descriptionField questionField codeField fieldsArray currentY|
 	self createSubmitButton.
 	
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
 	self status: (self createTextFieldWithContent: '' withBorder: true).
+	self taskQuestion ifNotNil: [
+		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true)].
+	self code ifNotNil: [
+		codeField := (self createCodeBlockWithContent: self code withBorder: true)].
 	
-	descriptionField center: (self topCenter + (0 @ 50)).
+	currentY := self topCenter y.
+	
+	"Collect fields in an array, skipping nil elements"
+	fieldsArray := OrderedCollection new.
+	fieldsArray add: descriptionField.
+	self taskQuestion ifNotNil: [fieldsArray add: questionField].
+	self code ifNotNil: [fieldsArray add: codeField].
+	
+	"Position each field"
+	fieldsArray do: [:element |
+		| elementHeight elementTop |
+		element ifNotNil: [
+			elementHeight := element height.
+			elementTop := currentY + 20.
+			element topLeft: (self topCenter x - (element width / 2)) @ elementTop.
+			currentY := elementTop + elementHeight.
+			self staticLowerBound: currentY + elementHeight.
+			]].
+	
 	self status center: (self bottomCenter - (0 @ 125)).
 	
-	self taskQuestion ifNotNil: [
-		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true).
-		questionField center: (descriptionField center + (0 @ 50)).]
-	
-	
-	
-	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 12:00'
+}
+SLGTaskView >> staticLowerBound [
+	^ staticLowerBound
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 12:00'
+}
+SLGTaskView >> staticLowerBound: anObject [
+	staticLowerBound := anObject
 ]
 
 {

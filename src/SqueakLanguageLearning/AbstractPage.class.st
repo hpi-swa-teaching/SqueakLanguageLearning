@@ -7,6 +7,10 @@ Class {
 		'body',
 		'footer'
 	],
+	#classInstVars : [
+		'pageWidth',
+		'pageHeight'
+	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
 
@@ -18,6 +22,33 @@ AbstractPage class >> newWithController: aController [
 
 	^super basicNew initializeWithController: aController
 	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:15'
+}
+AbstractPage class >> pageHeight [
+
+	^ 904
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:20'
+}
+AbstractPage class >> pageMargin [
+
+	^ 2
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:20'
+}
+AbstractPage class >> pageWidth [
+
+	^ 1204
 ]
 
 {
@@ -130,40 +161,46 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:49'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:24'
 }
 AbstractPage >> initializeWithController: aController [
 	
+	|width height margin|
 	super initialize.
 	controller := aController.
+	width := self class pageWidth.
+	height := self class pageHeight.
+	margin := self class pageMargin.
+	
+	self extent: width@height;
+		color: Color white; 
+		borderWidth: 2;
+		borderColor: Color orange;
+		center: Display center.
 		
 	self header: (Morph new
-		width: 1200;
+		width: width - 2 * margin;
 		height: 80;
-		position: self position + (2@2);
+		position: self position + (margin asPoint);
 		color: Color white).
 		
 	self body: (Morph new
-		width: 1200;
+		width: width - 2 * margin;
 		height: 740;
-		position: self position + (2@82);
+		position: self position + (margin @ (margin +self header height));
 		color: Color white).
 		
 	self footer: (Morph new
-		width: 1200;
+		width: width - 2 * margin;
 		height: 80;
-		position: self position + (2@822);
+		position: self position + (margin @ ( margin + self header height + self body height));
 		color: Color white).
 		
 	self addMorph: header.
 	self addMorph: body.
 	self addMorph: footer.
 	
-	self extent: 1204@904;
-		color: Color white; 
-		borderWidth: 2;
-		borderColor: Color orange;
-		center: Display center.
+
 	
 	self addBackButton.
 	self addCloseButton.

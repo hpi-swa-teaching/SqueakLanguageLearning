@@ -81,7 +81,7 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/10/2024 09:33'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 12:02'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
@@ -138,7 +138,7 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
 	cols := SLGLayout columnWithMorphs: rows.
 	
-	cols center: self center.
+	cols center: (self center x@self staticLowerBound).
 	self addMorph: cols.
 ]
 

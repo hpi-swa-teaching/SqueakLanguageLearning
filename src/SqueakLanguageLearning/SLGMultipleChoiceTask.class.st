@@ -6,15 +6,15 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'xiaoshi 6/9/2024 23:58'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 10:21'
 }
 SLGMultipleChoiceTask class >> newMultipleChoiceWithQuestion: aQuestionString withCode: aCodeString withOptions: anOptionArray withAnswers: anAnswerArray [
 
 	^ self new
-			setQuestion: aQuestionString;
-        		setCode: aCodeString;
+			question: aQuestionString;
+			code: aCodeString;
 			answerOptions: anOptionArray;
-			answers: anAnswerArray;
+			correctAnswer: anAnswerArray;
 			yourself
 	
 ]

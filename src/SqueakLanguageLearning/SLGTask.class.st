@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'question',
-		'correctAnswer'
+		'correctAnswer',
+		'code'
 	],
 	#classInstVars : [
 		'taskDescription'
@@ -52,10 +53,12 @@ SLGTask >> code [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/7/2024 16:07'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 11:01'
 }
-SLGTask >> code: anObject [
-	code := anObject
+SLGTask >> code: aCodeString [ 
+
+        aCodeString ifNotEmpty: [code:= aCodeString]
+    
 ]
 
 {
@@ -102,10 +105,12 @@ SLGTask >> question [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 6/1/2024 17:37'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:25'
 }
-SLGTask >> question: anObject [
-	question := anObject
+SLGTask >> question: aQuestionString [ 
+
+        aQuestionString ifNotNil: [question:= aQuestionString]
+    
 ]
 
 {
@@ -132,11 +137,11 @@ SLGTask >> setCode: aCodeString [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/9/2024 23:57'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 10:18'
 }
 SLGTask >> setQuestion: aQuestionString [ 
 
-        aQuestionString ifNotEmpty: [ self question: aQuestionString ]
+        aQuestionString ifNotEmpty: [ self question: aQuestionString]
     
 ]
 
