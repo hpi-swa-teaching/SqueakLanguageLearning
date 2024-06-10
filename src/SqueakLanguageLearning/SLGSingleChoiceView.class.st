@@ -1,8 +1,26 @@
 Class {
 	#name : #SLGSingleChoiceView,
-	#superclass : #SLGMultipleChoiceView,
+	#superclass : #SLGBaseChoiceView,
 	#category : #'SqueakLanguageLearning-Tasks'
 }
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:33'
+}
+SLGSingleChoiceView class >> errorMessage [
+
+	^ 'Please choose an answer.'
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/10/2024 09:33'
+}
+SLGSingleChoiceView class >> isSingleChoice [
+
+	^ true
+]
 
 {
 	#category : #'instance creation',
@@ -15,44 +33,4 @@ SLGSingleChoiceView class >> newSingleChoiceUIwithTask: aSLGSingleChoiceTask [
 		taskQuestion: aSLGSingleChoiceTask question;
 		setup;
 		yourself
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:05'
-}
-SLGSingleChoiceView >> createToggleButtonAtPosition: aPosition [
-
-	| button |
-	button := SLGToggleButton newToggleButtonWithState: false withPosition: aPosition withButtonPressed: [self resetToggleButtons].
-	"self toggleButtonList add: button."
-	
-	^ button
-]
-
-{
-	#category : #'initialize-release',
-	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:05'
-}
-SLGSingleChoiceView >> initialize [
-
-	super initialize.
-	self singleChoice: true.
-]
-
-{
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/1/2024 14:49'
-}
-SLGSingleChoiceView >> validate [
-
-	| userInput result |
-	userInput := OrderedCollection new.
-	self toggleButtonList do: [:each | userInput add: each state].
-	result := self task validate: userInput.
-	
-	(result = 100)
-		ifTrue: [self printSuccess]
-		ifFalse: [self printFailure]
-	
 ]

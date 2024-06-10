@@ -11,6 +11,15 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:35'
+}
+SLGDragAndDropView class >> errorMessage [
+
+	^ 'Please position all of the given items.'
+]
+
+{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 6/6/2024 15:57'
 }
@@ -175,6 +184,30 @@ SLGDragAndDropView >> itemTargetMap [
 ]
 
 {
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/8/2024 13:56'
+}
+SLGDragAndDropView >> passUserInput [
+
+	| itemsAtTarget anAnswer targetCorrectMap |
+	
+	targetCorrectMap := Dictionary new.	
+	itemsAtTarget := OrderedCollection new.
+	itemSlotMap keysAndValuesDo: [:target :item |
+		(item isKindOf: DraggableItemMorph) ifTrue: [
+			itemsAtTarget add: item label ].
+		targetCorrectMap at: target put: (item label = target label) ].
+	
+	targetCorrectMap keysAndValuesDo: [:target :correct |
+            target color: (correct ifTrue: [Color lightGreen] ifFalse: [Color red]).
+        ].
+
+	anAnswer := itemsAtTarget asArray.
+	
+	^ anAnswer
+]
+
+{
 	#category : #setup,
 	#'squeak_changestamp' : 'SW 6/7/2024 11:06'
 }
@@ -199,31 +232,4 @@ SLGDragAndDropView >> setup [
 SLGDragAndDropView >> updateItemTargetMap: anItemMorph target: aTargetMorph [
 
         itemSlotMap at: aTargetMorph put: anItemMorph.
-]
-
-{
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 6/7/2024 12:27'
-}
-SLGDragAndDropView >> validate [
-
-	| itemsAtTarget anAnswer targetCorrectMap |
-	
-	targetCorrectMap := Dictionary new.	
-	itemsAtTarget := OrderedCollection new.
-	itemSlotMap keysAndValuesDo: [:target :item |
-		(item isKindOf: DraggableItemMorph) ifTrue: [
-			itemsAtTarget add: item label ].
-		targetCorrectMap at: target put: (item label = target label) ].
-	
-	targetCorrectMap keysAndValuesDo: [:target :correct |
-            target color: (correct ifTrue: [Color lightGreen] ifFalse: [Color red]).
-        ].
-
-	anAnswer := itemsAtTarget asArray.
-	
-	(self task validate: anAnswer)
-		ifTrue: [self printSuccess]
-		ifFalse: [self printFailure].
-		
 ]

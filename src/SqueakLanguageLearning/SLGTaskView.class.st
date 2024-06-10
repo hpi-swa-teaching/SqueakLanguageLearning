@@ -4,13 +4,20 @@ Class {
 	#instVars : [
 		'status',
 		'taskQuestion',
-		'task'
-	],
-	#classInstVars : [
-		'taskDescription'
+		'task',
+		'result'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:30'
+}
+SLGTaskView class >> errorMessage [
+
+	self subclassResponsibility
+]
 
 {
 	#category : #constants,
@@ -40,8 +47,23 @@ SLGTaskView class >> taskDescription [
 ]
 
 {
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/8/2024 17:15'
+}
+SLGTaskView >> checkResult [
+
+	(self result = 100)
+		ifTrue: [self printSuccess]
+		ifFalse: [self printFailure]
+	
+		
+	
+	
+]
+
+{
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 09:59'
+	#'squeak_changestamp' : 'SW 6/9/2024 21:04'
 }
 SLGTaskView >> createSubmitButton [
 
@@ -50,7 +72,7 @@ SLGTaskView >> createSubmitButton [
 	submitButton 
 			label: 'Submit';
 			center: (self bottomRight + (-100@(-70)));
-			on: #mouseUp send: #validate to: self.
+			on: #mouseUp send: #verifyAnswer to: self.
 	
 	self addMorph: submitButton
 	
@@ -129,7 +151,29 @@ SLGTaskView >> initialize [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/8/2024 13:55'
+}
+SLGTaskView >> passUserInput [
+
+	self subclassResponsibility
+	
+	
+]
+
+{
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/8/2024 17:00'
+}
+SLGTaskView >> printError [
+
+	self status contents: self class errorMessage
+	
+	
+]
+
+{
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/7/2024 12:21'
 }
 SLGTaskView >> printFailure [
@@ -140,7 +184,7 @@ SLGTaskView >> printFailure [
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/7/2024 12:21'
 }
 SLGTaskView >> printSuccess [
@@ -151,8 +195,24 @@ SLGTaskView >> printSuccess [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/8/2024 14:05'
+}
+SLGTaskView >> result [
+	^ result
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 6/8/2024 14:05'
+}
+SLGTaskView >> result: anObject [
+	result := anObject
+]
+
+{
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 12:19'
+	#'squeak_changestamp' : 'SW 6/7/2024 15:47'
 }
 SLGTaskView >> setup [
 
@@ -160,12 +220,16 @@ SLGTaskView >> setup [
 	self createSubmitButton.
 	
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
-	questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true).
 	self status: (self createTextFieldWithContent: '' withBorder: true).
 	
 	descriptionField center: (self topCenter + (0 @ 50)).
-	questionField center: (descriptionField center + (0 @ 50)).
-	self status center: (self bottomCenter - (0 @ 125))
+	self status center: (self bottomCenter - (0 @ 125)).
+	
+	self taskQuestion ifNotNil: [
+		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true).
+		questionField center: (descriptionField center + (0 @ 50)).]
+	
+	
 	
 	
 ]
@@ -219,12 +283,19 @@ SLGTaskView >> taskQuestion: aString [
 ]
 
 {
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 5/30/2024 14:37'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/9/2024 21:09'
 }
-SLGTaskView >> validate [
+SLGTaskView >> verifyAnswer [
 
-	self subclassResponsibility
+	| userInput |
+	userInput := self passUserInput.
+	self result: (self task verifyAnswer: userInput).
+	
+	(self result = -1)
+		ifTrue: [self printError]
+		ifFalse: [self checkResult]
+		
 	
 	
 ]

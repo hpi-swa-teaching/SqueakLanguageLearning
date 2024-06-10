@@ -2,7 +2,6 @@ Class {
 	#name : #SLGClozeTask,
 	#superclass : #SLGTask,
 	#instVars : [
-		'answer',
 		'cloze'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
@@ -10,32 +9,38 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'SW 5/31/2024 10:56'
+	#'squeak_changestamp' : 'SW 6/8/2024 14:28'
 }
 SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCloze: aClozeString withAnswer: anAnswerString [
 
 	^ self new
 			question: aQuestionString;
 			cloze: aClozeString;
-			answer: anAnswerString;
+			correctAnswer: anAnswerString;
 			yourself
 	
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:25'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/8/2024 16:50'
 }
-SLGClozeTask >> answer [
-	^ answer
-]
+SLGClozeTask >> calculateResult: anUserInput [
 
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:25'
-}
-SLGClozeTask >> answer: anObject [
-	answer := anObject
+	"Multiple spaces and capitalization are ignored."
+
+	| modifiedInput modifiedAnswer output |
+	
+	modifiedInput := self removeSpacesAndLowercase: anUserInput.
+	modifiedAnswer := (self removeSpacesAndLowercase: self correctAnswer).
+
+	modifiedInput = modifiedAnswer
+		ifTrue: [output := 100]
+		ifFalse: [output := 0].
+		
+	^ output
+	
+	
 ]
 
 {
@@ -55,41 +60,37 @@ SLGClozeTask >> cloze: aString [
 ]
 
 {
-	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 5/31/2024 10:22'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/8/2024 14:40'
 }
-SLGClozeTask >> initialize [
+SLGClozeTask >> customizeInputAndAnswers: anUserInput [
 
-	super initialize
+	"Multiple Spraces and capitalization are ignored."
+
+	| modifiedInput |
+	
+	modifiedInput := self removeSpacesAndLowercase: anUserInput.
+	self correctAnswer: (self removeSpacesAndLowercase: self correctAnswer).
+	
+	^ modifiedInput
 ]
 
 {
-	#category : #validation,
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 6/8/2024 17:48'
+}
+SLGClozeTask >> isValid: aString [
+
+	^ (self cloze = aString) not
+	
+]
+
+{
+	#category : #verification,
 	#'squeak_changestamp' : 'SW 5/31/2024 11:07'
 }
 SLGClozeTask >> removeSpacesAndLowercase: aString [
 
 	^ (aString select: [:char | char isSeparator not]) asLowercase.
-
-]
-
-{
-	#category : #validation,
-	#'squeak_changestamp' : 'SW 5/31/2024 11:08'
-}
-SLGClozeTask >> validate: anUserInput [
-
-	"Multiple Spraces and capitalization are ignored."
-
-	| modifiedInput modifiedAnswer output |
-	
-	modifiedInput := self removeSpacesAndLowercase: anUserInput.
-	modifiedAnswer := self removeSpacesAndLowercase: self answer.
-	
-	(modifiedInput = modifiedAnswer)
-		ifTrue: [output := true]
-		ifFalse: [output := false].
-	
-	^ output
 
 ]
