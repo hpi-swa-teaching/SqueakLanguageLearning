@@ -11,7 +11,7 @@ Class {
 		'currentSubtopic',
 		'currentLesson'
 	],
-	#category : #SqueakLanguageLearning
+	#category : #'SqueakLanguageLearning-Controllers'
 }
 
 {

@@ -5,7 +5,7 @@ Class {
 		'title',
 		'lessons'
 	],
-	#category : #SqueakLanguageLearning
+	#category : #'SqueakLanguageLearning-Data'
 }
 
 {
