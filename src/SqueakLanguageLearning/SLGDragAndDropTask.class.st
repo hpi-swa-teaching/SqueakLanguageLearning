@@ -6,16 +6,17 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:00'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 19:48'
 }
 SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeString withCorrectAnswer: anArray [
 
 	^ self new
-		setQuestion: aQuestionString;
-        	setCode: aCodeString;
-        	setCode: aCodeString;
+		question: aCodeString;
+		code: aCodeString;
 		correctAnswer: anArray;
 		yourself
+		
+
 ]
 
 {

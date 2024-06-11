@@ -7,7 +7,7 @@ Class {
 		'task',
 		'result',
 		'code',
-		'staticLowerBound'
+		'headerLowerBound'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
@@ -49,6 +49,42 @@ SLGTaskView class >> taskDescription [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:11'
+}
+SLGTaskView class >> taskElementWidth [
+
+	^ 1000
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:55'
+}
+SLGTaskView class >> taskElementsMargin [
+
+	^ 50
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:53'
+}
+SLGTaskView class >> taskViewExtent [
+
+	^ 1200@800.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:58'
+}
+SLGTaskView class >> taskViewMargin [
+
+	^ 130
+]
+
+{
 	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 17:15'
 }
@@ -81,7 +117,7 @@ SLGTaskView >> code: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 11:26'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:14'
 }
 SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
@@ -92,7 +128,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 				contents: (aCodeString copyReplaceAll: '\n' with: '', Character cr,'');
 				buildCodePaneWith: ToolBuilder default))
 				wrapFlag: true;
-				extent: 600@145.
+				extent: self class taskElementWidth @ 145.
 
 	(aBoolean)
 		ifTrue: [codeField
@@ -109,15 +145,16 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/9/2024 21:04'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:50'
 }
 SLGTaskView >> createSubmitButton [
 
-	| submitButton |
+	| submitButton margin|
 	submitButton := SimpleButtonMorph new.
+	margin := self class taskElementsMargin.
 	submitButton 
 			label: 'Submit';
-			center: (self bottomRight + (-100@(-70)));
+			center: (self bottomRight - (100 @ margin));
 			on: #mouseUp send: #verifyAnswer to: self.
 	
 	self addMorph: submitButton
@@ -152,7 +189,7 @@ SLGTaskView >> createTextFieldWithContent: aString [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:02'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 01:31'
 }
 SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
@@ -166,7 +203,7 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 	textField
 		contents:  aString;
 		wrapFlag: true;
-		extent: 600@0;
+		extent: self class taskElementWidth @ 0;
 		lock.
 	
 	self addMorph: textField.
@@ -176,6 +213,22 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 	
 	
 	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:08'
+}
+SLGTaskView >> headerLowerBound [
+	^ headerLowerBound
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:08'
+}
+SLGTaskView >> headerLowerBound: anObject [
+	headerLowerBound := anObject
 ]
 
 {
@@ -258,11 +311,12 @@ SLGTaskView >> result: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:11'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:58'
 }
 SLGTaskView >> setup [
 
 	| descriptionField questionField codeField fieldsArray currentY|
+	self extent: self class taskViewExtent. "1200@800"
 	self createSubmitButton.
 	
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
@@ -272,43 +326,26 @@ SLGTaskView >> setup [
 	self code ifNotNil: [
 		codeField := (self createCodeBlockWithContent: self code withBorder: true)].
 	
-	currentY := self topCenter y.
 	
-	"Collect fields in an array, skipping nil elements"
 	fieldsArray := OrderedCollection new.
 	fieldsArray add: descriptionField.
 	self taskQuestion ifNotNil: [fieldsArray add: questionField].
 	self code ifNotNil: [fieldsArray add: codeField].
-	
+
 	"Position each field"
+	currentY := self topCenter y.
 	fieldsArray do: [:element |
 		| elementHeight elementTop |
 		element ifNotNil: [
 			elementHeight := element height.
-			elementTop := currentY + 20.
-			element topLeft: (self topCenter x - (element width / 2)) @ elementTop.
+			elementTop := currentY + self class taskElementsMargin.
+			element topLeft: (self center x - (element width / 2))  @ elementTop.
 			currentY := elementTop + elementHeight.
-			self staticLowerBound: currentY + elementHeight.
-			]].
+			self headerLowerBound: currentY + elementHeight.
+		].
+	].
 	
-	self status center: (self bottomCenter - (0 @ 125)).
-	
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 12:00'
-}
-SLGTaskView >> staticLowerBound [
-	^ staticLowerBound
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 12:00'
-}
-SLGTaskView >> staticLowerBound: anObject [
-	staticLowerBound := anObject
+	self status center: (self bottomCenter - (0 @ self class taskViewMargin)).	
 ]
 
 {

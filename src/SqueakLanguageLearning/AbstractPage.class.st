@@ -7,12 +7,35 @@ Class {
 		'body',
 		'footer'
 	],
-	#classInstVars : [
-		'pageWidth',
-		'pageHeight'
-	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:12'
+}
+AbstractPage class >> buttonWidth [
+
+	^ 500
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:18'
+}
+AbstractPage class >> descriptionFont [
+
+	^ 35
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:17'
+}
+AbstractPage class >> descriptionWidth [
+
+	^ 800
+]
 
 {
 	#category : #'as yet unclassified',
@@ -26,11 +49,20 @@ AbstractPage class >> newWithController: aController [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:15'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 16:50'
+}
+AbstractPage class >> pageBorder [
+
+	^ 2
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:52'
 }
 AbstractPage class >> pageHeight [
 
-	^ 904
+	^ 1204
 ]
 
 {
@@ -44,11 +76,11 @@ AbstractPage class >> pageMargin [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:20'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:52'
 }
 AbstractPage class >> pageWidth [
 
-	^ 1204
+	^ 1604
 ]
 
 {
@@ -161,24 +193,26 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/10/2024 16:20'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 16:54'
 }
 AbstractPage >> initializeWithController: aController [
 	
-	| margin |
+	|width height margin border|
 	
 	super initialize.
 	
 	controller := aController.
+	width := self class pageWidth.
+	height := self class pageHeight.
+	margin := self class pageMargin.
+	border := self class pageBorder.
 
-	self extent: 1204@904;
+	self extent: width@height;
 		"extent: 1404@904;"
 		color: Color white; 
-		borderWidth: 2;
+		borderWidth: border;
 		borderColor: Color orange;
 		center: Display center.
-
-	margin := 2.
 			
 	self header: (Morph new
 		width: self width - (2 * margin);

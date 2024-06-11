@@ -58,7 +58,7 @@ HomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:27'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:12'
 }
 HomePageView >> getTopicButtonWithTopic: aTopic [
 	| routeString |
@@ -71,7 +71,7 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 	
 	^SLGNavigationButtonGen new
 		label: aTopic title;
-		width: 400;
+		width: self class buttonWidth;
 		 onClickWithBlock: [
 			self controller routerController navigateTo: routeString.
 		];

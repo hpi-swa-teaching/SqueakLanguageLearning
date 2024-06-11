@@ -102,18 +102,19 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/10/2024 10:03'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 23:08'
 }
 DataAccessService >> createSubtopicsForDataTypes [
 
 	| tasks task lessons subtopics |
 	
 	tasks := Array new: 5.
-	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Assign 5 to x' withCorrectAnswer: #('x' ':' '=' '5')).
-	tasks at: 2 put: (SLGDragAndDropTask newWithQuestion: 'Assign 6 to x and y' withCorrectAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' )).
-	tasks at: 3 put: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true true false)).
-	tasks at: 4 put: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Do you like Squeak?' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true false false)).
-	tasks at: 5 put: (SLGClozeTask newClozeWithQuestion: nil withCloze: 'a_lozeString' withAnswer: 'aClozeString').
+	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Assign 5 to x' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withCorrectAnswer: #('x' ':' '=' '5')).
+	tasks at: 2 put: (SLGDragAndDropTask newWithQuestion: 'Assign 6 to x and y' withCode: '' withCorrectAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' )).
+	tasks at: 3 put: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Do you like Squeak?' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true true false)).
+	tasks at: 4 put: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Do you like Squeak?' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true false false)).
+	tasks at: 5 put: (SLGClozeTask newClozeWithQuestion: nil withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withCloze: 'a_lozeString' withAnswer: 'aClozeString').
+
 	
 	lessons := Array new: 5.
 	1 to: 5 do: [:index |
