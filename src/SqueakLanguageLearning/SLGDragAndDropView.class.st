@@ -92,7 +92,7 @@ SLGDragAndDropView >> createItemsAndTargets [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'EB 6/1/2024 23:14'
+	#'squeak_changestamp' : 'EB 6/11/2024 15:14'
 }
 SLGDragAndDropView >> createSlotsWith: correctAnswers [
 
@@ -105,19 +105,13 @@ SLGDragAndDropView >> createSlotsWith: correctAnswers [
 	step := container width / (numAnswers * 2 + 1).
 	 
 	correctAnswers do: [:correctAnswer |
-		"slot := Morph new."
-		"slot label: correctAnswer."
 		slot := AnswerSlotMorph newWithLabel: correctAnswer.
 		answerSlots add: slot.
+		itemSlotMap at: slot put: nil.
 		slot lock.
-		"slot color: Color lightGray;
-			extent: 150 @ 100;
-			borderWidth: 2;
-			borderColor: Color black;
-			lock."
 
 	slot position: container position + (step @ 100).
-	step := (step + 200). "TODO should be calculated"
+	step := (step + 150). "TODO should be calculated"
 	container addMorph: slot. ].
 
 	^container.
@@ -170,6 +164,14 @@ SLGDragAndDropView >> initialize [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/10/2024 15:03'
+}
+SLGDragAndDropView >> itemSlotMap [
+	^ itemSlotMap
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'SW 6/6/2024 15:55'
 }
 SLGDragAndDropView >> itemSlotMap: anObject [
@@ -177,33 +179,25 @@ SLGDragAndDropView >> itemSlotMap: anObject [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
-}
-SLGDragAndDropView >> itemTargetMap [
-	^ itemSlotMap
-]
-
-{
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 13:56'
+	#'squeak_changestamp' : 'EB 6/10/2024 15:23'
 }
 SLGDragAndDropView >> passUserInput [
 
-	| itemsAtTarget anAnswer targetCorrectMap |
+	| itemsAtSlots anAnswer targetCorrectMap |
 	
-	targetCorrectMap := Dictionary new.	
-	itemsAtTarget := OrderedCollection new.
-	itemSlotMap keysAndValuesDo: [:target :item |
+	targetCorrectMap ifNil:  [ targetCorrectMap := OrderedDictionary new ].
+	itemsAtSlots ifNil: [ itemsAtSlots := OrderedCollection new ].
+	itemSlotMap keysAndValuesDo: [:slot :item |
 		(item isKindOf: DraggableItemMorph) ifTrue: [
-			itemsAtTarget add: item label ].
-		targetCorrectMap at: target put: (item label = target label) ].
+			itemsAtSlots add: item label ].
+		targetCorrectMap at: slot put: (item label = slot label) ].
 	
 	targetCorrectMap keysAndValuesDo: [:target :correct |
             target color: (correct ifTrue: [Color lightGreen] ifFalse: [Color red]).
         ].
 
-	anAnswer := itemsAtTarget asArray.
+	anAnswer := itemsAtSlots asArray.
 	
 	^ anAnswer
 ]
@@ -228,9 +222,9 @@ SLGDragAndDropView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'EB 6/1/2024 23:08'
+	#'squeak_changestamp' : 'EB 6/10/2024 14:54'
 }
-SLGDragAndDropView >> updateItemTargetMap: anItemMorph target: aTargetMorph [
+SLGDragAndDropView >> updateItemSlotMap: anItem atSlot: aSlot [
 
-        itemSlotMap at: aTargetMorph put: anItemMorph.
+        itemSlotMap at: aSlot put: anItem.
 ]
