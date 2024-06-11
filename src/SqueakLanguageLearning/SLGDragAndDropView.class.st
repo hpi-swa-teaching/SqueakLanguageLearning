@@ -91,7 +91,7 @@ SLGDragAndDropView >> createItemsAndTargets [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'EB 6/10/2024 14:53'
+	#'squeak_changestamp' : 'EB 6/11/2024 15:14'
 }
 SLGDragAndDropView >> createSlotsWith: correctAnswers [
 
@@ -110,7 +110,7 @@ SLGDragAndDropView >> createSlotsWith: correctAnswers [
 		slot lock.
 
 	slot position: container position + (step @ 100).
-	step := (step + 200). "TODO should be calculated"
+	step := (step + 150). "TODO should be calculated"
 	container addMorph: slot. ].
 
 	^container.
