@@ -12,16 +12,23 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 20:44'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 21:05'
 }
 DataAccessService >> createLessonsWithTasks: tasks fromIndex: aInteger1 toIndex: aInteger2 [
 
 	|lessons task|
-	lessons := Array new: (aInteger2 + 1 - aInteger1).
-	1 to: (aInteger2 + 1 - aInteger1) do: [: index |
+	lessons := OrderedCollection new.
+	aInteger1 to: aInteger2 do: [:index | 
+		task := tasks at: index.
+		Transcript show: index.
+		lessons add: (Lesson newWithDescription: 'LessonDescription', (index - aInteger1) asString andTask: task)].
+	
+	"lessons := Array new: (aInteger2 + 1 - aInteger1)."
+	"1 to: (aInteger2 + 1 - aInteger1) do: [: index |
 		task := tasks at: aInteger1.
 		lessons at: index put: (Lesson newWithDescription: 'LessonDescription', index asString andTask: task).
-	].
+		aInteger1 := aInteger1 =1.
+	]."
 
 	^ lessons
 ]
@@ -110,7 +117,7 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 20:50'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 21:29'
 }
 DataAccessService >> createSubtopicsForDataTypes [
 
@@ -119,12 +126,12 @@ DataAccessService >> createSubtopicsForDataTypes [
 	tasks := OrderedCollection new.
 	
 	tasks "assignment 2"
-	add: (SLGDragAndDropTask newWithQuestion: 'Assign 5 to x' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withCorrectAnswer: #('x' ':' '=' '5'));
+	add: (SLGDragAndDropTask newWithQuestion: 'Assign 5 to x' withCode: '' withCorrectAnswer: #('x' ':' '=' '5'));
 	add: (SLGDragAndDropTask newWithQuestion: 'Assign 6 to x and y' withCode: '' withCorrectAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' ));
 	"integer 3"
-	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: '' withCode: 'x := 1. \n y := -5.\n x += 1. \n y *= (x + y). \n z := y / x \n w := z // x
-' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true true false));
-	add: (SLGSingleChoiceTask newSingleChoiceWithQuestion: '' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withOptions: #('y = 15' 'z = 7' 'w = 3.75') withAnswers: #(true false false)); 
+	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'What is the value of w?' withCode: 'x := 2. \ny := -5.\nz := y / x \nw := z // x' withOptions: #('5' 'x' '-2') withAnswers: #(false false true));
+	add: (SLGSingleChoiceTask newSingleChoiceWithQuestion: '' withCode: 'x := 1. \n y := -5.\n x += 1. \n y *= (x + y). \n z := y / x \n w := z // x
+' withOptions: #('y = 15' 'z = 7' 'w = 3.75') withAnswers: #(true false false)); 
 	add: (SLGClozeTask newClozeWithQuestion: '' withCode: 'x := 1.\n x class. ' withCloze: 'The class of x is __.' withAnswer: 'The class of x is Integer.');
 	"float 1"
 	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: '' withCode: 'x := 1.99.\n y := 2.01.\n x floor.\n y ceiling.\n y rounded.\n z := x + y. 
@@ -140,10 +147,10 @@ DataAccessService >> createSubtopicsForDataTypes [
 	add: (SLGClozeTask newClozeWithQuestion: '' withCode: 'x := $A. \n y := x isUppercase.\n z := x asLowercase.' withCloze: 'The value of z is __.' withAnswer: 'The value of z is $a.');
 	"symbol 2"
 	add: (SLGSingleChoiceTask newSingleChoiceWithQuestion: '' withCode: 'symbol1 := #apple. \n symbol2 := #banana. \n symbol3 := #apple.
-' withOptions: #('a = True' 'b = false' 'c = true') withAnswers: #(false true true));
+' withOptions: #('(symbol1 = symbol2)' '(symbol1 = symbol3)') withAnswers: #(false true));
 	add: (SLGClozeTask newClozeWithQuestion: 'Complete the following command to make Transcript show ''Alice''.' withCode: 'dict := Dictionary new. \n dict at: #name put: ''Alice''. \n dict at: #age put: 30.\n dict at: #occupation put: ''Engineer''.' withCloze: 'Transcript show: (dict at: __).' withAnswer: 'Transcript show: (dict at: #name).');
 	"nil 2"
-	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: '' withCode: '' withOptions: #('In Smalltalk, nil is a special object that represents the absence of a value or a "null" value.' 'It is an instance of the class UndefinedObject, which means it behaves like an object with certain predefined behaviors and properties.' 'The nil object is used to indicate that a variable has not been assigned a meaningful value.') withAnswers: #(true true true));
+	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: '' withCode: '' withOptions: #('nil is a special object that represents the absence of a value' 'It is an instance of the class UndefinedObject' 'nil indicates that a variable has not been assigned a value.') withAnswers: #(true true true));
 	add: (SLGClozeTask newClozeWithQuestion: '' withCode: 'myVariable := nil. \n myVariable := myVariable ifNil: [ ''Default value'' ]. \n Transcript show: myVariable; cr. 
 ' withCloze: 'The Transcript shows __.' withAnswer: 'The Transcript shows ''Default value''.');
 	"conversion 1"
@@ -158,7 +165,7 @@ subtopics at: 5 put: (Subtopic newWithTitle: 'Boolean' andLessons: (self createL
 subtopics at: 6 put: (Subtopic newWithTitle: 'Character' andLessons: (self createLessonsWithTasks: tasks fromIndex: 10 toIndex: 10)).
 subtopics at: 7 put: (Subtopic newWithTitle: 'Symbol' andLessons: (self createLessonsWithTasks: tasks fromIndex: 11 toIndex: 12)).
 subtopics at: 8 put: (Subtopic newWithTitle: 'Nil' andLessons: (self createLessonsWithTasks: tasks fromIndex: 13 toIndex: 14)).
-subtopics at: 9 put: (Subtopic newWithTitle: 'Conversion' andLessons: (self createLessonsWithTasks: tasks fromIndex: 15 toIndex: 16)).
+subtopics at: 9 put: (Subtopic newWithTitle: 'Conversion' andLessons: (self createLessonsWithTasks: tasks fromIndex: 15 toIndex: 15)).
 
 
 	"integerLessons := Array new: 10.
