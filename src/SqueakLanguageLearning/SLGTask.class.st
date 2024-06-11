@@ -105,11 +105,11 @@ SLGTask >> question [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:25'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 15:51'
 }
 SLGTask >> question: aQuestionString [ 
 
-        aQuestionString ifNotNil: [question:= aQuestionString]
+        aQuestionString ifNotEmpty: [question:= aQuestionString]
     
 ]
 
@@ -123,26 +123,6 @@ SLGTask >> sendError [
 	Transcript show: 'Error occured.'; cr.
 	
 	^ -1
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:41'
-}
-SLGTask >> setCode: aCodeString [ 
-
-        aCodeString ifNotEmpty: [ self code: (aCodeString copyReplaceAll: '\n' with: '', Character cr,'')]
-    
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 10:18'
-}
-SLGTask >> setQuestion: aQuestionString [ 
-
-        aQuestionString ifNotEmpty: [ self question: aQuestionString]
-    
 ]
 
 {

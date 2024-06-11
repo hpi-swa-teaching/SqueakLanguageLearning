@@ -30,11 +30,20 @@ AbstractPage class >> descriptionFont [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:17'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 16:26'
+}
+AbstractPage class >> descriptionMargin [
+
+	^ 100
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 16:26'
 }
 AbstractPage class >> descriptionWidth [
 
-	^ 800
+	^ self pageWidth - (self descriptionMargin * 2)
 ]
 
 {

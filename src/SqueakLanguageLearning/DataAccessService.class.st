@@ -19,6 +19,22 @@ DataAccessService class >> new [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 20:44'
+}
+DataAccessService >> createLessonsWithTasks: tasks fromIndex: aInteger1 toIndex: aInteger2 [
+
+	|lessons task|
+	lessons := Array new: (aInteger2 + 1 - aInteger1).
+	1 to: (aInteger2 + 1 - aInteger1) do: [: index |
+		task := tasks at: aInteger1.
+		lessons at: index put: (Lesson newWithDescription: 'LessonDescription', index asString andTask: task).
+	].
+
+	^ lessons
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'SW 6/6/2024 15:23'
 }
 DataAccessService >> createSubtopicsForClasses [
@@ -47,7 +63,7 @@ DataAccessService >> createSubtopicsForClasses [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:23'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 16:37'
 }
 DataAccessService >> createSubtopicsForControlFlow [
 
@@ -68,7 +84,6 @@ DataAccessService >> createSubtopicsForControlFlow [
 	subtopics at: 1 put: (Subtopic newWithTitle: 'SubtopicTitle1' andLessons: lessons).
 	subtopics at: 2 put: (Subtopic newWithTitle: 'SubtopicTitle2' andLessons: lessons).
 	subtopics at: 3 put: (Subtopic newWithTitle: 'SubtopicTitle3' andLessons: lessons).
-	
 	^subtopics
 	
 ]
@@ -102,30 +117,94 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 23:08'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 20:50'
 }
 DataAccessService >> createSubtopicsForDataTypes [
 
-	| tasks task lessons subtopics |
+	| tasks subtopics|
 	
-	tasks := Array new: 5.
-	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Assign 5 to x' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withCorrectAnswer: #('x' ':' '=' '5')).
-	tasks at: 2 put: (SLGDragAndDropTask newWithQuestion: 'Assign 6 to x and y' withCode: '' withCorrectAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' )).
-	tasks at: 3 put: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Do you like Squeak?' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true true false)).
-	tasks at: 4 put: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Do you like Squeak?' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true false false)).
-	tasks at: 5 put: (SLGClozeTask newClozeWithQuestion: nil withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withCloze: 'a_lozeString' withAnswer: 'aClozeString').
+	tasks := OrderedCollection new.
+	
+	tasks "assignment 2"
+	add: (SLGDragAndDropTask newWithQuestion: 'Assign 5 to x' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withCorrectAnswer: #('x' ':' '=' '5'));
+	add: (SLGDragAndDropTask newWithQuestion: 'Assign 6 to x and y' withCode: '' withCorrectAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' ));
+	"integer 3"
+	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: '' withCode: 'x := 1. \n y := -5.\n x += 1. \n y *= (x + y). \n z := y / x \n w := z // x
+' withOptions: #('yes' 'no' 'maybe') withAnswers: #(true true false));
+	add: (SLGSingleChoiceTask newSingleChoiceWithQuestion: '' withCode: '|x y| \n x := 5. \n y := x copy. \n y := y + x. ' withOptions: #('y = 15' 'z = 7' 'w = 3.75') withAnswers: #(true false false)); 
+	add: (SLGClozeTask newClozeWithQuestion: '' withCode: 'x := 1.\n x class. ' withCloze: 'The class of x is __.' withAnswer: 'The class of x is Integer.');
+	"float 1"
+	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: '' withCode: 'x := 1.99.\n y := 2.01.\n x floor.\n y ceiling.\n y rounded.\n z := x + y. 
+' withOptions: #('x = 1' 'y = 3' 'z = 3') withAnswers: #(true false true));
+	"string 2"
+	add: (SLGClozeTask newClozeWithQuestion: '' withCode: 's := ''Hello Squeak''. \n Transcript show: s. "Hello again Squeak" \n s size.
+' withCloze: 'The content shown in Transcript is __.' withAnswer: 'The content shown in Transcript is Hello Squeak.' );
+	add: (SLGClozeTask newClozeWithQuestion: '' withCode: 's := ''Hello Squeak''. \n Transcript show: s. "Hello again Squeak" \n s size.
+' withCloze: 'The size of s is __.' withAnswer: 'The size of s is 12.' );
+	"bool 1"
+	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: '' withCode: 'x := 1. y := 2. \n a := (x = y). \n b := x isInteger. \n b := b not.\n c := 123 isKindOf: Number' withOptions: #('a = True' 'b = false' 'c = true') withAnswers: #(false true true));
+	"char 1"
+	add: (SLGClozeTask newClozeWithQuestion: '' withCode: 'x := $A. \n y := x isUppercase.\n z := x asLowercase.' withCloze: 'The value of z is __.' withAnswer: 'The value of z is $a.');
+	"symbol 2"
+	add: (SLGSingleChoiceTask newSingleChoiceWithQuestion: '' withCode: 'symbol1 := #apple. \n symbol2 := #banana. \n symbol3 := #apple.
+' withOptions: #('a = True' 'b = false' 'c = true') withAnswers: #(false true true));
+	add: (SLGClozeTask newClozeWithQuestion: 'Complete the following command to make Transcript show ''Alice''.' withCode: 'dict := Dictionary new. \n dict at: #name put: ''Alice''. \n dict at: #age put: 30.\n dict at: #occupation put: ''Engineer''.' withCloze: 'Transcript show: (dict at: __).' withAnswer: 'Transcript show: (dict at: #name).');
+	"nil 2"
+	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: '' withCode: '' withOptions: #('In Smalltalk, nil is a special object that represents the absence of a value or a "null" value.' 'It is an instance of the class UndefinedObject, which means it behaves like an object with certain predefined behaviors and properties.' 'The nil object is used to indicate that a variable has not been assigned a meaningful value.') withAnswers: #(true true true));
+	add: (SLGClozeTask newClozeWithQuestion: '' withCode: 'myVariable := nil. \n myVariable := myVariable ifNil: [ ''Default value'' ]. \n Transcript show: myVariable; cr. 
+' withCloze: 'The Transcript shows __.' withAnswer: 'The Transcript shows ''Default value''.');
+	"conversion 1"
+	add: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the value of x + y?' withCode: 'x := 3.99 asInteger. \n y := $A asciiValue. ' withOptions: #('69' '68' '69.99') withAnswers: #(false true false)).
+	
+	subtopics := Array new: 9.
+	subtopics at: 1 put: (Subtopic newWithTitle: 'Assignment' andLessons: (self createLessonsWithTasks: tasks fromIndex: 1 toIndex: 2)).
+subtopics at: 2 put: (Subtopic newWithTitle: 'Integer' andLessons: (self createLessonsWithTasks: tasks fromIndex: 3 toIndex: 5)).
+subtopics at: 3 put: (Subtopic newWithTitle: 'Float' andLessons: (self createLessonsWithTasks: tasks fromIndex: 6 toIndex: 6)).
+subtopics at: 4 put: (Subtopic newWithTitle: 'String' andLessons: (self createLessonsWithTasks: tasks fromIndex: 7 toIndex: 8)).
+subtopics at: 5 put: (Subtopic newWithTitle: 'Boolean' andLessons: (self createLessonsWithTasks: tasks fromIndex: 9 toIndex: 9)).
+subtopics at: 6 put: (Subtopic newWithTitle: 'Character' andLessons: (self createLessonsWithTasks: tasks fromIndex: 10 toIndex: 10)).
+subtopics at: 7 put: (Subtopic newWithTitle: 'Symbol' andLessons: (self createLessonsWithTasks: tasks fromIndex: 11 toIndex: 12)).
+subtopics at: 8 put: (Subtopic newWithTitle: 'Nil' andLessons: (self createLessonsWithTasks: tasks fromIndex: 13 toIndex: 14)).
+subtopics at: 9 put: (Subtopic newWithTitle: 'Conversion' andLessons: (self createLessonsWithTasks: tasks fromIndex: 15 toIndex: 16)).
 
-	
-	lessons := Array new: 5.
-	1 to: 5 do: [:index |
+
+	"integerLessons := Array new: 10.
+	3 to: 13 do: [:index |
 		task := tasks at: index.
-		lessons at: index put: (Lesson newWithDescription: 'LessonDescriptionDT', index asString andTask: task).
+		assignmentLessons at: index put: (Lesson newWithDescription: 'LessonDescriptionDT', index asString andTask: task).
 	].
 
-	subtopics := Array new: 3.
-	subtopics at: 1 put: (Subtopic newWithTitle: 'Assignment' andLessons: lessons).
-	subtopics at: 2 put: (Subtopic newWithTitle: 'Integers' andLessons: lessons).
-	subtopics at: 3 put: (Subtopic newWithTitle: 'Floats' andLessons: lessons).
+	floatsLessons := Array new: 8.
+	1 to: 5 do: [:index |
+		task := tasks at: index.
+		 at: index put: (Lesson newWithDescription: 'LessonDescriptionDT', index asString andTask: task).
+	].	"
+	
+"	subtopicList := Dictionary new.
+	subtopicList add: #Assignment -> 2 ; 
+	add: #Integer -> 3; 
+	add: #Float -> 1;
+	add: #String -> 2;
+	add: #Boolean -> 1;
+	add: #Character -> 1;
+	add: #Symbol -> 2;
+	add: #Nil -> 2;
+	add: #Conversion -> 1.
+	
+	index := 1.
+	subtopics := OrderedCollection new.
+	subtopicList keysAndValuesDo: [
+		:subtopic :lessonNumber | 
+		lessons := Array new: lessonNumber.
+		[index to: (index + lessonNumber) do: [
+				task := tasks at: index.
+				lesson := Lesson newWithDescription: 'LessonDescription 1'  andTask: task.
+				lessons add: lesson.
+				index := index + 1.]
+			].
+		subtopics add: (Subtopic newWithTitle: subtopic asString andLessons: lessons).
+		Transcript show: lessons size].
+	"
 	
 	^subtopics
 	
