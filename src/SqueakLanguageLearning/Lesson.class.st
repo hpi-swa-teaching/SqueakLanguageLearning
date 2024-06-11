@@ -10,20 +10,20 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 21:27'
+	#'squeak_changestamp' : 'EB 6/11/2024 22:43'
 }
-Lesson class >> description: aDescription task:aTask [
+Lesson class >> newWithDescription: aDescription andTask:aTask [
 
-	^ self new initializeWithDescription: aDescription andTask: aTask
+	^ self basicNew initializeWithDescription: aDescription andTask: aTask
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 21:40'
+	#'squeak_changestamp' : 'EB 6/11/2024 22:44'
 }
-Lesson class >> newWithDescription: aDescription andTask:aTask [
+Lesson class >> newWithTask:aTask [
 
-	^ self new initializeWithDescription: aDescription andTask: aTask
+	^ self basicNew initializeWithTask: aTask
 ]
 
 {
@@ -41,6 +41,15 @@ Lesson >> description [
 Lesson >> initializeWithDescription: aDescription andTask: aTask [
 
 	description := aDescription.
+	task := aTask
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/11/2024 22:44'
+}
+Lesson >> initializeWithTask: aTask [
+
 	task := aTask
 ]
 
