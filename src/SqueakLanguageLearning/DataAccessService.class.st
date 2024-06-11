@@ -4,18 +4,11 @@ Class {
 	#instVars : [
 		'topics'
 	],
+	#classVars : [
+		'Instance'
+	],
 	#category : #'SqueakLanguageLearning-Controllers'
 }
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/25/2024 11:21'
-}
-DataAccessService class >> new [
-
-	^super new initialize
-	
-]
 
 {
 	#category : #'as yet unclassified',
