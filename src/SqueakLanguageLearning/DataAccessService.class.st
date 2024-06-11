@@ -95,7 +95,7 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/7/2024 15:44'
+	#'squeak_changestamp' : 'SW 6/10/2024 10:03'
 }
 DataAccessService >> createSubtopicsForDataTypes [
 
