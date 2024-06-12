@@ -48,19 +48,19 @@ TopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:52'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:18'
 }
 TopicPageView >> getDescription [
 	^SLGMultilineTextGen new 
-		setFontSize: 20;
-		width: 600;
+		setFontSize: self class descriptionFont;
+		width: self class descriptionWidth;
 		setText: (self topic description);
 		yourself.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:31'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:17'
 }
 TopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
 	|routeString  |
@@ -71,7 +71,7 @@ TopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString 
 	
 	^SLGNavigationButtonGen new
 		label: aSubtopic title;
-		width: 400;
+		width: self class buttonWidth;
 		 onClickWithBlock: [
 			self controller routerController navigateTo: routeString.
 		];

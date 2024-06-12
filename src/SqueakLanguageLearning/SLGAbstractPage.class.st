@@ -45,6 +45,15 @@ SLGAbstractPage class >> pageExtent [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 16:42'
+}
+SLGAbstractPage class >> pageHeader [
+
+	^ 1200 @ 900
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'SW 5/21/2024 20:50'
 }
 SLGAbstractPage >> initialize [

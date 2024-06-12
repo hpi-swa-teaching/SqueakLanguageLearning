@@ -46,6 +46,16 @@ LessonPageView class >> taskTypeDictionary [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:09'
+}
+LessonPageView class >> taskViewExtent [
+
+	"^ (self superclass pageWidth * 0.8) @ (self superclass pageHeight * 0.7)"
+	^ 1200@800
+]
+
+{
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:32'
 }
@@ -77,7 +87,7 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/10/2024 15:10'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:13'
 }
 LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
@@ -92,9 +102,11 @@ LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	].
 	taskView := self createViewForTask: task.
 		
-	taskView center: self body center.
+	taskView 
+		center: self body center.
 	
 	self body addMorph: taskView. 
+	
 	"tasks at: 1 put: 'Task Title'." "TODO substitute with the one stored in DataAccessService"
 	
 ]

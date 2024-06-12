@@ -2,9 +2,9 @@ Class {
 	#name : #SLGTask,
 	#superclass : #Object,
 	#instVars : [
-		'id',
 		'question',
-		'correctAnswer'
+		'correctAnswer',
+		'code'
 	],
 	#classInstVars : [
 		'taskDescription'
@@ -41,6 +41,24 @@ SLGTask >> calculateResult: anUserInput [
 	
 	^ percentage
 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/7/2024 16:07'
+}
+SLGTask >> code [
+	^ code
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 11:01'
+}
+SLGTask >> code: aCodeString [ 
+
+        aCodeString ifNotEmpty: [code:= aCodeString]
+    
 ]
 
 {
@@ -113,10 +131,12 @@ SLGTask >> question [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 6/1/2024 17:37'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 15:51'
 }
-SLGTask >> question: anObject [
-	question := anObject
+SLGTask >> question: aQuestionString [ 
+
+        aQuestionString ifNotEmpty: [question:= aQuestionString]
+    
 ]
 
 {

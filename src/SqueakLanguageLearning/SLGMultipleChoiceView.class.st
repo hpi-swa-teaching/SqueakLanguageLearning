@@ -24,12 +24,13 @@ SLGMultipleChoiceView class >> isSingleChoice [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'SW 6/8/2024 16:42'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 10:07'
 }
 SLGMultipleChoiceView class >> newMultipleChoiceUIwithTask: aSLGMultipleChoiceTask [
 
  	^ self new
 		task: aSLGMultipleChoiceTask;
+		code: aSLGMultipleChoiceTask code;
 		taskQuestion: aSLGMultipleChoiceTask question;
 		setup;
 		yourself

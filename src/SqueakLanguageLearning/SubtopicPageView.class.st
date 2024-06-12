@@ -40,7 +40,7 @@ SubtopicPageView >> constructView [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/12/2024 18:48'
+	#'squeak_changestamp' : 'EB 6/12/2024 21:02'
 }
 SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRouteKey: aString [
 	| routeKey index button | 
@@ -53,7 +53,7 @@ SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRout
 		
 		button := SLGNavigationButtonGen new
 			label: ('Lesson ', index);
-			width: 400;
+			width: self class buttonWidth;
 			 onClickWithBlock: [
 				self controller routerController navigateTo: routeKey.
 			].

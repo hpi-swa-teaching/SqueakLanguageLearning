@@ -19,12 +19,13 @@ SLGClozeView class >> errorMessage [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'SW 5/31/2024 10:41'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:32'
 }
 SLGClozeView class >> newClozeUIwithTask: aSLGClozeTask [
 
  	^ self new
 		task: aSLGClozeTask;
+		code: aSLGClozeTask code;
 		taskQuestion: aSLGClozeTask question;
 		taskCloze: aSLGClozeTask cloze;
 		setup;
@@ -58,12 +59,12 @@ SLGClozeView >> clozeField: aTextMorph [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:59'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 15:42'
 }
 SLGClozeView >> createCloze [
 
 	self clozeField: (self createClozeFieldWithContent: self task cloze).
-	self clozeField center: (self center).
+	self clozeField center: ((self center x) @( self headerLowerBound)).
 	
 	self addMorph: clozeField
 	

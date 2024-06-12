@@ -22,6 +22,21 @@ SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCloze: aClozeStr
 ]
 
 {
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 19:47'
+}
+SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCode: aCodeString withCloze: aClozeString withAnswer: anAnswerString [
+
+	^ self new
+			question: aQuestionString;
+        		code: aCodeString;
+			cloze: aClozeString;
+			correctAnswer: anAnswerString;
+			yourself
+
+]
+
+{
 	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 16:50'
 }
