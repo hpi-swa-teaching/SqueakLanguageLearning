@@ -1,5 +1,5 @@
 Class {
-	#name : #DataAccessService,
+	#name : #SLGDataAccessService,
 	#superclass : #Object,
 	#instVars : [
 		'topics'
@@ -7,14 +7,14 @@ Class {
 	#classVars : [
 		'Instance'
 	],
-	#category : #'SqueakLanguageLearning-Controllers'
+	#category : #'SqueakLanguageLearning-Data'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/11/2024 22:48'
+	#'squeak_changestamp' : 'EB 6/12/2024 15:15'
 }
-DataAccessService >> createSubtopicsForClasses [
+SLGDataAccessService >> createSubtopicsForClasses [
 
 	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
@@ -22,19 +22,19 @@ DataAccessService >> createSubtopicsForClasses [
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
-		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) ) 
-		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) )
-		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_01') ) 
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_02') )
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_03') )).
 		
 	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
-		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
-		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
-		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_04') )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_05') )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_06') )).
 		
 	lessonsForSubtopic at: (listOfSubtopics at: 3) put: (OrderedCollection 
-		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
-		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
-		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_07') )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_08') )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_09') )).
 	
 	
 	subtopics := OrderedCollection new.
@@ -48,9 +48,9 @@ DataAccessService >> createSubtopicsForClasses [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/11/2024 22:56'
+	#'squeak_changestamp' : 'EB 6/12/2024 15:54'
 }
-DataAccessService >> createSubtopicsForControlFlow [
+SLGDataAccessService >> createSubtopicsForControlFlow [
 
 	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
@@ -58,7 +58,7 @@ DataAccessService >> createSubtopicsForControlFlow [
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
-		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) ) 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_01') ) 
 		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) )
 		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
 		
@@ -86,7 +86,7 @@ DataAccessService >> createSubtopicsForControlFlow [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/11/2024 22:57'
 }
-DataAccessService >> createSubtopicsForDataStructures [
+SLGDataAccessService >> createSubtopicsForDataStructures [
 
 	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
@@ -122,7 +122,7 @@ DataAccessService >> createSubtopicsForDataStructures [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'SW 6/10/2024 10:03'
 }
-DataAccessService >> createSubtopicsForDataTypes [
+SLGDataAccessService >> createSubtopicsForDataTypes [
 
 	| tasks task lessons subtopics |
 	
@@ -152,7 +152,7 @@ DataAccessService >> createSubtopicsForDataTypes [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/11/2024 22:56'
 }
-DataAccessService >> createSubtopicsForMethods [
+SLGDataAccessService >> createSubtopicsForMethods [
 
 	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
@@ -188,7 +188,7 @@ DataAccessService >> createSubtopicsForMethods [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/11/2024 22:57'
 }
-DataAccessService >> createSubtopicsForMorphic [
+SLGDataAccessService >> createSubtopicsForMorphic [
 
 	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
@@ -224,7 +224,7 @@ DataAccessService >> createSubtopicsForMorphic [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/11/2024 22:57'
 }
-DataAccessService >> createSubtopicsForSqueak [
+SLGDataAccessService >> createSubtopicsForSqueak [
 
 	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
@@ -260,7 +260,7 @@ DataAccessService >> createSubtopicsForSqueak [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 19:12'
 }
-DataAccessService >> initialize [
+SLGDataAccessService >> initialize [
 
 	topics := Array new: 7.
 	topics at: 1 put: (Topic newWithTitle: 'Data Types' Description: 'In Smalltalk, datatypes are the essential building blocks like numbers, strings, and booleans that form the foundation of all your programming adventures. Each datatype has unique properties and uses, making your code powerful and versatile. Ready to dive into datatypes? Let’s get started!' andSubtopics: self createSubtopicsForDataTypes).
@@ -277,6 +277,6 @@ DataAccessService >> initialize [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/26/2024 22:00'
 }
-DataAccessService >> topics [
+SLGDataAccessService >> topics [
 	^ topics
 ]

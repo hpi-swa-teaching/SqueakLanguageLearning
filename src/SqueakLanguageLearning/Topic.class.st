@@ -47,6 +47,18 @@ Topic >> initializeWithTitle: aTitle Description: aDescription andSubtopics: sub
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/12/2024 16:33'
+}
+Topic >> isCompleted [
+
+	subtopics do: [ :each |
+		(each isCompleted) ifFalse: [ ^false. ] ].
+	
+	^ true
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/26/2024 21:08'
 }

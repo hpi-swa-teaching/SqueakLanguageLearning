@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'routerController',
 		'navigationController',
-		'dataAccessService'
+		'dataAccessService',
+		'userProgressInstance'
 	],
 	#category : #'SqueakLanguageLearning-Controllers'
 }
@@ -27,14 +28,15 @@ SLGMainController >> dataAccessService: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:21'
+	#'squeak_changestamp' : 'EB 6/12/2024 17:00'
 }
 SLGMainController >> initialize [
 	super initialize.
 	
-	self dataAccessService: DataAccessService new.
+	self dataAccessService: SLGDataAccessService new.
 	self routerController: SLGRouter new.
-	self navigationController: (NavigationController newWithTopics: (dataAccessService topics)).
+	"self navigationController: (NavigationController newWithTopics: (dataAccessService topics))."
+	userProgressInstance := SLGUserProgress userData.
 	
 	self registerRoutes.
 	

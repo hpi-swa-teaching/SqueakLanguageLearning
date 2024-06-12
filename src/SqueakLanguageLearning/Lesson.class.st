@@ -54,8 +54,19 @@ Lesson >> initializeWithTask: aTask [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/12/2024 16:27'
+}
+Lesson >> isCompleted [
+
+	^task isCompleted
+
+
+]
+
+{
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/26/2024 21:14'
+	#'squeak_changestamp' : 'EB 6/12/2024 16:26'
 }
 Lesson >> task [
 	^ task

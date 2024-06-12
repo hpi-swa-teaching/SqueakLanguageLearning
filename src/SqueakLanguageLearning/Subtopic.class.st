@@ -37,6 +37,20 @@ Subtopic >> initializeWithTitle: aTitle andLessons: lessonsList [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/12/2024 16:32'
+}
+Subtopic >> isCompleted [
+
+	lessons do: [ :each |
+		(each isCompleted) ifFalse: [ ^false. ] ].
+	
+	^ true
+
+	
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/26/2024 21:10'
 }
