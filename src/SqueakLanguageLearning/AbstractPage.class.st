@@ -206,7 +206,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 20:55'
+	#'squeak_changestamp' : 'SW 6/11/2024 21:53'
 }
 AbstractPage >> initializeWithController: aController [
 	
