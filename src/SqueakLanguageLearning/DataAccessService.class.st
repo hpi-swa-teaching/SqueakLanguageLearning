@@ -48,27 +48,35 @@ DataAccessService >> createSubtopicsForClasses [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:23'
+	#'squeak_changestamp' : 'EB 6/11/2024 22:56'
 }
 DataAccessService >> createSubtopicsForControlFlow [
 
-| tasks task lessons subtopics |
-
-	tasks := Array new: 2.
-	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
+	| listOfSubtopics subtopics lessonsForSubtopic title |
+	
+	listOfSubtopics := OrderedCollection withAll: #('SubtopicTitle1' 'SubtopicTitle2' 'SubtopicTitle3').
+	
+	lessonsForSubtopic := Dictionary new.
+	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) ) 
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) )
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 3) put: (OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
 	
 	
-	lessons := Array new: 2.
-	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
-	1 to: 2 do: [:index |
-		task := tasks at: index.
-		lessons at: index put: (Lesson newWithDescription: 'LessonDescription', index asString andTask: task).
-	].
-	
-	subtopics := Array new: 3.
-	subtopics at: 1 put: (Subtopic newWithTitle: 'SubtopicTitle1' andLessons: lessons).
-	subtopics at: 2 put: (Subtopic newWithTitle: 'SubtopicTitle2' andLessons: lessons).
-	subtopics at: 3 put: (Subtopic newWithTitle: 'SubtopicTitle3' andLessons: lessons).
+	subtopics := OrderedCollection new.
+	1 to: listOfSubtopics size do: [:index |
+		title := listOfSubtopics at: index.
+		subtopics add: (Subtopic newWithTitle: title andLessons: (lessonsForSubtopic at: title)) ].
 	
 	^subtopics
 	
@@ -76,26 +84,35 @@ DataAccessService >> createSubtopicsForControlFlow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:22'
+	#'squeak_changestamp' : 'EB 6/11/2024 22:57'
 }
 DataAccessService >> createSubtopicsForDataStructures [
 
-| tasks task lessons subtopics |
-
-	tasks := Array new: 2.
-	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
-
-	lessons := Array new: 2.
-	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
-	1 to: 2 do: [:index |
-		task := tasks at: index.
-		lessons at: index put: (Lesson newWithDescription: 'LessonDescription', index asString andTask: task).
-	].
+	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
-	subtopics := Array new: 3.
-	subtopics at: 1 put: (Subtopic newWithTitle: 'SubtopicTitle1' andLessons: lessons).
-	subtopics at: 2 put: (Subtopic newWithTitle: 'SubtopicTitle2' andLessons: lessons).
-	subtopics at: 3 put: (Subtopic newWithTitle: 'SubtopicTitle3' andLessons: lessons).
+	listOfSubtopics := OrderedCollection withAll: #('SubtopicTitle1' 'SubtopicTitle2' 'SubtopicTitle3').
+	
+	lessonsForSubtopic := Dictionary new.
+	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) ) 
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) )
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 3) put: (OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+	
+	
+	subtopics := OrderedCollection new.
+	1 to: listOfSubtopics size do: [:index |
+		title := listOfSubtopics at: index.
+		subtopics add: (Subtopic newWithTitle: title andLessons: (lessonsForSubtopic at: title)) ].
 	
 	^subtopics
 	
@@ -133,27 +150,35 @@ DataAccessService >> createSubtopicsForDataTypes [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:24'
+	#'squeak_changestamp' : 'EB 6/11/2024 22:56'
 }
 DataAccessService >> createSubtopicsForMethods [
 
-| tasks task lessons subtopics |
-
-	tasks := Array new: 2.
-	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
+	| listOfSubtopics subtopics lessonsForSubtopic title |
+	
+	listOfSubtopics := OrderedCollection withAll: #('SubtopicTitle1' 'SubtopicTitle2' 'SubtopicTitle3').
+	
+	lessonsForSubtopic := Dictionary new.
+	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) ) 
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) )
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 3) put: (OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
 	
 	
-	lessons := Array new: 2.
-	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
-	1 to: 2 do: [:index |
-		task := tasks at: index.
-		lessons at: index put: (Lesson newWithDescription: 'LessonDescription', index asString andTask: task).
-	].
-	
-	subtopics := Array new: 3.
-	subtopics at: 1 put: (Subtopic newWithTitle: 'SubtopicTitle1' andLessons: lessons).
-	subtopics at: 2 put: (Subtopic newWithTitle: 'SubtopicTitle2' andLessons: lessons).
-	subtopics at: 3 put: (Subtopic newWithTitle: 'SubtopicTitle3' andLessons: lessons).
+	subtopics := OrderedCollection new.
+	1 to: listOfSubtopics size do: [:index |
+		title := listOfSubtopics at: index.
+		subtopics add: (Subtopic newWithTitle: title andLessons: (lessonsForSubtopic at: title)) ].
 	
 	^subtopics
 	
@@ -161,27 +186,35 @@ DataAccessService >> createSubtopicsForMethods [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:24'
+	#'squeak_changestamp' : 'EB 6/11/2024 22:57'
 }
 DataAccessService >> createSubtopicsForMorphic [
 
-	| tasks task lessons subtopics |
-
-	tasks := Array new: 2.
-	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
+	| listOfSubtopics subtopics lessonsForSubtopic title |
+	
+	listOfSubtopics := OrderedCollection withAll: #('SubtopicTitle1' 'SubtopicTitle2' 'SubtopicTitle3').
+	
+	lessonsForSubtopic := Dictionary new.
+	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) ) 
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) )
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 3) put: (OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
 	
 	
-	lessons := Array new: 2.
-	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
-	1 to: 2 do: [:index |
-		task := tasks at: index.
-		lessons at: index put: (Lesson newWithDescription: 'LessonDescription', index asString andTask: task).
-	].
-	
-	subtopics := Array new: 3.
-	subtopics at: 1 put: (Subtopic newWithTitle: 'SubtopicTitle1' andLessons: lessons).
-	subtopics at: 2 put: (Subtopic newWithTitle: 'SubtopicTitle2' andLessons: lessons).
-	subtopics at: 3 put: (Subtopic newWithTitle: 'SubtopicTitle3' andLessons: lessons).
+	subtopics := OrderedCollection new.
+	1 to: listOfSubtopics size do: [:index |
+		title := listOfSubtopics at: index.
+		subtopics add: (Subtopic newWithTitle: title andLessons: (lessonsForSubtopic at: title)) ].
 	
 	^subtopics
 	
@@ -189,27 +222,35 @@ DataAccessService >> createSubtopicsForMorphic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:25'
+	#'squeak_changestamp' : 'EB 6/11/2024 22:57'
 }
 DataAccessService >> createSubtopicsForSqueak [
 
-	| tasks task lessons subtopics |
-
-	tasks := Array new: 2.
-	tasks at: 1 put: (SLGDragAndDropTask newWithQuestion: 'Drag the correct answer to the corresponding gap' withCorrectAnswer: #('1' '2' '3' '4')).
+	| listOfSubtopics subtopics lessonsForSubtopic title |
+	
+	listOfSubtopics := OrderedCollection withAll: #('SubtopicTitle1' 'SubtopicTitle2' 'SubtopicTitle3').
+	
+	lessonsForSubtopic := Dictionary new.
+	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) ) 
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') ) )
+		with: (Lesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
+		
+	lessonsForSubtopic at: (listOfSubtopics at: 3) put: (OrderedCollection 
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )
+		with: (Lesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4')) )).
 	
 	
-	lessons := Array new: 2.
-	"lessons at: 1 put: (Lesson newWithDescription: 'LessonDescription' andTask: (tasks at: 1))."
-	1 to: 2 do: [:index |
-		task := tasks at: index.
-		lessons at: index put: (Lesson newWithDescription: 'LessonDescription', index asString andTask: task).
-	].
-	
-	subtopics := Array new: 3.
-	subtopics at: 1 put: (Subtopic newWithTitle: 'SubtopicTitle1' andLessons: lessons).
-	subtopics at: 2 put: (Subtopic newWithTitle: 'SubtopicTitle2' andLessons: lessons).
-	subtopics at: 3 put: (Subtopic newWithTitle: 'SubtopicTitle3' andLessons: lessons).
+	subtopics := OrderedCollection new.
+	1 to: listOfSubtopics size do: [:index |
+		title := listOfSubtopics at: index.
+		subtopics add: (Subtopic newWithTitle: title andLessons: (lessonsForSubtopic at: title)) ].
 	
 	^subtopics
 	

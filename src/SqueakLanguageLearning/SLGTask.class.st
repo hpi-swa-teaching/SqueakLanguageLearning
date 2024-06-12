@@ -2,8 +2,10 @@ Class {
 	#name : #SLGTask,
 	#superclass : #Object,
 	#instVars : [
+		'id',
 		'question',
-		'correctAnswer'
+		'correctAnswer',
+		'isCompleted'
 	],
 	#classInstVars : [
 		'taskDescription'
