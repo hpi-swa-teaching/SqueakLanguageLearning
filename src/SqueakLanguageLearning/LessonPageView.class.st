@@ -47,7 +47,7 @@ LessonPageView class >> taskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:32'
+	#'squeak_changestamp' : 'yegi 6/11/2024 23:04'
 }
 LessonPageView >> createViewForTask: aTask [
 
@@ -55,8 +55,8 @@ LessonPageView >> createViewForTask: aTask [
 	dict := self getTaskTypeDictionary.
 	key := (aTask  class name) asString.
 	method := dict at: key ifAbsent: [].
-	targetClass := method first.
-	methodName := method second.
+	targetClass := method first.			"Class name e.g SLGDragAndDropView, SLGClozeView,.."
+	methodName := method second.	"Constructor of the Class above"
 	parameters := Array new: 1.
 	parameters at: 1 put: aTask.
 	

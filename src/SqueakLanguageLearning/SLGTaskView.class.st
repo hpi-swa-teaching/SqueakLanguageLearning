@@ -284,13 +284,15 @@ SLGTaskView >> taskQuestion: aString [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/9/2024 21:09'
+	#'squeak_changestamp' : 'yegi 6/12/2024 00:11'
 }
 SLGTaskView >> verifyAnswer [
 
 	| userInput |
 	userInput := self passUserInput.
-	self result: (self task verifyAnswer: userInput).
+	"self result: (self task verifyAnswer: userInput)."
+	self result: (self task verifyAnswer: userInput 
+						 andAddCompleted: self task). 
 	
 	(self result = -1)
 		ifTrue: [self printError]

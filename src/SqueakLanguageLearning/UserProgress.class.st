@@ -2,7 +2,8 @@ Class {
 	#name : #UserProgress,
 	#superclass : #Object,
 	#instVars : [
-		'completed'
+		'completed',
+		'experiencePoint'
 	],
 	#classVars : [
 		'Instance'
@@ -46,8 +47,35 @@ UserProgress >> completed: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 6/11/2024 13:53'
+	#'squeak_changestamp' : 'yegi 6/11/2024 23:12'
+}
+UserProgress >> experiencePoint [
+	^ experiencePoint
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/11/2024 23:12'
+}
+UserProgress >> experiencePoint: aNumber [
+	experiencePoint := aNumber
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/12/2024 00:20'
 }
 UserProgress >> initialize [
-	completed := Set new
+	completed := Set new.
+	experiencePoint := 0.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/12/2024 01:12'
+}
+UserProgress >> updateExperiencePoint [
+
+	experiencePoint := (completed size) * 100.
+	Transcript show: experiencePoint.
 ]

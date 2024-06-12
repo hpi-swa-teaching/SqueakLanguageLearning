@@ -101,6 +101,32 @@ AbstractPage >> controller [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/12/2024 12:41'
+}
+AbstractPage >> displayExperiencePoint [
+
+
+	| image imageMorph imgFile smallerImg textMorph |
+	
+	imgFile := FileStream fileNamed: '/Users/yegipark/Documents/Education/hpi/24_ss/softwaretechnik/SqueakLingoDesign/cheese.png'.
+	image := Form fromBinaryStream: imgFile binary.
+	smallerImg := image scaledToSize: (100 @ 100).
+	imgFile close.
+
+	imageMorph := ImageMorph new.
+	imageMorph image: smallerImg.
+	"imageMorph openInWorld."
+	
+	imageMorph center: self header rightCenter - ((imageMorph width) * 2 @ 0) - ((self header height - imageMorph height) * 2 @ 0).
+	
+	textMorph :=
+	
+	
+	self header addMorph: imageMorph.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:40'
 }
@@ -134,7 +160,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/11/2024 10:43'
+	#'squeak_changestamp' : 'yegi 6/12/2024 11:10'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -143,8 +169,9 @@ AbstractPage >> initializeWithController: aController [
 	super initialize.
 	
 	controller := aController.
-
-	self extent: 1204@904;
+	
+	self extent: (World width * 0.6) @ (World height * 0.8);
+		"extent: 1204@904;"
 		"extent: 1404@904;"
 		color: Color white; 
 		borderWidth: 2;
@@ -177,6 +204,7 @@ AbstractPage >> initializeWithController: aController [
 	
 	self addBackButton.
 	self addCloseButton.
+	self displayExperiencePoint.
 		
 	^self
 	

@@ -10,6 +10,15 @@ Class {
 }
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/12/2024 10:22'
+}
+SLGMainController class >> savedOpen [
+	^SLGsavedApp 
+		ifNil: [SLGsavedApp := self new]
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:04'
 }

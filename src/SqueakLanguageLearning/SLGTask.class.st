@@ -106,9 +106,9 @@ SLGTask >> sendError [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/9/2024 21:08'
+	#'squeak_changestamp' : 'yegi 6/12/2024 00:51'
 }
-SLGTask >> verifyAnswer: anUserInput [
+SLGTask >> verifyAnswer: anUserInput andAddCompleted: aTask [
 
 	| output |
 	
@@ -117,6 +117,11 @@ SLGTask >> verifyAnswer: anUserInput [
 	(self isValid: anUserInput)
 		ifTrue: [output := self calculateResult: anUserInput.]
 		ifFalse: [output := self sendError].
+	
+	"added to check if the task is completed, add the task into the completed set in UserProgress"
+	(output = 100)
+		ifTrue: [ UserProgress userData completed add: aTask.
+				UserProgress userData updateExperiencePoint.].
 		
 	^ output
 ]
