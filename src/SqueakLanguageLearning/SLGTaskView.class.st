@@ -59,11 +59,11 @@ SLGTaskView class >> taskElementWidth [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:55'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:47'
 }
 SLGTaskView class >> taskElementsMargin [
 
-	^ 50
+	^ 25
 ]
 
 {
@@ -145,7 +145,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:50'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:45'
 }
 SLGTaskView >> createSubmitButton [
 
@@ -154,17 +154,18 @@ SLGTaskView >> createSubmitButton [
 	margin := self class taskElementsMargin.
 	submitButton 
 			label: 'Submit';
-			center: (self bottomRight - (100 @ margin));
 			on: #mouseUp send: #verifyAnswer to: self.
 	
-	self addMorph: submitButton
+	self addMorph: submitButton.
+	
+	^ submitButton
 	
 	
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 10:47'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:44'
 }
 SLGTaskView >> createTextFieldWithContent: aString [
 	"Currently unused. Use createTextFieldWithContent:withBorder: instead"
@@ -174,8 +175,8 @@ SLGTaskView >> createTextFieldWithContent: aString [
 		contents:  aString;
 		wrapFlag: true;
 		extent: 600@0;
-		borderWidth: 2;
-		borderColor: Color veryLightGray;
+		"borderWidth: 2;"
+		"borderColor: Color veryLightGray;"
 		lock.
 	
 	self addMorph: textField.
@@ -189,17 +190,17 @@ SLGTaskView >> createTextFieldWithContent: aString [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 01:31'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:44'
 }
 SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
 	| textField |
 	textField := TextMorph new.
 	
-	(aBoolean)
+"	(aBoolean)
 		ifTrue: [textField
 					borderWidth: 2;
-					borderColor: Color veryLightGray].	
+					borderColor: Color veryLightGray].	"
 	textField
 		contents:  aString;
 		wrapFlag: true;
@@ -213,22 +214,6 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 	
 	
 	
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:08'
-}
-SLGTaskView >> headerLowerBound [
-	^ headerLowerBound
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:08'
-}
-SLGTaskView >> headerLowerBound: anObject [
-	headerLowerBound := anObject
 ]
 
 {
@@ -350,14 +335,14 @@ SLGTaskView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:20'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:46'
 }
 SLGTaskView >> setupWith: anInteractiveMorph [
 
-	| descriptionField questionField codeField fieldsArray fieldColumns|
+	| submitbutton descriptionField questionField codeField fieldsArray fieldColumns|
 	self extent: self class taskViewExtent. 
-	self createSubmitButton.
 	
+	submitbutton := self createSubmitButton.
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
 	self status: (self createTextFieldWithContent: '' withBorder: true).
 	self taskQuestion ifNotNil: [
@@ -367,7 +352,7 @@ SLGTaskView >> setupWith: anInteractiveMorph [
 	
 	fieldsArray := OrderedCollection new.
 	
-	fieldsArray add: status; add: anInteractiveMorph.
+	fieldsArray add: submitbutton; add: status; add: anInteractiveMorph.
 	self code ifNotNil: [fieldsArray add: codeField].
 	self taskQuestion ifNotNil: [fieldsArray add: questionField].
 	fieldsArray add: descriptionField.
