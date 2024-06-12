@@ -117,7 +117,7 @@ DataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/12/2024 09:11'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 10:04'
 }
 DataAccessService >> createSubtopicsForDataTypes [
 
@@ -130,7 +130,7 @@ DataAccessService >> createSubtopicsForDataTypes [
 	add: (SLGDragAndDropTask newWithQuestion: 'Assign 6 to x and y.' withCode: '' withCorrectAnswer: #('x' ':=(1)' 'y' ':=(2)' '6' ));
 	"integer 3"
 	add: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'What is the value of w?' withCode: 'x := 2. \ny := -5.\nz := y / x. \nw := z // x' withOptions: #('5' 'x' '-2') withAnswers: #(false false true));
-	add: (SLGSingleChoiceTask newSingleChoiceWithQuestion: '' withCode: 'x := 1. \n y := -5.\n x += 1. \n y *= (x + y). \n z := y / x. \n w := z // x
+	add: (SLGSingleChoiceTask newSingleChoiceWithQuestion: '' withCode: 'x := 1. \n y := -5.\n x := x + 1. \n y := y * (x + y). \n z := y / x. \n w := z // x
 ' withOptions: #('y = 15' 'z = 7' 'w = 3.75') withAnswers: #(true false false)); 
 	add: (SLGClozeTask newClozeWithQuestion: '' withCode: 'x := 1.\n x class. ' withCloze: 'The class of x is __.' withAnswer: 'The class of x is Integer.');
 	"float 1"
