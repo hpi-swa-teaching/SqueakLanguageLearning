@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'question',
 		'correctAnswer',
-		'code'
+		'code',
+		'id'
 	],
 	#classInstVars : [
 		'taskDescription'

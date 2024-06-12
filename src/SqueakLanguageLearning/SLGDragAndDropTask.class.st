@@ -21,6 +21,22 @@ SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeStri
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/12/2024 22:13'
+}
+SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeString withCorrectAnswer: anArray withID: anID [
+
+	^ self new
+		id: anID;
+		question: aQuestionString;
+		code: aCodeString;
+		correctAnswer: anArray;
+		yourself
+		
+
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/12/2024 19:06'
 }
 SLGDragAndDropTask class >> newWithQuestion: aString withCorrectAnswer: anArray [
