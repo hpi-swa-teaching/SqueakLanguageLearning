@@ -204,7 +204,7 @@ SLGDragAndDropView >> passUserInput [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 20:31'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:23'
 }
 SLGDragAndDropView >> setup [
 
@@ -213,10 +213,10 @@ SLGDragAndDropView >> setup [
 	super setup.
 	
 	intercative := self createItemsAndTargets.
-	intercative position: (self position + (50 @ 300)).
+	"intercative position: (self position + (50 @ 300))."
 	self addMorph: intercative.
+	super setupWith: intercative.
 
-	"^ self"
 	
 ]
 

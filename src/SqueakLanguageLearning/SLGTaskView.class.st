@@ -117,7 +117,7 @@ SLGTaskView >> code: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:14'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 16:41'
 }
 SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
@@ -128,7 +128,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 				contents: (aCodeString copyReplaceAll: '\n' with: '', Character cr,'');
 				buildCodePaneWith: ToolBuilder default))
 				wrapFlag: true;
-				extent: self class taskElementWidth @ 145.
+				extent: self class taskElementWidth @ 300.
 
 	(aBoolean)
 		ifTrue: [codeField
@@ -346,6 +346,36 @@ SLGTaskView >> setup [
 	].
 	
 	self status center: (self bottomCenter - (0 @ self class taskViewMargin)).	
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:20'
+}
+SLGTaskView >> setupWith: anInteractiveMorph [
+
+	| descriptionField questionField codeField fieldsArray fieldColumns|
+	self extent: self class taskViewExtent. 
+	self createSubmitButton.
+	
+	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
+	self status: (self createTextFieldWithContent: '' withBorder: true).
+	self taskQuestion ifNotNil: [
+		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true)].
+	self code ifNotNil: [
+		codeField := (self createCodeBlockWithContent: self code withBorder: true)].
+	
+	fieldsArray := OrderedCollection new.
+	
+	fieldsArray add: status; add: anInteractiveMorph.
+	self code ifNotNil: [fieldsArray add: codeField].
+	self taskQuestion ifNotNil: [fieldsArray add: questionField].
+	fieldsArray add: descriptionField.
+	
+	fieldColumns := SLGLayout columnWithMorphsReversed: fieldsArray withGap: (self class taskElementsMargin).	
+	fieldColumns center: self center.
+	self addMorph: fieldColumns.
+	
 ]
 
 {
