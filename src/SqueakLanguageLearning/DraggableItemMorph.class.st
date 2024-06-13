@@ -59,23 +59,26 @@ DraggableItemMorph >> handleDrop: anEvent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 16:10'
+	#'squeak_changestamp' : 'yegi 6/13/2024 19:42'
 }
 DraggableItemMorph >> initializeWithLabel: aString inMorph: aMorph [
 
+	| test |	
         self initialize.
         label := aString.
         isDragging := false.
-        offset := 0@0.
         parentMorph := aMorph. "Set the parent morph"
-        self position: 0@0. "Initial position"
-        self extent: 100@50. "Set dimensions"
-        self borderWidth: 1.
-        self borderColor: Color black.
-        self color: Color lightGray.
-        self addMorph: (StringMorph contents: aString).
-	self cornerStyle: #rounded;
-		cornerRadius: 20.
+        self position: 0 @ 0; "Initial position"
+        	extent: 80 @ 40; "Set dimensions"
+       	borderWidth: 1;
+        	borderColor: Color white;
+        	color: Color transparent;
+		cornerStyle: #rounded;
+		cornerRadius: 10.
+	
+	test := StringMorph contents: aString.
+	test center: self center.
+	  self addMorph: test."(StringMorph contents: aString)."
 
         self on: #mouseDown send: #startDrag: to: self.
         self on: #mouseUp send: #handleDrop: to: self.

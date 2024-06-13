@@ -106,7 +106,7 @@ AbstractPage >> addHomeButtom [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 09:51'
+	#'squeak_changestamp' : 'yegi 6/13/2024 18:32'
 }
 AbstractPage >> addTitle: aString [
 
@@ -118,6 +118,7 @@ AbstractPage >> addTitle: aString [
 		setFontSize: 40;
 		center: self body center - (self body width * 0.03 @ 0) ;
 		top: self body top + (self body height * 0.05).
+		
 
         self body addMorph: title
 ]

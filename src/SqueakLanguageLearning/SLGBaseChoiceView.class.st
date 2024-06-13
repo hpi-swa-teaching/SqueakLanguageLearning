@@ -81,7 +81,7 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/10/2024 09:33'
+	#'squeak_changestamp' : 'yegi 6/13/2024 18:53'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
@@ -92,9 +92,12 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		| row toggleBtn text |
 		
 		toggleBtn := SLGToggleButtonGen new
-			extent: (50@50);
-			borderWidth: 10;
-			color: Color gray.
+			extent: (50  @ 50);
+			borderWidth: 5;
+			borderColor: Color white;
+			cornerStyle: #rounded;
+			cornerRadius: 30;
+			color: Color white.
 		
 		toggleBtn stateUI:  [
 			toggleBtn state ifTrue: [
@@ -102,7 +105,7 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 			].
 
 			toggleBtn state ifFalse: [
-				toggleBtn color: Color gray.
+				toggleBtn color: Color white.
 			].
 		].
 	
@@ -126,13 +129,13 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		row := SLGLayout rowWithMorphs: 
 			{
 				toggleBtn.
-				SLGSpacerGen newSpacerWithDim: (20@0).
+				SLGSpacerGen newSpacerWithDim: (20 @ 0).
 				text
 			}.
 		
 		SLGLayout columnWithMorphs: {
 			row.
-			SLGSpacerGen newSpacerWithDim: (0@20)
+			SLGSpacerGen newSpacerWithDim: (0 @ 20)
 		}
 	].
 

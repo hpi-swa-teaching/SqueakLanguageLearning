@@ -63,16 +63,24 @@ SLGTaskView >> checkResult [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/9/2024 21:04'
+	#'squeak_changestamp' : 'yegi 6/13/2024 19:06'
 }
 SLGTaskView >> createSubmitButton [
 
-	| submitButton |
+	| submitButton labelMorph |
 	submitButton := SimpleButtonMorph new.
 	submitButton 
 			label: 'Submit';
+			borderColor: Color white;
+			width: 120;
+			height: 50;
 			center: (self bottomRight + (-100@(-70)));
+			cornerStyle: #rounded;
+			cornerRadius: 10;
 			on: #mouseUp send: #verifyAnswer to: self.
+			
+	labelMorph := submitButton submorphs detect: [:morph | morph isKindOf: StringMorph].
+	labelMorph color: Color white.
 	
 	self addMorph: submitButton
 	
@@ -134,7 +142,7 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 6/7/2024 12:24'
+	#'squeak_changestamp' : 'yegi 6/13/2024 18:45'
 }
 SLGTaskView >> initialize [
 
@@ -142,7 +150,9 @@ SLGTaskView >> initialize [
 	
 	self
 		extent: 1000@600;
-		color: Color veryVeryLightGray;
+		color: Color transparent;
+		cornerStyle: #rounded;
+		"color: Color veryVeryLightGray;"
 		center: World bounds center
 	
 		

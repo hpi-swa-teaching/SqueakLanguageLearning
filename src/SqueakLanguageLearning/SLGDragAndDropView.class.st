@@ -91,7 +91,7 @@ SLGDragAndDropView >> createItemsAndTargets [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'EB 6/11/2024 15:14'
+	#'squeak_changestamp' : 'yegi 6/13/2024 18:20'
 }
 SLGDragAndDropView >> createSlotsWith: correctAnswers [
 
