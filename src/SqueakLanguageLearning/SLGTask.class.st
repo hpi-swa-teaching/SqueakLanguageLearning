@@ -3,7 +3,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'question',
-		'correctAnswer'
+		'correctAnswer',
+		'code',
+		'id'
 	],
 	#classInstVars : [
 		'taskDescription'
@@ -44,6 +46,24 @@ SLGTask >> calculateResult: anUserInput [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/7/2024 16:07'
+}
+SLGTask >> code [
+	^ code
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 11:01'
+}
+SLGTask >> code: aCodeString [ 
+
+        aCodeString ifNotEmpty: [code:= aCodeString]
+    
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'SW 6/8/2024 14:24'
 }
 SLGTask >> correctAnswer [
@@ -68,6 +88,32 @@ SLGTask >> findMatches: aReferenceArray with: anInputArray [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/12/2024 13:48'
+}
+SLGTask >> id [
+	^ id
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/12/2024 13:48'
+}
+SLGTask >> id: anObject [
+	id := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/12/2024 19:04'
+}
+SLGTask >> isCompleted [
+	
+	^((SLGUserProgress userData) completed includes: id)
+
+]
+
+{
 	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 16:47'
 }
@@ -86,10 +132,12 @@ SLGTask >> question [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 6/1/2024 17:37'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 15:51'
 }
-SLGTask >> question: anObject [
-	question := anObject
+SLGTask >> question: aQuestionString [ 
+
+        aQuestionString ifNotEmpty: [question:= aQuestionString]
+    
 ]
 
 {
@@ -102,6 +150,25 @@ SLGTask >> sendError [
 	Transcript show: 'Error occured.'; cr.
 	
 	^ -1
+]
+
+{
+	#category : #verification,
+	#'squeak_changestamp' : 'EB 6/13/2024 13:52'
+}
+SLGTask >> verifyAnswer: anUserInput [
+
+	| output |
+	
+	Transcript show: 'isValid: ', (self isValid: anUserInput); cr.
+	
+	(self isValid: anUserInput)
+		ifTrue: [
+			output := self calculateResult: anUserInput. ]
+		
+		ifFalse: [output := self sendError].
+		
+	^ output
 ]
 
 {

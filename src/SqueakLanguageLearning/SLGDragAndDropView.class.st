@@ -21,12 +21,13 @@ SLGDragAndDropView class >> errorMessage [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:57'
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:32'
 }
 SLGDragAndDropView class >> newWithTask: aSLGDragAndDropTask [
 
 	^ self new
 		task: aSLGDragAndDropTask;
+		code: aSLGDragAndDropTask code;
 		taskQuestion: aSLGDragAndDropTask question;
 		setup;
 		yourself
@@ -203,7 +204,7 @@ SLGDragAndDropView >> passUserInput [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 11:06'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 20:31'
 }
 SLGDragAndDropView >> setup [
 
@@ -212,7 +213,7 @@ SLGDragAndDropView >> setup [
 	super setup.
 	
 	intercative := self createItemsAndTargets.
-	intercative position: (self position + (50 @ 100)).
+	intercative position: (self position + (50 @ 300)).
 	self addMorph: intercative.
 
 	"^ self"

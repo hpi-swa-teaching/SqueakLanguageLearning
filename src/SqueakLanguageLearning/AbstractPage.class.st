@@ -11,6 +11,42 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:12'
+}
+AbstractPage class >> buttonWidth [
+
+	^ 500
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:18'
+}
+AbstractPage class >> descriptionFont [
+
+	^ 35
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 16:26'
+}
+AbstractPage class >> descriptionMargin [
+
+	^ 100
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 16:26'
+}
+AbstractPage class >> descriptionWidth [
+
+	^ self pageWidth - (self descriptionMargin * 2)
+]
+
+{
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 00:08'
 }
@@ -18,6 +54,42 @@ AbstractPage class >> newWithController: aController [
 
 	^super basicNew initializeWithController: aController
 	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 16:50'
+}
+AbstractPage class >> pageBorder [
+
+	^ 2
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:52'
+}
+AbstractPage class >> pageHeight [
+
+	^ 1204
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:20'
+}
+AbstractPage class >> pageMargin [
+
+	^ 2
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:52'
+}
+AbstractPage class >> pageWidth [
+
+	^ 1604
 ]
 
 {

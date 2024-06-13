@@ -36,13 +36,14 @@ SLGMainController >> dataAccessService: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 10:24'
+	#'squeak_changestamp' : 'EB 6/12/2024 23:21'
 }
 SLGMainController >> initialize [
 	super initialize.
 	
-	self dataAccessService: DataAccessService new.
+	self dataAccessService: SLGDataAccessService new.
 	self routerController: SLGRouter new.
+	"self navigationController: (NavigationController newWithTopics: (dataAccessService topics))."
 	
 	self registerRoutes.
 	

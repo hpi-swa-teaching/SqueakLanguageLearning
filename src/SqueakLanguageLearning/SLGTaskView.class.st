@@ -5,7 +5,9 @@ Class {
 		'status',
 		'taskQuestion',
 		'task',
-		'result'
+		'result',
+		'code',
+		'headerLowerBound'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
@@ -47,16 +49,99 @@ SLGTaskView class >> taskDescription [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:11'
+}
+SLGTaskView class >> taskElementWidth [
+
+	^ 1000
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:55'
+}
+SLGTaskView class >> taskElementsMargin [
+
+	^ 50
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:53'
+}
+SLGTaskView class >> taskViewExtent [
+
+	^ 1200@800.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:58'
+}
+SLGTaskView class >> taskViewMargin [
+
+	^ 130
+]
+
+{
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 17:15'
+	#'squeak_changestamp' : 'EB 6/13/2024 20:22'
 }
 SLGTaskView >> checkResult [
 
 	(self result = 100)
-		ifTrue: [self printSuccess]
+		ifTrue: [self printSuccess.
+			SLGUserProgress userData markTaskAsCompleted: (self task id).
+			self task triggerEvent: #taskCompleted. ]
+		
 		ifFalse: [self printFailure]
 	
 		
+	
+	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:30'
+}
+SLGTaskView >> code [
+	^ code
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/10/2024 00:30'
+}
+SLGTaskView >> code: anObject [
+	code := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:14'
+}
+SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
+
+	|codeField|
+
+	codeField := (ToolBuilder build:
+			(Workspace new
+				contents: (aCodeString copyReplaceAll: '\n' with: '', Character cr,'');
+				buildCodePaneWith: ToolBuilder default))
+				wrapFlag: true;
+				extent: self class taskElementWidth @ 145.
+
+	(aBoolean)
+		ifTrue: [codeField
+					borderWidth: 2;
+					borderColor: Color veryLightGray].	
+	
+	self addMorph: codeField.
+	
+	^ codeField
+	
 	
 	
 ]
@@ -114,7 +199,7 @@ SLGTaskView >> createTextFieldWithContent: aString [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:02'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 01:31'
 }
 SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
@@ -128,7 +213,7 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 	textField
 		contents:  aString;
 		wrapFlag: true;
-		extent: 600@0;
+		extent: self class taskElementWidth @ 0;
 		lock.
 	
 	self addMorph: textField.
@@ -138,6 +223,22 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 	
 	
 	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:08'
+}
+SLGTaskView >> headerLowerBound [
+	^ headerLowerBound
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:08'
+}
+SLGTaskView >> headerLowerBound: anObject [
+	headerLowerBound := anObject
 ]
 
 {
@@ -222,26 +323,41 @@ SLGTaskView >> result: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 15:47'
+	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:58'
 }
 SLGTaskView >> setup [
 
-	| descriptionField questionField |
+	| descriptionField questionField codeField fieldsArray currentY|
+	self extent: self class taskViewExtent. "1200@800"
 	self createSubmitButton.
 	
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
 	self status: (self createTextFieldWithContent: '' withBorder: true).
-	
-	descriptionField center: (self topCenter + (0 @ 50)).
-	self status center: (self bottomCenter - (0 @ 125)).
-	
 	self taskQuestion ifNotNil: [
-		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true).
-		questionField center: (descriptionField center + (0 @ 50)).]
+		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true)].
+	self code ifNotNil: [
+		codeField := (self createCodeBlockWithContent: self code withBorder: true)].
 	
 	
+	fieldsArray := OrderedCollection new.
+	fieldsArray add: descriptionField.
+	self taskQuestion ifNotNil: [fieldsArray add: questionField].
+	self code ifNotNil: [fieldsArray add: codeField].
+
+	"Position each field"
+	currentY := self topCenter y.
+	fieldsArray do: [:element |
+		| elementHeight elementTop |
+		element ifNotNil: [
+			elementHeight := element height.
+			elementTop := currentY + self class taskElementsMargin.
+			element topLeft: (self center x - (element width / 2))  @ elementTop.
+			currentY := elementTop + elementHeight.
+			self headerLowerBound: currentY + elementHeight.
+		].
+	].
 	
-	
+	self status center: (self bottomCenter - (0 @ self class taskViewMargin)).	
 ]
 
 {
@@ -294,7 +410,7 @@ SLGTaskView >> taskQuestion: aString [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'yegi 6/12/2024 00:11'
+	#'squeak_changestamp' : 'yegi 6/13/2024 21:25'
 }
 SLGTaskView >> verifyAnswer [
 
@@ -303,6 +419,8 @@ SLGTaskView >> verifyAnswer [
 	"self result: (self task verifyAnswer: userInput)."
 	self result: (self task verifyAnswer: userInput 
 						 andAddCompleted: self task). 
+	
+	"TODO change the view for completed task"
 	
 	(self result = -1)
 		ifTrue: [self printError]
