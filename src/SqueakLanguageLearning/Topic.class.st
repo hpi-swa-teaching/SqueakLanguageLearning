@@ -37,13 +37,16 @@ Topic >> description [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 21:31'
+	#'squeak_changestamp' : 'EB 6/13/2024 19:49'
 }
 Topic >> initializeWithTitle: aTitle Description: aDescription andSubtopics: subtopicsList [
 
 	title := aTitle.
 	description := aDescription.
-	subtopics := subtopicsList
+	subtopics := subtopicsList.
+	
+	subtopics do: [:each |
+		each when: #subtopicCompleted send: #onSubtopicCompleted to: self ]
 ]
 
 {
@@ -56,6 +59,17 @@ Topic >> isCompleted [
 		(each isCompleted) ifFalse: [ ^false. ] ].
 	
 	^ true
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/13/2024 19:50'
+}
+Topic >> onSubtopicCompleted [
+
+	"Give a badge"
+	(self isCompleted)
+		ifTrue: [ Transcript show: 'You have earned a badge for a topic ', self title; cr. ]
 ]
 
 {

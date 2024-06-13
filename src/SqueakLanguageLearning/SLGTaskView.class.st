@@ -86,15 +86,15 @@ SLGTaskView class >> taskViewMargin [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'EB 6/13/2024 13:57'
+	#'squeak_changestamp' : 'EB 6/13/2024 20:22'
 }
 SLGTaskView >> checkResult [
 
 	(self result = 100)
 		ifTrue: [self printSuccess.
 			SLGUserProgress userData markTaskAsCompleted: (self task id).
-			"TODO check if you've earned a reward"
-			"Transcript show: SLGUserProgress userData getScore; cr."]
+			self task triggerEvent: #taskCompleted. ]
+		
 		ifFalse: [self printFailure]
 	
 		

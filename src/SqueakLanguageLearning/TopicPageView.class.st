@@ -60,22 +60,26 @@ TopicPageView >> getDescription [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:17'
+	#'squeak_changestamp' : 'EB 6/13/2024 20:52'
 }
 TopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
-	|routeString  |
+	|routeString button |
 	routeString := aString.
 	
 	self controller routerController addRouteWithPath: 
 	routeString withPage: (self createSubtopicPageWithSubtopic: aSubtopic).
 	
-	^SLGNavigationButtonGen new
+	button := SLGNavigationButtonGen new
 		label: aSubtopic title;
 		width: self class buttonWidth;
 		 onClickWithBlock: [
-			self controller routerController navigateTo: routeString.
-		];
-		yourself.
+			self controller routerController navigateTo: routeString. ].
+	
+	(aSubtopic isCompleted) ifTrue: [button color: Color green.].
+	
+	aSubtopic when: #subtopicCompleted evaluate: [button color: Color green.].
+	
+	^button
 
 ]
 

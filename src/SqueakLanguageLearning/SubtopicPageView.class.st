@@ -40,7 +40,7 @@ SubtopicPageView >> constructView [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/12/2024 21:02'
+	#'squeak_changestamp' : 'EB 6/13/2024 20:44'
 }
 SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRouteKey: aString [
 	| routeKey index button | 
@@ -61,19 +61,15 @@ SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRout
 		((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
 			ifTrue: [button color: Color green.].
 		
-		"^ SLGNavigationButtonGen new
-			label: ('Lesson ', index);
-			width: 400;
-			 onClickWithBlock: [
-				self controller routerController navigateTo: routeKey.
-			]."
+		aLesson task when: #taskCompleted evaluate: [button color: Color green.].
+	
 		^button
 		
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:44'
+	#'squeak_changestamp' : 'EB 6/13/2024 20:06'
 }
 SubtopicPageView >> getLessonButtons [
 	|index|
@@ -94,7 +90,7 @@ SubtopicPageView >> getLessonButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:40'
+	#'squeak_changestamp' : 'EB 6/13/2024 20:10'
 }
 SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
 	
