@@ -30,7 +30,7 @@ HomePageView class >> newWithTopics: topics andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:26'
+	#'squeak_changestamp' : 'yegi 6/13/2024 00:26'
 }
 HomePageView >> constructView [
 	| rows cols |
@@ -40,9 +40,10 @@ HomePageView >> constructView [
 
 	cols := SLGLayout columnWithMorphs: rows withGap: 20.
 	
-	cols center: self center.
+	cols center: self body center + (0 @ self body height * 0.05).
 	
 	self body addMorph: cols.
+	
 ]
 
 {
@@ -58,7 +59,7 @@ HomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:27'
+	#'squeak_changestamp' : 'yegi 6/13/2024 00:33'
 }
 HomePageView >> getTopicButtonWithTopic: aTopic [
 	| routeString |
@@ -72,6 +73,9 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 	^SLGNavigationButtonGen new
 		label: aTopic title;
 		width: 400;
+		height: 70;
+		borderWidth: 4;
+		borderColor: Color orange;
 		 onClickWithBlock: [
 			self controller routerController navigateTo: routeString.
 		];
@@ -90,11 +94,11 @@ HomePageView >> getTopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:27'
+	#'squeak_changestamp' : 'yegi 6/13/2024 00:11'
 }
 HomePageView >> initializeWithController: aController [
 	super initializeWithController: aController.
-	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
+	self addTitle: 'Welcome to Squeak Language Learning'.
 	self topics: self controller dataAccessService topics.
 	self constructView.
 ]

@@ -59,7 +59,7 @@ DraggableItemMorph >> handleDrop: anEvent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 15:46'
+	#'squeak_changestamp' : 'yegi 6/12/2024 16:10'
 }
 DraggableItemMorph >> initializeWithLabel: aString inMorph: aMorph [
 
@@ -74,6 +74,8 @@ DraggableItemMorph >> initializeWithLabel: aString inMorph: aMorph [
         self borderColor: Color black.
         self color: Color lightGray.
         self addMorph: (StringMorph contents: aString).
+	self cornerStyle: #rounded;
+		cornerRadius: 20.
 
         self on: #mouseDown send: #startDrag: to: self.
         self on: #mouseUp send: #handleDrop: to: self.

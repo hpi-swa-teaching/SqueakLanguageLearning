@@ -22,7 +22,17 @@ AbstractPage class >> newWithController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/11/2024 10:07'
+	#'squeak_changestamp' : 'yegi 6/12/2024 23:35'
+}
+AbstractPage class >> softYellow [
+
+	^Color r: 1 g: 0.8 b: 0.5
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/13/2024 00:35'
 }
 AbstractPage >> addBackButton [
 
@@ -30,28 +40,32 @@ AbstractPage >> addBackButton [
 	
 	backButton := SLGNavigationButtonGen new
 		label: 'Back';
-		"center: self header leftCenter + (60@0);"
-		"width: 100;"
+		borderColor: Color orange;
+		height: 50;
+		"color: Color veryVeryLightGray;"
 		onClickWithBlock: [
 			self controller routerController navigateBack.
 		].
 	
 	backButton width: backButton width + 40.
 	backButton center: self header leftCenter + ((backButton width)/2 @ 0) + ((self header height - backButton height)/2 @ 0).
-	self header addMorph: backButton.
+	
+		self header addMorph: backButton.
+	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/11/2024 10:06'
+	#'squeak_changestamp' : 'yegi 6/13/2024 00:36'
 }
 AbstractPage >> addCloseButton [
 	| closeButton |
 	
 	closeButton := SLGNavigationButtonGen new
 		label: 'Close';
-		"center: self header rightCenter - (70@0);"
-		"width: 100;"
+		borderColor: Color orange;
+		height: 50;
+		"color: Color veryVeryLightGray;"
 		onClickWithBlock: [
 			self controller routerController closeWindow.
 		].
@@ -63,7 +77,35 @@ AbstractPage >> addCloseButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:49'
+	#'squeak_changestamp' : 'yegi 6/12/2024 23:24'
+}
+AbstractPage >> addHomeButtom [
+
+	| imageMorph  homeButton  |
+	
+	homeButton := SLGNavigationButtonGen new
+		color: Color transparent;
+		label: '';
+		borderWidth: 0;   
+		onClickWithBlock: [
+			self controller routerController navigateTo: '/home'.
+		].
+	
+	homeButton width: homeButton width + 40.
+	
+	imageMorph := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/logoCircle.png'.
+	imageMorph scaleFactor: 0.5.
+	homeButton extent: imageMorph extent * 0.5.
+	homeButton center: self header center.
+	imageMorph center: homeButton center.
+	homeButton addMorph: imageMorph.
+	
+	self header addMorph: homeButton
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/13/2024 01:23'
 }
 AbstractPage >> addTitle: aString [
 
@@ -71,9 +113,13 @@ AbstractPage >> addTitle: aString [
 	
 	title := SLGTextGen new
 		setText: aString;
-		center: self header center.
-		
-        self header addMorph: title
+		width: self body width;
+		color: Color black;
+		setFontSize: 42;
+		center: self body center + (-15 @ 0) ;
+		top: self body top + (self body height * 0.05).
+
+        self body addMorph: title
 ]
 
 {
@@ -102,28 +148,30 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 12:41'
+	#'squeak_changestamp' : 'yegi 6/13/2024 00:09'
 }
 AbstractPage >> displayExperiencePoint [
+	
+	| cheeseImg textMorph |
+	
+	"adding morphs"
+	cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/cheese_small.png'.
+	cheeseImg scaleFactor: 0.5.
+	
+	textMorph := SLGMultilineTextGen new setText: '50'.
+	textMorph width: 150; 
+				setFontSize: 50;
+				centered;
+				color: Color orange.
+	
+	"positioning the morphs"
+	cheeseImg center: self header center + ((cheeseImg width) * 3 @ 10) - ((self header height - cheeseImg height) * 2 @ 0).
+ 	textMorph center: cheeseImg center + (100 @ 5).
+	
+	
+	cheeseImg addMorph: textMorph.
+	self header addMorph: cheeseImg.
 
-
-	| image imageMorph imgFile smallerImg textMorph |
-	
-	imgFile := FileStream fileNamed: '/Users/yegipark/Documents/Education/hpi/24_ss/softwaretechnik/SqueakLingoDesign/cheese.png'.
-	image := Form fromBinaryStream: imgFile binary.
-	smallerImg := image scaledToSize: (100 @ 100).
-	imgFile close.
-
-	imageMorph := ImageMorph new.
-	imageMorph image: smallerImg.
-	"imageMorph openInWorld."
-	
-	imageMorph center: self header rightCenter - ((imageMorph width) * 2 @ 0) - ((self header height - imageMorph height) * 2 @ 0).
-	
-	textMorph :=
-	
-	
-	self header addMorph: imageMorph.
 ]
 
 {
@@ -160,7 +208,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 11:10'
+	#'squeak_changestamp' : 'yegi 6/12/2024 23:39'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -170,12 +218,10 @@ AbstractPage >> initializeWithController: aController [
 	
 	controller := aController.
 	
-	self extent: (World width * 0.6) @ (World height * 0.8);
-		"extent: 1204@904;"
+	self extent: 1604 @ 1204;
 		"extent: 1404@904;"
 		color: Color white; 
 		borderWidth: 2;
-		borderColor: Color orange;
 		center: Display center.
 
 	margin := 2.
@@ -184,27 +230,33 @@ AbstractPage >> initializeWithController: aController [
 		width: self width - (2 * margin);
 		height: (10 * (self height - (2 * margin)))/100; "header has 10% of height of page"
 		position: self position + (margin asPoint);
-		color: Color white).
+		borderWidth: 1;
+		color: Color white).	
 		
 	self body: (Morph new
-		width: self width - (2 * margin);
-		height: (80 * (self height - (2 * margin)))/100; "body has 80% of height of page"
-		position: self position + (margin @ (self header height + margin));
-		color: Color white).
+		width: self width - 100;
+		height: (85 * (self height - (2 * margin)))/100; 
+		position: self position + (margin @ ((self header height * 3) + margin));
+		cornerStyle: #rounded;
+		cornerRadius: 20;
+		center: self center + (0 @  self header height * 0.5);
+		color: self class softYellow). 
 		
-	self footer: (Morph new
+	"self footer: (Morph new
 		width: self width - (2 * margin);
-		height: (10 * (self height - (2 * margin)))/100; "footer has 10% of height of page"
-		position: self position + (margin @ (self header height + self body height + margin));
-		color: Color white).
+		height: (10 * (self height - (2 * margin)))/100; ""footer has 10% of height of page"
+		"position: self position + (margin @ (self header height + self body height + margin));
+		color: Color white)."
+	
 		
 	self addMorph: header.
 	self addMorph: body.
-	self addMorph: footer.
+	"self addMorph: footer."
 	
 	self addBackButton.
 	self addCloseButton.
 	self displayExperiencePoint.
+	self addHomeButtom.
 		
 	^self
 	

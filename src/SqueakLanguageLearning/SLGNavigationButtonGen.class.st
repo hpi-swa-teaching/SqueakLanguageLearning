@@ -6,13 +6,13 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:43'
+	#'squeak_changestamp' : 'yegi 6/12/2024 23:10'
 }
 SLGNavigationButtonGen >> initialize [
 	super initialize.
-	self color: Color veryVeryLightGray.
+	self color: Color white.
 	self borderWidth: 2.
-	self borderColor: Color veryVeryLightGray.
+	self borderColor: Color white.
 	self cornerStyle: #rounded.
 	self cornerRadius: 20.
 ]
