@@ -154,7 +154,7 @@ SLGTask >> sendError [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'EB 6/12/2024 19:04'
+	#'squeak_changestamp' : 'EB 6/13/2024 13:52'
 }
 SLGTask >> verifyAnswer: anUserInput [
 
@@ -164,11 +164,7 @@ SLGTask >> verifyAnswer: anUserInput [
 	
 	(self isValid: anUserInput)
 		ifTrue: [
-			output := self calculateResult: anUserInput.
-			
-			SLGUserProgress userData markTaskAsCompleted: (self id).
-			"TODO check if you've earned a reward"
-			Transcript show: SLGUserProgress userData getScore; cr. ]
+			output := self calculateResult: anUserInput. ]
 		
 		ifFalse: [output := self sendError].
 		
