@@ -5,7 +5,8 @@ Class {
 		'controller',
 		'header',
 		'body',
-		'footer'
+		'footer',
+		'score'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
@@ -221,19 +222,19 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 09:47'
+	#'squeak_changestamp' : 'yegi 6/13/2024 21:48'
 }
 AbstractPage >> displayExperiencePoint [
 	
-	| cheeseImg textMorph point |
+	| cheeseImg textMorph |
 	
 	"adding morphs"
 	cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/cheese_small.png'.
 	cheeseImg scaleFactor: 0.5.
 	
-	point := UserProgress new completed size * 10.
+	score := SLGUserProgress userData getScore.
 	
-	textMorph := SLGMultilineTextGen new setText: point asString. "point"
+	textMorph := SLGMultilineTextGen new setText: score asString.
 	textMorph width: 150; 
 				setFontSize: 50;
 				centered;
@@ -283,7 +284,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 10:02'
+	#'squeak_changestamp' : 'yegi 6/13/2024 21:33'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -322,7 +323,6 @@ AbstractPage >> initializeWithController: aController [
 		height: (10 * (self height - (2 * margin)))/100; ""footer has 10% of height of page"
 		"position: self position + (margin @ (self header height + self body height + margin));
 		color: Color white)."
-	
 		
 	self addMorph: header.
 	self addMorph: body.
