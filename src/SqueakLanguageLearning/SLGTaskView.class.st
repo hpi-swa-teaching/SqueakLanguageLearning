@@ -32,6 +32,15 @@ SLGTaskView class >> failureMessage [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:55'
+}
+SLGTaskView class >> pageExtent [
+
+	^ 1600@1200
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 6/1/2024 14:46'
 }
 SLGTaskView class >> successMessage [
@@ -68,11 +77,11 @@ SLGTaskView class >> taskElementsMargin [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:53'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:58'
 }
 SLGTaskView class >> taskViewExtent [
 
-	^ 1200@800.
+	^ 1400@900
 ]
 
 {
@@ -218,14 +227,14 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 6/7/2024 12:24'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:59'
 }
 SLGTaskView >> initialize [
 
 	super initialize.
 	
 	self
-		extent: 1000@600;
+		extent: self class taskViewExtent;
 		color: Color veryVeryLightGray;
 		center: World bounds center
 	
@@ -296,10 +305,10 @@ SLGTaskView >> result: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:58'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:52'
 }
 SLGTaskView >> setup [
-
+	"use setupWith instead"
 	| descriptionField questionField codeField fieldsArray currentY|
 	self extent: self class taskViewExtent. "1200@800"
 	self createSubmitButton.
@@ -335,12 +344,11 @@ SLGTaskView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:46'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 18:01'
 }
 SLGTaskView >> setupWith: anInteractiveMorph [
 
 	| submitbutton descriptionField questionField codeField fieldsArray fieldColumns|
-	self extent: self class taskViewExtent. 
 	
 	submitbutton := self createSubmitButton.
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
@@ -359,6 +367,7 @@ SLGTaskView >> setupWith: anInteractiveMorph [
 	
 	fieldColumns := SLGLayout columnWithMorphsReversed: fieldsArray withGap: (self class taskElementsMargin).	
 	fieldColumns center: self center.
+	
 	self addMorph: fieldColumns.
 	
 ]

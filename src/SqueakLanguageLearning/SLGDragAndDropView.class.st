@@ -60,13 +60,43 @@ SLGDragAndDropView >> answerSlots: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/7/2024 10:52'
+	#'squeak_changestamp' : 'xiaoshi 6/13/2024 15:14'
+}
+SLGDragAndDropView >> createInteractiveItemsAndTargets [
+    
+	| shuffledOptions correctAnswers answerSlots item row columns rowLayout columnLayout|
+
+	shuffledOptions := self task getShuffledOptions.
+	correctAnswers := self task correctAnswer.
+	
+	answerSlots := self createSlotsWith: correctAnswers.
+	
+	row := OrderedCollection new.
+	shuffledOptions do: [:option |
+        item := DraggableItemMorph newWithLabel: option inMorph: self.
+			Transcript show: item position; cr.
+			row add: item.
+        draggableItems add: item.].
+	rowLayout := SLGLayout rowWithMorphs: row.
+	columns := OrderedCollection new.
+	columns add: answerSlots; add: rowLayout.
+	columnLayout := SLGLayout columnWithMorphs: columns withGap: self class taskElementsMargin.
+	"row do: [:i | columnLayout addMorph: i.
+		]. "
+	
+	^columnLayout
+	
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'xiaoshi 6/13/2024 16:26'
 }
 SLGDragAndDropView >> createItemsAndTargets [
     
 	| container xPosItem shuffledOptions correctAnswers answerSlots item "numAnswers step" |
 	container := Morph new.
-	container bounds: "(0@0 extent: 900@500);" (0@0 extent: 500@500);
+	container bounds: "(0@0 extent: 900@500);" (0@0 extent: ((self class taskElementWidth) * 0.75)@400);
             "color: Color white."
 		color: Color transparent. 
 
@@ -85,7 +115,7 @@ SLGDragAndDropView >> createItemsAndTargets [
         container addMorph: item.
         draggableItems add: item.
         xPosItem := xPosItem + 150 ].
-
+	
 	^container
 	
 ]
@@ -204,16 +234,17 @@ SLGDragAndDropView >> passUserInput [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:30'
+	#'squeak_changestamp' : 'xiaoshi 6/13/2024 16:22'
 }
 SLGDragAndDropView >> setup [
 
-	|intercative |
+	|interactive|
 	
-	intercative := self createItemsAndTargets.
+	"interactive := self createInteractiveItemsAndTargets."
+	interactive := self createItemsAndTargets.
 	"intercative position: (self position + (50 @ 300))."
-	self addMorph: intercative.
-	super setupWith: intercative.
+	self addMorph: interactive.
+	super setupWith: interactive.
 
 	
 ]
