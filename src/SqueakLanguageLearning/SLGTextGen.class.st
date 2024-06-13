@@ -38,13 +38,12 @@ SLGTextGen >> content: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 6/13/2024 00:56'
+	#'squeak_changestamp' : 'yegi 6/13/2024 09:36'
 }
 SLGTextGen >> initialize [
 	super initialize.
 	self content: ' '.
 	self lock.
-	self centered.
 ]
 
 {

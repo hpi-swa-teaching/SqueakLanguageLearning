@@ -32,7 +32,7 @@ AbstractPage class >> softYellow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 00:35'
+	#'squeak_changestamp' : 'yegi 6/13/2024 11:38'
 }
 AbstractPage >> addBackButton [
 
@@ -50,13 +50,13 @@ AbstractPage >> addBackButton [
 	backButton width: backButton width + 40.
 	backButton center: self header leftCenter + ((backButton width)/2 @ 0) + ((self header height - backButton height)/2 @ 0).
 	
-		self header addMorph: backButton.
+	self header addMorph: backButton.
 	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 00:36'
+	#'squeak_changestamp' : 'yegi 6/13/2024 11:39'
 }
 AbstractPage >> addCloseButton [
 	| closeButton |
@@ -72,6 +72,7 @@ AbstractPage >> addCloseButton [
 	
 	closeButton width: closeButton width + 40.
 	closeButton center: self header rightCenter - ((closeButton width)/2 @ 0) - ((self header height - closeButton height)/2 @ 0).
+	
 	self header addMorph: closeButton.
 ]
 
@@ -105,7 +106,7 @@ AbstractPage >> addHomeButtom [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 01:23'
+	#'squeak_changestamp' : 'yegi 6/13/2024 09:51'
 }
 AbstractPage >> addTitle: aString [
 
@@ -113,10 +114,9 @@ AbstractPage >> addTitle: aString [
 	
 	title := SLGTextGen new
 		setText: aString;
-		width: self body width;
 		color: Color black;
-		setFontSize: 42;
-		center: self body center + (-15 @ 0) ;
+		setFontSize: 40;
+		center: self body center - (self body width * 0.03 @ 0) ;
 		top: self body top + (self body height * 0.05).
 
         self body addMorph: title
@@ -148,17 +148,19 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 00:09'
+	#'squeak_changestamp' : 'yegi 6/13/2024 09:47'
 }
 AbstractPage >> displayExperiencePoint [
 	
-	| cheeseImg textMorph |
+	| cheeseImg textMorph point |
 	
 	"adding morphs"
 	cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/cheese_small.png'.
 	cheeseImg scaleFactor: 0.5.
 	
-	textMorph := SLGMultilineTextGen new setText: '50'.
+	point := UserProgress new completed size * 10.
+	
+	textMorph := SLGMultilineTextGen new setText: point asString. "point"
 	textMorph width: 150; 
 				setFontSize: 50;
 				centered;
@@ -208,7 +210,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 23:39'
+	#'squeak_changestamp' : 'yegi 6/13/2024 10:02'
 }
 AbstractPage >> initializeWithController: aController [
 	

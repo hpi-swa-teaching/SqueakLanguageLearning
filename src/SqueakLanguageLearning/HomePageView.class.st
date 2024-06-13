@@ -30,7 +30,7 @@ HomePageView class >> newWithTopics: topics andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 00:26'
+	#'squeak_changestamp' : 'yegi 6/13/2024 11:40'
 }
 HomePageView >> constructView [
 	| rows cols |
@@ -43,6 +43,7 @@ HomePageView >> constructView [
 	cols center: self body center + (0 @ self body height * 0.05).
 	
 	self body addMorph: cols.
+	
 	
 ]
 
@@ -94,11 +95,11 @@ HomePageView >> getTopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 00:11'
+	#'squeak_changestamp' : 'yegi 6/13/2024 09:53'
 }
 HomePageView >> initializeWithController: aController [
 	super initializeWithController: aController.
-	self addTitle: 'Welcome to Squeak Language Learning'.
+	self addTitle: 'Welcome to SqueakLingo!'.
 	self topics: self controller dataAccessService topics.
 	self constructView.
 ]
