@@ -157,12 +157,13 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/13/2024 19:06'
+	#'squeak_changestamp' : 'yegi 6/15/2024 00:25'
 }
 SLGTaskView >> createSubmitButton [
 
-	| submitButton labelMorph |
+	| submitButton labelMorph margin |
 	submitButton := SimpleButtonMorph new.
+	margin := self class taskElementsMargin.
 	submitButton 
 			label: 'Submit';
 			borderColor: Color white;
@@ -176,8 +177,9 @@ SLGTaskView >> createSubmitButton [
 	labelMorph := submitButton submorphs detect: [:morph | morph isKindOf: StringMorph].
 	labelMorph color: Color white.
 	
-	self addMorph: submitButton
+	self addMorph: submitButton.
 	
+	^ submitButton
 	
 ]
 
@@ -355,7 +357,7 @@ SLGTaskView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 18:01'
+	#'squeak_changestamp' : 'yegi 6/14/2024 23:56'
 }
 SLGTaskView >> setupWith: anInteractiveMorph [
 
