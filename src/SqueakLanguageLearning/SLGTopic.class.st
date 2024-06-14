@@ -1,5 +1,5 @@
 Class {
-	#name : #Topic,
+	#name : #SLGTopic,
 	#superclass : #Object,
 	#instVars : [
 		'title',
@@ -13,7 +13,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/26/2024 21:58'
 }
-Topic class >> newWithTitle: aTitle Description: aDescription andSubtopics: subtopicsList [
+SLGTopic class >> newWithTitle: aTitle Description: aDescription andSubtopics: subtopicsList [
 
 	^ self new initializeWithTitle: aTitle Description: aDescription andSubtopics: subtopicsList
 ]
@@ -22,7 +22,7 @@ Topic class >> newWithTitle: aTitle Description: aDescription andSubtopics: subt
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/26/2024 21:32'
 }
-Topic class >> title: aTitle description: aDescription subtopics: subtopicsList [
+SLGTopic class >> title: aTitle description: aDescription subtopics: subtopicsList [
 
 	^ self new initializeWithTitle: aTitle Description: aDescription andSubtopics: subtopicsList
 ]
@@ -31,7 +31,7 @@ Topic class >> title: aTitle description: aDescription subtopics: subtopicsList 
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/26/2024 21:07'
 }
-Topic >> description [
+SLGTopic >> description [
 	^ description
 ]
 
@@ -39,7 +39,7 @@ Topic >> description [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/13/2024 19:49'
 }
-Topic >> initializeWithTitle: aTitle Description: aDescription andSubtopics: subtopicsList [
+SLGTopic >> initializeWithTitle: aTitle Description: aDescription andSubtopics: subtopicsList [
 
 	title := aTitle.
 	description := aDescription.
@@ -53,7 +53,7 @@ Topic >> initializeWithTitle: aTitle Description: aDescription andSubtopics: sub
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/12/2024 16:33'
 }
-Topic >> isCompleted [
+SLGTopic >> isCompleted [
 
 	subtopics do: [ :each |
 		(each isCompleted) ifFalse: [ ^false. ] ].
@@ -65,7 +65,7 @@ Topic >> isCompleted [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/13/2024 22:32'
 }
-Topic >> onSubtopicCompleted [
+SLGTopic >> onSubtopicCompleted [
 
 	"Give a badge"
 	(self isCompleted)
@@ -77,7 +77,7 @@ Topic >> onSubtopicCompleted [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/26/2024 21:08'
 }
-Topic >> subtopics [
+SLGTopic >> subtopics [
 	^ subtopics
 ]
 
@@ -85,6 +85,6 @@ Topic >> subtopics [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/26/2024 21:07'
 }
-Topic >> title [
+SLGTopic >> title [
 	^ title
 ]

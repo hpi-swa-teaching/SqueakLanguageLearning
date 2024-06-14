@@ -1,5 +1,5 @@
 Class {
-	#name : #Subtopic,
+	#name : #SLGSubtopic,
 	#superclass : #Object,
 	#instVars : [
 		'title',
@@ -12,7 +12,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/26/2024 21:55'
 }
-Subtopic class >> newWithTitle: aTitle andLessons: lessonsList [
+SLGSubtopic class >> newWithTitle: aTitle andLessons: lessonsList [
 
 	^ self new initializeWithTitle: aTitle andLessons: lessonsList
 ]
@@ -21,7 +21,7 @@ Subtopic class >> newWithTitle: aTitle andLessons: lessonsList [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/26/2024 21:29'
 }
-Subtopic class >> title: aTitle lessons: lessonsList [
+SLGSubtopic class >> title: aTitle lessons: lessonsList [
 
 	^ self new initializeWithTitle: aTitle andLessons: lessonsList
 ]
@@ -30,7 +30,7 @@ Subtopic class >> title: aTitle lessons: lessonsList [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/13/2024 19:55'
 }
-Subtopic >> initializeWithTitle: aTitle andLessons: lessonsList [
+SLGSubtopic >> initializeWithTitle: aTitle andLessons: lessonsList [
 
 	title := aTitle.
 	lessons := lessonsList.
@@ -44,7 +44,7 @@ Subtopic >> initializeWithTitle: aTitle andLessons: lessonsList [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/12/2024 16:32'
 }
-Subtopic >> isCompleted [
+SLGSubtopic >> isCompleted [
 
 	lessons do: [ :each |
 		(each isCompleted) ifFalse: [ ^false. ] ].
@@ -58,7 +58,7 @@ Subtopic >> isCompleted [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/26/2024 21:10'
 }
-Subtopic >> lessons [
+SLGSubtopic >> lessons [
 	^ lessons
 ]
 
@@ -66,7 +66,7 @@ Subtopic >> lessons [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/13/2024 19:47'
 }
-Subtopic >> onTaskCompleted [
+SLGSubtopic >> onTaskCompleted [
 
 	"Give a badge"
 	(self isCompleted)
@@ -78,6 +78,6 @@ Subtopic >> onTaskCompleted [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/26/2024 21:10'
 }
-Subtopic >> title [
+SLGSubtopic >> title [
 	^ title
 ]

@@ -7,7 +7,9 @@ Class {
 		'body',
 		'footer',
 		'score',
-		'scoreDisplay'
+		'scoreDisplay',
+		'topicBadgeScore',
+		'subtopicBadgeScore'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
@@ -223,7 +225,7 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 13:48'
+	#'squeak_changestamp' : 'EB 6/14/2024 17:22'
 }
 AbstractPage >> displayExperiencePoint [
 	
@@ -232,8 +234,6 @@ AbstractPage >> displayExperiencePoint [
 	"adding morphs"
 	cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/cheese_small.png'.
 	cheeseImg scaleFactor: 0.5.
-	
-	"score := SLGUserProgress userData getScore."
 	
 	scoreDisplay := SLGMultilineTextGen new setText: score asString.
 	scoreDisplay width: 150; 
@@ -285,7 +285,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/13/2024 23:28'
+	#'squeak_changestamp' : 'EB 6/14/2024 18:00'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -296,6 +296,8 @@ AbstractPage >> initializeWithController: aController [
 	controller := aController.
 	
 	self updateScore.
+	self updateTopicBadgeScore.
+	self updateSubtopicBadgeScore.
 	
 	self extent: 1604 @ 1204;
 		"extent: 1404@904;"
@@ -362,4 +364,31 @@ AbstractPage >> updateScore [
 	
 	score := SLGUserProgress userData getScore.
 	scoreDisplay ifNotNil: [ scoreDisplay setText: score asString. ]
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/14/2024 18:06'
+}
+AbstractPage >> updateSubtopicBadgeScore [
+	
+	subtopicBadgeScore := 0.
+	self controller dataAccessService topics do: [ :topic |
+		topic subtopics do: [ :each |
+			(each isCompleted) ifTrue: [subtopicBadgeScore := subtopicBadgeScore + 1]] ].
+	Transcript show: 'You now have ', subtopicBadgeScore, ' subtopic badges.'; cr.
+	"(self topics) ifNotNil: [ Transcript show: 'You have earned a badge for a subtopic ', self subtopic title; cr. ]"
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/14/2024 18:05'
+}
+AbstractPage >> updateTopicBadgeScore [
+
+	topicBadgeScore := 0.
+	self controller dataAccessService topics do: [ :each |
+		(each isCompleted) ifTrue: [topicBadgeScore := topicBadgeScore + 1] ].
+	Transcript show: 'You now have ', topicBadgeScore, ' topic badges.'; cr.
+	"(self topics) ifNotNil: [ Transcript show: 'You have earned a badge for a topic ', self topic title; cr. ]"
 ]
