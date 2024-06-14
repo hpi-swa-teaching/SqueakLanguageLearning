@@ -2,12 +2,15 @@ Class {
 	#name : #SLGUserProgress,
 	#superclass : #Object,
 	#instVars : [
-		'completed'
+		'completed',
+		'score',
+		'topicScore',
+		'subtopicScore'
 	],
 	#classVars : [
 		'Instance'
 	],
-	#category : #'SqueakLanguageLearning-Controllers'
+	#category : #'SqueakLanguageLearning-Data'
 }
 
 {
@@ -46,30 +49,98 @@ SLGUserProgress >> completed: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/13/2024 22:59'
-}
-SLGUserProgress >> getScore [
-	
-	^ (completed isEmpty) 
-		ifTrue: [0] 
-		ifFalse: [completed size * 10]
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/12/2024 14:43'
+	#'squeak_changestamp' : 'EB 6/14/2024 19:33'
 }
 SLGUserProgress >> initialize [
 
 	completed := Set new.
+	score := 0.
+	topicScore := 0.
+	subtopicScore := 0.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/12/2024 14:43'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:02'
 }
 SLGUserProgress >> markTaskAsCompleted: aTaskID [
 
-        (completed includes: aTaskID) 
-		ifFalse: [ completed add: aTaskID. ]
+        (completed includes: aTaskID) ifFalse: [ 
+			completed add: aTaskID. 
+			self updateScore. ]
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/14/2024 19:52'
+}
+SLGUserProgress >> score [
+	^ score
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/14/2024 19:52'
+}
+SLGUserProgress >> score: anObject [
+	score := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/14/2024 20:06'
+}
+SLGUserProgress >> subtopicScore [
+	^ subtopicScore
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/14/2024 20:06'
+}
+SLGUserProgress >> subtopicScore: anObject [
+	subtopicScore := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/14/2024 20:11'
+}
+SLGUserProgress >> topicScore [
+	^ topicScore
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/14/2024 20:11'
+}
+SLGUserProgress >> topicScore: anObject [
+	topicScore := anObject
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/14/2024 20:02'
+}
+SLGUserProgress >> updateScore [
+	
+	score := (completed size) * 10.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/14/2024 20:11'
+}
+SLGUserProgress >> updateSubtopicScore [
+
+	subtopicScore := subtopicScore + 1.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/14/2024 20:11'
+}
+SLGUserProgress >> updateTopicScore [
+
+	topicScore := topicScore + 1.
 ]

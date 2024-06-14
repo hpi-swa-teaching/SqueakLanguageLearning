@@ -87,7 +87,7 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 13:52'
+	#'squeak_changestamp' : 'EB 6/14/2024 19:58'
 }
 LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
@@ -107,6 +107,6 @@ LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
 	self body addMorph: taskView. 
 	
-	aLesson task when: #taskCompleted evaluate: [self updateScore].
+	aLesson task when: #taskCompleted evaluate: [self updateScoreDisplay].
 	
 ]

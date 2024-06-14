@@ -1,5 +1,5 @@
 Class {
-	#name : #Lesson,
+	#name : #SLGLesson,
 	#superclass : #Object,
 	#instVars : [
 		'description',
@@ -12,7 +12,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/11/2024 22:43'
 }
-Lesson class >> newWithDescription: aDescription andTask:aTask [
+SLGLesson class >> newWithDescription: aDescription andTask:aTask [
 
 	^ self basicNew initializeWithDescription: aDescription andTask: aTask
 ]
@@ -21,7 +21,7 @@ Lesson class >> newWithDescription: aDescription andTask:aTask [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/11/2024 22:44'
 }
-Lesson class >> newWithTask:aTask [
+SLGLesson class >> newWithTask:aTask [
 
 	^ self basicNew initializeWithTask: aTask
 ]
@@ -30,7 +30,7 @@ Lesson class >> newWithTask:aTask [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 5/26/2024 21:14'
 }
-Lesson >> description [
+SLGLesson >> description [
 	^ description
 ]
 
@@ -38,7 +38,7 @@ Lesson >> description [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 5/26/2024 21:13'
 }
-Lesson >> initializeWithDescription: aDescription andTask: aTask [
+SLGLesson >> initializeWithDescription: aDescription andTask: aTask [
 
 	description := aDescription.
 	task := aTask
@@ -48,7 +48,7 @@ Lesson >> initializeWithDescription: aDescription andTask: aTask [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/11/2024 22:44'
 }
-Lesson >> initializeWithTask: aTask [
+SLGLesson >> initializeWithTask: aTask [
 
 	task := aTask
 ]
@@ -57,7 +57,7 @@ Lesson >> initializeWithTask: aTask [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/12/2024 16:27'
 }
-Lesson >> isCompleted [
+SLGLesson >> isCompleted [
 
 	^task isCompleted
 
@@ -68,6 +68,6 @@ Lesson >> isCompleted [
 	#category : #accessing,
 	#'squeak_changestamp' : 'EB 6/12/2024 16:26'
 }
-Lesson >> task [
+SLGLesson >> task [
 	^ task
 ]

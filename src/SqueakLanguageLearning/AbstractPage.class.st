@@ -8,8 +8,10 @@ Class {
 		'footer',
 		'score',
 		'scoreDisplay',
-		'subBadgeDisplay',
-		'mainBadgeDisplay'
+		'topicScore',
+		'subtopicScore',
+		'topicScoreDisplay',
+		'subtopicScoreDisplay'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
@@ -284,7 +286,7 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 18:14'
+	#'squeak_changestamp' : 'yegi 6/14/2024 21:48'
 }
 AbstractPage >> displayExperiencePoint [
 	
@@ -310,7 +312,6 @@ AbstractPage >> displayExperiencePoint [
  	scoreDisplay center: cheeseImg center + (marginwidth * 0.55 @ 0).
 	
 	self header addMorph: cheeseImg.
-
 ]
 
 {
@@ -407,7 +408,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 18:03'
+	#'squeak_changestamp' : 'yegi 6/14/2024 21:48'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -416,8 +417,9 @@ AbstractPage >> initializeWithController: aController [
 	super initialize.
 	
 	controller := aController.
-	
-	self updateScore.
+	score := SLGUserProgress userData score.
+	subtopicScore := SLGUserProgress userData subtopicScore.
+	topicScore := SLGUserProgress userData topicScore.
 	
 	self extent: 1604 @ 1204;
 		"extent: 1404@904;"
@@ -481,10 +483,37 @@ AbstractPage >> navigateBack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 13:51'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:04'
 }
-AbstractPage >> updateScore [
+AbstractPage >> updateScoreDisplay [
 	
-	score := SLGUserProgress userData getScore.
-	scoreDisplay ifNotNil: [ scoreDisplay setText: score asString. ]
+	score := SLGUserProgress userData score.
+	"scoreDisplay ifNotNil: [ scoreDisplay setText: score asString. ]"
+	scoreDisplay setText: score asString.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/14/2024 20:39'
+}
+AbstractPage >> updateSubtopicScoreDisplay [
+	
+	subtopicScore := SLGUserProgress userData subtopicScore.
+	"subtopicScoreDisplay setText: subtopicScore asString."
+	
+	Transcript show: 'You have  completed ', subtopicScore, ' subtopics!'; cr.
+	Transcript show: 'You have earned a badge for a subtopic "', self subtopic title, '"'; cr. 
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/14/2024 20:41'
+}
+AbstractPage >> updateTopicScoreDisplay [
+	
+	topicScore := SLGUserProgress userData topicScore.
+	"topicScoreDisplay setText: topicScore asString."
+	
+	Transcript show: 'You have completed ', topicScore, ' topics!'; cr.
+	Transcript show: 'You have earned a badge for a topic "', self topic title,'"'; cr.
 ]
