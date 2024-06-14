@@ -213,27 +213,28 @@ AbstractPage >> addHomeButtom [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 16:58'
+	#'squeak_changestamp' : 'yegi 6/14/2024 22:18'
 }
 AbstractPage >> addResetButton [
 
 	| resetButton |
 	
-	"resetButton := SLGNavigationButtonGen new
-		label: 'Back';
-		borderColor: Color orange;
+	resetButton := SLGNavigationButtonGen new
+		label: 'reset';
 		height: 50;
 		onClickWithBlock: [
-			self controller routerController navigateBack.
-		]."
-	resetButton := PluggableButtonMorph new
+			SLGUserProgress reset.
+			SLGMainController new.
+			self controller routerController closeWindow.
+		].
+	"resetButton := PluggableButtonMorph new
 					onColor: Color veryVeryLightGray offColor: Color white;
 					label: 'Reset';
 					textColor: Color darkGray;
 					borderColor: Color white;
 					borderWidth: 0;
 					cornerStyle: #rounded;
-					on: #mouseUp send: SLGUserProgress reset to: self.
+					on: #mouseUp send:  to: self."
 	
 	resetButton center: self footer center.
 	
@@ -316,7 +317,7 @@ AbstractPage >> displayExperiencePoint [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 18:15'
+	#'squeak_changestamp' : 'yegi 6/14/2024 22:00'
 }
 AbstractPage >> displayMainBadge [
 	
@@ -328,17 +329,17 @@ AbstractPage >> displayMainBadge [
 	
 	"TODO for BADGE COUNTING"
 	"badgeCount := "
-	mainBadgeDisplay := SLGMultilineTextGen new setText: 0 asString.
-	mainBadgeDisplay width: 150; 
+	topicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
+	topicScoreDisplay width: 150; 
 				setFontSize: AbstractPage iconFont;
 				color: Color orange.
 	
 	"positioning the morphs"
 	marginwidth := AbstractPage iconMarginWidth.
 	marginHeight := AbstractPage iconMarginHeight.
-	badgeImg addMorph: mainBadgeDisplay.
+	badgeImg addMorph: topicScoreDisplay.
 	badgeImg center: self header center + (marginwidth * 2.5 @ marginHeight  * 0.25).
- 	mainBadgeDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
+ 	topicScoreDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
 	
 	self header addMorph: badgeImg.
 
@@ -346,29 +347,29 @@ AbstractPage >> displayMainBadge [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 18:15'
+	#'squeak_changestamp' : 'yegi 6/14/2024 22:01'
 }
 AbstractPage >> displaySubBadge [
 	
 	| badgeImg marginwidth marginHeight |
 
 	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/badge-sub.png') 
+										loadForm: '/assets/badge_silver.png') 
 										magnifyBy: 0.7) asMorph.
 	
 	"TODO for BADGE COUNTING"
 	"badgeCount := "
-	subBadgeDisplay := SLGMultilineTextGen new setText: 0 asString.
-	subBadgeDisplay width: 150; 
+	subtopicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
+	subtopicScoreDisplay width: 150; 
 				setFontSize: AbstractPage iconFont;
 				color: Color orange.
 	
 	"positioning the morphs"
 	marginwidth := AbstractPage iconMarginWidth.
 	marginHeight := AbstractPage iconMarginHeight.
-	badgeImg addMorph: subBadgeDisplay.
+	badgeImg addMorph: subtopicScoreDisplay.
 	badgeImg center: self header center + (0 @ marginHeight  * 0.25).
- 	subBadgeDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
+ 	subtopicScoreDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
 	
 	self header addMorph: badgeImg.
 
@@ -494,26 +495,26 @@ AbstractPage >> updateScoreDisplay [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:39'
+	#'squeak_changestamp' : 'yegi 6/14/2024 22:05'
 }
 AbstractPage >> updateSubtopicScoreDisplay [
 	
 	subtopicScore := SLGUserProgress userData subtopicScore.
-	"subtopicScoreDisplay setText: subtopicScore asString."
+	subtopicScoreDisplay setText: subtopicScore asString.
 	
 	Transcript show: 'You have  completed ', subtopicScore, ' subtopics!'; cr.
-	Transcript show: 'You have earned a badge for a subtopic "', self subtopic title, '"'; cr. 
+	"Transcript show: 'You have earned a badge for a subtopic ""', self subtopic title, '""'; cr." 
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:41'
+	#'squeak_changestamp' : 'yegi 6/14/2024 22:06'
 }
 AbstractPage >> updateTopicScoreDisplay [
 	
 	topicScore := SLGUserProgress userData topicScore.
-	"topicScoreDisplay setText: topicScore asString."
+	topicScoreDisplay setText: topicScore asString.
 	
 	Transcript show: 'You have completed ', topicScore, ' topics!'; cr.
-	Transcript show: 'You have earned a badge for a topic "', self topic title,'"'; cr.
+	"Transcript show: 'You have earned a badge for a topic ""', self topic title,'""'; cr."
 ]
