@@ -7,7 +7,9 @@ Class {
 		'body',
 		'footer',
 		'score',
-		'scoreDisplay'
+		'scoreDisplay',
+		'subBadgeDisplay',
+		'mainBadgeDisplay'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
@@ -46,6 +48,33 @@ AbstractPage class >> descriptionMargin [
 AbstractPage class >> descriptionWidth [
 
 	^ self pageWidth - (self descriptionMargin * 2)
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/14/2024 17:19'
+}
+AbstractPage class >> iconFont [
+
+	^ 18px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/14/2024 17:14'
+}
+AbstractPage class >> iconMarginHeight [
+
+	^ 100px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/14/2024 17:13'
+}
+AbstractPage class >> iconMarginWidth [
+
+	^ 100px
 ]
 
 {
@@ -152,7 +181,7 @@ AbstractPage >> addCloseButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 23:24'
+	#'squeak_changestamp' : 'yegi 6/14/2024 16:32'
 }
 AbstractPage >> addHomeButtom [
 
@@ -166,16 +195,48 @@ AbstractPage >> addHomeButtom [
 			self controller routerController navigateTo: '/home'.
 		].
 	
-	homeButton width: homeButton width + 40.
+	imageMorph := (((GitAssetLoader for: 'SqueakLanguageLearning') 
+										loadForm: '/assets/logoCircle-small.png') 
+										magnifyBy: 1) asMorph.
 	
-	imageMorph := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/logoCircle.png'.
-	imageMorph scaleFactor: 0.5.
-	homeButton extent: imageMorph extent * 0.5.
-	homeButton center: self header center.
-	imageMorph center: homeButton center.
 	homeButton addMorph: imageMorph.
 	
+	homeButton extent: imageMorph extent * 0.5.
+	homeButton center: self header center.
+	imageMorph center: homeButton center + (0 @ -40).
+	
+	
 	self header addMorph: homeButton
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/14/2024 16:58'
+}
+AbstractPage >> addResetButton [
+
+	| resetButton |
+	
+	"resetButton := SLGNavigationButtonGen new
+		label: 'Back';
+		borderColor: Color orange;
+		height: 50;
+		onClickWithBlock: [
+			self controller routerController navigateBack.
+		]."
+	resetButton := PluggableButtonMorph new
+					onColor: Color veryVeryLightGray offColor: Color white;
+					label: 'Reset';
+					textColor: Color darkGray;
+					borderColor: Color white;
+					borderWidth: 0;
+					cornerStyle: #rounded;
+					on: #mouseUp send: SLGUserProgress reset to: self.
+	
+	resetButton center: self footer center.
+	
+	self footer addMorph: resetButton.
+	
 ]
 
 {
@@ -223,31 +284,92 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 13:48'
+	#'squeak_changestamp' : 'yegi 6/14/2024 18:14'
 }
 AbstractPage >> displayExperiencePoint [
 	
-	| cheeseImg |
+	| cheeseImg marginwidth marginHeight |
 	
 	"adding morphs"
-	cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/cheese_small.png'.
-	cheeseImg scaleFactor: 0.5.
-	
-	"score := SLGUserProgress userData getScore."
+	"cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/badge-main.png'.
+	cheeseImg scaleFactor: 0.5."	
+	cheeseImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
+										loadForm: '/assets/cheese_small.png') 
+										magnifyBy: 0.5) asMorph.
 	
 	scoreDisplay := SLGMultilineTextGen new setText: score asString.
 	scoreDisplay width: 150; 
-				setFontSize: 50;
-				centered;
+				setFontSize: AbstractPage iconFont;
 				color: Color orange.
 	
 	"positioning the morphs"
-	cheeseImg center: self header center + ((cheeseImg width) * 3 @ 10) - ((self header height - cheeseImg height) * 2 @ 0).
- 	scoreDisplay center: cheeseImg center + (100 @ 5).
-	
-	
+	marginwidth := AbstractPage iconMarginWidth.
+	marginHeight := AbstractPage iconMarginHeight.
 	cheeseImg addMorph: scoreDisplay.
+	cheeseImg center: self header center + (0 @ marginHeight * 0.25) - (marginwidth * 0.7 @ 0).
+ 	scoreDisplay center: cheeseImg center + (marginwidth * 0.55 @ 0).
+	
 	self header addMorph: cheeseImg.
+
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/14/2024 18:15'
+}
+AbstractPage >> displayMainBadge [
+	
+	| badgeImg marginwidth marginHeight |
+
+	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
+										loadForm: '/assets/badge-main.png') 
+										magnifyBy: 0.7) asMorph.
+	
+	"TODO for BADGE COUNTING"
+	"badgeCount := "
+	mainBadgeDisplay := SLGMultilineTextGen new setText: 0 asString.
+	mainBadgeDisplay width: 150; 
+				setFontSize: AbstractPage iconFont;
+				color: Color orange.
+	
+	"positioning the morphs"
+	marginwidth := AbstractPage iconMarginWidth.
+	marginHeight := AbstractPage iconMarginHeight.
+	badgeImg addMorph: mainBadgeDisplay.
+	badgeImg center: self header center + (marginwidth * 2.5 @ marginHeight  * 0.25).
+ 	mainBadgeDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
+	
+	self header addMorph: badgeImg.
+
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/14/2024 18:15'
+}
+AbstractPage >> displaySubBadge [
+	
+	| badgeImg marginwidth marginHeight |
+
+	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
+										loadForm: '/assets/badge-sub.png') 
+										magnifyBy: 0.7) asMorph.
+	
+	"TODO for BADGE COUNTING"
+	"badgeCount := "
+	subBadgeDisplay := SLGMultilineTextGen new setText: 0 asString.
+	subBadgeDisplay width: 150; 
+				setFontSize: AbstractPage iconFont;
+				color: Color orange.
+	
+	"positioning the morphs"
+	marginwidth := AbstractPage iconMarginWidth.
+	marginHeight := AbstractPage iconMarginHeight.
+	badgeImg addMorph: subBadgeDisplay.
+	badgeImg center: self header center + (0 @ marginHeight  * 0.25).
+ 	subBadgeDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
+	
+	self header addMorph: badgeImg.
 
 ]
 
@@ -285,7 +407,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/13/2024 23:28'
+	#'squeak_changestamp' : 'yegi 6/14/2024 18:03'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -321,20 +443,23 @@ AbstractPage >> initializeWithController: aController [
 		center: self center + (0 @  self header height * 0.5);
 		color: self class softYellow). 
 		
-	"self footer: (Morph new
+	self footer: (Morph new
 		width: self width - (2 * margin);
-		height: (10 * (self height - (2 * margin)))/100; ""footer has 10% of height of page"
-		"position: self position + (margin @ (self header height + self body height + margin));
-		color: Color white)."
+		height: (5 * (self height - (2 * margin)))/100; "footer has 10% of height of page"
+		position: self position + (margin @ (self header height + self body height + margin));
+		color: Color white).
 		
 	self addMorph: header.
 	self addMorph: body.
-	"self addMorph: footer."
+	self addMorph: footer.
 	
 	self addBackButton.
 	self addCloseButton.
 	self displayExperiencePoint.
+	self displaySubBadge.
+	self displayMainBadge.
 	self addHomeButtom.
+	self addResetButton.
 		
 	^self
 	

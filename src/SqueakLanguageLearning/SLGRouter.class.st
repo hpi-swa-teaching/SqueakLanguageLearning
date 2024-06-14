@@ -137,7 +137,7 @@ SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/14/2024 14:18'
+	#'squeak_changestamp' : 'yegi 6/14/2024 17:05'
 }
 SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistory: aBoolean [
 	| route curPage |
