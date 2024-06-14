@@ -87,7 +87,7 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:13'
+	#'squeak_changestamp' : 'EB 6/13/2024 23:26'
 }
 LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
@@ -108,5 +108,7 @@ LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	self body addMorph: taskView. 
 	
 	"tasks at: 1 put: 'Task Title'." "TODO substitute with the one stored in DataAccessService"
+	
+	aLesson task when: #taskCompleted evaluate: [self updateScore].
 	
 ]

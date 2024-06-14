@@ -60,10 +60,10 @@ HomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 00:33'
+	#'squeak_changestamp' : 'EB 6/13/2024 22:33'
 }
 HomePageView >> getTopicButtonWithTopic: aTopic [
-	| routeString |
+	| routeString button |
 	
 	routeString := ('/home/', aTopic title).
 	
@@ -71,16 +71,20 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 		addRouteWithPath: routeString 
 		withPage: (self createTopicPageWithTopic: aTopic).
 	
-	^SLGNavigationButtonGen new
+	button := SLGNavigationButtonGen new
 		label: aTopic title;
 		width: 400;
 		height: 70;
 		borderWidth: 4;
 		borderColor: Color orange;
 		 onClickWithBlock: [
-			self controller routerController navigateTo: routeString.
-		];
-		yourself.
+			self controller routerController navigateTo: routeString. ].
+		
+	(aTopic isCompleted) ifTrue: [button color: Color green.].
+	
+	aTopic when: #topicCompleted evaluate: [button color: Color green.].
+	
+	^button
 ]
 
 {
@@ -95,13 +99,15 @@ HomePageView >> getTopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 09:53'
+	#'squeak_changestamp' : 'EB 6/13/2024 23:25'
 }
 HomePageView >> initializeWithController: aController [
 	super initializeWithController: aController.
 	self addTitle: 'Welcome to SqueakLingo!'.
 	self topics: self controller dataAccessService topics.
 	self constructView.
+	
+	
 ]
 
 {

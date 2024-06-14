@@ -63,13 +63,14 @@ Topic >> isCompleted [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/13/2024 19:50'
+	#'squeak_changestamp' : 'EB 6/13/2024 22:32'
 }
 Topic >> onSubtopicCompleted [
 
 	"Give a badge"
 	(self isCompleted)
-		ifTrue: [ Transcript show: 'You have earned a badge for a topic ', self title; cr. ]
+		ifTrue: [ Transcript show: 'You have earned a badge for a topic ', self title; cr.
+			self triggerEvent: #topicCompleted. ]
 ]
 
 {

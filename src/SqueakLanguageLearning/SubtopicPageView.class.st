@@ -91,7 +91,7 @@ SubtopicPageView >> getLessonButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 21:56'
+	#'squeak_changestamp' : 'EB 6/13/2024 22:57'
 }
 SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
 	
@@ -99,7 +99,6 @@ SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andContro
 	self topic: aTopic.
 	self subtopic: aSubtopic.
 	self addTitle: aSubtopic title.
-	aSubtopic lessons do:[:each | each task when:#taskCompleted evaluate:[score := SLGUserProgress userData getScore.]].
 	
 	self constructView.
 ]

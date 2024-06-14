@@ -86,7 +86,7 @@ SLGTaskView class >> taskViewMargin [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'EB 6/13/2024 20:22'
+	#'squeak_changestamp' : 'EB 6/13/2024 23:08'
 }
 SLGTaskView >> checkResult [
 

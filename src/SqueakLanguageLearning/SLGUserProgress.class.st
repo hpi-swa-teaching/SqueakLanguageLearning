@@ -46,14 +46,13 @@ SLGUserProgress >> completed: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/12/2024 14:47'
+	#'squeak_changestamp' : 'EB 6/13/2024 22:59'
 }
 SLGUserProgress >> getScore [
 	
 	^ (completed isEmpty) 
 		ifTrue: [0] 
 		ifFalse: [completed size * 10]
-	"^ (completed isEmpty) ifTrue: 0 ifFalse: [completed size * 10]"
 ]
 
 {

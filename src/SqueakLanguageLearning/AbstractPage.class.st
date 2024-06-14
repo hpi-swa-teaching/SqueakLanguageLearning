@@ -222,7 +222,7 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 21:48'
+	#'squeak_changestamp' : 'EB 6/13/2024 23:21'
 }
 AbstractPage >> displayExperiencePoint [
 	
@@ -232,7 +232,7 @@ AbstractPage >> displayExperiencePoint [
 	cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/cheese_small.png'.
 	cheeseImg scaleFactor: 0.5.
 	
-	score := SLGUserProgress userData getScore.
+	"score := SLGUserProgress userData getScore."
 	
 	textMorph := SLGMultilineTextGen new setText: score asString.
 	textMorph width: 150; 
@@ -284,7 +284,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 21:33'
+	#'squeak_changestamp' : 'EB 6/13/2024 23:28'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -293,6 +293,8 @@ AbstractPage >> initializeWithController: aController [
 	super initialize.
 	
 	controller := aController.
+	
+	self updateScore.
 	
 	self extent: 1604 @ 1204;
 		"extent: 1404@904;"
@@ -349,4 +351,13 @@ AbstractPage >> navigateBack [
  
 	controller navigateBack.
 	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/13/2024 23:07'
+}
+AbstractPage >> updateScore [
+	
+	score := SLGUserProgress userData getScore
 ]

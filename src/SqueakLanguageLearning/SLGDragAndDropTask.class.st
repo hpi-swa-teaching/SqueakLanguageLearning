@@ -6,21 +6,6 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 20:59'
-}
-SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeString withCorrectAnswer: anArray [
-
-	^ self new
-		question: aQuestionString;
-		code: aCodeString;
-		correctAnswer: anArray;
-		yourself
-		
-
-]
-
-{
-	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/12/2024 22:13'
 }
 SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeString withCorrectAnswer: anArray withID: anID [
@@ -33,18 +18,6 @@ SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeStri
 		yourself
 		
 
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/12/2024 19:06'
-}
-SLGDragAndDropTask class >> newWithQuestion: aString withCorrectAnswer: anArray [
-
-	^ self new
-		question: aString;
-		correctAnswer: anArray;
-		yourself
 ]
 
 {
