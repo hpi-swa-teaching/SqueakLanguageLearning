@@ -8,8 +8,10 @@ Class {
 		'footer',
 		'score',
 		'scoreDisplay',
-		'topicBadgeScore',
-		'subtopicBadgeScore'
+		'topicScore',
+		'subtopicScore',
+		'topicScoreDisplay',
+		'subtopicScoreDisplay'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
@@ -285,7 +287,7 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 18:00'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:35'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -294,10 +296,9 @@ AbstractPage >> initializeWithController: aController [
 	super initialize.
 	
 	controller := aController.
-	
-	self updateScore.
-	self updateTopicBadgeScore.
-	self updateSubtopicBadgeScore.
+	score := SLGUserProgress userData score.
+	subtopicScore := SLGUserProgress userData subtopicScore.
+	topicScore := SLGUserProgress userData topicScore.
 	
 	self extent: 1604 @ 1204;
 		"extent: 1404@904;"
@@ -358,37 +359,37 @@ AbstractPage >> navigateBack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 13:51'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:04'
 }
-AbstractPage >> updateScore [
+AbstractPage >> updateScoreDisplay [
 	
-	score := SLGUserProgress userData getScore.
-	scoreDisplay ifNotNil: [ scoreDisplay setText: score asString. ]
+	score := SLGUserProgress userData score.
+	"scoreDisplay ifNotNil: [ scoreDisplay setText: score asString. ]"
+	scoreDisplay setText: score asString.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 18:06'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:39'
 }
-AbstractPage >> updateSubtopicBadgeScore [
+AbstractPage >> updateSubtopicScoreDisplay [
 	
-	subtopicBadgeScore := 0.
-	self controller dataAccessService topics do: [ :topic |
-		topic subtopics do: [ :each |
-			(each isCompleted) ifTrue: [subtopicBadgeScore := subtopicBadgeScore + 1]] ].
-	Transcript show: 'You now have ', subtopicBadgeScore, ' subtopic badges.'; cr.
-	"(self topics) ifNotNil: [ Transcript show: 'You have earned a badge for a subtopic ', self subtopic title; cr. ]"
+	subtopicScore := SLGUserProgress userData subtopicScore.
+	"subtopicScoreDisplay setText: subtopicScore asString."
+	
+	Transcript show: 'You have  completed ', subtopicScore, ' subtopics!'; cr.
+	Transcript show: 'You have earned a badge for a subtopic "', self subtopic title, '"'; cr. 
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 18:05'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:41'
 }
-AbstractPage >> updateTopicBadgeScore [
-
-	topicBadgeScore := 0.
-	self controller dataAccessService topics do: [ :each |
-		(each isCompleted) ifTrue: [topicBadgeScore := topicBadgeScore + 1] ].
-	Transcript show: 'You now have ', topicBadgeScore, ' topic badges.'; cr.
-	"(self topics) ifNotNil: [ Transcript show: 'You have earned a badge for a topic ', self topic title; cr. ]"
+AbstractPage >> updateTopicScoreDisplay [
+	
+	topicScore := SLGUserProgress userData topicScore.
+	"topicScoreDisplay setText: topicScore asString."
+	
+	Transcript show: 'You have completed ', topicScore, ' topics!'; cr.
+	Transcript show: 'You have earned a badge for a topic "', self topic title,'"'; cr.
 ]

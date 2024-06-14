@@ -410,15 +410,15 @@ SLGTaskView >> taskQuestion: aString [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'yegi 6/13/2024 21:25'
+	#'squeak_changestamp' : 'EB 6/14/2024 18:15'
 }
 SLGTaskView >> verifyAnswer [
 
 	| userInput |
 	userInput := self passUserInput.
-	"self result: (self task verifyAnswer: userInput)."
-	self result: (self task verifyAnswer: userInput 
-						 andAddCompleted: self task). 
+	self result: (self task verifyAnswer: userInput).
+	"self result: (self task verifyAnswer: userInput 
+						 andAddCompleted: self task). "
 	
 	"TODO change the view for completed task"
 	

@@ -63,14 +63,13 @@ SLGTopic >> isCompleted [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/13/2024 22:32'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:29'
 }
 SLGTopic >> onSubtopicCompleted [
 
-	"Give a badge"
-	(self isCompleted)
-		ifTrue: [ Transcript show: 'You have earned a badge for a topic ', self title; cr.
-			self triggerEvent: #topicCompleted. ]
+	(self isCompleted) ifTrue: [ Transcript show: 'You have earned a badge for a topic ', self title; cr.
+			self triggerEvent: #topicCompleted.
+			SLGUserProgress userData updateTopicScore. ]
 ]
 
 {

@@ -96,7 +96,7 @@ TopicPageView >> getSubtopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 17:34'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:30'
 }
 TopicPageView >> initializeWithTopic: aTopic andController: aController [
 	
@@ -107,7 +107,7 @@ TopicPageView >> initializeWithTopic: aTopic andController: aController [
 	
 	self constructView.
 	
-	aTopic when: #topicCompleted evaluate: [self updateTopicBadgeScore].
+	aTopic when: #topicCompleted evaluate: [self updateTopicScoreDisplay].
 	
 	
 ]
