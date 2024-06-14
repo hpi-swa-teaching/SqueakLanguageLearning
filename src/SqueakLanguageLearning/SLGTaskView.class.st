@@ -32,11 +32,11 @@ SLGTaskView class >> failureMessage [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:55'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:53'
 }
 SLGTaskView class >> pageExtent [
 
-	^ 1600@1200
+	^ ((1604 * 0.55) px) @ ((1204 * 0.55) px)
 ]
 
 {
@@ -59,38 +59,38 @@ SLGTaskView class >> taskDescription [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:11'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:53'
 }
 SLGTaskView class >> taskElementWidth [
 
-	^ 1000
+	^ (1000 * 0.55) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:47'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:54'
 }
 SLGTaskView class >> taskElementsMargin [
 
-	^ 25
+	^ (25 * 0.55) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:58'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:54'
 }
 SLGTaskView class >> taskViewExtent [
 
-	^ 1400@900
+	^( 1400 * 0.55) px @ (900 * 0.55) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:58'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:54'
 }
 SLGTaskView class >> taskViewMargin [
 
-	^ 130
+	^ (130 * 0.55) px
 ]
 
 {

@@ -12,29 +12,29 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:12'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:51'
 }
 AbstractPage class >> buttonWidth [
 
-	^ 500
+	^ (500 * 0.55) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:18'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:51'
 }
 AbstractPage class >> descriptionFont [
 
-	^ 35
+	^ (35 * 0.55) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 16:26'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:51'
 }
 AbstractPage class >> descriptionMargin [
 
-	^ 100
+	^ (100 * 0.55) px
 ]
 
 {
@@ -58,38 +58,38 @@ AbstractPage class >> newWithController: aController [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 16:50'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
 }
 AbstractPage class >> pageBorder [
 
-	^ 2
+	^ 2 px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:52'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
 }
 AbstractPage class >> pageHeight [
 
-	^ 1204
+	^ (1204 * 0.55) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:20'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
 }
 AbstractPage class >> pageMargin [
 
-	^ 2
+	^ 2 px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:52'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
 }
 AbstractPage class >> pageWidth [
 
-	^ 1604
+	^ (1604 * 0.55) px
 ]
 
 {
