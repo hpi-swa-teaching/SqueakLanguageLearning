@@ -6,7 +6,8 @@ Class {
 		'header',
 		'body',
 		'footer',
-		'score'
+		'score',
+		'scoreDisplay'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
@@ -222,11 +223,11 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/13/2024 23:21'
+	#'squeak_changestamp' : 'EB 6/14/2024 13:48'
 }
 AbstractPage >> displayExperiencePoint [
 	
-	| cheeseImg textMorph |
+	| cheeseImg |
 	
 	"adding morphs"
 	cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/cheese_small.png'.
@@ -234,18 +235,18 @@ AbstractPage >> displayExperiencePoint [
 	
 	"score := SLGUserProgress userData getScore."
 	
-	textMorph := SLGMultilineTextGen new setText: score asString.
-	textMorph width: 150; 
+	scoreDisplay := SLGMultilineTextGen new setText: score asString.
+	scoreDisplay width: 150; 
 				setFontSize: 50;
 				centered;
 				color: Color orange.
 	
 	"positioning the morphs"
 	cheeseImg center: self header center + ((cheeseImg width) * 3 @ 10) - ((self header height - cheeseImg height) * 2 @ 0).
- 	textMorph center: cheeseImg center + (100 @ 5).
+ 	scoreDisplay center: cheeseImg center + (100 @ 5).
 	
 	
-	cheeseImg addMorph: textMorph.
+	cheeseImg addMorph: scoreDisplay.
 	self header addMorph: cheeseImg.
 
 ]
@@ -355,9 +356,10 @@ AbstractPage >> navigateBack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/13/2024 23:07'
+	#'squeak_changestamp' : 'EB 6/14/2024 13:51'
 }
 AbstractPage >> updateScore [
 	
-	score := SLGUserProgress userData getScore
+	score := SLGUserProgress userData getScore.
+	scoreDisplay ifNotNil: [ scoreDisplay setText: score asString. ]
 ]

@@ -57,7 +57,7 @@ LessonPageView class >> taskViewExtent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/11/2024 23:04'
+	#'squeak_changestamp' : 'EB 6/14/2024 13:21'
 }
 LessonPageView >> createViewForTask: aTask [
 
@@ -87,7 +87,7 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/13/2024 23:26'
+	#'squeak_changestamp' : 'EB 6/14/2024 13:52'
 }
 LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
@@ -106,8 +106,6 @@ LessonPageView >> initializeWithLesson: aLesson andController: aController [
 		center: self body center.
 	
 	self body addMorph: taskView. 
-	
-	"tasks at: 1 put: 'Task Title'." "TODO substitute with the one stored in DataAccessService"
 	
 	aLesson task when: #taskCompleted evaluate: [self updateScore].
 	
