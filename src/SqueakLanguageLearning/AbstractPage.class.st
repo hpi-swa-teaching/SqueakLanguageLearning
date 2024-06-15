@@ -5,7 +5,8 @@ Class {
 		'controller',
 		'header',
 		'body',
-		'footer'
+		'footer',
+		'backButton'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
@@ -94,7 +95,7 @@ AbstractPage class >> pageWidth [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/11/2024 10:07'
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
 }
 AbstractPage >> addBackButton [
 
@@ -110,6 +111,7 @@ AbstractPage >> addBackButton [
 	
 	backButton width: backButton width + 40.
 	backButton center: self header leftCenter + ((backButton width)/2 @ 0) + ((self header height - backButton height)/2 @ 0).
+	self backButton: backButton.
 	self header addMorph: backButton.
 ]
 
@@ -146,6 +148,22 @@ AbstractPage >> addTitle: aString [
 		center: self header center.
 		
         self header addMorph: title
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:13'
+}
+AbstractPage >> backButton [
+	^ backButton
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:13'
+}
+AbstractPage >> backButton: anObject [
+	backButton := anObject
 ]
 
 {
@@ -202,6 +220,14 @@ AbstractPage >> header [
 }
 AbstractPage >> header: anObject [
 	header := anObject
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+}
+AbstractPage >> hideBackButton [
+	self backButton hide.
 ]
 
 {
@@ -268,4 +294,12 @@ AbstractPage >> navigateBack [
  
 	controller navigateBack.
 	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+}
+AbstractPage >> showBackButton [
+	self backButton show.
 ]
