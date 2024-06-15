@@ -153,7 +153,7 @@ AbstractPage class >> softYellow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 11:01'
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
 }
 AbstractPage >> addBackButton [
 
@@ -161,18 +161,16 @@ AbstractPage >> addBackButton [
 	
 	backButton := SLGNavigationButtonGen new
 		label: 'Back';
-		borderColor: Color orange;
-		height: 30px;
-		"color: Color veryVeryLightGray;"
+		"center: self header leftCenter + (60@0);"
+		"width: 100;"
 		onClickWithBlock: [
 			self controller routerController navigateBack.
 		].
 	
 	backButton width: backButton width + 40.
 	backButton center: self header leftCenter + ((backButton width)/2 @ 0) + ((self header height - backButton height)/2 @ 0).
-	
+	self backButton: backButton.
 	self header addMorph: backButton.
-	
 ]
 
 {
@@ -269,6 +267,22 @@ AbstractPage >> addTitle: aString [
 		
 
         self body addMorph: title
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:13'
+}
+AbstractPage >> backButton [
+	^ backButton
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:13'
+}
+AbstractPage >> backButton: anObject [
+	backButton := anObject
 ]
 
 {
@@ -419,6 +433,14 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+}
+AbstractPage >> hideBackButton [
+	self backButton hide.
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'yegi 6/15/2024 01:37'
 }
 AbstractPage >> initializeWithController: aController [
@@ -505,6 +527,14 @@ AbstractPage >> resetAction [
 		SLGUserProgress reset.
 		SLGMainController new.
 		self controller routerController closeWindow.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+}
+AbstractPage >> showBackButton [
+	self backButton show.
 ]
 
 {

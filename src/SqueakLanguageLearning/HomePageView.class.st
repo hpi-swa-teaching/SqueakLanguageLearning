@@ -100,17 +100,14 @@ HomePageView >> getTopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 17:55'
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:15'
 }
 HomePageView >> initializeWithController: aController [
-
 	super initializeWithController: aController.
-	
-	self addTitle: 'Welcome to SqueakLingo!'.
+	self hideBackButton.
+	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
 	self topics: self controller dataAccessService topics.
 	self constructView.
-	
-	
 ]
 
 {
