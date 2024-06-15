@@ -90,15 +90,15 @@ SLGDragAndDropView >> createInteractiveItemsAndTargets [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/15/2024 13:25'
+	#'squeak_changestamp' : 'yegi 6/15/2024 14:53'
 }
 SLGDragAndDropView >> createItemsAndTargets [
     
 	| container xPosItem shuffledOptions correctAnswers answerSlots item "numAnswers step" |
 	container := Morph new.
 	container bounds: "(0@0 extent: 900@500);" "(0@0 extent: ((self class taskElementWidth) * 0.75)@400);" (0@0 extent: (self class taskElementWidth) * 1.2 @ 300px);
-            color: Color gray. "DEBUGGING"
-		"color: Color transparent. "
+            "color: Color gray." "DEBUGGING"
+		color: Color transparent. 
 
 	xPosItem := 100.
 
@@ -122,13 +122,13 @@ SLGDragAndDropView >> createItemsAndTargets [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/15/2024 13:31'
+	#'squeak_changestamp' : 'yegi 6/15/2024 14:52'
 }
 SLGDragAndDropView >> createSlotsWith: correctAnswers [
 
 	| container slot numAnswers step |
 	container := Morph new.
-	container color: Color white; "transparent" 
+	container color: Color transparent;
 			extent: self class taskElementWidth @ 200px.  "800 @ 150." "TODO change the size of a container"
 
 	numAnswers := correctAnswers size.
