@@ -14,6 +14,15 @@ Class {
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/15/2024 19:31'
+}
+SLGTaskView class >> baseChoiceButtonExtent [
+
+	^(25px  @  25px)
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 6/8/2024 16:30'
 }
 SLGTaskView class >> errorMessage [
@@ -129,7 +138,7 @@ SLGTaskView >> code: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/15/2024 11:53'
+	#'squeak_changestamp' : 'xiaoshi 6/15/2024 19:01'
 }
 SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 

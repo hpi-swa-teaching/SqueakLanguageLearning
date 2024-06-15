@@ -82,7 +82,7 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/15/2024 11:15'
+	#'squeak_changestamp' : 'xiaoshi 6/15/2024 19:33'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
@@ -93,7 +93,7 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		| row toggleBtn text |
 		
 		toggleBtn := SLGToggleButtonGen new
-			extent: (25px  @  25px);
+			extent: self class baseChoiceButtonExtent;
 			borderWidth: 2px;
 			borderColor: Color white;
 			cornerStyle: #rounded;
@@ -124,7 +124,7 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		
 		text := SLGMultilineTextGen new
 			setText: option;
-			width: 900;
+			width: self class taskElementWidth - (6 * (self class baseChoiceButtonExtent x));
 			color: Color black.
 			
 		row := SLGLayout rowWithMorphs: 
