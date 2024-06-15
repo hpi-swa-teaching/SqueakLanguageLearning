@@ -40,7 +40,7 @@ SubtopicPageView >> constructView [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 21:25'
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:06'
 }
 SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRouteKey: aString [
 	| routeKey index button | 
@@ -60,9 +60,9 @@ SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRout
 			].
 		
 		((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
-			ifTrue: [button color: Color green.].
+			ifTrue: [button color: self class softGreen.].
 		
-		aLesson task when: #taskCompleted evaluate: [button color: Color green.].
+		aLesson task when: #taskCompleted evaluate: [button color: self class softGreen.].
 	
 		^button
 		

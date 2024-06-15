@@ -127,10 +127,25 @@ AbstractPage class >> pageWidth [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 23:35'
+	#'squeak_changestamp' : 'yegi 6/15/2024 00:45'
+}
+AbstractPage class >> pastelGreen [
+	^Color r: 0.39 g: 0.81 b: 0.53
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:05'
+}
+AbstractPage class >> softGreen [
+	^Color r: 0.54 g: 0.97 b: 0.56
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:02'
 }
 AbstractPage class >> softYellow [
-
 	^Color r: 1 g: 0.8 b: 0.5
 	
 ]
@@ -183,9 +198,9 @@ AbstractPage >> addCloseButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 16:32'
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:37'
 }
-AbstractPage >> addHomeButtom [
+AbstractPage >> addHomeButton [
 
 	| imageMorph  homeButton  |
 	
@@ -213,28 +228,22 @@ AbstractPage >> addHomeButtom [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:18'
+	#'squeak_changestamp' : 'yegi 6/15/2024 02:03'
 }
 AbstractPage >> addResetButton [
 
 	| resetButton |
 	
-	resetButton := SLGNavigationButtonGen new
-		label: 'reset';
-		height: 50;
-		onClickWithBlock: [
-			SLGUserProgress reset.
-			SLGMainController new.
-			self controller routerController closeWindow.
-		].
-	"resetButton := PluggableButtonMorph new
+	resetButton := PluggableButtonMorph new
 					onColor: Color veryVeryLightGray offColor: Color white;
 					label: 'Reset';
 					textColor: Color darkGray;
 					borderColor: Color white;
 					borderWidth: 0;
 					cornerStyle: #rounded;
-					on: #mouseUp send:  to: self."
+					target: self;
+					actionSelector: #resetAction.
+				
 	
 	resetButton center: self footer center.
 	
@@ -409,11 +418,11 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 21:48'
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:37'
 }
 AbstractPage >> initializeWithController: aController [
 	
-	| margin |
+	| width height margin border |
 	
 	super initialize.
 	
@@ -422,7 +431,11 @@ AbstractPage >> initializeWithController: aController [
 	subtopicScore := SLGUserProgress userData subtopicScore.
 	topicScore := SLGUserProgress userData topicScore.
 	
-	self extent: 1604 @ 1204;
+	width := self class pageWidth.
+	height := self class pageHeight.
+	border := self class pageBorder.
+	
+	self extent: width@height;
 		"extent: 1404@904;"
 		color: Color white; 
 		borderWidth: 2;
@@ -448,7 +461,7 @@ AbstractPage >> initializeWithController: aController [
 		
 	self footer: (Morph new
 		width: self width - (2 * margin);
-		height: (5 * (self height - (2 * margin)))/100; "footer has 10% of height of page"
+		height: (5 * (self height - (2 * margin)))/100; 
 		position: self position + (margin @ (self header height + self body height + margin));
 		color: Color white).
 		
@@ -461,7 +474,7 @@ AbstractPage >> initializeWithController: aController [
 	self displayExperiencePoint.
 	self displaySubBadge.
 	self displayMainBadge.
-	self addHomeButtom.
+	self addHomeButton.
 	self addResetButton.
 		
 	^self
@@ -480,6 +493,17 @@ AbstractPage >> navigateBack [
  
 	controller navigateBack.
 	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/15/2024 00:40'
+}
+AbstractPage >> resetAction [
+
+		SLGUserProgress reset.
+		SLGMainController new.
+		self controller routerController closeWindow.
 ]
 
 {

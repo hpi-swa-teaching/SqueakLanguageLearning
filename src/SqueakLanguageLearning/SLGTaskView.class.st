@@ -129,7 +129,7 @@ SLGTaskView >> code: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 16:41'
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:46'
 }
 SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
@@ -140,7 +140,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 				contents: (aCodeString copyReplaceAll: '\n' with: '', Character cr,'');
 				buildCodePaneWith: ToolBuilder default))
 				wrapFlag: true;
-				extent: self class taskElementWidth @ 300.
+				extent: self class taskElementWidth @ 350.
 
 	(aBoolean)
 		ifTrue: [codeField
@@ -157,25 +157,31 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/15/2024 00:25'
+	#'squeak_changestamp' : 'yegi 6/15/2024 02:11'
 }
 SLGTaskView >> createSubmitButton [
 
 	| submitButton labelMorph margin |
-	submitButton := SimpleButtonMorph new.
+	"submitButton := SimpleButtonMorph new."
+	submitButton := PluggableButtonMorph new.
 	margin := self class taskElementsMargin.
 	submitButton 
 			label: 'Submit';
+			textColor: Color white;
+			onColor: Color white offColor: AbstractPage pastelGreen;
 			borderColor: Color white;
-			width: 120;
-			height: 50;
-			center: (self bottomRight + (-100@(-70)));
+			borderWidth: 0;
+			width: 60px;
+			height: 30px;
+			center: (self bottomCenter) ;
 			cornerStyle: #rounded;
 			cornerRadius: 10;
-			on: #mouseUp send: #verifyAnswer to: self.
+			"on: #mouseUp send: #verifyAnswer to: self."
+			target: self;
+			actionSelector: #verifyAnswer.
 			
-	labelMorph := submitButton submorphs detect: [:morph | morph isKindOf: StringMorph].
-	labelMorph color: Color white.
+	"labelMorph := submitButton submorphs detect: [:morph | morph isKindOf: StringMorph].
+	labelMorph color: Color white."
 	
 	self addMorph: submitButton.
 	

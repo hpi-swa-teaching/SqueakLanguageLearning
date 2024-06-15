@@ -82,7 +82,7 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/14/2024 23:24'
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:19'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
@@ -102,7 +102,7 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		
 		toggleBtn stateUI:  [
 			toggleBtn state ifTrue: [
-				toggleBtn color: Color green.
+				toggleBtn color: AbstractPage pastelGreen.
 			].
 
 			toggleBtn state ifFalse: [

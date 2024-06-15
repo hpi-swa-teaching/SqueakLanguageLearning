@@ -60,7 +60,7 @@ HomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/13/2024 22:33'
+	#'squeak_changestamp' : 'yegi 6/15/2024 00:59'
 }
 HomePageView >> getTopicButtonWithTopic: aTopic [
 	| routeString button |
@@ -80,9 +80,9 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 		 onClickWithBlock: [
 			self controller routerController navigateTo: routeString. ].
 		
-	(aTopic isCompleted) ifTrue: [button color: Color green.].
+	(aTopic isCompleted) ifTrue: [button color: self class pastelGreen.].
 	
-	aTopic when: #topicCompleted evaluate: [button color: Color green.].
+	aTopic when: #topicCompleted evaluate: [button color: self class pastelGreen.].
 	
 	^button
 ]
