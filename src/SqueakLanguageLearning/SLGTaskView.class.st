@@ -129,7 +129,7 @@ SLGTaskView >> code: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/15/2024 01:46'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:53'
 }
 SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
@@ -140,7 +140,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 				contents: (aCodeString copyReplaceAll: '\n' with: '', Character cr,'');
 				buildCodePaneWith: ToolBuilder default))
 				wrapFlag: true;
-				extent: self class taskElementWidth @ 350.
+				extent: self class taskElementWidth @ 200px.
 
 	(aBoolean)
 		ifTrue: [codeField
@@ -157,7 +157,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/15/2024 02:11'
+	#'squeak_changestamp' : 'yegi 6/15/2024 12:02'
 }
 SLGTaskView >> createSubmitButton [
 
@@ -173,7 +173,7 @@ SLGTaskView >> createSubmitButton [
 			borderWidth: 0;
 			width: 60px;
 			height: 30px;
-			center: (self bottomCenter) ;
+			center: self bottomCenter;
 			cornerStyle: #rounded;
 			cornerRadius: 10;
 			"on: #mouseUp send: #verifyAnswer to: self."
@@ -244,14 +244,14 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'yegi 6/13/2024 18:45'
+	#'squeak_changestamp' : 'yegi 6/15/2024 13:01'
 }
 SLGTaskView >> initialize [
 
 	super initialize.
 	
 	self
-		extent: 1000@600;
+		extent: self class taskViewExtent;
 		color: Color transparent;
 		cornerStyle: #rounded;
 		"color: Color veryVeryLightGray;"

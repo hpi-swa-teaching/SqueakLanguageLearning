@@ -18,20 +18,21 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:51'
+	#'squeak_changestamp' : 'yegi 6/15/2024 10:44'
 }
 AbstractPage class >> buttonWidth [
 
-	^ (500 * 0.55) px
+	^ (500 * 0.4) px
+	
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:51'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:22'
 }
 AbstractPage class >> descriptionFont [
 
-	^ (35 * 0.55) px
+	^ (35 * 0.5) px "0.55) px"
 ]
 
 {
@@ -152,7 +153,7 @@ AbstractPage class >> softYellow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 11:38'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:01'
 }
 AbstractPage >> addBackButton [
 
@@ -161,7 +162,7 @@ AbstractPage >> addBackButton [
 	backButton := SLGNavigationButtonGen new
 		label: 'Back';
 		borderColor: Color orange;
-		height: 50;
+		height: 30px;
 		"color: Color veryVeryLightGray;"
 		onClickWithBlock: [
 			self controller routerController navigateBack.
@@ -176,7 +177,7 @@ AbstractPage >> addBackButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 11:39'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:01'
 }
 AbstractPage >> addCloseButton [
 	| closeButton |
@@ -184,7 +185,7 @@ AbstractPage >> addCloseButton [
 	closeButton := SLGNavigationButtonGen new
 		label: 'Close';
 		borderColor: Color orange;
-		height: 50;
+		height: 30px;
 		"color: Color veryVeryLightGray;"
 		onClickWithBlock: [
 			self controller routerController closeWindow.
@@ -198,7 +199,7 @@ AbstractPage >> addCloseButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 01:37'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:50'
 }
 AbstractPage >> addHomeButton [
 
@@ -213,8 +214,8 @@ AbstractPage >> addHomeButton [
 		].
 	
 	imageMorph := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/logoCircle-small.png') 
-										magnifyBy: 1) asMorph.
+										loadForm: '/assets/logoCircle-small.png')) asMorph.
+
 	
 	homeButton addMorph: imageMorph.
 	
@@ -253,7 +254,7 @@ AbstractPage >> addResetButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 18:32'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:20'
 }
 AbstractPage >> addTitle: aString [
 
@@ -262,9 +263,9 @@ AbstractPage >> addTitle: aString [
 	title := SLGTextGen new
 		setText: aString;
 		color: Color black;
-		setFontSize: 40;
+		setFontSize: 20px;
 		center: self body center - (self body width * 0.03 @ 0) ;
-		top: self body top + (self body height * 0.05).
+		top: self body top + (self body height * 0.04).
 		
 
         self body addMorph: title

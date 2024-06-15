@@ -82,7 +82,7 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/15/2024 01:19'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:15'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
@@ -93,8 +93,8 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		| row toggleBtn text |
 		
 		toggleBtn := SLGToggleButtonGen new
-			extent: (50  @ 50);
-			borderWidth: 5;
+			extent: (25px  @  25px);
+			borderWidth: 2px;
 			borderColor: Color white;
 			cornerStyle: #rounded;
 			cornerRadius: 30;

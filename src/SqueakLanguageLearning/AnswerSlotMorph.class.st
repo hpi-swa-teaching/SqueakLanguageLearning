@@ -40,13 +40,13 @@ AnswerSlotMorph >> label [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 18:47'
+	#'squeak_changestamp' : 'yegi 6/15/2024 13:09'
 }
 AnswerSlotMorph >> setup [
 
 	self color: Color white;
-			extent: 120 @ 60;"90;"
-			borderWidth: 2;
+			extent: 100px @ 40px;"90;"
+			borderWidth: 2px;
 			borderColor: Color darkGray;
 			cornerStyle: #rounded;
 			cornerRadius: 10.

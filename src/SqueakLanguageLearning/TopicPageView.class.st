@@ -19,7 +19,7 @@ TopicPageView class >> newWithTopic: aTopic andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 01:24'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:23'
 }
 TopicPageView >> constructView [
 	| rows cols |
@@ -28,7 +28,7 @@ TopicPageView >> constructView [
 	rows add: self getDescription.
 	rows addAll: self getSubtopicButtons.
 
-	cols := SLGLayout columnWithMorphs: rows withGap: 20.
+	cols := SLGLayout columnWithMorphs: rows withGap: 10px.
 	
 	cols center: self center + (0 @ self class iconMarginHeight * 0.3).
 	
