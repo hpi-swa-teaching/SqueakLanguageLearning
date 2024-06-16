@@ -12,7 +12,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:07'
+	#'squeak_changestamp' : 'yegi 6/16/2024 02:15'
 }
 SLGDataAccessService >> createSubtopicsForClasses [
 
@@ -24,7 +24,7 @@ SLGDataAccessService >> createSubtopicsForClasses [
 	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
 		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_01') ) 
 		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_02') )"
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_03') )).
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4' '5' '6') withID:'slg1_03') )).
 		
 	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
 		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_04') )
@@ -120,7 +120,7 @@ SLGDataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:48'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:02'
 }
 SLGDataAccessService >> createSubtopicsForDataTypes [
 
@@ -134,7 +134,7 @@ SLGDataAccessService >> createSubtopicsForDataTypes [
 		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Copy object of x into y.' withCode: '' withCorrectAnswer: #('y' ':=' 'x' 'copy') withID: 'slg4_02') ) ).
 		
 	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'What is the value of x?' withCode: 'x := 1 + 2 * 3' withOptions: #('7' '9') withAnswers: #(true false) withID: 'slg4_03') )
+		with: (SLGLesson newWithTask: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the value of x?' withCode: 'x := 1 + 2 * 3' withOptions: #('7' '9') withAnswers: #(false true) withID: 'slg4_03') )
 		with: (SLGLesson newWithTask: (SLGSingleChoiceTask newSingleChoiceWithQuestion: '' withCode: 'x := 1. \n y := -5.\n x := x + 1. \n z := y // x' withOptions: #('z = -3' 'z = -2.5' 'z = -2') withAnswers: #(true false false) withID: 'slg4_04') )
 		with: (SLGLesson newWithTask: (SLGClozeTask newClozeWithQuestion: '' withCode: 'x := 1.\n x class. ' withCloze: 'The class of x is __.' withAnswer: 'The class of x is Integer.' withID: 'slg4_05') )).
 		

@@ -7,7 +7,8 @@ Class {
 		'task',
 		'result',
 		'code',
-		'headerLowerBound'
+		'headerLowerBound',
+		'statusDisplay'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
@@ -19,6 +20,15 @@ Class {
 SLGTaskView class >> baseChoiceButtonExtent [
 
 	^(25px  @  25px)
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/16/2024 04:03'
+}
+SLGTaskView class >> codeFieldHeight [
+
+	^180px
 ]
 
 {
@@ -46,6 +56,32 @@ SLGTaskView class >> failureMessage [
 SLGTaskView class >> pageExtent [
 
 	^ ((1604 * 0.55) px) @ ((1204 * 0.55) px)
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/16/2024 03:58'
+}
+SLGTaskView class >> pastelRed [
+	^Color r: 1 g: 0.4 b: 0.4
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 21:45'
+}
+SLGTaskView class >> submitButtonHeight [
+
+	^30px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 21:44'
+}
+SLGTaskView class >> submitButtonWidth [
+
+	^60px
 ]
 
 {
@@ -138,7 +174,7 @@ SLGTaskView >> code: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/15/2024 19:01'
+	#'squeak_changestamp' : 'yegi 6/16/2024 04:04'
 }
 SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
@@ -149,7 +185,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 				contents: (aCodeString copyReplaceAll: '\n' with: '', Character cr,'');
 				buildCodePaneWith: ToolBuilder default))
 				wrapFlag: true;
-				extent: self class taskElementWidth @ 200px.
+				extent: self class taskElementWidth @ self class codeFieldHeight.
 
 	(aBoolean)
 		ifTrue: [codeField
@@ -166,7 +202,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/15/2024 12:02'
+	#'squeak_changestamp' : 'yegi 6/16/2024 04:02'
 }
 SLGTaskView >> createSubmitButton [
 
@@ -180,12 +216,11 @@ SLGTaskView >> createSubmitButton [
 			onColor: Color white offColor: AbstractPage pastelGreen;
 			borderColor: Color white;
 			borderWidth: 0;
-			width: 60px;
-			height: 30px;
+			width: self class submitButtonWidth;
+			height: self class submitButtonHeight;
 			center: self bottomCenter;
 			cornerStyle: #rounded;
-			cornerRadius: 10;
-			"on: #mouseUp send: #verifyAnswer to: self."
+			cornerRadius: 10px;
 			target: self;
 			actionSelector: #verifyAnswer.
 			
@@ -225,7 +260,7 @@ SLGTaskView >> createTextFieldWithContent: aString [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:44'
+	#'squeak_changestamp' : 'yegi 6/16/2024 04:42'
 }
 SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
@@ -238,7 +273,7 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 					borderColor: Color veryLightGray].	"
 	textField
 		contents:  aString;
-		wrapFlag: true;
+		"wrapFlag: true;"
 		extent: self class taskElementWidth @ 0;
 		lock.
 	
@@ -372,15 +407,28 @@ SLGTaskView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/14/2024 23:56'
+	#'squeak_changestamp' : 'yegi 6/16/2024 04:48'
 }
 SLGTaskView >> setupWith: anInteractiveMorph [
 
-	| submitbutton descriptionField questionField codeField fieldsArray fieldColumns|
+	| submitbutton descriptionField questionField codeField fieldsArray fieldColumns statusField |
 	
 	submitbutton := self createSubmitButton.
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
-	self status: (self createTextFieldWithContent: '' withBorder: true).
+	self status: (self createTextFieldWithContent: '' withBorder: false)."true)."
+	
+	"YEGI"
+	statusField := Morph new 
+					extent: self class taskElementWidth @ 50px;
+					color: Color white;
+					cornerStyle: #rounded;
+					borderWidth: 3px;
+					borderColor: Color orange.
+					
+	statusField addMorph: status.
+	status position: statusField topLeft + (20px @ 15px).
+	""
+	
 	self taskQuestion ifNotNil: [
 		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true)].
 	self code ifNotNil: [
@@ -388,7 +436,8 @@ SLGTaskView >> setupWith: anInteractiveMorph [
 	
 	fieldsArray := OrderedCollection new.
 	
-	fieldsArray add: submitbutton; add: status; add: anInteractiveMorph.
+	"fieldsArray add: submitbutton; add: status; add: anInteractiveMorph."
+	fieldsArray add: submitbutton; add: statusField; add: anInteractiveMorph.
 	self code ifNotNil: [fieldsArray add: codeField].
 	self taskQuestion ifNotNil: [fieldsArray add: questionField].
 	fieldsArray add: descriptionField.

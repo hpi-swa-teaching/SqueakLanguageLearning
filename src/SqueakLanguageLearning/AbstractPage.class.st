@@ -18,6 +18,16 @@ Class {
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:41'
+}
+AbstractPage class >> buttonHeight [
+
+	^ 30px
+	
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'yegi 6/15/2024 10:44'
 }
 AbstractPage class >> buttonWidth [
@@ -51,15 +61,6 @@ AbstractPage class >> descriptionMargin [
 AbstractPage class >> descriptionWidth [
 
 	^ self pageWidth - (self descriptionMargin * 2)
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/14/2024 17:19'
-}
-AbstractPage class >> iconFont [
-
-	^ 18px
 ]
 
 {
@@ -135,6 +136,24 @@ AbstractPage class >> pastelGreen [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 22:13'
+}
+AbstractPage class >> scoreDisplayWidth [
+
+	^ 150px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 22:08'
+}
+AbstractPage class >> scoreFontSize [
+
+	^ 20px
+]
+
+{
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'yegi 6/15/2024 01:05'
 }
@@ -153,7 +172,7 @@ AbstractPage class >> softYellow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:42'
 }
 AbstractPage >> addBackButton [
 
@@ -163,11 +182,13 @@ AbstractPage >> addBackButton [
 		label: 'Back';
 		"center: self header leftCenter + (60@0);"
 		"width: 100;"
+		borderColor: Color orange;
+		height: self class buttonHeight;
 		onClickWithBlock: [
 			self controller routerController navigateBack.
 		].
 	
-	backButton width: backButton width + 40.
+	backButton width: backButton width + 40px.
 	backButton center: self header leftCenter + ((backButton width)/2 @ 0) + ((self header height - backButton height)/2 @ 0).
 	self backButton: backButton.
 	self header addMorph: backButton.
@@ -175,7 +196,7 @@ AbstractPage >> addBackButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 11:01'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:41'
 }
 AbstractPage >> addCloseButton [
 	| closeButton |
@@ -183,7 +204,7 @@ AbstractPage >> addCloseButton [
 	closeButton := SLGNavigationButtonGen new
 		label: 'Close';
 		borderColor: Color orange;
-		height: 30px;
+		height: self class buttonHeight;
 		"color: Color veryVeryLightGray;"
 		onClickWithBlock: [
 			self controller routerController closeWindow.
@@ -197,7 +218,7 @@ AbstractPage >> addCloseButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 11:50'
+	#'squeak_changestamp' : 'yegi 6/16/2024 00:59'
 }
 AbstractPage >> addHomeButton [
 
@@ -212,14 +233,15 @@ AbstractPage >> addHomeButton [
 		].
 	
 	imageMorph := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/logoCircle-small.png')) asMorph.
+										loadForm: '/assets/logo-80.png')
+										magnifyBy: 1px) asMorph.
 
 	
 	homeButton addMorph: imageMorph.
 	
-	homeButton extent: imageMorph extent * 0.5.
-	homeButton center: self header center.
-	imageMorph center: homeButton center + (0 @ -40).
+	homeButton extent: imageMorph extent * 0.7.
+	homeButton center: self header center- (0 @ 25px).
+	imageMorph center: homeButton center .
 	
 	
 	self header addMorph: homeButton
@@ -311,7 +333,7 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 21:48'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:38'
 }
 AbstractPage >> displayExperiencePoint [
 	
@@ -321,49 +343,49 @@ AbstractPage >> displayExperiencePoint [
 	"cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/badge-main.png'.
 	cheeseImg scaleFactor: 0.5."	
 	cheeseImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/cheese_small.png') 
-										magnifyBy: 0.5) asMorph.
+										loadForm: '/assets/cheese-30.png') 
+										magnifyBy: 1px) asMorph.
 	
 	scoreDisplay := SLGMultilineTextGen new setText: score asString.
-	scoreDisplay width: 150; 
-				setFontSize: AbstractPage iconFont;
+	scoreDisplay width: self class scoreDisplayWidth; 
+				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
 	"positioning the morphs"
-	marginwidth := AbstractPage iconMarginWidth.
-	marginHeight := AbstractPage iconMarginHeight.
+	marginwidth := self class iconMarginWidth.
+	marginHeight := self class iconMarginHeight.
 	cheeseImg addMorph: scoreDisplay.
-	cheeseImg center: self header center + (0 @ marginHeight * 0.25) - (marginwidth * 0.7 @ 0).
- 	scoreDisplay center: cheeseImg center + (marginwidth * 0.55 @ 0).
+	cheeseImg center: self header center - (marginwidth * 0.8 @ 0) + (0 @ marginHeight * 0.2) .
+ 	scoreDisplay center: cheeseImg center + (marginwidth * 0.95 @ 0).
 	
 	self header addMorph: cheeseImg.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:00'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:39'
 }
 AbstractPage >> displayMainBadge [
 	
 	| badgeImg marginwidth marginHeight |
 
 	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/badge-main.png') 
-										magnifyBy: 0.7) asMorph.
+										loadForm: '/assets/badge-gold-30.png') 
+										magnifyBy: 1px) asMorph.
 	
 	"TODO for BADGE COUNTING"
 	"badgeCount := "
 	topicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
-	topicScoreDisplay width: 150; 
-				setFontSize: AbstractPage iconFont;
+	topicScoreDisplay width: self class scoreDisplayWidth; 
+				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
 	"positioning the morphs"
 	marginwidth := AbstractPage iconMarginWidth.
 	marginHeight := AbstractPage iconMarginHeight.
 	badgeImg addMorph: topicScoreDisplay.
-	badgeImg center: self header center + (marginwidth * 2.5 @ marginHeight  * 0.25).
- 	topicScoreDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
+	badgeImg center: self header center + (marginwidth * 3 @ marginHeight  * 0.2).
+ 	topicScoreDisplay center: badgeImg center + (marginwidth * 0.95 @ 0).
 	
 	self header addMorph: badgeImg.
 
@@ -371,29 +393,29 @@ AbstractPage >> displayMainBadge [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:01'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:35'
 }
 AbstractPage >> displaySubBadge [
 	
 	| badgeImg marginwidth marginHeight |
 
 	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/badge_silver.png') 
-										magnifyBy: 0.7) asMorph.
+										loadForm: '/assets/badge-silver-30.png') 
+										magnifyBy: 1px) asMorph.
 	
 	"TODO for BADGE COUNTING"
 	"badgeCount := "
 	subtopicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
-	subtopicScoreDisplay width: 150; 
-				setFontSize: AbstractPage iconFont;
+	subtopicScoreDisplay width: self class scoreDisplayWidth; 
+				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
 	"positioning the morphs"
 	marginwidth := AbstractPage iconMarginWidth.
 	marginHeight := AbstractPage iconMarginHeight.
 	badgeImg addMorph: subtopicScoreDisplay.
-	badgeImg center: self header center + (0 @ marginHeight  * 0.25).
- 	subtopicScoreDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
+	badgeImg center: self header center + (0 @ marginHeight  * 0.2) - (marginwidth * 0.05 @ 0).
+ 	subtopicScoreDisplay center: badgeImg center + (marginwidth * 0.95 @ 0).
 	
 	self header addMorph: badgeImg.
 
@@ -441,7 +463,7 @@ AbstractPage >> hideBackButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 01:37'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:34'
 }
 AbstractPage >> initializeWithController: aController [
 	
@@ -461,25 +483,24 @@ AbstractPage >> initializeWithController: aController [
 	self extent: width@height;
 		"extent: 1404@904;"
 		color: Color white; 
-		borderWidth: 2;
 		center: Display center.
 
-	margin := 2.
+	margin := 2px.
 			
 	self header: (Morph new
 		width: self width - (2 * margin);
-		height: (10 * (self height - (2 * margin)))/100; "header has 10% of height of page"
+		height: (12 * (self height - (2 * margin)))/100; "header has 10% of height of page"
 		position: self position + (margin asPoint);
 		borderWidth: 1;
 		color: Color white).	
 		
 	self body: (Morph new
-		width: self width - 100;
-		height: (85 * (self height - (2 * margin)))/100; 
-		position: self position + (margin @ ((self header height * 3) + margin));
+		width: self width - 50px;
+		height: (83 * (self height - (2 * margin)))/100; 
+		position: self position;" + (margin @ ((self header height * 3))); ""+ margin));"
 		cornerStyle: #rounded;
 		cornerRadius: 20;
-		center: self center + (0 @  self header height * 0.5);
+		center: self center + (0 @ self header height * 0.3); " (margin @ (self header height + margin));"
 		color: self class softYellow). 
 		
 	self footer: (Morph new

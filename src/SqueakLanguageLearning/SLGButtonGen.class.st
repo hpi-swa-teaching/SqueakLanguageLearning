@@ -8,6 +8,14 @@ Class {
 }
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:28'
+}
+SLGButtonGen class >> buttonBorderWidth [
+	^2px
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:14'
 }

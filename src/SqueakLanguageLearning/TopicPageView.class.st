@@ -60,7 +60,7 @@ TopicPageView >> getDescription [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 01:08'
+	#'squeak_changestamp' : 'yegi 6/16/2024 04:00'
 }
 TopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
 	|routeString button |
@@ -76,9 +76,9 @@ TopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString 
 		 onClickWithBlock: [
 			self controller routerController navigateTo: routeString. ].
 	
-	(aSubtopic isCompleted) ifTrue: [button color: self class softGreen.].
+	(aSubtopic isCompleted) ifTrue: [button color: self class pastelGreen.].
 	
-	aSubtopic when: #subtopicCompleted evaluate: [button color: self class softGreen.].
+	aSubtopic when: #subtopicCompleted evaluate: [button color: self class pastelGreen.].
 	
 	^button
 

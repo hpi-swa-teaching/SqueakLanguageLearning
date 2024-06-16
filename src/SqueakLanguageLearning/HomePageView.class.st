@@ -60,7 +60,7 @@ HomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 11:02'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:29'
 }
 HomePageView >> getTopicButtonWithTopic: aTopic [
 	| routeString button |
@@ -77,7 +77,7 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 		height: 40px;
 		borderWidth: 3px;
 		borderColor: Color orange;
-		cornerRadius: 15;
+		cornerRadius: 15px;
 		 onClickWithBlock: [
 			self controller routerController navigateTo: routeString. ].
 		

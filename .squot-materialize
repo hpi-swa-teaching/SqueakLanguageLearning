@@ -2,20 +2,27 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'logoCircle-small.png'
+			'logo-80.png'
 		],
 		#encoding : Class [ #PNGReadWriter ]
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'badge_silver.png'
+			'badge-silver-30.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'badge-gold-30.png'
 		],
 		#encoding : @4
 	},
 	SquotTonelMapper {
 		#package : MCPackage {
-			#name : 'SqueakLanguageLearning'
+			#name : 'MyOwnCategory'
 		},
 		#path : FSAbsolutePath [
 			'src'
@@ -24,34 +31,20 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'badge-main.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'logoCircle.png'
+			'cheese-30.png'
 		],
 		#encoding : @4
 	},
 	SquotTonelMapper {
 		#package : MCPackage {
-			#name : 'MyOwnCategory'
+			#name : 'SqueakLanguageLearning'
 		},
-		#path : @9
+		#path : @11
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'badge-sub.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'cheese_small.png'
+			'logo-100.png'
 		],
 		#encoding : @4
 	}
