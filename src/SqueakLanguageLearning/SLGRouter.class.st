@@ -3,8 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'routes',
-		'routeHistory',
-		'currentRouteIndex'
+		'routeHistory'
 	],
 	#category : #'SqueakLanguageLearning-Controllers'
 }
@@ -41,29 +40,13 @@ SLGRouter >> canNavigateWithNextRoute: aRoute [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:51'
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:47'
 }
 SLGRouter >> closeWindow [
 	| curRoute |
 
-	curRoute := self routeHistory at: (self currentRouteIndex).
+	curRoute := self routeHistory last.
 	curRoute page delete.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 18:13'
-}
-SLGRouter >> currentRouteIndex [
-	^ currentRouteIndex
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 18:13'
-}
-SLGRouter >> currentRouteIndex: anObject [
-	currentRouteIndex := anObject
 ]
 
 {
@@ -113,35 +96,33 @@ SLGRouter >> hideAndPositionWithCurrentPage: aPage1 withNextPage: aPage2 [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:08'
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:49'
 }
 SLGRouter >> initialize [
 	super initialize.
 	self routes: Dictionary new.
 	self routeHistory: OrderedCollection new.
-	self currentRouteIndex: 1.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:12'
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:48'
 }
 SLGRouter >> navigateBack [
 	
-	| prevRoute curRoute lastRoute lastHistorySize |
+	| previousRoute currentRoute lastRoute lastHistorySize |
 
-	self currentRouteIndex - 1 > 0 ifFalse: [
+	self routeHistory ifEmpty: [
 		^false	
 	].
 
-	curRoute := self routeHistory at: (self currentRouteIndex).
-	prevRoute := self routeHistory at: (self currentRouteIndex - 1).
+	currentRoute := self routeHistory last.
+	previousRoute := self routeHistory at: (self routeHistory size - 1).
 	lastRoute := self routeHistory last.
 	lastHistorySize := self routeHistory size.
 	
-	self navigateToWithPath: (prevRoute path) withCurrentPage: (curRoute page) withEnableHistory: false.
+	self navigateToWithPath: (previousRoute path) withCurrentPage: (currentRoute page) withEnableHistory: false.
 	self routeHistory removeLast.
-	self currentRouteIndex: self routeHistory size.
 	
 ]
 
@@ -235,9 +216,8 @@ SLGRouter >> tryToRefreshPageWithPage: aPage [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:35'
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:49'
 }
 SLGRouter >> updateHistoryWithRoute: aRoute [
 	self routeHistory add: aRoute.
-	self currentRouteIndex: (self routeHistory size).
 ]
