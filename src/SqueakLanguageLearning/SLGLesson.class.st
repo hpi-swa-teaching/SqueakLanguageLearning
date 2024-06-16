@@ -46,11 +46,13 @@ SLGLesson >> initializeWithDescription: aDescription andTask: aTask [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/11/2024 22:44'
+	#'squeak_changestamp' : 'EB 6/14/2024 23:07'
 }
 SLGLesson >> initializeWithTask: aTask [
 
-	task := aTask
+	task := aTask.
+	
+	"task when: #taskCompleted send: #onTaskCompleted to: self "
 ]
 
 {

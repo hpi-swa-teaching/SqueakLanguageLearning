@@ -27,15 +27,6 @@ LessonPageView class >> initializeTaskTypeDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 14:10'
-}
-LessonPageView class >> newWithLesson: aLesson andController: aController [
-
-	^self basicNew initializeWithLesson: aLesson andController: aController
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:12'
 }
@@ -87,19 +78,16 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 19:58'
+	#'squeak_changestamp' : 'EB 6/16/2024 09:56'
 }
-LessonPageView >> initializeWithLesson: aLesson andController: aController [
+LessonPageView >> initializeWithLesson: aLesson Subtopic: aSubtopic Topic: aTopic andController: aController [
 	
 	| taskView |
 	super initializeWithController: aController.
 	self addTitle: 'Lesson Title'. "TODO substitute with the one stored in DataAccessService"
-	"self addDescriptionTo: aLesson."
 	
 	task := aLesson task.
-	task ifNil: [
-		^self.	
-	].
+	task ifNil: [ ^self. ].
 	taskView := self createViewForTask: task.
 		
 	taskView 
@@ -107,6 +95,9 @@ LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
 	self body addMorph: taskView. 
 	
-	aLesson task when: #taskCompleted evaluate: [self updateScoreDisplay].
+	aLesson task when: #taskCompleted evaluate: 
+		[ self updateScoreDisplay. 
+		(aSubtopic isCompleted) ifTrue: [self updateSubtopicScoreDisplay.
+			(aTopic isCompleted) ifTrue: [self updateTopicScoreDisplay]] ].
 	
 ]
