@@ -29,6 +29,18 @@ SLGRouter >> addRouteWithRoute: aRoute [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:14'
+}
+SLGRouter >> canNavigateWithNextRoute: aRoute [
+	self routeHistory ifNotEmpty: [
+		^(aRoute ~= self routeHistory last)
+	].
+
+	^true
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:51'
 }
 SLGRouter >> closeWindow [
@@ -52,6 +64,51 @@ SLGRouter >> currentRouteIndex [
 }
 SLGRouter >> currentRouteIndex: anObject [
 	currentRouteIndex := anObject
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 15:58'
+}
+SLGRouter >> getRouteWithRouteString: aString [
+	^self routes at: aString.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:36'
+}
+SLGRouter >> handleCurrentPageWithCurrentPage: aPage1 withNextPage: aPage2 [
+	| currentPage nextPage |
+	currentPage := aPage1.
+	nextPage := aPage2.
+	
+	currentPage ifNotNil: [
+		self hideAndPositionWithCurrentPage: currentPage withNextPage: nextPage.
+	].
+
+	currentPage ifNil: [
+		self routeHistory ifNotEmpty: [
+			currentPage := self routeHistory last page.
+			currentPage ifNotNil: [
+				self hideAndPositionWithCurrentPage: currentPage withNextPage: nextPage.
+			].
+		].
+	].
+
+	nextPage show.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:26'
+}
+SLGRouter >> hideAndPositionWithCurrentPage: aPage1 withNextPage: aPage2 [
+	| currentPage nextPage |
+	currentPage := aPage1.
+	nextPage := aPage2.
+	currentPage hide.
+	nextPage position: currentPage position.
 ]
 
 {
@@ -98,83 +155,33 @@ SLGRouter >> navigateTo: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 23:20'
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:38'
 }
 SLGRouter >> navigateToWithPath: aString [
-
 	self navigateToWithPath: aString withCurrentPage: nil withEnableHistory: true
-	"| route curPage |
-	
-	Transcript show: 'navigate to ', aString; cr.
-	route := self routes at: aString.
-	
-	self routeHistory size > 0 ifTrue: [
-		curPage := self routeHistory last.
-		Transcript show: curPage.
-		curPage == nil ifFalse: [
-			curPage page hide.
-			Transcript show: curPage page.
-			route page position: curPage page position.
-		].
-	].
-	
-	route page position: (aPage position).
-	route page show.
-	
-	self routeHistory add: route.
-	self currentRouteIndex: (self routeHistory size).
-	"
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 23:22'
-}
-SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage [
-	self navigateToWithPath: aString withCurrentPage: aPage withEnableHistory: true.
-	
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:03'
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:36'
 }
 SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistory: aBoolean [
-	| route curPage |
+	| nextRoute |
 
 	self routeHistory size > 0 ifTrue: [
 		Transcript show: 'From "', (self routeHistory last path) ,'" navigate to "', aString, '"'; cr.
 	].
-	route := self routes at: aString.
-	
-	self routeHistory size > 0 ifTrue: [
-		route == routeHistory last ifTrue: [
-			^false
-		].
-	].
-	
-	aPage == nil ifFalse: [
-			aPage hide.
-			route page position: aPage position.
-	].
 
-	aPage == nil ifTrue: [
-		self routeHistory size > 0 ifTrue: [
-		curPage := self routeHistory last.
-			curPage == nil ifFalse: [
-				curPage page hide.
-				route page position: curPage page position.
-			].
-		].
-	].
-
-	route page show.
-	route page updateScoreDisplay.
-	route page updateSubtopicScoreDisplay.
-	route page updateTopicScoreDisplay.
+	nextRoute := self getRouteWithRouteString: aString.
+	
+	(self canNavigateWithNextRoute: nextRoute) ifFalse: [ ^false ].
+	
+	self handleCurrentPageWithCurrentPage: aPage withNextPage: nextRoute page.
+	
+	self tryToRefreshPageWithPage: nextRoute page.
+	
 	aBoolean ifTrue: [
-		self routeHistory add: route.
-		self currentRouteIndex: (self routeHistory size).
+		self updateHistoryWithRoute: nextRoute.
 	].
 	
 ]
@@ -209,4 +216,28 @@ SLGRouter >> routes [
 }
 SLGRouter >> routes: anObject [
 	routes := anObject
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:31'
+}
+SLGRouter >> tryToRefreshPageWithPage: aPage [
+	| exists |
+	
+	exists := aPage respondsTo: #refresh.
+	
+	exists ifTrue: [
+		aPage refresh.
+	]
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:35'
+}
+SLGRouter >> updateHistoryWithRoute: aRoute [
+	self routeHistory add: aRoute.
+	self currentRouteIndex: (self routeHistory size).
 ]

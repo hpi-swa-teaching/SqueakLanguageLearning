@@ -540,6 +540,17 @@ AbstractPage >> navigateBack [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:33'
+}
+AbstractPage >> refresh [
+	"This method gets called everytime, when we navigate to this page with SLGRouter"
+	self updateScoreDisplay.
+	self updateSubtopicScoreDisplay.
+	self updateTopicScoreDisplay.
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'yegi 6/15/2024 00:40'
 }
