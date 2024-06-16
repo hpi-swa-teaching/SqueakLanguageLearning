@@ -51,6 +51,22 @@ SLGTaskView class >> failureMessage [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:44'
+}
+SLGTaskView class >> lightPastelGreen [
+	^Color r: 0.78 g: 1 b: 0.7
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:42'
+}
+SLGTaskView class >> lightPastelRed [
+	^Color r: 1 g: 0.7 b: 0.7
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:53'
 }
 SLGTaskView class >> pageExtent [
@@ -140,16 +156,18 @@ SLGTaskView class >> taskViewMargin [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'EB 6/13/2024 23:08'
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:46'
 }
 SLGTaskView >> checkResult [
 
 	(self result = 100)
 		ifTrue: [self printSuccess.
+			self statusDisplay color: self class lightPastelGreen.
 			SLGUserProgress userData markTaskAsCompleted: (self task id).
 			self task triggerEvent: #taskCompleted. ]
 		
-		ifFalse: [self printFailure]
+		ifFalse: [self printFailure.
+			self statusDisplay color: self class lightPastelRed]
 	
 		
 	
@@ -196,6 +214,35 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 	
 	^ codeField
 	
+	
+	
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:28'
+}
+SLGTaskView >> createStatusField [
+
+	| statusField |
+	
+	self status: (self createTextFieldWithContent: '' withBorder: false).
+	self status wrapFlag: false.
+	
+	statusField := Morph new 
+					extent: self class taskElementWidth @ 50px;
+					color: Color white;
+					cornerStyle: #rounded;
+					borderWidth: 3px;
+					borderColor: Color orange.
+					
+	statusField addMorph: status.
+	status position: statusField topLeft + (20px @ 15px).
+	
+	self addMorph: statusField.
+	
+	^statusField
+
 	
 	
 ]
@@ -260,7 +307,7 @@ SLGTaskView >> createTextFieldWithContent: aString [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/16/2024 04:42'
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:04'
 }
 SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
@@ -273,7 +320,7 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 					borderColor: Color veryLightGray].	"
 	textField
 		contents:  aString;
-		"wrapFlag: true;"
+		wrapFlag: true;
 		extent: self class taskElementWidth @ 0;
 		lock.
 	
@@ -407,28 +454,17 @@ SLGTaskView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/16/2024 04:48'
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:35'
 }
 SLGTaskView >> setupWith: anInteractiveMorph [
 
-	| submitbutton descriptionField questionField codeField fieldsArray fieldColumns statusField |
+	| submitbutton descriptionField questionField codeField fieldsArray fieldColumns "statusField" |
 	
 	submitbutton := self createSubmitButton.
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
-	self status: (self createTextFieldWithContent: '' withBorder: false)."true)."
-	
-	"YEGI"
-	statusField := Morph new 
-					extent: self class taskElementWidth @ 50px;
-					color: Color white;
-					cornerStyle: #rounded;
-					borderWidth: 3px;
-					borderColor: Color orange.
-					
-	statusField addMorph: status.
-	status position: statusField topLeft + (20px @ 15px).
-	""
-	
+	"self status: (self createTextFieldWithContent: '' withBorder: true)."
+
+	self statusDisplay: (self createStatusField).
 	self taskQuestion ifNotNil: [
 		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true)].
 	self code ifNotNil: [
@@ -437,7 +473,7 @@ SLGTaskView >> setupWith: anInteractiveMorph [
 	fieldsArray := OrderedCollection new.
 	
 	"fieldsArray add: submitbutton; add: status; add: anInteractiveMorph."
-	fieldsArray add: submitbutton; add: statusField; add: anInteractiveMorph.
+	fieldsArray add: submitbutton; add: statusDisplay; add: anInteractiveMorph.
 	self code ifNotNil: [fieldsArray add: codeField].
 	self taskQuestion ifNotNil: [fieldsArray add: questionField].
 	fieldsArray add: descriptionField.
@@ -463,6 +499,22 @@ SLGTaskView >> status [
 }
 SLGTaskView >> status: aTextMorph [
 	status := aTextMorph
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:37'
+}
+SLGTaskView >> statusDisplay [
+	^statusDisplay
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:36'
+}
+SLGTaskView >> statusDisplay: anObject [
+	statusDisplay:= anObject
 ]
 
 {
