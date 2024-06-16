@@ -40,13 +40,25 @@ SLGRouter >> canNavigateWithNextRoute: aRoute [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:47'
+	#'squeak_changestamp' : 'Alexander Netz 6/14/2024 22:33'
+}
+SLGRouter >> closeAllWindows [
+	
+	self routes do: [:r |
+			r page delete.
+	].
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:52'
 }
 SLGRouter >> closeWindow [
 	| curRoute |
 
 	curRoute := self routeHistory last.
 	curRoute page delete.
+	self routes removeKey: curRoute path.
 ]
 
 {
