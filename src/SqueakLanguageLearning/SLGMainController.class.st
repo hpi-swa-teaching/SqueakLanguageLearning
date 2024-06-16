@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'routerController',
-		'navigationController',
 		'dataAccessService'
 	],
 	#category : #'SqueakLanguageLearning-Controllers'
