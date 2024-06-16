@@ -216,18 +216,21 @@ SLGDragAndDropView >> itemSlotMap: anObject [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'yegi 6/16/2024 03:58'
+	#'squeak_changestamp' : 'SW 6/16/2024 12:51'
 }
 SLGDragAndDropView >> passUserInput [
 
 	| itemsAtSlots anAnswer targetCorrectMap |
 	
-	targetCorrectMap ifNil:  [ targetCorrectMap := OrderedDictionary new ].
-	itemsAtSlots ifNil: [ itemsAtSlots := OrderedCollection new ].
+	"targetCorrectMap ifNil:  [ targetCorrectMap := OrderedDictionary new ].
+	itemsAtSlots ifNil: [ itemsAtSlots := OrderedCollection new ]."
+	targetCorrectMap := OrderedDictionary new.
+	itemsAtSlots := OrderedCollection new.
 	itemSlotMap keysAndValuesDo: [:slot :item |
 		(item isKindOf: DraggableItemMorph) ifTrue: [
 			itemsAtSlots add: item label ].
-		targetCorrectMap at: slot put: (item label = slot label) ].
+		item ifNotNil: [
+		targetCorrectMap at: slot put: (item label = slot label) ]].
 	
 	targetCorrectMap keysAndValuesDo: [:target :correct |
             target color: (correct ifTrue: [AbstractPage pastelGreen] ifFalse: [self class pastelRed]).
