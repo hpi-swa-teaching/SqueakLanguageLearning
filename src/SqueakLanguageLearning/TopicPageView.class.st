@@ -19,7 +19,7 @@ TopicPageView class >> newWithTopic: aTopic andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:04'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:23'
 }
 TopicPageView >> constructView [
 	| rows cols |
@@ -28,9 +28,9 @@ TopicPageView >> constructView [
 	rows add: self getDescription.
 	rows addAll: self getSubtopicButtons.
 
-	cols := SLGLayout columnWithMorphs: rows withGap: 20.
+	cols := SLGLayout columnWithMorphs: rows withGap: 10px.
 	
-	cols center: self center.
+	cols center: self center + (0 @ self class iconMarginHeight * 0.3).
 	
 	self body addMorph: cols.
 ]
@@ -60,22 +60,27 @@ TopicPageView >> getDescription [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:17'
+	#'squeak_changestamp' : 'yegi 6/16/2024 04:00'
 }
 TopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
-	|routeString  |
+	|routeString button |
 	routeString := aString.
 	
 	self controller routerController addRouteWithPath: 
 	routeString withPage: (self createSubtopicPageWithSubtopic: aSubtopic).
 	
-	^SLGNavigationButtonGen new
+	button := SLGNavigationButtonGen new
 		label: aSubtopic title;
 		width: self class buttonWidth;
+		borderWidth: 2;
 		 onClickWithBlock: [
-			self controller routerController navigateTo: routeString.
-		];
-		yourself.
+			self controller routerController navigateTo: routeString. ].
+	
+	(aSubtopic isCompleted) ifTrue: [button color: self class pastelGreen.].
+	
+	aSubtopic when: #subtopicCompleted evaluate: [button color: self class pastelGreen.].
+	
+	^button
 
 ]
 
@@ -92,7 +97,7 @@ TopicPageView >> getSubtopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:50'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:30'
 }
 TopicPageView >> initializeWithTopic: aTopic andController: aController [
 	
@@ -102,6 +107,8 @@ TopicPageView >> initializeWithTopic: aTopic andController: aController [
 	self addTitle: aTopic title.
 	
 	self constructView.
+	
+	aTopic when: #topicCompleted evaluate: [self updateTopicScoreDisplay].
 	
 	
 ]

@@ -1,16 +1,51 @@
 [
-	SquotTonelMapper {
-		#package : MCPackage {
-			#name : 'SqueakLanguageLearning'
-		},
+	SquotImageMapper {
 		#path : FSAbsolutePath [
-			'src'
-		]
+			'assets',
+			'logo-80.png'
+		],
+		#encoding : Class [ #PNGReadWriter ]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'badge-silver-30.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'badge-gold-30.png'
+		],
+		#encoding : @4
 	},
 	SquotTonelMapper {
 		#package : MCPackage {
 			#name : 'MyOwnCategory'
 		},
-		#path : @4
+		#path : FSAbsolutePath [
+			'src'
+		]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'cheese-30.png'
+		],
+		#encoding : @4
+	},
+	SquotTonelMapper {
+		#package : MCPackage {
+			#name : 'SqueakLanguageLearning'
+		},
+		#path : @11
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'logo-100.png'
+		],
+		#encoding : @4
 	}
 ]

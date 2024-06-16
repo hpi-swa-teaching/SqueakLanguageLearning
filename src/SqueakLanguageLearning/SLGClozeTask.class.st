@@ -9,11 +9,12 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'SW 6/8/2024 14:28'
+	#'squeak_changestamp' : 'EB 6/12/2024 22:10'
 }
-SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCloze: aClozeString withAnswer: anAnswerString [
+SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCloze: aClozeString withAnswer: anAnswerString withID: anID [
 
 	^ self new
+			id: anID;
 			question: aQuestionString;
 			cloze: aClozeString;
 			correctAnswer: anAnswerString;
@@ -23,11 +24,12 @@ SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCloze: aClozeStr
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 19:47'
+	#'squeak_changestamp' : 'EB 6/12/2024 22:10'
 }
-SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCode: aCodeString withCloze: aClozeString withAnswer: anAnswerString [
+SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCode: aCodeString withCloze: aClozeString withAnswer: anAnswerString withID: anID [
 
 	^ self new
+			id: anID;
 			question: aQuestionString;
         		code: aCodeString;
 			cloze: aClozeString;

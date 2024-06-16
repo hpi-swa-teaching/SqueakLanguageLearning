@@ -57,7 +57,7 @@ LessonPageView class >> taskViewExtent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:32'
+	#'squeak_changestamp' : 'EB 6/14/2024 13:21'
 }
 LessonPageView >> createViewForTask: aTask [
 
@@ -65,8 +65,8 @@ LessonPageView >> createViewForTask: aTask [
 	dict := self getTaskTypeDictionary.
 	key := (aTask  class name) asString.
 	method := dict at: key ifAbsent: [].
-	targetClass := method first.
-	methodName := method second.
+	targetClass := method first.			"Class name e.g SLGDragAndDropView, SLGClozeView,.."
+	methodName := method second.	"Constructor of the Class above"
 	parameters := Array new: 1.
 	parameters at: 1 put: aTask.
 	
@@ -87,7 +87,7 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:13'
+	#'squeak_changestamp' : 'EB 6/14/2024 19:58'
 }
 LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
@@ -107,6 +107,6 @@ LessonPageView >> initializeWithLesson: aLesson andController: aController [
 	
 	self body addMorph: taskView. 
 	
-	"tasks at: 1 put: 'Task Title'." "TODO substitute with the one stored in DataAccessService"
+	aLesson task when: #taskCompleted evaluate: [self updateScoreDisplay].
 	
 ]

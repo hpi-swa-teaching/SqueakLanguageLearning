@@ -30,7 +30,7 @@ HomePageView class >> newWithTopics: topics andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:26'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:18'
 }
 HomePageView >> constructView [
 	| rows cols |
@@ -40,9 +40,11 @@ HomePageView >> constructView [
 
 	cols := SLGLayout columnWithMorphs: rows withGap: 20.
 	
-	cols center: self center.
+	cols center: self body center + (0 @ self body height * 0.1).
 	
 	self body addMorph: cols.
+	
+	
 ]
 
 {
@@ -58,10 +60,10 @@ HomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:12'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:29'
 }
 HomePageView >> getTopicButtonWithTopic: aTopic [
-	| routeString |
+	| routeString button |
 	
 	routeString := ('/home/', aTopic title).
 	
@@ -69,13 +71,21 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 		addRouteWithPath: routeString 
 		withPage: (self createTopicPageWithTopic: aTopic).
 	
-	^SLGNavigationButtonGen new
+	button := SLGNavigationButtonGen new
 		label: aTopic title;
 		width: self class buttonWidth;
+		height: 40px;
+		borderWidth: 3px;
+		borderColor: Color orange;
+		cornerRadius: 15px;
 		 onClickWithBlock: [
-			self controller routerController navigateTo: routeString.
-		];
-		yourself.
+			self controller routerController navigateTo: routeString. ].
+		
+	(aTopic isCompleted) ifTrue: [button color: self class pastelGreen.].
+	
+	aTopic when: #topicCompleted evaluate: [button color: self class pastelGreen.].
+	
+	^button
 ]
 
 {
@@ -90,12 +100,12 @@ HomePageView >> getTopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:15'
+	#'squeak_changestamp' : 'yegi 6/15/2024 14:53'
 }
 HomePageView >> initializeWithController: aController [
 	super initializeWithController: aController.
 	self hideBackButton.
-	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
+	self addTitle: 'Welcome to SqueakLingo!'.
 	self topics: self controller dataAccessService topics.
 	self constructView.
 ]

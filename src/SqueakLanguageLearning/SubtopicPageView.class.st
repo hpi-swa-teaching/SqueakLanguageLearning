@@ -40,28 +40,37 @@ SubtopicPageView >> constructView [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:13'
+	#'squeak_changestamp' : 'yegi 6/16/2024 04:00'
 }
 SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRouteKey: aString [
-	| routeKey index| 
+	| routeKey index button | 
 	
 	routeKey := aString.
 	index := anInt.
 	
 	self controller routerController 
-		addRouteWithPath: routeKey withPage: (LessonPageView new initializeWithLesson: aLesson andController: controller).
+		addRouteWithPath: routeKey 
+		withPage: (LessonPageView new initializeWithLesson: aLesson andController: controller).
 		
-		^ SLGNavigationButtonGen new
+		button := SLGNavigationButtonGen new
 			label: ('Lesson ', index);
 			width: self class buttonWidth;
 			 onClickWithBlock: [
 				self controller routerController navigateTo: routeKey.
 			].
+		
+		((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
+			ifTrue: [button color: self class pastelGreen.].
+		
+		aLesson task when: #taskCompleted evaluate: [button color: self class pastelGreen.].
+	
+		^button
+		
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:44'
+	#'squeak_changestamp' : 'yegi 6/13/2024 21:25'
 }
 SubtopicPageView >> getLessonButtons [
 	|index|
@@ -71,8 +80,8 @@ SubtopicPageView >> getLessonButtons [
 	^self subtopic lessons collect: [:lesson |
 		| button |
 		button := self getLessonButtonWithLesson: lesson
-			withIndex: index
-			withRouteKey: ('/home/', self topic title, '/', self subtopic title, '/', index).
+						withIndex: index
+						withRouteKey: ('/home/', self topic title, '/', self subtopic title, '/', index).
 			
 		index := index + 1.
 		
@@ -82,7 +91,7 @@ SubtopicPageView >> getLessonButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:40'
+	#'squeak_changestamp' : 'EB 6/14/2024 20:30'
 }
 SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
 	
@@ -92,6 +101,8 @@ SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andContro
 	self addTitle: aSubtopic title.
 	
 	self constructView.
+	
+	aSubtopic when: #subtopicCompleted evaluate: [self updateSubtopicScoreDisplay].
 ]
 
 {

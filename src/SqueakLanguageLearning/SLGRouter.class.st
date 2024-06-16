@@ -137,7 +137,7 @@ SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:24'
+	#'squeak_changestamp' : 'yegi 6/14/2024 22:03'
 }
 SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistory: aBoolean [
 	| route curPage |
@@ -169,7 +169,9 @@ SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistor
 	].
 
 	route page show.
-	
+	route page updateScoreDisplay.
+	route page updateSubtopicScoreDisplay.
+	route page updateTopicScoreDisplay.
 	aBoolean ifTrue: [
 		self routeHistory add: route.
 		self currentRouteIndex: (self routeHistory size).

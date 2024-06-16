@@ -6,27 +6,43 @@ Class {
 		'header',
 		'body',
 		'footer',
-		'backButton'
+		'score',
+		'scoreDisplay',
+		'topicScore',
+		'subtopicScore',
+		'topicScoreDisplay',
+		'subtopicScoreDisplay'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:51'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:41'
 }
-AbstractPage class >> buttonWidth [
+AbstractPage class >> buttonHeight [
 
-	^ (500 * 0.55) px
+	^ 30px
+	
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:51'
+	#'squeak_changestamp' : 'yegi 6/15/2024 10:44'
+}
+AbstractPage class >> buttonWidth [
+
+	^ (500 * 0.4) px
+	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:22'
 }
 AbstractPage class >> descriptionFont [
 
-	^ (35 * 0.55) px
+	^ (35 * 0.5) px "0.55) px"
 ]
 
 {
@@ -45,6 +61,24 @@ AbstractPage class >> descriptionMargin [
 AbstractPage class >> descriptionWidth [
 
 	^ self pageWidth - (self descriptionMargin * 2)
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/14/2024 17:14'
+}
+AbstractPage class >> iconMarginHeight [
+
+	^ 100px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/14/2024 17:13'
+}
+AbstractPage class >> iconMarginWidth [
+
+	^ 100px
 ]
 
 {
@@ -95,7 +129,50 @@ AbstractPage class >> pageWidth [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+	#'squeak_changestamp' : 'yegi 6/15/2024 00:45'
+}
+AbstractPage class >> pastelGreen [
+	^Color r: 0.39 g: 0.81 b: 0.53
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 22:13'
+}
+AbstractPage class >> scoreDisplayWidth [
+
+	^ 150px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 22:08'
+}
+AbstractPage class >> scoreFontSize [
+
+	^ 20px
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:05'
+}
+AbstractPage class >> softGreen [
+	^Color r: 0.54 g: 0.97 b: 0.56
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:02'
+}
+AbstractPage class >> softYellow [
+	^Color r: 1 g: 0.8 b: 0.5
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:42'
 }
 AbstractPage >> addBackButton [
 
@@ -105,11 +182,13 @@ AbstractPage >> addBackButton [
 		label: 'Back';
 		"center: self header leftCenter + (60@0);"
 		"width: 100;"
+		borderColor: Color orange;
+		height: self class buttonHeight;
 		onClickWithBlock: [
 			self controller routerController navigateBack.
 		].
 	
-	backButton width: backButton width + 40.
+	backButton width: backButton width + 40px.
 	backButton center: self header leftCenter + ((backButton width)/2 @ 0) + ((self header height - backButton height)/2 @ 0).
 	self backButton: backButton.
 	self header addMorph: backButton.
@@ -117,27 +196,85 @@ AbstractPage >> addBackButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/11/2024 10:06'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:41'
 }
 AbstractPage >> addCloseButton [
 	| closeButton |
 	
 	closeButton := SLGNavigationButtonGen new
 		label: 'Close';
-		"center: self header rightCenter - (70@0);"
-		"width: 100;"
+		borderColor: Color orange;
+		height: self class buttonHeight;
+		"color: Color veryVeryLightGray;"
 		onClickWithBlock: [
 			self controller routerController closeWindow.
 		].
 	
 	closeButton width: closeButton width + 40.
 	closeButton center: self header rightCenter - ((closeButton width)/2 @ 0) - ((self header height - closeButton height)/2 @ 0).
+	
 	self header addMorph: closeButton.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 21:49'
+	#'squeak_changestamp' : 'yegi 6/16/2024 00:59'
+}
+AbstractPage >> addHomeButton [
+
+	| imageMorph  homeButton  |
+	
+	homeButton := SLGNavigationButtonGen new
+		color: Color transparent;
+		label: '';
+		borderWidth: 0;   
+		onClickWithBlock: [
+			self controller routerController navigateTo: '/home'.
+		].
+	
+	imageMorph := (((GitAssetLoader for: 'SqueakLanguageLearning') 
+										loadForm: '/assets/logo-80.png')
+										magnifyBy: 1px) asMorph.
+
+	
+	homeButton addMorph: imageMorph.
+	
+	homeButton extent: imageMorph extent * 0.7.
+	homeButton center: self header center- (0 @ 25px).
+	imageMorph center: homeButton center .
+	
+	
+	self header addMorph: homeButton
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 02:03'
+}
+AbstractPage >> addResetButton [
+
+	| resetButton |
+	
+	resetButton := PluggableButtonMorph new
+					onColor: Color veryVeryLightGray offColor: Color white;
+					label: 'Reset';
+					textColor: Color darkGray;
+					borderColor: Color white;
+					borderWidth: 0;
+					cornerStyle: #rounded;
+					target: self;
+					actionSelector: #resetAction.
+				
+	
+	resetButton center: self footer center.
+	
+	self footer addMorph: resetButton.
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:20'
 }
 AbstractPage >> addTitle: aString [
 
@@ -145,9 +282,13 @@ AbstractPage >> addTitle: aString [
 	
 	title := SLGTextGen new
 		setText: aString;
-		center: self header center.
+		color: Color black;
+		setFontSize: 20px;
+		center: self body center - (self body width * 0.03 @ 0) ;
+		top: self body top + (self body height * 0.04).
 		
-        self header addMorph: title
+
+        self body addMorph: title
 ]
 
 {
@@ -188,6 +329,96 @@ AbstractPage >> body: anObject [
 }
 AbstractPage >> controller [
 	^ controller
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:38'
+}
+AbstractPage >> displayExperiencePoint [
+	
+	| cheeseImg marginwidth marginHeight |
+	
+	"adding morphs"
+	"cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/badge-main.png'.
+	cheeseImg scaleFactor: 0.5."	
+	cheeseImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
+										loadForm: '/assets/cheese-30.png') 
+										magnifyBy: 1px) asMorph.
+	
+	scoreDisplay := SLGMultilineTextGen new setText: score asString.
+	scoreDisplay width: self class scoreDisplayWidth; 
+				setFontSize: self class scoreFontSize;
+				color: Color orange.
+	
+	"positioning the morphs"
+	marginwidth := self class iconMarginWidth.
+	marginHeight := self class iconMarginHeight.
+	cheeseImg addMorph: scoreDisplay.
+	cheeseImg center: self header center - (marginwidth * 0.8 @ 0) + (0 @ marginHeight * 0.2) .
+ 	scoreDisplay center: cheeseImg center + (marginwidth * 0.95 @ 0).
+	
+	self header addMorph: cheeseImg.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:39'
+}
+AbstractPage >> displayMainBadge [
+	
+	| badgeImg marginwidth marginHeight |
+
+	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
+										loadForm: '/assets/badge-gold-30.png') 
+										magnifyBy: 1px) asMorph.
+	
+	"TODO for BADGE COUNTING"
+	"badgeCount := "
+	topicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
+	topicScoreDisplay width: self class scoreDisplayWidth; 
+				setFontSize: self class scoreFontSize;
+				color: Color orange.
+	
+	"positioning the morphs"
+	marginwidth := AbstractPage iconMarginWidth.
+	marginHeight := AbstractPage iconMarginHeight.
+	badgeImg addMorph: topicScoreDisplay.
+	badgeImg center: self header center + (marginwidth * 3 @ marginHeight  * 0.2).
+ 	topicScoreDisplay center: badgeImg center + (marginwidth * 0.95 @ 0).
+	
+	self header addMorph: badgeImg.
+
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:35'
+}
+AbstractPage >> displaySubBadge [
+	
+	| badgeImg marginwidth marginHeight |
+
+	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
+										loadForm: '/assets/badge-silver-30.png') 
+										magnifyBy: 1px) asMorph.
+	
+	"TODO for BADGE COUNTING"
+	"badgeCount := "
+	subtopicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
+	subtopicScoreDisplay width: self class scoreDisplayWidth; 
+				setFontSize: self class scoreFontSize;
+				color: Color orange.
+	
+	"positioning the morphs"
+	marginwidth := AbstractPage iconMarginWidth.
+	marginHeight := AbstractPage iconMarginHeight.
+	badgeImg addMorph: subtopicScoreDisplay.
+	badgeImg center: self header center + (0 @ marginHeight  * 0.2) - (marginwidth * 0.05 @ 0).
+ 	subtopicScoreDisplay center: badgeImg center + (marginwidth * 0.95 @ 0).
+	
+	self header addMorph: badgeImg.
+
 ]
 
 {
@@ -232,42 +463,49 @@ AbstractPage >> hideBackButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/11/2024 21:53'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:34'
 }
 AbstractPage >> initializeWithController: aController [
 	
-	|width height margin border|
+	| width height margin border |
 	
 	super initialize.
 	
 	controller := aController.
+	score := SLGUserProgress userData score.
+	subtopicScore := SLGUserProgress userData subtopicScore.
+	topicScore := SLGUserProgress userData topicScore.
+	
 	width := self class pageWidth.
 	height := self class pageHeight.
-	margin := self class pageMargin.
 	border := self class pageBorder.
-
+	
 	self extent: width@height;
 		"extent: 1404@904;"
 		color: Color white; 
-		borderWidth: border;
-		borderColor: Color orange;
 		center: Display center.
+
+	margin := 2px.
 			
 	self header: (Morph new
 		width: self width - (2 * margin);
-		height: (10 * (self height - (2 * margin)))/100; "header has 10% of height of page"
+		height: (12 * (self height - (2 * margin)))/100; "header has 10% of height of page"
 		position: self position + (margin asPoint);
-		color: Color white).
+		borderWidth: 1;
+		color: Color white).	
 		
 	self body: (Morph new
-		width: self width - (2 * margin);
-		height: (80 * (self height - (2 * margin)))/100; "body has 80% of height of page"
-		position: self position + (margin @ (self header height + margin));
-		color: Color white).
+		width: self width - 50px;
+		height: (83 * (self height - (2 * margin)))/100; 
+		position: self position;" + (margin @ ((self header height * 3))); ""+ margin));"
+		cornerStyle: #rounded;
+		cornerRadius: 20;
+		center: self center + (0 @ self header height * 0.3); " (margin @ (self header height + margin));"
+		color: self class softYellow). 
 		
 	self footer: (Morph new
 		width: self width - (2 * margin);
-		height: (10 * (self height - (2 * margin)))/100; "footer has 10% of height of page"
+		height: (5 * (self height - (2 * margin)))/100; 
 		position: self position + (margin @ (self header height + self body height + margin));
 		color: Color white).
 		
@@ -277,6 +515,11 @@ AbstractPage >> initializeWithController: aController [
 	
 	self addBackButton.
 	self addCloseButton.
+	self displayExperiencePoint.
+	self displaySubBadge.
+	self displayMainBadge.
+	self addHomeButton.
+	self addResetButton.
 		
 	^self
 	
@@ -297,9 +540,57 @@ AbstractPage >> navigateBack [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/15/2024 00:40'
+}
+AbstractPage >> resetAction [
+
+		SLGUserProgress reset.
+		SLGMainController new.
+		self controller routerController closeWindow.
+]
+
+{
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
 }
 AbstractPage >> showBackButton [
 	self backButton show.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/14/2024 20:04'
+}
+AbstractPage >> updateScoreDisplay [
+	
+	score := SLGUserProgress userData score.
+	"scoreDisplay ifNotNil: [ scoreDisplay setText: score asString. ]"
+	scoreDisplay setText: score asString.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/14/2024 22:05'
+}
+AbstractPage >> updateSubtopicScoreDisplay [
+	
+	subtopicScore := SLGUserProgress userData subtopicScore.
+	subtopicScoreDisplay setText: subtopicScore asString.
+	
+	Transcript show: 'You have  completed ', subtopicScore, ' subtopics!'; cr.
+	"Transcript show: 'You have earned a badge for a subtopic ""', self subtopic title, '""'; cr." 
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/14/2024 22:06'
+}
+AbstractPage >> updateTopicScoreDisplay [
+	
+	topicScore := SLGUserProgress userData topicScore.
+	topicScoreDisplay setText: topicScore asString.
+	
+	Transcript show: 'You have completed ', topicScore, ' topics!'; cr.
+	"Transcript show: 'You have earned a badge for a topic ""', self topic title,'""'; cr."
 ]
