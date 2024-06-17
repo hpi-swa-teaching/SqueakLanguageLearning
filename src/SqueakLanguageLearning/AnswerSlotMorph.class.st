@@ -18,6 +18,14 @@ AnswerSlotMorph class >> newWithLabel: aLabel [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:49'
+}
+AnswerSlotMorph class >> slotExtent [
+	^90px @ 40px
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 23:12'
 }
 AnswerSlotMorph >> initializeWithLabel: aLabel [
@@ -40,15 +48,15 @@ AnswerSlotMorph >> label [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 18:47'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:49'
 }
 AnswerSlotMorph >> setup [
 
 	self color: Color white;
-			extent: 120 @ 60;"90;"
-			borderWidth: 2;
+			extent: self class slotExtent;
+			borderWidth: 2px;
 			borderColor: Color darkGray;
 			cornerStyle: #rounded;
-			cornerRadius: 10.
+			cornerRadius: 10px.
 			
 ]

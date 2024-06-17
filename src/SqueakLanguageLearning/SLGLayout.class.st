@@ -10,7 +10,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:02'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:15'
 }
 SLGLayout class >> columnWithMorphs: anArray [
 	| container maxWidth sumHeight |
@@ -47,6 +47,36 @@ SLGLayout class >> columnWithMorphs: anArray withGap: anInt [
 	container := self columnWithMorphs: anArray.
 	container cellGap: anInt.
 	
+	^container
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:19'
+}
+SLGLayout class >> columnWithMorphsReversed: anArray withGap: anInt [
+	| container maxWidth sumHeight |
+	
+	container := Morph new.
+	
+	maxWidth := (anArray collect: [:a | a width]) inject: 0 into: [:a :c | (a > c)
+	   ifTrue: [a]
+	   ifFalse: [c]
+	].
+	sumHeight := 0. anArray do: [:a | sumHeight := sumHeight + (a height)]. sumHeight.	
+	
+	container width: maxWidth.
+	container height: sumHeight.
+	
+	container layoutPolicy: TableLayout new.
+	container listDirection: #topToBottom.
+	container color: Color transparent.
+	
+	anArray do: [:each |
+		container addMorph: each.
+	].
+	container cellGap: anInt.
+
 	^container
 ]
 

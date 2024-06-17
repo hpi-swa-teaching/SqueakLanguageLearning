@@ -18,29 +18,40 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:12'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:41'
+}
+AbstractPage class >> buttonHeight [
+
+	^ 30px
+	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 10:44'
 }
 AbstractPage class >> buttonWidth [
 
-	^ 500
+	^ (500 * 0.4) px
+	
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:18'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:22'
 }
 AbstractPage class >> descriptionFont [
 
-	^ 35
+	^ (35 * 0.5) px "0.55) px"
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 16:26'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:51'
 }
 AbstractPage class >> descriptionMargin [
 
-	^ 100
+	^ (100 * 0.55) px
 ]
 
 {
@@ -50,15 +61,6 @@ AbstractPage class >> descriptionMargin [
 AbstractPage class >> descriptionWidth [
 
 	^ self pageWidth - (self descriptionMargin * 2)
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/14/2024 17:19'
-}
-AbstractPage class >> iconFont [
-
-	^ 18px
 ]
 
 {
@@ -91,53 +93,86 @@ AbstractPage class >> newWithController: aController [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 16:50'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
 }
 AbstractPage class >> pageBorder [
 
-	^ 2
+	^ 2 px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:52'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
 }
 AbstractPage class >> pageHeight [
 
-	^ 1204
+	^ (1204 * 0.55) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 13:20'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
 }
 AbstractPage class >> pageMargin [
 
-	^ 2
+	^ 2 px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 09:52'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
 }
 AbstractPage class >> pageWidth [
 
-	^ 1604
+	^ (1604 * 0.55) px
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 23:35'
+	#'squeak_changestamp' : 'yegi 6/15/2024 00:45'
+}
+AbstractPage class >> pastelGreen [
+	^Color r: 0.39 g: 0.81 b: 0.53
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 22:13'
+}
+AbstractPage class >> scoreDisplayWidth [
+
+	^ 150px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 22:08'
+}
+AbstractPage class >> scoreFontSize [
+
+	^ 20px
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:05'
+}
+AbstractPage class >> softGreen [
+	^Color r: 0.54 g: 0.97 b: 0.56
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/15/2024 01:02'
 }
 AbstractPage class >> softYellow [
-
 	^Color r: 1 g: 0.8 b: 0.5
 	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 11:38'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:42'
 }
 AbstractPage >> addBackButton [
 
@@ -145,23 +180,23 @@ AbstractPage >> addBackButton [
 	
 	backButton := SLGNavigationButtonGen new
 		label: 'Back';
+		"center: self header leftCenter + (60@0);"
+		"width: 100;"
 		borderColor: Color orange;
-		height: 50;
-		"color: Color veryVeryLightGray;"
+		height: self class buttonHeight;
 		onClickWithBlock: [
 			self controller routerController navigateBack.
 		].
 	
-	backButton width: backButton width + 40.
+	backButton width: backButton width + 40px.
 	backButton center: self header leftCenter + ((backButton width)/2 @ 0) + ((self header height - backButton height)/2 @ 0).
-	
+	self backButton: backButton.
 	self header addMorph: backButton.
-	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 11:39'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:41'
 }
 AbstractPage >> addCloseButton [
 	| closeButton |
@@ -169,7 +204,7 @@ AbstractPage >> addCloseButton [
 	closeButton := SLGNavigationButtonGen new
 		label: 'Close';
 		borderColor: Color orange;
-		height: 50;
+		height: self class buttonHeight;
 		"color: Color veryVeryLightGray;"
 		onClickWithBlock: [
 			self controller routerController closeWindow.
@@ -183,9 +218,9 @@ AbstractPage >> addCloseButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 16:32'
+	#'squeak_changestamp' : 'yegi 6/16/2024 00:59'
 }
-AbstractPage >> addHomeButtom [
+AbstractPage >> addHomeButton [
 
 	| imageMorph  homeButton  |
 	
@@ -198,14 +233,15 @@ AbstractPage >> addHomeButtom [
 		].
 	
 	imageMorph := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/logoCircle-small.png') 
-										magnifyBy: 1) asMorph.
+										loadForm: '/assets/logo-80.png')
+										magnifyBy: 1px) asMorph.
+
 	
 	homeButton addMorph: imageMorph.
 	
-	homeButton extent: imageMorph extent * 0.5.
-	homeButton center: self header center.
-	imageMorph center: homeButton center + (0 @ -40).
+	homeButton extent: imageMorph extent * 0.7.
+	homeButton center: self header center- (0 @ 25px).
+	imageMorph center: homeButton center .
 	
 	
 	self header addMorph: homeButton
@@ -213,28 +249,22 @@ AbstractPage >> addHomeButtom [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:18'
+	#'squeak_changestamp' : 'yegi 6/15/2024 02:03'
 }
 AbstractPage >> addResetButton [
 
 	| resetButton |
 	
-	resetButton := SLGNavigationButtonGen new
-		label: 'reset';
-		height: 50;
-		onClickWithBlock: [
-			SLGUserProgress reset.
-			SLGMainController new.
-			self controller routerController closeWindow.
-		].
-	"resetButton := PluggableButtonMorph new
+	resetButton := PluggableButtonMorph new
 					onColor: Color veryVeryLightGray offColor: Color white;
 					label: 'Reset';
 					textColor: Color darkGray;
 					borderColor: Color white;
 					borderWidth: 0;
 					cornerStyle: #rounded;
-					on: #mouseUp send:  to: self."
+					target: self;
+					actionSelector: #resetAction.
+				
 	
 	resetButton center: self footer center.
 	
@@ -244,7 +274,7 @@ AbstractPage >> addResetButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 18:32'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:20'
 }
 AbstractPage >> addTitle: aString [
 
@@ -253,12 +283,28 @@ AbstractPage >> addTitle: aString [
 	title := SLGTextGen new
 		setText: aString;
 		color: Color black;
-		setFontSize: 40;
+		setFontSize: 20px;
 		center: self body center - (self body width * 0.03 @ 0) ;
-		top: self body top + (self body height * 0.05).
+		top: self body top + (self body height * 0.04).
 		
 
         self body addMorph: title
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:13'
+}
+AbstractPage >> backButton [
+	^ backButton
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:13'
+}
+AbstractPage >> backButton: anObject [
+	backButton := anObject
 ]
 
 {
@@ -287,7 +333,7 @@ AbstractPage >> controller [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 21:48'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:38'
 }
 AbstractPage >> displayExperiencePoint [
 	
@@ -297,49 +343,49 @@ AbstractPage >> displayExperiencePoint [
 	"cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/badge-main.png'.
 	cheeseImg scaleFactor: 0.5."	
 	cheeseImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/cheese_small.png') 
-										magnifyBy: 0.5) asMorph.
+										loadForm: '/assets/cheese-30.png') 
+										magnifyBy: 1px) asMorph.
 	
 	scoreDisplay := SLGMultilineTextGen new setText: score asString.
-	scoreDisplay width: 150; 
-				setFontSize: AbstractPage iconFont;
+	scoreDisplay width: self class scoreDisplayWidth; 
+				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
 	"positioning the morphs"
-	marginwidth := AbstractPage iconMarginWidth.
-	marginHeight := AbstractPage iconMarginHeight.
+	marginwidth := self class iconMarginWidth.
+	marginHeight := self class iconMarginHeight.
 	cheeseImg addMorph: scoreDisplay.
-	cheeseImg center: self header center + (0 @ marginHeight * 0.25) - (marginwidth * 0.7 @ 0).
- 	scoreDisplay center: cheeseImg center + (marginwidth * 0.55 @ 0).
+	cheeseImg center: self header center - (marginwidth * 0.8 @ 0) + (0 @ marginHeight * 0.2) .
+ 	scoreDisplay center: cheeseImg center + (marginwidth * 0.95 @ 0).
 	
 	self header addMorph: cheeseImg.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:00'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:39'
 }
 AbstractPage >> displayMainBadge [
 	
 	| badgeImg marginwidth marginHeight |
 
 	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/badge-main.png') 
-										magnifyBy: 0.7) asMorph.
+										loadForm: '/assets/badge-gold-30.png') 
+										magnifyBy: 1px) asMorph.
 	
 	"TODO for BADGE COUNTING"
 	"badgeCount := "
 	topicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
-	topicScoreDisplay width: 150; 
-				setFontSize: AbstractPage iconFont;
+	topicScoreDisplay width: self class scoreDisplayWidth; 
+				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
 	"positioning the morphs"
 	marginwidth := AbstractPage iconMarginWidth.
 	marginHeight := AbstractPage iconMarginHeight.
 	badgeImg addMorph: topicScoreDisplay.
-	badgeImg center: self header center + (marginwidth * 2.5 @ marginHeight  * 0.25).
- 	topicScoreDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
+	badgeImg center: self header center + (marginwidth * 3 @ marginHeight  * 0.2).
+ 	topicScoreDisplay center: badgeImg center + (marginwidth * 0.95 @ 0).
 	
 	self header addMorph: badgeImg.
 
@@ -347,29 +393,29 @@ AbstractPage >> displayMainBadge [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:01'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:35'
 }
 AbstractPage >> displaySubBadge [
 	
 	| badgeImg marginwidth marginHeight |
 
 	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
-										loadForm: '/assets/badge_silver.png') 
-										magnifyBy: 0.7) asMorph.
+										loadForm: '/assets/badge-silver-30.png') 
+										magnifyBy: 1px) asMorph.
 	
 	"TODO for BADGE COUNTING"
 	"badgeCount := "
 	subtopicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
-	subtopicScoreDisplay width: 150; 
-				setFontSize: AbstractPage iconFont;
+	subtopicScoreDisplay width: self class scoreDisplayWidth; 
+				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
 	"positioning the morphs"
 	marginwidth := AbstractPage iconMarginWidth.
 	marginHeight := AbstractPage iconMarginHeight.
 	badgeImg addMorph: subtopicScoreDisplay.
-	badgeImg center: self header center + (0 @ marginHeight  * 0.25).
- 	subtopicScoreDisplay center: badgeImg center + (marginwidth * 0.53 @ 0).
+	badgeImg center: self header center + (0 @ marginHeight  * 0.2) - (marginwidth * 0.05 @ 0).
+ 	subtopicScoreDisplay center: badgeImg center + (marginwidth * 0.95 @ 0).
 	
 	self header addMorph: badgeImg.
 
@@ -409,11 +455,19 @@ AbstractPage >> header: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 21:48'
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+}
+AbstractPage >> hideBackButton [
+	self backButton hide.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:34'
 }
 AbstractPage >> initializeWithController: aController [
 	
-	| margin |
+	| width height margin border |
 	
 	super initialize.
 	
@@ -422,33 +476,36 @@ AbstractPage >> initializeWithController: aController [
 	subtopicScore := SLGUserProgress userData subtopicScore.
 	topicScore := SLGUserProgress userData topicScore.
 	
-	self extent: 1604 @ 1204;
+	width := self class pageWidth.
+	height := self class pageHeight.
+	border := self class pageBorder.
+	
+	self extent: width@height;
 		"extent: 1404@904;"
 		color: Color white; 
-		borderWidth: 2;
 		center: Display center.
 
-	margin := 2.
+	margin := 2px.
 			
 	self header: (Morph new
 		width: self width - (2 * margin);
-		height: (10 * (self height - (2 * margin)))/100; "header has 10% of height of page"
+		height: (12 * (self height - (2 * margin)))/100; "header has 10% of height of page"
 		position: self position + (margin asPoint);
 		borderWidth: 1;
 		color: Color white).	
 		
 	self body: (Morph new
-		width: self width - 100;
-		height: (85 * (self height - (2 * margin)))/100; 
-		position: self position + (margin @ ((self header height * 3) + margin));
+		width: self width - 50px;
+		height: (83 * (self height - (2 * margin)))/100; 
+		position: self position;" + (margin @ ((self header height * 3))); ""+ margin));"
 		cornerStyle: #rounded;
 		cornerRadius: 20;
-		center: self center + (0 @  self header height * 0.5);
+		center: self center + (0 @ self header height * 0.3); " (margin @ (self header height + margin));"
 		color: self class softYellow). 
 		
 	self footer: (Morph new
 		width: self width - (2 * margin);
-		height: (5 * (self height - (2 * margin)))/100; "footer has 10% of height of page"
+		height: (5 * (self height - (2 * margin)))/100; 
 		position: self position + (margin @ (self header height + self body height + margin));
 		color: Color white).
 		
@@ -461,7 +518,7 @@ AbstractPage >> initializeWithController: aController [
 	self displayExperiencePoint.
 	self displaySubBadge.
 	self displayMainBadge.
-	self addHomeButtom.
+	self addHomeButton.
 	self addResetButton.
 		
 	^self
@@ -480,6 +537,36 @@ AbstractPage >> navigateBack [
  
 	controller navigateBack.
 	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:33'
+}
+AbstractPage >> refresh [
+	"This method gets called everytime, when we navigate to this page with SLGRouter"
+	self updateScoreDisplay.
+	self updateSubtopicScoreDisplay.
+	self updateTopicScoreDisplay.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/15/2024 00:40'
+}
+AbstractPage >> resetAction [
+
+		SLGUserProgress reset.
+		SLGMainController new.
+		self controller routerController closeWindow.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+}
+AbstractPage >> showBackButton [
+	self backButton show.
 ]
 
 {

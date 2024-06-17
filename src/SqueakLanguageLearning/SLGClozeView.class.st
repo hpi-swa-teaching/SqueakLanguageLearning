@@ -59,20 +59,22 @@ SLGClozeView >> clozeField: aTextMorph [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 15:42'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:26'
 }
 SLGClozeView >> createCloze [
 
 	self clozeField: (self createClozeFieldWithContent: self task cloze).
-	self clozeField center: ((self center x) @( self headerLowerBound)).
+"	self clozeField center: ((self center x) @( self headerLowerBound))."
 	
-	self addMorph: clozeField
+	self addMorph: clozeField.
+
+	^ clozeField
 	
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:59'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 16:51'
 }
 SLGClozeView >> createClozeFieldWithContent: aString [
 
@@ -83,7 +85,7 @@ SLGClozeView >> createClozeFieldWithContent: aString [
 		wrapFlag: true;
 		borderWidth: 2;
 		borderColor: Color green;
-		extent: 600@0.
+		extent: self class taskElementWidth@0.
 	
 	self addMorph: textField.
 	
@@ -107,13 +109,13 @@ SLGClozeView >> passUserInput [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 5/31/2024 10:43'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:22'
 }
 SLGClozeView >> setup [
 
-	super setup.
-	
-	self createCloze
+	|interactive|
+	interactive := self createCloze.
+	super setupWith: interactive
 ]
 
 {

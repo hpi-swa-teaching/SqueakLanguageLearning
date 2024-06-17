@@ -64,13 +64,14 @@ SLGBaseChoiceView >> resetToggleButtons [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/10/2024 09:20'
+	#'squeak_changestamp' : 'xiaoshi 6/12/2024 16:18'
 }
 SLGBaseChoiceView >> setup [
-
-	super setup.
 	
-	self setupToggleButtons: self task answerOptions
+	|interactive|
+	interactive :=	self setupToggleButtons: self task answerOptions.
+	
+	super setupWith: interactive
 	
 	
 	
@@ -81,7 +82,7 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/13/2024 21:25'
+	#'squeak_changestamp' : 'xiaoshi 6/15/2024 19:33'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
@@ -92,8 +93,8 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		| row toggleBtn text |
 		
 		toggleBtn := SLGToggleButtonGen new
-			extent: (50  @ 50);
-			borderWidth: 5;
+			extent: self class baseChoiceButtonExtent;
+			borderWidth: 2px;
 			borderColor: Color white;
 			cornerStyle: #rounded;
 			cornerRadius: 30;
@@ -101,7 +102,7 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		
 		toggleBtn stateUI:  [
 			toggleBtn state ifTrue: [
-				toggleBtn color: Color green.
+				toggleBtn color: AbstractPage pastelGreen.
 			].
 
 			toggleBtn state ifFalse: [
@@ -123,7 +124,7 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		
 		text := SLGMultilineTextGen new
 			setText: option;
-			width: 400;
+			width: self class taskElementWidth - (6 * (self class baseChoiceButtonExtent x));
 			color: Color black.
 			
 		row := SLGLayout rowWithMorphs: 
@@ -141,8 +142,9 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
 	cols := SLGLayout columnWithMorphs: rows.
 	
-	cols center: (self center x @ self headerLowerBound).
-	self addMorph: cols.
+	"cols center: (self center x @ self headerLowerBound).
+	self addMorph: cols."
+	^ cols
 ]
 
 {

@@ -30,7 +30,7 @@ HomePageView class >> newWithTopics: topics andController: aController [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 11:40'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:18'
 }
 HomePageView >> constructView [
 	| rows cols |
@@ -40,7 +40,7 @@ HomePageView >> constructView [
 
 	cols := SLGLayout columnWithMorphs: rows withGap: 20.
 	
-	cols center: self body center + (0 @ self body height * 0.05).
+	cols center: self body center + (0 @ self body height * 0.1).
 	
 	self body addMorph: cols.
 	
@@ -60,7 +60,7 @@ HomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/13/2024 22:33'
+	#'squeak_changestamp' : 'yegi 6/15/2024 23:29'
 }
 HomePageView >> getTopicButtonWithTopic: aTopic [
 	| routeString button |
@@ -73,16 +73,17 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 	
 	button := SLGNavigationButtonGen new
 		label: aTopic title;
-		width: 400;
-		height: 70;
-		borderWidth: 4;
+		width: self class buttonWidth;
+		height: 40px;
+		borderWidth: 3px;
 		borderColor: Color orange;
+		cornerRadius: 15px;
 		 onClickWithBlock: [
 			self controller routerController navigateTo: routeString. ].
 		
-	(aTopic isCompleted) ifTrue: [button color: Color green.].
+	(aTopic isCompleted) ifTrue: [button color: self class pastelGreen.].
 	
-	aTopic when: #topicCompleted evaluate: [button color: Color green.].
+	aTopic when: #topicCompleted evaluate: [button color: self class pastelGreen.].
 	
 	^button
 ]
@@ -99,17 +100,14 @@ HomePageView >> getTopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 17:55'
+	#'squeak_changestamp' : 'yegi 6/15/2024 14:53'
 }
 HomePageView >> initializeWithController: aController [
-
 	super initializeWithController: aController.
-	
+	self hideBackButton.
 	self addTitle: 'Welcome to SqueakLingo!'.
 	self topics: self controller dataAccessService topics.
 	self constructView.
-	
-	
 ]
 
 {

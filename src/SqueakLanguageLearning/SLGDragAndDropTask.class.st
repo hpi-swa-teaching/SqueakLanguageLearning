@@ -46,9 +46,9 @@ SLGDragAndDropTask >> getShuffledOptions [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 17:49'
+	#'squeak_changestamp' : 'SW 6/16/2024 12:47'
 }
 SLGDragAndDropTask >> isValid: anArray [
 	
-	^ true
+	^ self correctAnswer size = anArray size
 ]

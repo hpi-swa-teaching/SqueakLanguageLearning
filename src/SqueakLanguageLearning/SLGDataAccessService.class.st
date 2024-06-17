@@ -12,37 +12,28 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 22:15'
+	#'squeak_changestamp' : 'yegi 6/16/2024 02:15'
 }
 SLGDataAccessService >> createSubtopicsForClasses [
 
 	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
-	listOfSubtopics := OrderedCollection withAll: #('Concept of a Class in Smalltalk' 'Class Hierarchy' 'Instance Variables' 'Methods' 'Inheritance' 'self vs. super').
+	listOfSubtopics := OrderedCollection withAll: #('SubtopicTitle1' 'SubtopicTitle2' 'SubtopicTitle3').
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGClozeTask newClozeWithQuestion: 'What is the role of the initialize method in Smalltalk?' withCloze: 'The initialize method in Smalltalk is used to set up the initial state of an instance when it is created using the keyword ___.' withAnswer: 'The initialize method in Smalltalk is used to set up the initial state of an instance when it is created using the keyword new.' withID:'slg1_01') ) 
-		with: (SLGLesson newWithTask: ( SLGClozeTask newClozeWithQuestion: '' withCloze: 'Each class in Smalltalk ________ its behavior and the description of its structure from a single __________.' withAnswer: 'Each class in Smalltalk inherits its behavior and the description of its structure from a single superclass.' withID:'slg1_02') )
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_03') )).
+		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_01') ) 
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_02') )"
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4' '5' '6') withID:'slg1_03') )).
 		
 	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Which of the following are true about inheritance in Smalltalk? (Choose all that apply)' withOptions: #('Subclasses inherit all instance variables from their superclasses.' 'Methods in subclasses can override methods in superclasses.' 'Subclasses cannot add new instance variables.' 'The super keyword is used to call superclass methods.') withAnswers: #(true true false true) withID:'slg1_04') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_05') )
+		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_04') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_05') )"
 		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_06') )).
 		
 	lessonsForSubtopic at: (listOfSubtopics at: 3) put: (OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Arrange the parts of a class definition in Smalltalk in the correct order:' withCorrectAnswer: #('Object' 'subclass:' '#MyClass') withID:'slg1_07') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_08') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_09') )).
-		
-	lessonsForSubtopic at: (listOfSubtopics at: 4) put: (OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_09') )).
-		
-	lessonsForSubtopic at: (listOfSubtopics at: 5) put: (OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_09') )).
-		
-		lessonsForSubtopic at: (listOfSubtopics at: 6) put: (OrderedCollection 
+		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_07') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_08') )"
 		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_09') )).
 	
 	
@@ -130,7 +121,7 @@ SLGDataAccessService >> createSubtopicsForDataStructures [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:48'
+	#'squeak_changestamp' : 'yegi 6/16/2024 01:02'
 }
 SLGDataAccessService >> createSubtopicsForDataTypes [
 
@@ -144,7 +135,7 @@ SLGDataAccessService >> createSubtopicsForDataTypes [
 		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Copy object of x into y.' withCode: '' withCorrectAnswer: #('y' ':=' 'x' 'copy') withID: 'slg4_02') ) ).
 		
 	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'What is the value of x?' withCode: 'x := 1 + 2 * 3' withOptions: #('7' '9') withAnswers: #(true false) withID: 'slg4_03') )
+		with: (SLGLesson newWithTask: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the value of x?' withCode: 'x := 1 + 2 * 3' withOptions: #('7' '9') withAnswers: #(false true) withID: 'slg4_03') )
 		with: (SLGLesson newWithTask: (SLGSingleChoiceTask newSingleChoiceWithQuestion: '' withCode: 'x := 1. \n y := -5.\n x := x + 1. \n z := y // x' withOptions: #('z = -3' 'z = -2.5' 'z = -2') withAnswers: #(true false false) withID: 'slg4_04') )
 		with: (SLGLesson newWithTask: (SLGClozeTask newClozeWithQuestion: '' withCode: 'x := 1.\n x class. ' withCloze: 'The class of x is __.' withAnswer: 'The class of x is Integer.' withID: 'slg4_05') )).
 		
