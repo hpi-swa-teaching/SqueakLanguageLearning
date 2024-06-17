@@ -6,6 +6,15 @@ Class {
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/17/2024 14:37'
+}
+SLGModelTest class >> classNamesNotUnderTest [
+
+	^ #(SLGDataAccessService)
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 12:17'
 }
 SLGModelTest >> testClozeTask [

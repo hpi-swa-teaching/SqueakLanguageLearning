@@ -12,7 +12,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 02:15'
+	#'squeak_changestamp' : 'EB 6/17/2024 14:37'
 }
 SLGDataAccessService >> createSubtopicsForClasses [
 

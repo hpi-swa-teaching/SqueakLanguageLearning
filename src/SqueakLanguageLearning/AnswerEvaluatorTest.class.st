@@ -6,6 +6,15 @@ Class {
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/17/2024 14:25'
+}
+AnswerEvaluatorTest class >> classNamesNotUnderTest [
+
+	^ #(SLGDataAccessService)
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:18'
 }
 AnswerEvaluatorTest class >> test [ 
@@ -54,12 +63,12 @@ AnswerEvaluatorTest >> testCalculateResultWithMatchingInput [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:24'
+	#'squeak_changestamp' : 'EB 6/17/2024 14:35'
 }
 AnswerEvaluatorTest >> testCalculateResultWithNonMatchingInput [
         | evaluator result |
         evaluator := AnswerEvaluator new.
-        evaluator correctAnswer: 'hello'.
+        evaluator correctAnswer: 'hey'.
         result := evaluator calculateResult: 'world'.
         self assert: result = 0.
 ]
