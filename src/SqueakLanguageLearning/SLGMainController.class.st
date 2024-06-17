@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'routerController',
-		'navigationController',
 		'dataAccessService'
 	],
 	#category : #'SqueakLanguageLearning-Controllers'
@@ -36,14 +35,13 @@ SLGMainController >> dataAccessService: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/12/2024 23:21'
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 15:53'
 }
 SLGMainController >> initialize [
 	super initialize.
 	
 	self dataAccessService: SLGDataAccessService new.
 	self routerController: SLGRouter new.
-	"self navigationController: (NavigationController newWithTopics: (dataAccessService topics))."
 	
 	self registerRoutes.
 	
@@ -51,27 +49,13 @@ SLGMainController >> initialize [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:04'
-}
-SLGMainController >> navigationController [
-	^ navigationController
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:04'
-}
-SLGMainController >> navigationController: anObject [
-	navigationController := anObject
-]
-
-{
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:33'
+	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 15:54'
 }
 SLGMainController >> registerRoutes [
-	self routerController addRouteWithPath: '/home' withPage: (HomePageView new initializeWithController: self).
+	self routerController 
+		addRouteWithPath: '/home'
+		withPage: (HomePageView new initializeWithController: self).
 ]
 
 {
