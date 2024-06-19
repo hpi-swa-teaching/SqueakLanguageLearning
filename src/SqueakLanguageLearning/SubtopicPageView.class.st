@@ -40,9 +40,9 @@ SubtopicPageView >> constructView [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/17/2024 12:59'
+	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:28'
 }
-SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRouteKey: aString [
+SubtopicPageView >> getLessonButtonWithLessonPage: aPage withIndex: anInt withRouteKey: aString [
 	| routeKey index button | 
 	
 	routeKey := aString.
@@ -50,19 +50,20 @@ SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRout
 	
 	self controller routerController 
 		addRouteWithPath: routeKey 
-		withPage: (LessonPageView new initializeWithLesson: aLesson Subtopic: self subtopic Topic: self topic andController: controller).
+		withPage: aPage.
 		
 		button := SLGNavigationButtonGen new
 			label: ('Lesson ', index);
 			width: self class buttonWidth;
 			 onClickWithBlock: [
+				aPage currentIndex: index.
 				self controller routerController navigateTo: routeKey.
 			].
 		
-		((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
-			ifTrue: [button color: self class pastelGreen.].
+		"((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
+			ifTrue: [button color: self class pastelGreen.]."
 		
-		aLesson task when: #taskCompleted evaluate: [button color: self class pastelGreen.].
+		"aLesson task when: #taskCompleted evaluate: [button color: self class pastelGreen.]."
 	
 		^button
 		
@@ -70,18 +71,28 @@ SubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRout
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 21:25'
+	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:29'
 }
 SubtopicPageView >> getLessonButtons [
-	|index|
+	| index page |
 	
 	index := 0.
 	
+	page := LessonPageView new
+				initializeWithLessons: self subtopic lessons
+				Subtopic: self subtopic
+				Topic: self topic
+				andController: controller.
+	
+	
 	^self subtopic lessons collect: [:lesson |
-		| button |
-		button := self getLessonButtonWithLesson: lesson
+		| button currentRouteKey |
+		
+		currentRouteKey :=  ('/home/', self topic title, '/', self subtopic title, '/', 'lessons').
+		
+		button  := self getLessonButtonWithLessonPage: page
 						withIndex: index
-						withRouteKey: ('/home/', self topic title, '/', self subtopic title, '/', index).
+						withRouteKey: currentRouteKey.
 			
 		index := index + 1.
 		
