@@ -204,7 +204,7 @@ SLGModelTest >> testSubtopicIsCompleted [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 18:45'
+	#'squeak_changestamp' : 'yegi 6/19/2024 20:45'
 }
 SLGModelTest >> testSubtopicOnTaskCompleted [
         | subtopic lesson task transcriptOutput |

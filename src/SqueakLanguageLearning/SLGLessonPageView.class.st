@@ -1,6 +1,6 @@
 Class {
-	#name : #LessonPageView,
-	#superclass : #AbstractPage,
+	#name : #SLGLessonPageView,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'task'
 	],
@@ -14,7 +14,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'SW 6/6/2024 15:28'
 }
-LessonPageView class >> initializeTaskTypeDictionary [
+SLGLessonPageView class >> initializeTaskTypeDictionary [
 	
 	"key is a name of object class for the type of task"
 	taskTypeDictionary := Dictionary new.
@@ -30,7 +30,7 @@ LessonPageView class >> initializeTaskTypeDictionary [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:12'
 }
-LessonPageView class >> taskTypeDictionary [
+SLGLessonPageView class >> taskTypeDictionary [
 	
 	taskTypeDictionary ifNil: [self initializeTaskTypeDictionary].
 	^ taskTypeDictionary
@@ -40,7 +40,7 @@ LessonPageView class >> taskTypeDictionary [
 	#category : #constants,
 	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:09'
 }
-LessonPageView class >> taskViewExtent [
+SLGLessonPageView class >> taskViewExtent [
 
 	"^ (self superclass pageWidth * 0.8) @ (self superclass pageHeight * 0.7)"
 	^ 1200@800
@@ -50,7 +50,7 @@ LessonPageView class >> taskViewExtent [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 13:21'
 }
-LessonPageView >> createViewForTask: aTask [
+SLGLessonPageView >> createViewForTask: aTask [
 
 	| dict method targetClass methodName key parameters|
 	dict := self getTaskTypeDictionary.
@@ -70,7 +70,7 @@ LessonPageView >> createViewForTask: aTask [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/5/2024 16:39'
 }
-LessonPageView >> getTaskTypeDictionary [
+SLGLessonPageView >> getTaskTypeDictionary [
 	
 	^self class taskTypeDictionary
 	
@@ -80,7 +80,7 @@ LessonPageView >> getTaskTypeDictionary [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/16/2024 09:56'
 }
-LessonPageView >> initializeWithLesson: aLesson Subtopic: aSubtopic Topic: aTopic andController: aController [
+SLGLessonPageView >> initializeWithLesson: aLesson Subtopic: aSubtopic Topic: aTopic andController: aController [
 	
 	| taskView |
 	super initializeWithController: aController.

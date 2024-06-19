@@ -76,10 +76,27 @@ SLGTaskView class >> pageExtent [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/19/2024 20:01'
+}
+SLGTaskView class >> paperBasic [
+	^Color r: 0.98 g: 0.96 b: 0.91
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'yegi 6/16/2024 03:58'
 }
 SLGTaskView class >> pastelRed [
 	^Color r: 1 g: 0.4 b: 0.4
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/19/2024 19:47'
+}
+SLGTaskView class >> statusFieldMargine [
+
+	^20px @ 15px
 ]
 
 {
@@ -155,6 +172,15 @@ SLGTaskView class >> taskViewMargin [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/19/2024 20:20'
+}
+SLGTaskView class >> textContainerHeight [
+
+	^50px
+]
+
+{
 	#category : #verification,
 	#'squeak_changestamp' : 'yegi 6/16/2024 05:46'
 }
@@ -220,7 +246,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/16/2024 05:28'
+	#'squeak_changestamp' : 'yegi 6/19/2024 20:21'
 }
 SLGTaskView >> createStatusField [
 
@@ -230,14 +256,14 @@ SLGTaskView >> createStatusField [
 	self status wrapFlag: false.
 	
 	statusField := Morph new 
-					extent: self class taskElementWidth @ 50px;
-					color: Color white;
+					extent: self class taskElementWidth @ self class textContainerHeight;
+					color: self class paperBasic;
 					cornerStyle: #rounded;
 					borderWidth: 3px;
 					borderColor: Color orange.
 					
 	statusField addMorph: status.
-	status position: statusField topLeft + (20px @ 15px).
+	status position: statusField topLeft + self class statusFieldMargine.
 	
 	self addMorph: statusField.
 	
@@ -249,18 +275,18 @@ SLGTaskView >> createStatusField [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/16/2024 04:02'
+	#'squeak_changestamp' : 'yegi 6/19/2024 15:45'
 }
 SLGTaskView >> createSubmitButton [
 
-	| submitButton labelMorph margin |
+	| submitButton margin |
 	"submitButton := SimpleButtonMorph new."
 	submitButton := PluggableButtonMorph new.
 	margin := self class taskElementsMargin.
 	submitButton 
 			label: 'Submit';
 			textColor: Color white;
-			onColor: Color white offColor: AbstractPage pastelGreen;
+			onColor: Color white offColor: SLGAbstractPage pastelGreen;
 			borderColor: Color white;
 			borderWidth: 0;
 			width: self class submitButtonWidth;
@@ -454,7 +480,7 @@ SLGTaskView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/16/2024 05:35'
+	#'squeak_changestamp' : 'yegi 6/19/2024 19:38'
 }
 SLGTaskView >> setupWith: anInteractiveMorph [
 
@@ -462,7 +488,6 @@ SLGTaskView >> setupWith: anInteractiveMorph [
 	
 	submitbutton := self createSubmitButton.
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
-	"self status: (self createTextFieldWithContent: '' withBorder: true)."
 
 	self statusDisplay: (self createStatusField).
 	self taskQuestion ifNotNil: [
@@ -472,7 +497,6 @@ SLGTaskView >> setupWith: anInteractiveMorph [
 	
 	fieldsArray := OrderedCollection new.
 	
-	"fieldsArray add: submitbutton; add: status; add: anInteractiveMorph."
 	fieldsArray add: submitbutton; add: statusDisplay; add: anInteractiveMorph.
 	self code ifNotNil: [fieldsArray add: codeField].
 	self taskQuestion ifNotNil: [fieldsArray add: questionField].

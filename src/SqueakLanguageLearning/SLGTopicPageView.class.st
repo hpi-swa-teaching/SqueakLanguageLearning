@@ -1,6 +1,6 @@
 Class {
-	#name : #TopicPageView,
-	#superclass : #AbstractPage,
+	#name : #SLGTopicPageView,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'topic',
 		'subtopics'
@@ -12,7 +12,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 00:14'
 }
-TopicPageView class >> newWithTopic: aTopic andController: aController [
+SLGTopicPageView class >> newWithTopic: aTopic andController: aController [
 
 	^super basicNew initializeWithTopic: aTopic andController: aController
 ]
@@ -21,7 +21,7 @@ TopicPageView class >> newWithTopic: aTopic andController: aController [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'yegi 6/15/2024 11:23'
 }
-TopicPageView >> constructView [
+SLGTopicPageView >> constructView [
 	| rows cols |
 	rows := OrderedCollection new.
 	
@@ -37,10 +37,10 @@ TopicPageView >> constructView [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:05'
+	#'squeak_changestamp' : 'yegi 6/19/2024 00:57'
 }
-TopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [
-	^SubtopicPageView new
+SLGTopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [
+	^SLGSubtopicPageView new
 		initializeWithTopic: (self topic)
 		andSubtopic: aSubtopic
 		andController: self controller
@@ -50,7 +50,7 @@ TopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:18'
 }
-TopicPageView >> getDescription [
+SLGTopicPageView >> getDescription [
 	^SLGMultilineTextGen new 
 		setFontSize: self class descriptionFont;
 		width: self class descriptionWidth;
@@ -62,7 +62,7 @@ TopicPageView >> getDescription [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'yegi 6/16/2024 04:00'
 }
-TopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
+SLGTopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
 	|routeString button |
 	routeString := aString.
 	
@@ -88,7 +88,7 @@ TopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString 
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:31'
 }
-TopicPageView >> getSubtopicButtons [
+SLGTopicPageView >> getSubtopicButtons [
 	^self subtopics collect: [:subtopic |
 		self getSubtopicButtonWithSubtopic: subtopic
 			withRouteKey:  ('/home/', self topic title, '/', subtopic title)
@@ -99,7 +99,7 @@ TopicPageView >> getSubtopicButtons [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 20:30'
 }
-TopicPageView >> initializeWithTopic: aTopic andController: aController [
+SLGTopicPageView >> initializeWithTopic: aTopic andController: aController [
 	
 	super initializeWithController: aController.
 	self topic: aTopic.
@@ -117,7 +117,7 @@ TopicPageView >> initializeWithTopic: aTopic andController: aController [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:47'
 }
-TopicPageView >> subtopics [
+SLGTopicPageView >> subtopics [
 	^ subtopics
 ]
 
@@ -125,7 +125,7 @@ TopicPageView >> subtopics [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:47'
 }
-TopicPageView >> subtopics: anObject [
+SLGTopicPageView >> subtopics: anObject [
 	subtopics := anObject
 ]
 
@@ -133,7 +133,7 @@ TopicPageView >> subtopics: anObject [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:22'
 }
-TopicPageView >> topic [
+SLGTopicPageView >> topic [
 	^ topic
 ]
 
@@ -141,6 +141,6 @@ TopicPageView >> topic [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:22'
 }
-TopicPageView >> topic: anObject [
+SLGTopicPageView >> topic: anObject [
 	topic := anObject
 ]

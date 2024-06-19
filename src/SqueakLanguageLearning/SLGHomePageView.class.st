@@ -1,6 +1,6 @@
 Class {
-	#name : #HomePageView,
-	#superclass : #AbstractPage,
+	#name : #SLGHomePageView,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'topics'
 	],
@@ -14,7 +14,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/5/2024 14:48'
 }
-HomePageView class >> newWithController: aController [
+SLGHomePageView class >> newWithController: aController [
 
 	^ super basicNew initializeWithController: aController
 ]
@@ -23,7 +23,7 @@ HomePageView class >> newWithController: aController [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/2/2024 23:21'
 }
-HomePageView class >> newWithTopics: topics andController: aController [
+SLGHomePageView class >> newWithTopics: topics andController: aController [
 
 	^ super basicNew initializeWithTopics: topics andController: aController
 ]
@@ -32,7 +32,7 @@ HomePageView class >> newWithTopics: topics andController: aController [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'yegi 6/15/2024 11:18'
 }
-HomePageView >> constructView [
+SLGHomePageView >> constructView [
 	| rows cols |
 	rows := OrderedCollection new.
 	
@@ -49,10 +49,10 @@ HomePageView >> constructView [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:18'
+	#'squeak_changestamp' : 'yegi 6/19/2024 00:57'
 }
-HomePageView >> createTopicPageWithTopic: aTopic [
-	^TopicPageView new
+SLGHomePageView >> createTopicPageWithTopic: aTopic [
+	^SLGTopicPageView new
 		initializeWithTopic: aTopic
 		andController: self controller;
 		yourself.
@@ -60,9 +60,9 @@ HomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 23:29'
+	#'squeak_changestamp' : 'yegi 6/19/2024 21:08'
 }
-HomePageView >> getTopicButtonWithTopic: aTopic [
+SLGHomePageView >> getTopicButtonWithTopic: aTopic [
 	| routeString button |
 	
 	routeString := ('/home/', aTopic title).
@@ -74,7 +74,7 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 	button := SLGNavigationButtonGen new
 		label: aTopic title;
 		width: self class buttonWidth;
-		height: 40px;
+		height: self class buttonHeight + 10px;
 		borderWidth: 3px;
 		borderColor: Color orange;
 		cornerRadius: 15px;
@@ -92,7 +92,7 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:28'
 }
-HomePageView >> getTopicButtons [
+SLGHomePageView >> getTopicButtons [
 	^self topics collect: [:topic |
 		self getTopicButtonWithTopic: topic
 	].
@@ -102,7 +102,7 @@ HomePageView >> getTopicButtons [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'yegi 6/15/2024 14:53'
 }
-HomePageView >> initializeWithController: aController [
+SLGHomePageView >> initializeWithController: aController [
 	super initializeWithController: aController.
 	self hideBackButton.
 	self addTitle: 'Welcome to SqueakLingo!'.
@@ -114,7 +114,7 @@ HomePageView >> initializeWithController: aController [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:20'
 }
-HomePageView >> topics [
+SLGHomePageView >> topics [
 	^ topics
 ]
 
@@ -122,6 +122,6 @@ HomePageView >> topics [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:20'
 }
-HomePageView >> topics: anObject [
+SLGHomePageView >> topics: anObject [
 	topics := anObject
 ]

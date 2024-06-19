@@ -1,5 +1,5 @@
 Class {
-	#name : #AnswerSlotMorph,
+	#name : #SLGAnswerSlotMorph,
 	#superclass : #Morph,
 	#instVars : [
 		'label'
@@ -11,7 +11,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 23:13'
 }
-AnswerSlotMorph class >> newWithLabel: aLabel [
+SLGAnswerSlotMorph class >> newWithLabel: aLabel [
 
 	^self basicNew initializeWithLabel: aLabel
 ]
@@ -20,7 +20,7 @@ AnswerSlotMorph class >> newWithLabel: aLabel [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'yegi 6/16/2024 01:49'
 }
-AnswerSlotMorph class >> slotExtent [
+SLGAnswerSlotMorph class >> slotExtent [
 	^90px @ 40px
 ]
 
@@ -28,7 +28,7 @@ AnswerSlotMorph class >> slotExtent [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 23:12'
 }
-AnswerSlotMorph >> initializeWithLabel: aLabel [
+SLGAnswerSlotMorph >> initializeWithLabel: aLabel [
 
 	self initialize.
 	label := aLabel.
@@ -40,7 +40,7 @@ AnswerSlotMorph >> initializeWithLabel: aLabel [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/1/2024 23:15'
 }
-AnswerSlotMorph >> label [
+SLGAnswerSlotMorph >> label [
 
 	^ label
 	
@@ -50,7 +50,7 @@ AnswerSlotMorph >> label [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'yegi 6/16/2024 01:49'
 }
-AnswerSlotMorph >> setup [
+SLGAnswerSlotMorph >> setup [
 
 	self color: Color white;
 			extent: self class slotExtent;

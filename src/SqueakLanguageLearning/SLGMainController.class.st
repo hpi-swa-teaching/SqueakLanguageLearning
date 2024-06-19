@@ -50,12 +50,12 @@ SLGMainController >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 15:54'
+	#'squeak_changestamp' : 'yegi 6/19/2024 00:58'
 }
 SLGMainController >> registerRoutes [
 	self routerController 
 		addRouteWithPath: '/home'
-		withPage: (HomePageView new initializeWithController: self).
+		withPage: (SLGHomePageView new initializeWithController: self).
 ]
 
 {
