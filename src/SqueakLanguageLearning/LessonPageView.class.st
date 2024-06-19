@@ -113,7 +113,7 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:41'
+	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:52'
 }
 LessonPageView >> initializeWithLessons: aLessons Subtopic: aSubtopic Topic: aTopic andController: aController [
 	| taskViews nextButton col |
@@ -142,7 +142,17 @@ LessonPageView >> initializeWithLessons: aLessons Subtopic: aSubtopic Topic: aTo
 					self controller routerController navigateBack.
 				].
 				self carousel next.
+				
+				(aLessons at: self carousel currentIndex +1) task when: #taskCompleted evaluate: 
+		[ self updateScoreDisplay. 
+		(aSubtopic isCompleted) ifTrue: [self updateSubtopicScoreDisplay.
+			(aTopic isCompleted) ifTrue: [self updateTopicScoreDisplay]] ].
 			].
+		
+	(aLessons at: self carousel currentIndex +1) task when: #taskCompleted evaluate: 
+		[ self updateScoreDisplay. 
+		(aSubtopic isCompleted) ifTrue: [self updateSubtopicScoreDisplay.
+			(aTopic isCompleted) ifTrue: [self updateTopicScoreDisplay]] ].
 		
 	col := SLGLayout columnWithMorphs: {self carousel.nextButton} withGap: 10.
 	

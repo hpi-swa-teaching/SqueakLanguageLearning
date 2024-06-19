@@ -40,7 +40,7 @@ SubtopicPageView >> constructView [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:28'
+	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:45'
 }
 SubtopicPageView >> getLessonButtonWithLessonPage: aPage withIndex: anInt withRouteKey: aString [
 	| routeKey index button | 
@@ -71,7 +71,38 @@ SubtopicPageView >> getLessonButtonWithLessonPage: aPage withIndex: anInt withRo
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:29'
+	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:47'
+}
+SubtopicPageView >> getLessonButtonWithLessonPage: aPage withLesson: aLesson withIndex: anInt withRouteKey: aString [
+	| routeKey index button | 
+	
+	routeKey := aString.
+	index := anInt.
+	
+	self controller routerController 
+		addRouteWithPath: routeKey 
+		withPage: aPage.
+		
+		button := SLGNavigationButtonGen new
+			label: ('Lesson ', index);
+			width: self class buttonWidth;
+			 onClickWithBlock: [
+				aPage currentIndex: index.
+				self controller routerController navigateTo: routeKey.
+			].
+		
+		((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
+			ifTrue: [button color: self class pastelGreen.].
+		
+		aLesson task when: #taskCompleted evaluate: [button color: self class pastelGreen.].
+	
+		^button
+		
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:47'
 }
 SubtopicPageView >> getLessonButtons [
 	| index page |
@@ -91,6 +122,7 @@ SubtopicPageView >> getLessonButtons [
 		currentRouteKey :=  ('/home/', self topic title, '/', self subtopic title, '/', 'lessons').
 		
 		button  := self getLessonButtonWithLessonPage: page
+						withLesson: lesson
 						withIndex: index
 						withRouteKey: currentRouteKey.
 			
