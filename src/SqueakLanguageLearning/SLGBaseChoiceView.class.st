@@ -82,7 +82,7 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/19/2024 15:44'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 

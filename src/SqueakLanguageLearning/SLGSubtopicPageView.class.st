@@ -70,18 +70,91 @@ SLGSubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withR
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/13/2024 21:25'
+	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:45'
+}
+SLGSubtopicPageView >> getLessonButtonWithLessonPage: aPage withIndex: anInt withRouteKey: aString [
+	| routeKey index button | 
+	
+	routeKey := aString.
+	index := anInt.
+	
+	self controller routerController 
+		addRouteWithPath: routeKey 
+		withPage: aPage.
+		
+		button := SLGNavigationButtonGen new
+			label: ('Lesson ', index);
+			width: self class buttonWidth;
+			 onClickWithBlock: [
+				aPage currentIndex: index.
+				self controller routerController navigateTo: routeKey.
+			].
+		
+		"((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
+			ifTrue: [button color: self class pastelGreen.]."
+		
+		"aLesson task when: #taskCompleted evaluate: [button color: self class pastelGreen.]."
+	
+		^button
+		
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:47'
+}
+SLGSubtopicPageView >> getLessonButtonWithLessonPage: aPage withLesson: aLesson withIndex: anInt withRouteKey: aString [
+	| routeKey index button | 
+	
+	routeKey := aString.
+	index := anInt.
+	
+	self controller routerController 
+		addRouteWithPath: routeKey 
+		withPage: aPage.
+		
+		button := SLGNavigationButtonGen new
+			label: ('Lesson ', index);
+			width: self class buttonWidth;
+			 onClickWithBlock: [
+				aPage currentIndex: index.
+				self controller routerController navigateTo: routeKey.
+			].
+		
+		((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
+			ifTrue: [button color: self class pastelGreen.].
+		
+		aLesson task when: #taskCompleted evaluate: [button color: self class pastelGreen.].
+	
+		^button
+		
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:08'
 }
 SLGSubtopicPageView >> getLessonButtons [
-	|index|
+	| index page |
 	
 	index := 0.
 	
+	page := SLGLessonPageView new
+				initializeWithLessons: self subtopic lessons
+				Subtopic: self subtopic
+				Topic: self topic
+				andController: controller.
+	
+	
 	^self subtopic lessons collect: [:lesson |
-		| button |
-		button := self getLessonButtonWithLesson: lesson
+		| button currentRouteKey |
+		
+		currentRouteKey :=  ('/home/', self topic title, '/', self subtopic title, '/', 'lessons').
+		
+		button  := self getLessonButtonWithLessonPage: page
+						withLesson: lesson
 						withIndex: index
-						withRouteKey: ('/home/', self topic title, '/', self subtopic title, '/', index).
+						withRouteKey: currentRouteKey.
 			
 		index := index + 1.
 		

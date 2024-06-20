@@ -50,7 +50,7 @@ SLGMainController >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/19/2024 00:58'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGMainController >> registerRoutes [
 	self routerController 

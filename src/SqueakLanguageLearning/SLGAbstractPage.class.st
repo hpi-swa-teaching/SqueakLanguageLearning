@@ -154,6 +154,16 @@ SLGAbstractPage class >> scoreFontSize [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:31'
+}
+SLGAbstractPage class >> smallButtonWidth [
+
+	^ 60px
+	
+]
+
+{
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'yegi 6/15/2024 01:02'
 }
@@ -164,7 +174,7 @@ SLGAbstractPage class >> softYellow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 23:42'
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:32'
 }
 SLGAbstractPage >> addBackButton [
 
@@ -172,15 +182,13 @@ SLGAbstractPage >> addBackButton [
 	
 	backButton := SLGNavigationButtonGen new
 		label: 'Back';
-		"center: self header leftCenter + (60@0);"
-		"width: 100;"
 		borderColor: Color orange;
+		width: self class smallButtonWidth;
 		height: self class buttonHeight;
 		onClickWithBlock: [
 			self controller routerController navigateBack.
 		].
 	
-	backButton width: backButton width + 40px.
 	backButton center: self header leftCenter + ((backButton width)/2 @ 0) + ((self header height - backButton height)/2 @ 0).
 	self backButton: backButton.
 	self header addMorph: backButton.
@@ -188,21 +196,20 @@ SLGAbstractPage >> addBackButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 23:41'
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:32'
 }
 SLGAbstractPage >> addCloseButton [
 	| closeButton |
 	
 	closeButton := SLGNavigationButtonGen new
 		label: 'Close';
+		width: self class smallButtonWidth;
 		borderColor: Color orange;
 		height: self class buttonHeight;
-		"color: Color veryVeryLightGray;"
 		onClickWithBlock: [
 			self controller routerController closeWindow.
 		].
 	
-	closeButton width: closeButton width + 40.
 	closeButton center: self header rightCenter - ((closeButton width)/2 @ 0) - ((self header height - closeButton height)/2 @ 0).
 	
 	self header addMorph: closeButton.
@@ -241,7 +248,7 @@ SLGAbstractPage >> addHomeButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 02:03'
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:51'
 }
 SLGAbstractPage >> addResetButton [
 
@@ -250,7 +257,7 @@ SLGAbstractPage >> addResetButton [
 	resetButton := PluggableButtonMorph new
 					onColor: Color veryVeryLightGray offColor: Color white;
 					label: 'Reset';
-					textColor: Color darkGray;
+					textColor: Color veryLightGray;
 					borderColor: Color white;
 					borderWidth: 0;
 					cornerStyle: #rounded;
@@ -258,7 +265,7 @@ SLGAbstractPage >> addResetButton [
 					actionSelector: #resetAction.
 				
 	
-	resetButton center: self footer center.
+	resetButton center: self footer center + (0 @ self class pageMargin * 3).
 	
 	self footer addMorph: resetButton.
 	
@@ -355,7 +362,7 @@ SLGAbstractPage >> displayExperiencePoint [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/19/2024 15:44'
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:07'
 }
 SLGAbstractPage >> displayMainBadge [
 	
@@ -365,14 +372,11 @@ SLGAbstractPage >> displayMainBadge [
 										loadForm: '/assets/badge-gold-30.png') 
 										magnifyBy: 1px) asMorph.
 	
-	"TODO for BADGE COUNTING"
-	"badgeCount := "
 	topicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
 	topicScoreDisplay width: self class scoreDisplayWidth; 
 				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
-	"positioning the morphs"
 	marginwidth := SLGAbstractPage iconMarginWidth.
 	marginHeight := SLGAbstractPage iconMarginHeight.
 	badgeImg addMorph: topicScoreDisplay.
@@ -385,7 +389,7 @@ SLGAbstractPage >> displayMainBadge [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/19/2024 15:44'
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:07'
 }
 SLGAbstractPage >> displaySubBadge [
 	
@@ -395,14 +399,11 @@ SLGAbstractPage >> displaySubBadge [
 										loadForm: '/assets/badge-silver-30.png') 
 										magnifyBy: 1px) asMorph.
 	
-	"TODO for BADGE COUNTING"
-	"badgeCount := "
 	subtopicScoreDisplay := SLGMultilineTextGen new setText: 0 asString.
 	subtopicScoreDisplay width: self class scoreDisplayWidth; 
 				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
-	"positioning the morphs"
 	marginwidth := SLGAbstractPage iconMarginWidth.
 	marginHeight := SLGAbstractPage iconMarginHeight.
 	badgeImg addMorph: subtopicScoreDisplay.

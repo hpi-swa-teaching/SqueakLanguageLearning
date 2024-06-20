@@ -37,7 +37,7 @@ SLGTopicPageView >> constructView [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/19/2024 00:57'
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:08'
 }
 SLGTopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [
 	^SLGSubtopicPageView new

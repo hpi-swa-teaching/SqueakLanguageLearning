@@ -60,7 +60,7 @@ SLGDragAndDropView >> answerSlots: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/19/2024 15:54'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGDragAndDropView >> createInteractiveItemsAndTargets [
     
@@ -90,14 +90,13 @@ SLGDragAndDropView >> createInteractiveItemsAndTargets [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/19/2024 15:54'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGDragAndDropView >> createItemsAndTargets [
     
 	| container xPosItem shuffledOptions correctAnswers answerSlots item numAnswers step |
 	container := Morph new.
-	container bounds:(0@0 extent: self class taskElementWidth @ 200px);" (0@0 extent: 900@500);" "(0@0 extent: ((self class taskElementWidth) * 0.75)@400);"
-            "color: Color gray." "For DEBUGGING"
+	container bounds:(0@0 extent: self class taskElementWidth @ 200px); 
 		color: Color transparent. 
 
 	xPosItem := 1px. "100."
@@ -128,7 +127,7 @@ SLGDragAndDropView >> createItemsAndTargets [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/19/2024 15:54'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGDragAndDropView >> createSlotsWith: correctAnswers [
 
@@ -216,7 +215,7 @@ SLGDragAndDropView >> itemSlotMap: anObject [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'yegi 6/19/2024 15:54'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGDragAndDropView >> passUserInput [
 

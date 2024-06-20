@@ -76,10 +76,11 @@ SLGTaskView class >> pageExtent [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/19/2024 20:01'
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:37'
 }
-SLGTaskView class >> paperBasic [
-	^Color r: 0.98 g: 0.96 b: 0.91
+SLGTaskView class >> paperBasic [	
+	
+	^ Color r: 0.98 g: 0.96 b: 0.91
 ]
 
 {
@@ -275,12 +276,11 @@ SLGTaskView >> createStatusField [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/19/2024 15:45'
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:07'
 }
 SLGTaskView >> createSubmitButton [
 
 	| submitButton margin |
-	"submitButton := SimpleButtonMorph new."
 	submitButton := PluggableButtonMorph new.
 	margin := self class taskElementsMargin.
 	submitButton 
@@ -296,9 +296,6 @@ SLGTaskView >> createSubmitButton [
 			cornerRadius: 10px;
 			target: self;
 			actionSelector: #verifyAnswer.
-			
-	"labelMorph := submitButton submorphs detect: [:morph | morph isKindOf: StringMorph].
-	labelMorph color: Color white."
 	
 	self addMorph: submitButton.
 	
@@ -575,7 +572,7 @@ SLGTaskView >> taskQuestion: aString [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'EB 6/14/2024 18:15'
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:25'
 }
 SLGTaskView >> verifyAnswer [
 
@@ -584,8 +581,6 @@ SLGTaskView >> verifyAnswer [
 	self result: (self task verifyAnswer: userInput).
 	"self result: (self task verifyAnswer: userInput 
 						 andAddCompleted: self task). "
-	
-	"TODO change the view for completed task"
 	
 	(self result = -1)
 		ifTrue: [self printError]
