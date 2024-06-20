@@ -10,6 +10,24 @@ Class {
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:58'
+}
+SLGClozeView class >> clozeHeight [
+	
+	^ 0px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:00'
+}
+SLGClozeView class >> clozeMargin [
+	
+	^ 11px
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 6/8/2024 16:34'
 }
 SLGClozeView class >> errorMessage [
@@ -42,6 +60,15 @@ SLGClozeView class >> taskDescription [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:59'
+}
+SLGClozeView class >> textContainerHeight [
+	
+	^ 40px
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'SW 5/31/2024 10:42'
 }
@@ -59,22 +86,35 @@ SLGClozeView >> clozeField: aTextMorph [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:26'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:04'
 }
 SLGClozeView >> createCloze [
 
+	| clozeFieldContainer |	
+		
 	self clozeField: (self createClozeFieldWithContent: self task cloze).
 "	self clozeField center: ((self center x) @( self headerLowerBound))."
 	
-	self addMorph: clozeField.
+	 clozeFieldContainer := Morph new					
+						extent: self class taskElementWidth @ self class textContainerHeight;					
+						color: Color white;					
+						cornerStyle: #rounded;					
+						borderWidth: 1px;				
+						borderColor: self class paperBasic.		 
+								
+	clozeFieldContainer addMorph: clozeField.	
+	clozeField position:  clozeFieldContainer topLeft.	
+	self addMorph:  clozeFieldContainer.	
+		
+	^ clozeFieldContainer
 
-	^ clozeField
+
 	
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 16:51'
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:56'
 }
 SLGClozeView >> createClozeFieldWithContent: aString [
 
@@ -84,7 +124,9 @@ SLGClozeView >> createClozeFieldWithContent: aString [
 		contents:  aString;
 		wrapFlag: true;
 		borderWidth: 2;
-		borderColor: Color green;
+		margins: self class clozeMargin;	
+		borderColor: Color transparent;
+		height: self class clozeHeight;
 		extent: self class taskElementWidth@0.
 	
 	self addMorph: textField.

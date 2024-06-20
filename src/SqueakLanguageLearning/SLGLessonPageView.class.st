@@ -1,6 +1,6 @@
 Class {
-	#name : #LessonPageView,
-	#superclass : #AbstractPage,
+	#name : #SLGLessonPageView,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'task',
 		'nextExerciseRoute',
@@ -17,7 +17,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'SW 6/6/2024 15:28'
 }
-LessonPageView class >> initializeTaskTypeDictionary [
+SLGLessonPageView class >> initializeTaskTypeDictionary [
 	
 	"key is a name of object class for the type of task"
 	taskTypeDictionary := Dictionary new.
@@ -33,7 +33,7 @@ LessonPageView class >> initializeTaskTypeDictionary [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:12'
 }
-LessonPageView class >> taskTypeDictionary [
+SLGLessonPageView class >> taskTypeDictionary [
 	
 	taskTypeDictionary ifNil: [self initializeTaskTypeDictionary].
 	^ taskTypeDictionary
@@ -43,7 +43,7 @@ LessonPageView class >> taskTypeDictionary [
 	#category : #constants,
 	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:09'
 }
-LessonPageView class >> taskViewExtent [
+SLGLessonPageView class >> taskViewExtent [
 
 	"^ (self superclass pageWidth * 0.8) @ (self superclass pageHeight * 0.7)"
 	^ 1200@800
@@ -53,7 +53,7 @@ LessonPageView class >> taskViewExtent [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:09'
 }
-LessonPageView >> carousel [
+SLGLessonPageView >> carousel [
 	^ carousel
 ]
 
@@ -61,7 +61,7 @@ LessonPageView >> carousel [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:09'
 }
-LessonPageView >> carousel: anObject [
+SLGLessonPageView >> carousel: anObject [
 	carousel := anObject
 ]
 
@@ -69,7 +69,7 @@ LessonPageView >> carousel: anObject [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 13:21'
 }
-LessonPageView >> createViewForTask: aTask [
+SLGLessonPageView >> createViewForTask: aTask [
 
 	| dict method targetClass methodName key parameters|
 	dict := self getTaskTypeDictionary.
@@ -89,7 +89,7 @@ LessonPageView >> createViewForTask: aTask [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:06'
 }
-LessonPageView >> currentIndex [
+SLGLessonPageView >> currentIndex [
 	^ currentIndex
 ]
 
@@ -97,7 +97,7 @@ LessonPageView >> currentIndex [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:06'
 }
-LessonPageView >> currentIndex: anObject [
+SLGLessonPageView >> currentIndex: anObject [
 	currentIndex := anObject
 ]
 
@@ -105,7 +105,7 @@ LessonPageView >> currentIndex: anObject [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/5/2024 16:39'
 }
-LessonPageView >> getTaskTypeDictionary [
+SLGLessonPageView >> getTaskTypeDictionary [
 	
 	^self class taskTypeDictionary
 	
@@ -113,9 +113,9 @@ LessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:52'
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:44'
 }
-LessonPageView >> initializeWithLessons: aLessons Subtopic: aSubtopic Topic: aTopic andController: aController [
+SLGLessonPageView >> initializeWithLessons: aLessons Subtopic: aSubtopic Topic: aTopic andController: aController [
 	| taskViews nextButton col |
 	super initializeWithController: aController.
 	self addTitle: 'Lesson Title'. "TODO substitute with the one stored in DataAccessService"
@@ -135,7 +135,10 @@ LessonPageView >> initializeWithLessons: aLessons Subtopic: aSubtopic Topic: aTo
 	
 	nextButton := SLGNavigationButtonGen new
 			label: 'Next';
-			width: self class buttonWidth;
+			height: self class buttonHeight * 0.8;
+			width: self class smallButtonWidth;
+			cornerRadius: 10px;
+			color: SLGTaskView paperBasic;
 			 onClickWithBlock: [
 				
 				self carousel canSwitch ifFalse: [
@@ -207,7 +210,7 @@ LessonPageView >> initializeWithLessons: aLessons Subtopic: aSubtopic Topic: aTo
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/18/2024 18:31'
 }
-LessonPageView >> nextExerciseRoute [
+SLGLessonPageView >> nextExerciseRoute [
 	^ nextExerciseRoute
 ]
 
@@ -215,7 +218,7 @@ LessonPageView >> nextExerciseRoute [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/18/2024 18:31'
 }
-LessonPageView >> nextExerciseRoute: anObject [
+SLGLessonPageView >> nextExerciseRoute: anObject [
 	nextExerciseRoute := anObject
 ]
 
@@ -223,7 +226,7 @@ LessonPageView >> nextExerciseRoute: anObject [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:35'
 }
-LessonPageView >> refresh [
+SLGLessonPageView >> refresh [
 	super refresh.
 	self carousel currentIndex: self currentIndex.
 	self carousel update.

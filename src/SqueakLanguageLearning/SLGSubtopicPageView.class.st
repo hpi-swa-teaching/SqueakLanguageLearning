@@ -1,6 +1,6 @@
 Class {
-	#name : #SubtopicPageView,
-	#superclass : #AbstractPage,
+	#name : #SLGSubtopicPageView,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'topic',
 		'subtopic',
@@ -13,7 +13,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/3/2024 10:41'
 }
-SubtopicPageView class >> newWithSubtopic: aSubtopic andController: aController [
+SLGSubtopicPageView class >> newWithSubtopic: aSubtopic andController: aController [
 	
 	^super basicNew initializeWithSubtopic: aSubtopic andController: aController
 ]
@@ -22,7 +22,7 @@ SubtopicPageView class >> newWithSubtopic: aSubtopic andController: aController 
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:42'
 }
-SubtopicPageView >> constructView [
+SLGSubtopicPageView >> constructView [
 	| rows cols |
 	
 	rows :=  OrderedCollection new.
@@ -42,7 +42,7 @@ SubtopicPageView >> constructView [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:45'
 }
-SubtopicPageView >> getLessonButtonWithLessonPage: aPage withIndex: anInt withRouteKey: aString [
+SLGSubtopicPageView >> getLessonButtonWithLessonPage: aPage withIndex: anInt withRouteKey: aString [
 	| routeKey index button | 
 	
 	routeKey := aString.
@@ -73,7 +73,7 @@ SubtopicPageView >> getLessonButtonWithLessonPage: aPage withIndex: anInt withRo
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:47'
 }
-SubtopicPageView >> getLessonButtonWithLessonPage: aPage withLesson: aLesson withIndex: anInt withRouteKey: aString [
+SLGSubtopicPageView >> getLessonButtonWithLessonPage: aPage withLesson: aLesson withIndex: anInt withRouteKey: aString [
 	| routeKey index button | 
 	
 	routeKey := aString.
@@ -102,14 +102,14 @@ SubtopicPageView >> getLessonButtonWithLessonPage: aPage withLesson: aLesson wit
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:47'
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:08'
 }
-SubtopicPageView >> getLessonButtons [
+SLGSubtopicPageView >> getLessonButtons [
 	| index page |
 	
 	index := 0.
 	
-	page := LessonPageView new
+	page := SLGLessonPageView new
 				initializeWithLessons: self subtopic lessons
 				Subtopic: self subtopic
 				Topic: self topic
@@ -136,7 +136,7 @@ SubtopicPageView >> getLessonButtons [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 20:30'
 }
-SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
+SLGSubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
 	
 	super initializeWithController: aController.
 	self topic: aTopic.
@@ -152,7 +152,7 @@ SubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andContro
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
 }
-SubtopicPageView >> lessons [
+SLGSubtopicPageView >> lessons [
 	^ lessons
 ]
 
@@ -160,7 +160,7 @@ SubtopicPageView >> lessons [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
 }
-SubtopicPageView >> lessons: anObject [
+SLGSubtopicPageView >> lessons: anObject [
 	lessons := anObject
 ]
 
@@ -168,7 +168,7 @@ SubtopicPageView >> lessons: anObject [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
 }
-SubtopicPageView >> subtopic [
+SLGSubtopicPageView >> subtopic [
 	^ subtopic
 ]
 
@@ -176,7 +176,7 @@ SubtopicPageView >> subtopic [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
 }
-SubtopicPageView >> subtopic: anObject [
+SLGSubtopicPageView >> subtopic: anObject [
 	subtopic := anObject
 ]
 
@@ -184,7 +184,7 @@ SubtopicPageView >> subtopic: anObject [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
 }
-SubtopicPageView >> topic [
+SLGSubtopicPageView >> topic [
 	^ topic
 ]
 
@@ -192,6 +192,6 @@ SubtopicPageView >> topic [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
 }
-SubtopicPageView >> topic: anObject [
+SLGSubtopicPageView >> topic: anObject [
 	topic := anObject
 ]
