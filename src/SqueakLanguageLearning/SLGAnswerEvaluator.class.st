@@ -1,5 +1,5 @@
 Class {
-	#name : #AnswerEvaluator,
+	#name : #SLGAnswerEvaluator,
 	#superclass : #Object,
 	#instVars : [
 		'correctAnswer'
@@ -11,7 +11,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:23'
 }
-AnswerEvaluator >> calculatePercentage: aValue with: aTotal [
+SLGAnswerEvaluator >> calculatePercentage: aValue with: aTotal [
         | percentage |
         percentage := ((aValue / aTotal) * 100) rounded.
         ^ percentage
@@ -21,7 +21,7 @@ AnswerEvaluator >> calculatePercentage: aValue with: aTotal [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:23'
 }
-AnswerEvaluator >> calculateResult: anUserInput [
+SLGAnswerEvaluator >> calculateResult: anUserInput [
         | comparison percentage |
         
         Transcript show: 'No Error occurred.'; cr.
@@ -36,7 +36,7 @@ AnswerEvaluator >> calculateResult: anUserInput [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:31'
 }
-AnswerEvaluator >> correctAnswer [
+SLGAnswerEvaluator >> correctAnswer [
         ^ correctAnswer.
 ]
 
@@ -44,7 +44,7 @@ AnswerEvaluator >> correctAnswer [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:30'
 }
-AnswerEvaluator >> correctAnswer: anAnswer [ 
+SLGAnswerEvaluator >> correctAnswer: anAnswer [ 
         correctAnswer := anAnswer.
 ]
 
@@ -52,7 +52,7 @@ AnswerEvaluator >> correctAnswer: anAnswer [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:23'
 }
-AnswerEvaluator >> findMatches: correctAnswer with: userAnswer [
+SLGAnswerEvaluator >> findMatches: correctAnswer with: userAnswer [
         "Mock implementation: find matching characters between two strings"
         | matches |
         matches := ''.
@@ -68,7 +68,7 @@ AnswerEvaluator >> findMatches: correctAnswer with: userAnswer [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:17'
 }
-AnswerEvaluator >> isValid: anUserInput [ 
+SLGAnswerEvaluator >> isValid: anUserInput [ 
         "Mock implementation: returns true for non-empty strings"
         ^ anUserInput isEmpty not
 ]
@@ -77,7 +77,7 @@ AnswerEvaluator >> isValid: anUserInput [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:17'
 }
-AnswerEvaluator >> sendError [ 
+SLGAnswerEvaluator >> sendError [ 
         "Mock implementation: returns 'Invalid Input' for invalid input"
         ^ 'Invalid Input'
 ]
@@ -86,7 +86,7 @@ AnswerEvaluator >> sendError [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:18'
 }
-AnswerEvaluator >> verifyAnswer: anUserInput [ 
+SLGAnswerEvaluator >> verifyAnswer: anUserInput [ 
         | output |
         
         Transcript show: 'isValid: ', (self isValid: anUserInput) printString; cr.
