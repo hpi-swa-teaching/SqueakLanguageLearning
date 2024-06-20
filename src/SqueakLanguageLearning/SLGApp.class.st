@@ -5,7 +5,7 @@ Class {
 		'homepage',
 		'topicList'
 	],
-	#category : #SqueakLanguageLearning
+	#category : #'SqueakLanguageLearning-Controllers'
 }
 
 {

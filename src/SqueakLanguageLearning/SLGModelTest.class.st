@@ -6,6 +6,15 @@ Class {
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/17/2024 14:37'
+}
+SLGModelTest class >> classNamesNotUnderTest [
+
+	^ #(SLGDataAccessService)
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 12:17'
 }
 SLGModelTest >> testClozeTask [
@@ -190,36 +199,6 @@ SLGModelTest >> testSubtopicIsCompleted [
         subtopic := SLGSubtopic newWithTitle: 'Sample Subtopic' andLessons: {lesson1. lesson2}.
 
         self assert: subtopic isCompleted.
-
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 18:45'
-}
-SLGModelTest >> testSubtopicOnTaskCompleted [
-        | subtopic lesson task transcriptOutput |
-
-        task := SLGClozeTask newClozeWithQuestion: 'Fill in the blank: The quick brown ___ jumps over the lazy dog.'
-                                     withCloze: 'fox'
-                                     withAnswer: 'fox'
-                                     withID: 'Task1'.
-
-        lesson := SLGLesson newWithTask: task.
-
-        subtopic := SLGSubtopic newWithTitle: 'Sample Subtopic' andLessons: {lesson}.
-
-        "Simulate task completion"
-        SLGUserProgress userData completed add: 'Task1'.
-        task triggerEvent: #taskCompleted.
-
-        "Capture transcript output"
-        transcriptOutput := String streamContents: [ :stream |
-            Transcript show: stream.
-            subtopic onTaskCompleted.
-        ].
-
-        self assert: (transcriptOutput includesSubstring: 'You have earned a badge for a subtopic ').
 
 ]
 

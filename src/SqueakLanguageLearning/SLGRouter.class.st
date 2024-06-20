@@ -140,18 +140,10 @@ SLGRouter >> navigateBack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 20:06'
+	#'squeak_changestamp' : 'Alexander Netz 6/18/2024 19:04'
 }
 SLGRouter >> navigateTo: aString [
-	self navigateToWithPath: aString.
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:38'
-}
-SLGRouter >> navigateToWithPath: aString [
-	self navigateToWithPath: aString withCurrentPage: nil withEnableHistory: true
+	self navigateToWithPath: aString withCurrentPage: nil withEnableHistory: true.
 ]
 
 {
@@ -177,6 +169,14 @@ SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistor
 		self updateHistoryWithRoute: nextRoute.
 	].
 	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'Alexander Netz 6/18/2024 19:08'
+}
+SLGRouter >> navigateToWithoutHistory: aString withCurrentPage: aPage [
+	self navigateToWithPath: aString withCurrentPage: aPage withEnableHistory: false.
 ]
 
 {

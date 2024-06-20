@@ -1,24 +1,33 @@
 Class {
-	#name : #AnswerEvaluatorTest,
+	#name : #SLGAnswerEvaluatorTest,
 	#superclass : #TestCase,
 	#category : #'SqueakLanguageLearning-Tests'
 }
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/17/2024 14:25'
+}
+SLGAnswerEvaluatorTest class >> classNamesNotUnderTest [
+
+	^ #(SLGDataAccessService)
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/14/2024 11:18'
 }
-AnswerEvaluatorTest class >> test [ 
+SLGAnswerEvaluatorTest class >> test [ 
         ^self new run
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:25'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:42'
 }
-AnswerEvaluatorTest >> testCalculatePercentage [
+SLGAnswerEvaluatorTest >> testCalculatePercentage [
         | evaluator result |
-        evaluator := AnswerEvaluator new.
+        evaluator := SLGAnswerEvaluator new.
 
         "Test case 1: perfect match"
         result := evaluator calculatePercentage: 5 with: 5.
@@ -42,11 +51,11 @@ AnswerEvaluatorTest >> testCalculatePercentage [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:24'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:42'
 }
-AnswerEvaluatorTest >> testCalculateResultWithMatchingInput [
+SLGAnswerEvaluatorTest >> testCalculateResultWithMatchingInput [
         | evaluator result |
-        evaluator := AnswerEvaluator new.
+        evaluator := SLGAnswerEvaluator new.
         evaluator correctAnswer: 'hello'.
         result := evaluator calculateResult: 'hello'.
         self assert: result = 100.
@@ -54,23 +63,23 @@ AnswerEvaluatorTest >> testCalculateResultWithMatchingInput [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:24'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:42'
 }
-AnswerEvaluatorTest >> testCalculateResultWithNonMatchingInput [
+SLGAnswerEvaluatorTest >> testCalculateResultWithNonMatchingInput [
         | evaluator result |
-        evaluator := AnswerEvaluator new.
-        evaluator correctAnswer: 'hello'.
+        evaluator := SLGAnswerEvaluator new.
+        evaluator correctAnswer: 'hey'.
         result := evaluator calculateResult: 'world'.
         self assert: result = 0.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:24'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:42'
 }
-AnswerEvaluatorTest >> testCalculateResultWithPartialMatchingInput [
+SLGAnswerEvaluatorTest >> testCalculateResultWithPartialMatchingInput [
         | evaluator result |
-        evaluator := AnswerEvaluator new.
+        evaluator := SLGAnswerEvaluator new.
         evaluator correctAnswer: 'hello'.
         result := evaluator calculateResult: 'hallo'.
         self assert: result = 80.
@@ -78,11 +87,11 @@ AnswerEvaluatorTest >> testCalculateResultWithPartialMatchingInput [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:26'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:42'
 }
-AnswerEvaluatorTest >> testVerifyAnswerWithInvalidInput [
+SLGAnswerEvaluatorTest >> testVerifyAnswerWithInvalidInput [
         | evaluator result |
-        evaluator := AnswerEvaluator new.
+        evaluator := SLGAnswerEvaluator new.
         evaluator correctAnswer: 'hello'.
         result := evaluator verifyAnswer: ''.
         self assert: result = 'Invalid Input'.
@@ -90,11 +99,11 @@ AnswerEvaluatorTest >> testVerifyAnswerWithInvalidInput [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:26'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:42'
 }
-AnswerEvaluatorTest >> testVerifyAnswerWithValidInput [ 
+SLGAnswerEvaluatorTest >> testVerifyAnswerWithValidInput [ 
         | evaluator result |
-        evaluator := AnswerEvaluator new.
+        evaluator := SLGAnswerEvaluator new.
         evaluator correctAnswer: 'hello'.
         result := evaluator verifyAnswer: 'hello'.
         self assert: result = 100.

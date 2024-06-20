@@ -12,7 +12,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 02:15'
+	#'squeak_changestamp' : 'EB 6/17/2024 14:37'
 }
 SLGDataAccessService >> createSubtopicsForClasses [
 
@@ -48,29 +48,30 @@ SLGDataAccessService >> createSubtopicsForClasses [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 17:12'
+	#'squeak_changestamp' : 'EB 6/14/2024 21:10'
 }
 SLGDataAccessService >> createSubtopicsForControlFlow [
 
 	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
-	listOfSubtopics := OrderedCollection withAll: #('SubtopicTitle1' 'SubtopicTitle2' 'SubtopicTitle3').
+	listOfSubtopics := OrderedCollection withAll: #('Conditional Expressions' 'Iteration' 'Block (Closure)').
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
 		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_01') ) 
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_02') )
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_03') )).
+		with: (SLGLesson newWithTask: ( SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the right result value of a from following code?' withCode: '| a b |\na := 1.\nb := 2.\ntrue or: [a := b. true].' withOptions: #('1' '2' '3') withAnswers: #(true false false) withID:'slg2_02') )
+		with: (SLGLesson newWithTask: ( SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the right result value of a from following code?' withCode: '| a b |\na := 1.\nb := 2.\nfalse or: [a := b. true].' withOptions: #('1' '2' '3') withAnswers: #(false true false) withID:'slg2_03') )
+		with: (SLGLesson newWithTask: ( SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the result value of the following code?' withCode: '| colors |\ncolors := {Color white . Color yellow. Color red . Color blue . Color orange}.\ncolors includes: Color blue. ' withOptions: #('true' 'false') withAnswers: #(true false) withID:'slg2_04') )).
 		
 	lessonsForSubtopic at: (listOfSubtopics at: 2) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_04') )
 		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_05') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_06') )).
+		with: (SLGLesson newWithTask: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'The result value of both statements are the same?' withCode: '10 timesRepeat: [y := y * 2].\n1 to: 10 do: [:a | y := y * 2].' withOptions: #('true' 'false') withAnswers: #(true false) withID:'slg2_06') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_07') )).
 		
 	lessonsForSubtopic at: (listOfSubtopics at: 3) put: (OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_07') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_08') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_09') )).
+		with: (SLGLesson newWithTask: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Please select all the correct explanation about Block on Squeak' withOptions: #('Blocks are not lexical closures' 'A block is essentially an anonymous(Lambda) function' 'Blocks may take parameters' 'Blocks can not declare temporary variables') withAnswers: #(false true true false) withID:'slg2_08') )
+		with: (SLGLesson newWithTask: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Which one is correctly written?' withOptions: #('[:x :y | |z| z:= x + y. z] value:1 value:2' '[x: y: | z;  z:= x + y. z] value:1 value:2') withAnswers: #(true false) withID:'slg2_09') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_10') )).
 	
 	
 	subtopics := OrderedCollection new.
@@ -84,13 +85,13 @@ SLGDataAccessService >> createSubtopicsForControlFlow [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 17:12'
+	#'squeak_changestamp' : 'EB 6/14/2024 21:16'
 }
 SLGDataAccessService >> createSubtopicsForDataStructures [
 
 	| listOfSubtopics subtopics lessonsForSubtopic title |
 	
-	listOfSubtopics := OrderedCollection withAll: #('SubtopicTitle1' 'SubtopicTitle2' 'SubtopicTitle3').
+	listOfSubtopics := OrderedCollection withAll: #('Array' 'Ordered Collection' 'Dictionary').
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (listOfSubtopics at: 1) put: ( OrderedCollection 
