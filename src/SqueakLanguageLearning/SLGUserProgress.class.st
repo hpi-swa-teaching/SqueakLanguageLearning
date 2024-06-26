@@ -28,11 +28,39 @@ SLGUserProgress class >> reset [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/11/2024 13:50'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:56'
+}
+SLGUserProgress class >> subtopicScorePoint [
+
+	^1
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:56'
+}
+SLGUserProgress class >> topicScorePoint [
+
+	^1
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:59'
 }
 SLGUserProgress class >> userData [
+
 	^ Instance
 		ifNil: [Instance := self new]
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:55'
+}
+SLGUserProgress class >> userScoreFactor [
+
+	^10
 ]
 
 {
@@ -45,10 +73,10 @@ SLGUserProgress >> completed [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 6/11/2024 13:51'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:58'
 }
-SLGUserProgress >> completed: anObject [
-	completed := anObject
+SLGUserProgress >> completed: aSetOfIDs [
+	completed := aSetOfIDs
 ]
 
 {
@@ -84,10 +112,10 @@ SLGUserProgress >> score [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/14/2024 19:52'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:50'
 }
-SLGUserProgress >> score: anObject [
-	score := anObject
+SLGUserProgress >> score: aScore [
+	score := aScore
 ]
 
 {
@@ -100,10 +128,10 @@ SLGUserProgress >> subtopicScore [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/14/2024 20:06'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:50'
 }
-SLGUserProgress >> subtopicScore: anObject [
-	subtopicScore := anObject
+SLGUserProgress >> subtopicScore: aScore [
+	subtopicScore := aScore
 ]
 
 {
@@ -116,35 +144,35 @@ SLGUserProgress >> topicScore [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/14/2024 20:11'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:50'
 }
-SLGUserProgress >> topicScore: anObject [
-	topicScore := anObject
+SLGUserProgress >> topicScore: aScore [
+	topicScore := aScore
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:02'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:56'
 }
 SLGUserProgress >> updateScore [
 	
-	score := (completed size) * 10.
+	score := (completed size) * self class userScoreFactor
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:11'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:57'
 }
 SLGUserProgress >> updateSubtopicScore [
 
-	subtopicScore := subtopicScore + 1.
+	subtopicScore := subtopicScore + self class subtopicScorePoint
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:11'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:57'
 }
 SLGUserProgress >> updateTopicScore [
 
-	topicScore := topicScore + 1.
+	topicScore := topicScore + self class topicScorePoint
 ]

@@ -43,8 +43,8 @@ SLGLesson >> task [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/26/2024 14:29'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:46'
 }
-SLGLesson >> task: anObject [
-	task := anObject
+SLGLesson >> task: aTask [
+	task := aTask
 ]

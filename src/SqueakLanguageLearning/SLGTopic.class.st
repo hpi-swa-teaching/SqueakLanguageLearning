@@ -37,10 +37,10 @@ SLGTopic >> description [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/26/2024 12:28'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:47'
 }
-SLGTopic >> description: anObject [
-	description := anObject
+SLGTopic >> description: aDescription [
+	description := aDescription
 ]
 
 {
@@ -86,10 +86,10 @@ SLGTopic >> subtopics [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/26/2024 12:29'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:47'
 }
-SLGTopic >> subtopics: anObject [
-	subtopics := anObject
+SLGTopic >> subtopics: subtopicsCollection [
+	subtopics := subtopicsCollection
 ]
 
 {
@@ -102,8 +102,8 @@ SLGTopic >> title [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/26/2024 12:28'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:48'
 }
-SLGTopic >> title: anObject [
-	title := anObject
+SLGTopic >> title: aTitle [
+	title := aTitle
 ]

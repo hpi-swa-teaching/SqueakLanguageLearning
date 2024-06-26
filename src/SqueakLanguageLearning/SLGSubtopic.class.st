@@ -49,10 +49,10 @@ SLGSubtopic >> lessons [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/26/2024 14:12'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:48'
 }
-SLGSubtopic >> lessons: anObject [
-	lessons := anObject
+SLGSubtopic >> lessons: lessonsCollection [
+	lessons := lessonsCollection
 ]
 
 {
@@ -88,8 +88,8 @@ SLGSubtopic >> title [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/26/2024 14:12'
+	#'squeak_changestamp' : 'EB 6/26/2024 15:48'
 }
-SLGSubtopic >> title: anObject [
-	title := anObject
+SLGSubtopic >> title: aTitle [
+	title := aTitle
 ]
