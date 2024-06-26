@@ -1,10 +1,14 @@
+"
+Represents a structure that consists of a task; able to check if its task is completed.
+"
 Class {
 	#name : #SLGLesson,
 	#superclass : #Object,
 	#instVars : [
 		'task'
 	],
-	#category : #'SqueakLanguageLearning-Data'
+	#category : #'SqueakLanguageLearning-Data',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:39'
 }
 
 {

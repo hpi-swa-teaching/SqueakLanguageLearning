@@ -1,3 +1,6 @@
+"
+Represents a structure that consists of a title, description, and subtopics; able to observe the completion of tasks within its own subtopics.
+"
 Class {
 	#name : #SLGTopic,
 	#superclass : #Object,
@@ -6,7 +9,8 @@ Class {
 		'description',
 		'subtopics'
 	],
-	#category : #'SqueakLanguageLearning-Data'
+	#category : #'SqueakLanguageLearning-Data',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:37'
 }
 
 {

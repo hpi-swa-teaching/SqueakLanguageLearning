@@ -1,3 +1,6 @@
+"
+Encapsulates the logic of accessing data; provides methods for creating tasks within a subtopic.
+"
 Class {
 	#name : #SLGDataAccessService,
 	#superclass : #Object,
@@ -7,7 +10,8 @@ Class {
 	#classVars : [
 		'Instance'
 	],
-	#category : #'SqueakLanguageLearning-Data'
+	#category : #'SqueakLanguageLearning-Data',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:43'
 }
 
 {

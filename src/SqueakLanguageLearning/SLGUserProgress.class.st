@@ -1,3 +1,6 @@
+"
+Data structure that manages the progress of a user through various tasks or modules; provides methods to record, update, and retrieve progress information.
+"
 Class {
 	#name : #SLGUserProgress,
 	#superclass : #Object,
@@ -10,7 +13,8 @@ Class {
 	#classVars : [
 		'Instance'
 	],
-	#category : #'SqueakLanguageLearning-Data'
+	#category : #'SqueakLanguageLearning-Data',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:43'
 }
 
 {

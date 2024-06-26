@@ -1,3 +1,6 @@
+"
+Represents a structure that consists of a title and lessons; able to observe the completion of tasks within its own lessons.
+"
 Class {
 	#name : #SLGSubtopic,
 	#superclass : #Object,
@@ -5,7 +8,8 @@ Class {
 		'title',
 		'lessons'
 	],
-	#category : #'SqueakLanguageLearning-Data'
+	#category : #'SqueakLanguageLearning-Data',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:38'
 }
 
 {
