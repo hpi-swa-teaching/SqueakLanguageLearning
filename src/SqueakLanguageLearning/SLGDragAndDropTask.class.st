@@ -6,11 +6,12 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 20:59'
+	#'squeak_changestamp' : 'EB 6/12/2024 22:13'
 }
-SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeString withCorrectAnswer: anArray [
+SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeString withCorrectAnswer: anArray withID: anID [
 
 	^ self new
+		id: anID;
 		question: aQuestionString;
 		code: aCodeString;
 		correctAnswer: anArray;
@@ -21,11 +22,12 @@ SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeStri
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:30'
+	#'squeak_changestamp' : 'EB 6/12/2024 19:06'
 }
-SLGDragAndDropTask class >> newWithQuestion: aString withCorrectAnswer: anArray [
+SLGDragAndDropTask class >> newWithQuestion: aString withCorrectAnswer: anArray withID: anID [
 
 	^ self new
+		id: anID;
 		question: aString;
 		correctAnswer: anArray;
 		yourself
@@ -44,9 +46,9 @@ SLGDragAndDropTask >> getShuffledOptions [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 17:49'
+	#'squeak_changestamp' : 'SW 6/16/2024 12:47'
 }
 SLGDragAndDropTask >> isValid: anArray [
 	
-	^ true
+	^ self correctAnswer size = anArray size
 ]

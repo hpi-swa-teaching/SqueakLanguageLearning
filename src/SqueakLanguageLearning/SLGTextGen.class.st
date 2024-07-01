@@ -38,7 +38,7 @@ SLGTextGen >> content: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:24'
+	#'squeak_changestamp' : 'yegi 6/13/2024 09:36'
 }
 SLGTextGen >> initialize [
 	super initialize.

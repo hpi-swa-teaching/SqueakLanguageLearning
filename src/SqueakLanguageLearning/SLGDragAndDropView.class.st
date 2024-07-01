@@ -60,7 +60,7 @@ SLGDragAndDropView >> answerSlots: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/13/2024 15:14'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGDragAndDropView >> createInteractiveItemsAndTargets [
     
@@ -73,7 +73,7 @@ SLGDragAndDropView >> createInteractiveItemsAndTargets [
 	
 	row := OrderedCollection new.
 	shuffledOptions do: [:option |
-        item := DraggableItemMorph newWithLabel: option inMorph: self.
+        item := SLGDraggableItemMorph newWithLabel: option inMorph: self.
 			Transcript show: item position; cr.
 			row add: item.
         draggableItems add: item.].
@@ -90,31 +90,36 @@ SLGDragAndDropView >> createInteractiveItemsAndTargets [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/13/2024 16:26'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGDragAndDropView >> createItemsAndTargets [
     
-	| container xPosItem shuffledOptions correctAnswers answerSlots item "numAnswers step" |
+	| container xPosItem shuffledOptions correctAnswers answerSlots item numAnswers step |
 	container := Morph new.
-	container bounds: "(0@0 extent: 900@500);" (0@0 extent: ((self class taskElementWidth) * 0.75)@400);
-            "color: Color white."
+	container bounds:(0@0 extent: self class taskElementWidth @ 200px); 
 		color: Color transparent. 
 
-	xPosItem := 100.
+	xPosItem := 1px. "100."
 
 	shuffledOptions := self task getShuffledOptions.
 	correctAnswers := self task correctAnswer.
 	
+	numAnswers := correctAnswers size.
+	step := (container width /(numAnswers * 2 + 1))px.
+	
 	answerSlots := self createSlotsWith: correctAnswers.
-	answerSlots position: (container position + (0 @ 50)).
+	"answerSlots position: (container position + (0 @ 100px))."
+	answerSlots center: container center - (SLGAnswerSlotMorph slotExtent x * 0.5 @ 50px).
 	container addMorph: answerSlots.   
 	
 	shuffledOptions do: [:option |
-        item := DraggableItemMorph newWithLabel: option inMorph: self.
-	item position: (container position + (xPosItem@280)).
-        container addMorph: item.
-        draggableItems add: item.
-        xPosItem := xPosItem + 150 ].
+		item := SLGDraggableItemMorph newWithLabel: option inMorph: self.
+	  	item position: (container position + (step @ 100px)). "(xPosItem@280))."
+		container addMorph: item.
+		draggableItems add: item.
+		step := step + 10px + SLGDraggableItemMorph slotExtent x].
+		"xPosItem := xPosItem + 150 ]."
+	
 	
 	^container
 	
@@ -122,27 +127,27 @@ SLGDragAndDropView >> createItemsAndTargets [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'EB 6/11/2024 15:14'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGDragAndDropView >> createSlotsWith: correctAnswers [
 
 	| container slot numAnswers step |
 	container := Morph new.
-	container color: Color transparent; 
-	extent: 900 @ 150. "TODO change the size of a container"
+	container color: Color transparent;
+			extent: self class taskElementWidth @ 100px.  "800 @ 150." "TODO change the size of a container"
 
 	numAnswers := correctAnswers size.
-	step := container width / (numAnswers * 2 + 1).
+	step := (container width /(numAnswers * 2 + 1))px.
 	 
 	correctAnswers do: [:correctAnswer |
-		slot := AnswerSlotMorph newWithLabel: correctAnswer.
+		slot := SLGAnswerSlotMorph newWithLabel: correctAnswer.
 		answerSlots add: slot.
 		itemSlotMap at: slot put: nil.
 		slot lock.
 
-	slot position: container position + (step @ 100).
-	step := (step + 150). "TODO should be calculated"
-	container addMorph: slot. ].
+		slot position: step @ 30px. "container position + (step @ 100)."
+		step := (step + 5px + SLGAnswerSlotMorph slotExtent x). "TODO should be calculated,""gap + the width of the box"
+		container addMorph: slot. ].
 
 	^container.
 ]
@@ -210,21 +215,24 @@ SLGDragAndDropView >> itemSlotMap: anObject [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'EB 6/10/2024 15:23'
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
 }
 SLGDragAndDropView >> passUserInput [
 
 	| itemsAtSlots anAnswer targetCorrectMap |
 	
-	targetCorrectMap ifNil:  [ targetCorrectMap := OrderedDictionary new ].
-	itemsAtSlots ifNil: [ itemsAtSlots := OrderedCollection new ].
+	"targetCorrectMap ifNil:  [ targetCorrectMap := OrderedDictionary new ].
+	itemsAtSlots ifNil: [ itemsAtSlots := OrderedCollection new ]."
+	targetCorrectMap := OrderedDictionary new.
+	itemsAtSlots := OrderedCollection new.
 	itemSlotMap keysAndValuesDo: [:slot :item |
-		(item isKindOf: DraggableItemMorph) ifTrue: [
+		(item isKindOf: SLGDraggableItemMorph) ifTrue: [
 			itemsAtSlots add: item label ].
-		targetCorrectMap at: slot put: (item label = slot label) ].
+		item ifNotNil: [
+		targetCorrectMap at: slot put: (item label = slot label) ]].
 	
 	targetCorrectMap keysAndValuesDo: [:target :correct |
-            target color: (correct ifTrue: [Color lightGreen] ifFalse: [Color red]).
+            target color: (correct ifTrue: [SLGAbstractPage pastelGreen] ifFalse: [self class pastelRed]).
         ].
 
 	anAnswer := itemsAtSlots asArray.
@@ -234,7 +242,7 @@ SLGDragAndDropView >> passUserInput [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/13/2024 16:22'
+	#'squeak_changestamp' : 'yegi 6/15/2024 12:45'
 }
 SLGDragAndDropView >> setup [
 
@@ -242,7 +250,7 @@ SLGDragAndDropView >> setup [
 	
 	"interactive := self createInteractiveItemsAndTargets."
 	interactive := self createItemsAndTargets.
-	"intercative position: (self position + (50 @ 300))."
+	"interactive position:( self position + (50 @ 300))."
 	self addMorph: interactive.
 	super setupWith: interactive.
 

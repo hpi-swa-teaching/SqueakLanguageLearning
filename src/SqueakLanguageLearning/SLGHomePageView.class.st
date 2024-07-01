@@ -1,6 +1,6 @@
 Class {
-	#name : #HomePageView,
-	#superclass : #AbstractPage,
+	#name : #SLGHomePageView,
+	#superclass : #SLGAbstractPage,
 	#instVars : [
 		'topics'
 	],
@@ -14,7 +14,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/5/2024 14:48'
 }
-HomePageView class >> newWithController: aController [
+SLGHomePageView class >> newWithController: aController [
 
 	^ super basicNew initializeWithController: aController
 ]
@@ -23,16 +23,16 @@ HomePageView class >> newWithController: aController [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'EB 6/2/2024 23:21'
 }
-HomePageView class >> newWithTopics: topics andController: aController [
+SLGHomePageView class >> newWithTopics: topics andController: aController [
 
 	^ super basicNew initializeWithTopics: topics andController: aController
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:26'
+	#'squeak_changestamp' : 'yegi 6/15/2024 11:18'
 }
-HomePageView >> constructView [
+SLGHomePageView >> constructView [
 	| rows cols |
 	rows := OrderedCollection new.
 	
@@ -40,17 +40,19 @@ HomePageView >> constructView [
 
 	cols := SLGLayout columnWithMorphs: rows withGap: 20.
 	
-	cols center: self center.
+	cols center: self body center + (0 @ self body height * 0.1).
 	
 	self body addMorph: cols.
+	
+	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:18'
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:08'
 }
-HomePageView >> createTopicPageWithTopic: aTopic [
-	^TopicPageView new
+SLGHomePageView >> createTopicPageWithTopic: aTopic [
+	^SLGTopicPageView new
 		initializeWithTopic: aTopic
 		andController: self controller;
 		yourself.
@@ -58,10 +60,10 @@ HomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:12'
+	#'squeak_changestamp' : 'yegi 6/19/2024 21:08'
 }
-HomePageView >> getTopicButtonWithTopic: aTopic [
-	| routeString |
+SLGHomePageView >> getTopicButtonWithTopic: aTopic [
+	| routeString button |
 	
 	routeString := ('/home/', aTopic title).
 	
@@ -69,20 +71,28 @@ HomePageView >> getTopicButtonWithTopic: aTopic [
 		addRouteWithPath: routeString 
 		withPage: (self createTopicPageWithTopic: aTopic).
 	
-	^SLGNavigationButtonGen new
+	button := SLGNavigationButtonGen new
 		label: aTopic title;
 		width: self class buttonWidth;
+		height: self class buttonHeight + 10px;
+		borderWidth: 3px;
+		borderColor: Color orange;
+		cornerRadius: 15px;
 		 onClickWithBlock: [
-			self controller routerController navigateTo: routeString.
-		];
-		yourself.
+			self controller routerController navigateTo: routeString. ].
+		
+	(aTopic isCompleted) ifTrue: [button color: self class pastelGreen.].
+	
+	aTopic when: #topicCompleted evaluate: [button color: self class pastelGreen.].
+	
+	^button
 ]
 
 {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:28'
 }
-HomePageView >> getTopicButtons [
+SLGHomePageView >> getTopicButtons [
 	^self topics collect: [:topic |
 		self getTopicButtonWithTopic: topic
 	].
@@ -90,11 +100,12 @@ HomePageView >> getTopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:27'
+	#'squeak_changestamp' : 'yegi 6/15/2024 14:53'
 }
-HomePageView >> initializeWithController: aController [
+SLGHomePageView >> initializeWithController: aController [
 	super initializeWithController: aController.
-	self addTitle: 'Welcome to Squeak Language Learning (Dynamic)'.
+	self hideBackButton.
+	self addTitle: 'Welcome to SqueakLingo!'.
 	self topics: self controller dataAccessService topics.
 	self constructView.
 ]
@@ -103,7 +114,7 @@ HomePageView >> initializeWithController: aController [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:20'
 }
-HomePageView >> topics [
+SLGHomePageView >> topics [
 	^ topics
 ]
 
@@ -111,6 +122,6 @@ HomePageView >> topics [
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:20'
 }
-HomePageView >> topics: anObject [
+SLGHomePageView >> topics: anObject [
 	topics := anObject
 ]

@@ -5,7 +5,7 @@ Class {
 		'homepage',
 		'topicList'
 	],
-	#category : #SqueakLanguageLearning
+	#category : #'SqueakLanguageLearning-Controllers'
 }
 
 {
@@ -29,9 +29,11 @@ SLGApp class >> open [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/10/2024 09:41'
+	#'squeak_changestamp' : 'yegi 6/12/2024 10:52'
 }
 SLGApp class >> openWithProgress [
 	"read from a file in the directory"
 	SLGMainController new
+	
+	"SLGMainController savedOpen"
 ]

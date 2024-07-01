@@ -10,6 +10,33 @@ Class {
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/20/2024 12:14'
+}
+SLGClozeView class >> clozeContainerHeight [
+	
+	^ 40px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:58'
+}
+SLGClozeView class >> clozeHeight [
+	
+	^ 0px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/20/2024 02:00'
+}
+SLGClozeView class >> clozeMargin [
+	
+	^ 11px
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 6/8/2024 16:34'
 }
 SLGClozeView class >> errorMessage [
@@ -59,22 +86,35 @@ SLGClozeView >> clozeField: aTextMorph [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:26'
+	#'squeak_changestamp' : 'yegi 6/20/2024 12:14'
 }
 SLGClozeView >> createCloze [
 
+	| clozeFieldContainer |	
+		
 	self clozeField: (self createClozeFieldWithContent: self task cloze).
 "	self clozeField center: ((self center x) @( self headerLowerBound))."
 	
-	self addMorph: clozeField.
+	 clozeFieldContainer := Morph new					
+						extent: self class taskElementWidth @ self class clozeContainerHeight;					
+						color: Color white;					
+						cornerStyle: #rounded;					
+						borderWidth: 1px;				
+						borderColor: self class paperBasic.		 
+								
+	clozeFieldContainer addMorph: clozeField.	
+	clozeField position:  clozeFieldContainer topLeft.	
+	self addMorph:  clozeFieldContainer.	
+		
+	^ clozeFieldContainer
 
-	^ clozeField
+
 	
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 16:51'
+	#'squeak_changestamp' : 'yegi 6/20/2024 12:15'
 }
 SLGClozeView >> createClozeFieldWithContent: aString [
 
@@ -83,9 +123,10 @@ SLGClozeView >> createClozeFieldWithContent: aString [
 	textField
 		contents:  aString;
 		wrapFlag: true;
-		borderWidth: 2;
-		borderColor: Color green;
-		extent: self class taskElementWidth@0.
+		borderWidth: 2px;
+		margins: self class clozeMargin;
+		borderColor: Color transparent;
+		extent: self class taskElementWidth @ 0.
 	
 	self addMorph: textField.
 	

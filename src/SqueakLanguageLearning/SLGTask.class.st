@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'question',
 		'correctAnswer',
-		'code'
+		'code',
+		'id'
 	],
 	#classInstVars : [
 		'taskDescription'
@@ -87,6 +88,32 @@ SLGTask >> findMatches: aReferenceArray with: anInputArray [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/12/2024 13:48'
+}
+SLGTask >> id [
+	^ id
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/12/2024 13:48'
+}
+SLGTask >> id: anObject [
+	id := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/12/2024 19:04'
+}
+SLGTask >> isCompleted [
+	
+	^((SLGUserProgress userData) completed includes: id)
+
+]
+
+{
 	#category : #verification,
 	#'squeak_changestamp' : 'SW 6/8/2024 16:47'
 }
@@ -127,7 +154,7 @@ SLGTask >> sendError [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/9/2024 21:08'
+	#'squeak_changestamp' : 'EB 6/13/2024 13:52'
 }
 SLGTask >> verifyAnswer: anUserInput [
 
@@ -136,7 +163,9 @@ SLGTask >> verifyAnswer: anUserInput [
 	Transcript show: 'isValid: ', (self isValid: anUserInput); cr.
 	
 	(self isValid: anUserInput)
-		ifTrue: [output := self calculateResult: anUserInput.]
+		ifTrue: [
+			output := self calculateResult: anUserInput. ]
+		
 		ifFalse: [output := self sendError].
 		
 	^ output

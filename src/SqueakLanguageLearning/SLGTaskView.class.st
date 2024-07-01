@@ -7,10 +7,29 @@ Class {
 		'task',
 		'result',
 		'code',
-		'headerLowerBound'
+		'headerLowerBound',
+		'statusDisplay'
 	],
 	#category : #'SqueakLanguageLearning-Tasks'
 }
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'xiaoshi 6/15/2024 19:31'
+}
+SLGTaskView class >> baseChoiceButtonExtent [
+
+	^(25px  @  25px)
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/16/2024 04:03'
+}
+SLGTaskView class >> codeFieldHeight [
+
+	^180px
+]
 
 {
 	#category : #constants,
@@ -32,11 +51,71 @@ SLGTaskView class >> failureMessage [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:44'
+}
+SLGTaskView class >> lightPastelGreen [
+	^Color r: 0.78 g: 1 b: 0.7
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:42'
+}
+SLGTaskView class >> lightPastelRed [
+	^Color r: 1 g: 0.7 b: 0.7
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:53'
 }
 SLGTaskView class >> pageExtent [
 
 	^ ((1604 * 0.55) px) @ ((1204 * 0.55) px)
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/20/2024 01:37'
+}
+SLGTaskView class >> paperBasic [	
+	
+	^ Color r: 0.98 g: 0.96 b: 0.91
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/16/2024 03:58'
+}
+SLGTaskView class >> pastelRed [
+	^Color r: 1 g: 0.4 b: 0.4
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/19/2024 19:47'
+}
+SLGTaskView class >> statusFieldMargine [
+
+	^20px @ 15px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 21:45'
+}
+SLGTaskView class >> submitButtonHeight [
+
+	^30px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/15/2024 21:44'
+}
+SLGTaskView class >> submitButtonWidth [
+
+	^60px
 ]
 
 {
@@ -94,14 +173,28 @@ SLGTaskView class >> taskViewMargin [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 6/19/2024 20:20'
+}
+SLGTaskView class >> textContainerHeight [
+
+	^50px
+]
+
+{
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 17:15'
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:46'
 }
 SLGTaskView >> checkResult [
 
 	(self result = 100)
-		ifTrue: [self printSuccess]
-		ifFalse: [self printFailure]
+		ifTrue: [self printSuccess.
+			self statusDisplay color: self class lightPastelGreen.
+			SLGUserProgress userData markTaskAsCompleted: (self task id).
+			self task triggerEvent: #taskCompleted. ]
+		
+		ifFalse: [self printFailure.
+			self statusDisplay color: self class lightPastelRed]
 	
 		
 	
@@ -126,7 +219,7 @@ SLGTaskView >> code: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 14:15'
+	#'squeak_changestamp' : 'xiaoshi 7/1/2024 09:21'
 }
 SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
@@ -137,7 +230,7 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 				contents: (aCodeString copyReplaceAll: '\n' with: '', Character cr,'');
 				buildCodePaneWith: ToolBuilder default))
 				wrapFlag: true;
-				extent: self class taskElementWidth @ 300.
+				extent: self class taskElementWidth @ self class codeFieldHeight.
 
 	(aBoolean)
 		ifTrue: [codeField
@@ -154,21 +247,59 @@ SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:45'
+	#'squeak_changestamp' : 'yegi 6/19/2024 20:21'
+}
+SLGTaskView >> createStatusField [
+
+	| statusField |
+	
+	self status: (self createTextFieldWithContent: '' withBorder: false).
+	self status wrapFlag: false.
+	
+	statusField := Morph new 
+					extent: self class taskElementWidth @ self class textContainerHeight;
+					color: self class paperBasic;
+					cornerStyle: #rounded;
+					borderWidth: 3px;
+					borderColor: Color orange.
+					
+	statusField addMorph: status.
+	status position: statusField topLeft + self class statusFieldMargine.
+	
+	self addMorph: statusField.
+	
+	^statusField
+
+	
+	
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:07'
 }
 SLGTaskView >> createSubmitButton [
 
-	| submitButton margin|
-	submitButton := SimpleButtonMorph new.
+	| submitButton margin |
+	submitButton := PluggableButtonMorph new.
 	margin := self class taskElementsMargin.
 	submitButton 
 			label: 'Submit';
-			on: #mouseUp send: #verifyAnswer to: self.
+			textColor: Color white;
+			onColor: Color white offColor: SLGAbstractPage pastelGreen;
+			borderColor: Color white;
+			borderWidth: 0;
+			width: self class submitButtonWidth;
+			height: self class submitButtonHeight;
+			center: self bottomCenter;
+			cornerStyle: #rounded;
+			cornerRadius: 10px;
+			target: self;
+			actionSelector: #verifyAnswer.
 	
 	self addMorph: submitButton.
 	
 	^ submitButton
-	
 	
 ]
 
@@ -199,7 +330,7 @@ SLGTaskView >> createTextFieldWithContent: aString [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:44'
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:04'
 }
 SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
@@ -227,7 +358,7 @@ SLGTaskView >> createTextFieldWithContent: aString withBorder: aBoolean [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:59'
+	#'squeak_changestamp' : 'yegi 6/15/2024 13:01'
 }
 SLGTaskView >> initialize [
 
@@ -235,7 +366,9 @@ SLGTaskView >> initialize [
 	
 	self
 		extent: self class taskViewExtent;
-		color: Color veryVeryLightGray;
+		color: Color transparent;
+		cornerStyle: #rounded;
+		"color: Color veryVeryLightGray;"
 		center: World bounds center
 	
 		
@@ -344,15 +477,16 @@ SLGTaskView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 18:01'
+	#'squeak_changestamp' : 'yegi 6/19/2024 19:38'
 }
 SLGTaskView >> setupWith: anInteractiveMorph [
 
-	| submitbutton descriptionField questionField codeField fieldsArray fieldColumns|
+	| submitbutton descriptionField questionField codeField fieldsArray fieldColumns "statusField" |
 	
 	submitbutton := self createSubmitButton.
 	descriptionField := (self createTextFieldWithContent: self class taskDescription withBorder: true).
-	self status: (self createTextFieldWithContent: '' withBorder: true).
+
+	self statusDisplay: (self createStatusField).
 	self taskQuestion ifNotNil: [
 		questionField := (self createTextFieldWithContent: self taskQuestion withBorder: true)].
 	self code ifNotNil: [
@@ -360,7 +494,7 @@ SLGTaskView >> setupWith: anInteractiveMorph [
 	
 	fieldsArray := OrderedCollection new.
 	
-	fieldsArray add: submitbutton; add: status; add: anInteractiveMorph.
+	fieldsArray add: submitbutton; add: statusDisplay; add: anInteractiveMorph.
 	self code ifNotNil: [fieldsArray add: codeField].
 	self taskQuestion ifNotNil: [fieldsArray add: questionField].
 	fieldsArray add: descriptionField.
@@ -386,6 +520,22 @@ SLGTaskView >> status [
 }
 SLGTaskView >> status: aTextMorph [
 	status := aTextMorph
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:37'
+}
+SLGTaskView >> statusDisplay [
+	^statusDisplay
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 6/16/2024 05:36'
+}
+SLGTaskView >> statusDisplay: anObject [
+	statusDisplay:= anObject
 ]
 
 {
@@ -422,13 +572,15 @@ SLGTaskView >> taskQuestion: aString [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/9/2024 21:09'
+	#'squeak_changestamp' : 'yegi 6/19/2024 23:25'
 }
 SLGTaskView >> verifyAnswer [
 
 	| userInput |
 	userInput := self passUserInput.
 	self result: (self task verifyAnswer: userInput).
+	"self result: (self task verifyAnswer: userInput 
+						 andAddCompleted: self task). "
 	
 	(self result = -1)
 		ifTrue: [self printError]
