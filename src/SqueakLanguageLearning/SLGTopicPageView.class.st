@@ -97,7 +97,7 @@ SLGTopicPageView >> getSubtopicButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:30'
+	#'squeak_changestamp' : 'EB 7/1/2024 15:06'
 }
 SLGTopicPageView >> initializeWithTopic: aTopic andController: aController [
 	
@@ -108,7 +108,7 @@ SLGTopicPageView >> initializeWithTopic: aTopic andController: aController [
 	
 	self constructView.
 	
-	aTopic when: #topicCompleted evaluate: [self updateTopicScoreDisplay].
+	"aTopic when: #topicCompleted evaluate: [self updateTopicScoreDisplay]."
 	
 	
 ]
