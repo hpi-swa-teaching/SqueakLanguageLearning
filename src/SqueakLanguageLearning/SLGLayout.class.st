@@ -52,7 +52,7 @@ SLGLayout class >> columnWithMorphs: anArray withGap: anInt [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:19'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 14:14'
 }
 SLGLayout class >> columnWithMorphsReversed: anArray withGap: anInt [
 	| container maxWidth sumHeight |
@@ -66,7 +66,7 @@ SLGLayout class >> columnWithMorphsReversed: anArray withGap: anInt [
 	sumHeight := 0. anArray do: [:a | sumHeight := sumHeight + (a height)]. sumHeight.	
 	
 	container width: maxWidth.
-	container height: sumHeight.
+	container height: sumHeight + (anInt * anArray size).
 	
 	container layoutPolicy: TableLayout new.
 	container listDirection: #topToBottom.

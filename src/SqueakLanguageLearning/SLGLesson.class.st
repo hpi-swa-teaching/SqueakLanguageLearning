@@ -1,58 +1,25 @@
+"
+Represents a structure that consists of a task; able to check if its task is completed.
+"
 Class {
 	#name : #SLGLesson,
 	#superclass : #Object,
 	#instVars : [
-		'description',
 		'task'
 	],
-	#category : #'SqueakLanguageLearning-Data'
+	#category : #'SqueakLanguageLearning-Data',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:39'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/11/2024 22:43'
+	#'squeak_changestamp' : 'EB 6/26/2024 14:30'
 }
-SLGLesson class >> newWithDescription: aDescription andTask:aTask [
+SLGLesson class >> newWithTask: aTask [
 
-	^ self basicNew initializeWithDescription: aDescription andTask: aTask
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/11/2024 22:44'
-}
-SLGLesson class >> newWithTask:aTask [
-
-	^ self basicNew initializeWithTask: aTask
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/26/2024 21:14'
-}
-SLGLesson >> description [
-	^ description
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 21:13'
-}
-SLGLesson >> initializeWithDescription: aDescription andTask: aTask [
-
-	description := aDescription.
-	task := aTask
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 23:07'
-}
-SLGLesson >> initializeWithTask: aTask [
-
-	task := aTask.
-	
-	"task when: #taskCompleted send: #onTaskCompleted to: self "
+	^ self new
+		task: aTask;
+		yourself
 ]
 
 {
@@ -72,4 +39,12 @@ SLGLesson >> isCompleted [
 }
 SLGLesson >> task [
 	^ task
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:46'
+}
+SLGLesson >> task: aTask [
+	task := aTask
 ]

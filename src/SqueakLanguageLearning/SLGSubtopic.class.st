@@ -1,3 +1,6 @@
+"
+Represents a structure that consists of a title and lessons; able to observe the completion of tasks within its own lessons.
+"
 Class {
 	#name : #SLGSubtopic,
 	#superclass : #Object,
@@ -5,49 +8,31 @@ Class {
 		'title',
 		'lessons'
 	],
-	#category : #'SqueakLanguageLearning-Data'
+	#category : #'SqueakLanguageLearning-Data',
+	#'squeak_changestamp' : 'EB 6/26/2024 15:38'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 18:35'
+	#'squeak_changestamp' : 'EB 6/26/2024 14:26'
 }
-SLGSubtopic class >> newWithTitle: aTitle andLessons: lessonsList [
-
-	^ self basicNew initializeWithTitle: aTitle andLessons: lessonsList
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/26/2024 21:29'
-}
-SLGSubtopic class >> title: aTitle lessons: lessonsList [
-
-	^ self new initializeWithTitle: aTitle andLessons: lessonsList
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 18:35'
-}
-SLGSubtopic >> initializeWithTitle: aTitle andLessons: lessonsList [
-
-	title := aTitle.
-	lessons := lessonsList.
+SLGSubtopic class >> newWithTitle: aTitle andLessons: lessons [
 	
-	lessons do: [:each |
-		each task when: #taskCompleted send: #onTaskCompleted to: self ]
-	
+	^ self new
+		title: aTitle;
+		lessons: lessons;
+		listenToTaskCompleted;
+		yourself
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/12/2024 16:32'
+	#'squeak_changestamp' : 'EB 6/26/2024 14:33'
 }
 SLGSubtopic >> isCompleted [
 
 	lessons do: [ :each |
-		(each isCompleted) ifFalse: [ ^false. ] ].
+		(each isCompleted) ifFalse: [ ^false ] ].
 	
 	^ true
 
@@ -63,16 +48,34 @@ SLGSubtopic >> lessons [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/26/2024 15:48'
+}
+SLGSubtopic >> lessons: lessonsCollection [
+	lessons := lessonsCollection
+]
+
+{
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:28'
+	#'squeak_changestamp' : 'EB 6/26/2024 14:25'
+}
+SLGSubtopic >> listenToTaskCompleted [
+	
+	lessons do: [:each |
+		each task when: #taskCompleted send: #onTaskCompleted to: self ]
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 6/26/2024 14:33'
 }
 SLGSubtopic >> onTaskCompleted [
 
-	"Give a badge"
 	(self isCompleted)
 		ifTrue: [ Transcript show: 'You have earned a badge for a subtopic ', self title; cr.
 			self triggerEvent: #subtopicCompleted.
-			SLGUserProgress userData updateSubtopicScore.  ]
+			SLGUserProgress userData updateSubtopicScore  ]
 ]
 
 {
@@ -81,4 +84,12 @@ SLGSubtopic >> onTaskCompleted [
 }
 SLGSubtopic >> title [
 	^ title
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 6/26/2024 15:48'
+}
+SLGSubtopic >> title: aTitle [
+	title := aTitle
 ]

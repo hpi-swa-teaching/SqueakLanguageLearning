@@ -147,7 +147,7 @@ SLGTaskView class >> taskElementWidth [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:54'
+	#'squeak_changestamp' : 'xiaoshi 6/14/2024 14:06'
 }
 SLGTaskView class >> taskElementsMargin [
 
@@ -219,7 +219,7 @@ SLGTaskView >> code: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/16/2024 04:04'
+	#'squeak_changestamp' : 'xiaoshi 7/1/2024 09:21'
 }
 SLGTaskView >> createCodeBlockWithContent: aCodeString withBorder: aBoolean [
 
