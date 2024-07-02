@@ -183,15 +183,16 @@ SLGTaskView class >> textContainerHeight [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'yegi 6/16/2024 05:46'
+	#'squeak_changestamp' : 'EB 7/1/2024 15:16'
 }
 SLGTaskView >> checkResult [
 
 	(self result = 100)
 		ifTrue: [self printSuccess.
 			self statusDisplay color: self class lightPastelGreen.
-			SLGUserProgress userData markTaskAsCompleted: (self task id).
-			self task triggerEvent: #taskCompleted. ]
+			(SLGUserProgress userData isTaskCompleted: (self task id) ) ifFalse: [
+				SLGUserProgress userData markTaskAsCompleted: (self task id).
+				self task triggerEvent: #taskCompleted. ] ]
 		
 		ifFalse: [self printFailure.
 			self statusDisplay color: self class lightPastelRed]

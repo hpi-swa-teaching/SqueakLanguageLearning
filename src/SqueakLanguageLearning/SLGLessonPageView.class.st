@@ -113,7 +113,7 @@ SLGLessonPageView >> getTaskTypeDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/16/2024 09:56'
+	#'squeak_changestamp' : 'EB 7/1/2024 15:05'
 }
 SLGLessonPageView >> initializeWithLesson: aLesson Subtopic: aSubtopic Topic: aTopic andController: aController [
 	
@@ -132,7 +132,7 @@ SLGLessonPageView >> initializeWithLesson: aLesson Subtopic: aSubtopic Topic: aT
 	
 	aLesson task when: #taskCompleted evaluate: 
 		[ self updateScoreDisplay. 
-		(aSubtopic isCompleted) ifTrue: [self updateSubtopicScoreDisplay.
+			(aSubtopic isCompleted) ifTrue: [self updateSubtopicScoreDisplay.
 			(aTopic isCompleted) ifTrue: [self updateTopicScoreDisplay]] ].
 	
 ]

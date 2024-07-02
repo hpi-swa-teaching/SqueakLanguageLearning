@@ -164,7 +164,7 @@ SLGSubtopicPageView >> getLessonButtons [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:30'
+	#'squeak_changestamp' : 'EB 7/1/2024 15:06'
 }
 SLGSubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
 	
@@ -175,7 +175,7 @@ SLGSubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andCon
 	
 	self constructView.
 	
-	aSubtopic when: #subtopicCompleted evaluate: [self updateSubtopicScoreDisplay].
+	"aSubtopic when: #subtopicCompleted evaluate: [self updateSubtopicScoreDisplay]."
 ]
 
 {
