@@ -65,70 +65,49 @@ SLGUITest >> testResetButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 11:33'
+	#'squeak_changestamp' : 'yegi 7/3/2024 12:30'
 }
 SLGUITest >> testStatusErrorChoiceMulti [		
-		
-		| taskView task choiceView |	   		 		
 	
-		taskView := SLGTaskView new.		
-		taskView status: (taskView createTextFieldWithContent: '' withBorder: false).		
-		taskView statusDisplay: (taskView createStatusField).	      
-			
-		task := SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Which of the following are mammals?'                                          
-										withOptions: #('Dog' 'Snake' 'Whale' 'Eagle')                                          
-										withAnswers: #('Dog' 'Whale')                                          
-										withID: 'Task4'.	
+	| task choiceView |	   		 			      
 		
-		choiceView := SLGMultipleChoiceView newMultipleChoiceUIwithTask: task.	
-		choiceView status: taskView status.	
-		choiceView statusDisplay:
-		taskView statusDisplay.	
-		choiceView setup.	
-		choiceView verifyAnswer.	
-				
-		self assert: (choiceView status contents = 'Please choose at least one answer.').	
+	task := SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Which of the following are mammals?'                                          
+									withOptions: #('Dog' 'Snake' 'Whale' 'Eagle')                                          
+									withAnswers: #('Dog' 'Whale')                                          
+									withID: 'Task4'.	
+	
+	choiceView := SLGMultipleChoiceView newMultipleChoiceUIwithTask: task.	
+	choiceView verifyAnswer.	
+			
+	self assert: (choiceView status contents = 'Please choose at least one answer.').	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 11:35'
+	#'squeak_changestamp' : 'yegi 7/3/2024 12:31'
 }
 SLGUITest >> testStatusErrorChoiceSingle [	
-		
-		| taskView task choiceView |	   		 		
 	
-		taskView := SLGTaskView new.		
-		taskView status: (taskView createTextFieldWithContent: '' withBorder: false).		
-		taskView statusDisplay: (taskView createStatusField).	      
-			
-		task := SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Which of the following are mammals?'                                          
-										withOptions: #('Dog' 'Snake' 'Eagle')                                          
-										withAnswers: #('Dog')                                          
-										withID: 'Task4'.	
+	| task choiceView |	   		 		      
 		
-		choiceView := SLGSingleChoiceView newSingleChoiceUIwithTask: task.	
-		choiceView status: taskView status.	
-		choiceView statusDisplay:
-		taskView statusDisplay.	
-		choiceView setup.	
-		choiceView verifyAnswer.	
-				
-		self assert: (choiceView status contents = 'Please choose an answer.').	
+	task := SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Which of the following are mammals?'                                          
+									withOptions: #('Dog' 'Snake' 'Eagle')                                          
+									withAnswers: #('Dog')                                          
+									withID: 'Task4'.	
+	
+	choiceView := SLGSingleChoiceView newSingleChoiceUIwithTask: task.		
+	choiceView verifyAnswer.	
+			
+	self assert: (choiceView status contents = 'Please choose an answer.').	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 11:35'
+	#'squeak_changestamp' : 'yegi 7/3/2024 12:29'
 }
 SLGUITest >> testStatusErrorCloze [
 	
-	| taskView clozeTask clozeView |	   
-		 	
-	taskView := SLGTaskView new.
-	
-	taskView status: (taskView createTextFieldWithContent: '' withBorder: false).	
-	taskView statusDisplay: (taskView createStatusField).
+	| clozeTask clozeView |	   
 	
       clozeTask := SLGClozeTask newClozeWithQuestion: '' 
 									withCloze: 'The class of x is __.' 
@@ -136,9 +115,6 @@ SLGUITest >> testStatusErrorCloze [
 									withID: 'test1'.
 
 	clozeView := SLGClozeView newClozeUIwithTask: clozeTask.
-	clozeView status: taskView status.
-	clozeView statusDisplay: taskView statusDisplay.
-	clozeView setup.
 	clozeView verifyAnswer.
 	
 	self assert: (clozeView status contents = 'Please change xx to your answer.').	
@@ -147,25 +123,17 @@ SLGUITest >> testStatusErrorCloze [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 11:38'
+	#'squeak_changestamp' : 'yegi 7/3/2024 12:29'
 }
 SLGUITest >> testStatusErrorDragAndDrop [
 	
-	| taskView dragDropTask dragDropView |	   
-		 	
-	taskView := SLGTaskView new.
-	
-	taskView status: (taskView createTextFieldWithContent: '' withBorder: false).	
-	taskView statusDisplay: (taskView createStatusField).
+	| dragDropTask dragDropView |	   
 	
      dragDropTask := SLGDragAndDropTask newWithQuestion: 'Arrange the words in alphabetical order'                                   
 									withCorrectAnswer: #('apple' 'banana' 'cherry' 'date')                                   
 									withID: 'Task1'.
 
 	dragDropView := SLGDragAndDropView newWithTask: dragDropTask.
-	dragDropView status: taskView status.
-	dragDropView statusDisplay: taskView statusDisplay.
-	dragDropView setup.
 	dragDropView verifyAnswer.
 	
 	self assert: (dragDropView status contents = 'Please position all of the given items.').	
