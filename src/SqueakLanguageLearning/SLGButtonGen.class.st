@@ -8,44 +8,49 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 23:28'
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:00'
 }
 SLGButtonGen class >> buttonBorderWidth [
-	^2px
+
+	^ 2px
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:14'
+	#'squeak_changestamp' : 'SW 7/4/2024 18:01'
 }
 SLGButtonGen >> callback [
+
 	^ callback value
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:14'
+	#'squeak_changestamp' : 'SW 7/4/2024 18:01'
 }
-SLGButtonGen >> callback: anObject [
-	callback := anObject
+SLGButtonGen >> callback: aBlock [
+	callback := aBlock
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:15'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/4/2024 18:02'
 }
 SLGButtonGen >> initialize [
+
 	super initialize.
-	self
+	
+	self 
 		target: [self callback];
-		actionSelector: #value.
+		actionSelector: #value
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:13'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/4/2024 18:01'
 }
 SLGButtonGen >> onClickWithBlock: aBlock [
-	self callback: aBlock.
+
+	self callback: aBlock
 ]

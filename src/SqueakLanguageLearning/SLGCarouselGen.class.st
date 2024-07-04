@@ -11,27 +11,35 @@ Class {
 }
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:15'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'SW 7/4/2024 18:24'
 }
-SLGCarouselGen >> back [
-	self currentIndex: (self currentIndex - 1) \\ (self morphs size).
-	self update.
+SLGCarouselGen class >> newCarouselWithMorphs: aList [
+
+	^ self new
+		morphs: aList;
+		setup;
+		update;
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:37'
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:12'
+}
+SLGCarouselGen >> back [
+
+	self currentIndex: self decrementedIndex.
+	self update
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:20'
 }
 SLGCarouselGen >> canSwitch [
-	((self cycle not) and: ((self currentIndex + 1) < (self morphs size))) ifTrue: [
-		^true
-	].
-	self cycle ifTrue: [
-		^true
-	].
-	
-	^false
+
+	^ self shouldIncrementIndex
 ]
 
 {
@@ -67,39 +75,59 @@ SLGCarouselGen >> cycle: anObject [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:28'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/4/2024 18:12'
+}
+SLGCarouselGen >> decrementedIndex [
+
+	^ (self currentIndex - 1) \\ self morphsSize
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:21'
 }
 SLGCarouselGen >> getCurrentMorph [
+
 	| morph |
+	
 	morph := self morphs at: (self currentIndex + 1).
 	morph center: self center.
-	^morph.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/18/2024 19:38'
-}
-SLGCarouselGen >> handler [
-	self addMorph: self getCurrentMorph.
 	
+	^ morph
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:20'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/4/2024 18:12'
 }
-SLGCarouselGen >> initializeWithMorphs: aList [
+SLGCarouselGen >> incrementedIndex [
+
+	^ (self currentIndex + 1) \\ self morphsSize
+]
+
+{
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/4/2024 18:19'
+}
+SLGCarouselGen >> initialize [
+
 	super initialize.
-	self morphs: aList.
-	self currentIndex: 0.
-	self previousIndex: -1.
-	self cycle: false.
-	self color: Color transparent.
-	self width: self getCurrentMorph width.
-	self height: self getCurrentMorph height.
-	self update.
+	
+	self 
+		color: Color transparent;
+		currentIndex: 0;
+		previousIndex: -1;
+		cycle: false
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:09'
+}
+SLGCarouselGen >> isWithinBounds [
+
+	^ (self currentIndex + 1) < self morphsSize
 ]
 
 {
@@ -112,24 +140,44 @@ SLGCarouselGen >> morphs [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/18/2024 19:29'
+	#'squeak_changestamp' : 'SW 7/4/2024 18:08'
 }
-SLGCarouselGen >> morphs: anObject [
-	morphs := anObject
+SLGCarouselGen >> morphs: aListOfMorphs [
+	morphs := aListOfMorphs
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:15'
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:07'
+}
+SLGCarouselGen >> morphsSize [
+
+	^ self morphs size
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:17'
 }
 SLGCarouselGen >> next [
-	((self cycle not) and: ((self currentIndex + 1) < (self morphs size))) ifTrue: [
-		self currentIndex: (self currentIndex + 1) \\ (self morphs size).
-	].
-	self cycle ifTrue: [
-		self currentIndex: (self currentIndex + 1) \\ (self morphs size).
-	].
-	self update.
+
+	| newIndex |
+	
+	self shouldIncrementIndex
+		ifTrue: [
+				newIndex := self incrementedIndex.
+				self currentIndex: newIndex].
+			
+	self update
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:07'
+}
+SLGCarouselGen >> notCycle [
+
+	^ self cycle not
 ]
 
 {
@@ -149,20 +197,45 @@ SLGCarouselGen >> previousIndex: anObject [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/18/2024 19:39'
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:13'
 }
 SLGCarouselGen >> removeCurrentMorph [
-	self removeMorph: self getCurrentMorph.
+
+	self removeMorph: self getCurrentMorph
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:31'
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:14'
+}
+SLGCarouselGen >> setup [
+
+	self 
+		width: self getCurrentMorph width;
+		height: self getCurrentMorph height
+		
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:10'
+}
+SLGCarouselGen >> shouldIncrementIndex [
+
+	^ ((self notCycle and: [self isWithinBounds]) or: [self cycle])
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:15'
 }
 SLGCarouselGen >> update [
-	self previousIndex < 0 ifTrue: [self previousIndex: 0].
+
+	self previousIndex < 0 
+		ifTrue: [self previousIndex: 0].
+		
 	self removeMorph: (self morphs at: self previousIndex + 1).
 	self addMorph: self getCurrentMorph.
-	self previousIndex: self currentIndex.
+	self previousIndex: self currentIndex
 ]
