@@ -11,7 +11,8 @@ Class {
 		'topicScore',
 		'subtopicScore',
 		'topicScoreDisplay',
-		'subtopicScoreDisplay'
+		'subtopicScoreDisplay',
+		'backButton'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
