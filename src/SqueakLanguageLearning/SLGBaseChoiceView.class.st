@@ -82,7 +82,7 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
+	#'squeak_changestamp' : 'SW 7/5/2024 09:40'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
@@ -130,13 +130,13 @@ SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 		row := SLGLayout rowWithMorphs: 
 			{
 				toggleBtn.
-				SLGSpacerGen newSpacerWithDim: (20 @ 0).
+				SLGSpacerGen newSpacerWithDimension: (20 @ 0).
 				text
 			}.
 		
 		SLGLayout columnWithMorphs: {
 			row.
-			SLGSpacerGen newSpacerWithDim: (0 @ 20)
+			SLGSpacerGen newSpacerWithDimension: (0 @ 20)
 		}
 	].
 

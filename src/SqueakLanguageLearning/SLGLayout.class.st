@@ -1,3 +1,6 @@
+"
+This class is a lightweight wrapper for TableLayout. It takes a list of morphs as an argument and returns a new morph with the elements ordered in a specific direction.
+"
 Class {
 	#name : #SLGLayout,
 	#superclass : #Morph,
@@ -6,7 +9,8 @@ Class {
 		'morphs',
 		'gapSize'
 	],
-	#category : #'SqueakLanguageLearning-UI-Components'
+	#category : #'SqueakLanguageLearning-UI-Components',
+	#'squeak_changestamp' : 'SW 7/5/2024 10:22'
 }
 
 {
@@ -50,6 +54,15 @@ SLGLayout class >> columnWithMorphsReversed: anArray withGap: aNumber [
 		gapSize: aNumber;
 		setupColumns;
 		yourself
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/5/2024 09:59'
+}
+SLGLayout class >> layoutColor [
+
+	^ Color transparent
 ]
 
 {
@@ -143,7 +156,7 @@ SLGLayout >> gapSize: aNumber [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 7/4/2024 18:38'
+	#'squeak_changestamp' : 'SW 7/5/2024 10:00'
 }
 SLGLayout >> initialize [
 
@@ -151,7 +164,7 @@ SLGLayout >> initialize [
 	
 	self 
 		layoutPolicy: TableLayout new;
-		color: Color transparent
+		color: self class layoutColor
 		
 	
 	
@@ -167,10 +180,10 @@ SLGLayout >> morphs [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 7/4/2024 18:35'
+	#'squeak_changestamp' : 'SW 7/5/2024 09:45'
 }
-SLGLayout >> morphs: aListOfMorphs [
-	morphs := aListOfMorphs
+SLGLayout >> morphs: anArrayOfMorphs [
+	morphs := anArrayOfMorphs
 ]
 
 {
