@@ -1,31 +1,35 @@
+"
+This class is a Mock Object for SLGTask supporting all methods to validate and verify user input.
+"
 Class {
 	#name : #SLGAnswerEvaluator,
 	#superclass : #Object,
 	#instVars : [
 		'correctAnswer'
 	],
-	#category : #'SqueakLanguageLearning-Tests'
+	#category : #'SqueakLanguageLearning-Tests',
+	#'squeak_changestamp' : 'SW 7/5/2024 17:23'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:23'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 7/5/2024 17:37'
 }
 SLGAnswerEvaluator >> calculatePercentage: aValue with: aTotal [
+
         | percentage |
         percentage := ((aValue / aTotal) * 100) rounded.
+
         ^ percentage
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:23'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 7/5/2024 17:37'
 }
 SLGAnswerEvaluator >> calculateResult: anUserInput [
+
         | comparison percentage |
-        
-        Transcript show: 'No Error occurred.'; cr.
-        
         comparison := self findMatches: self correctAnswer with: anUserInput.
         percentage := self calculatePercentage: (comparison size) with: (self correctAnswer size).
         
@@ -33,15 +37,15 @@ SLGAnswerEvaluator >> calculateResult: anUserInput [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:31'
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/6/2024 14:23'
 }
 SLGAnswerEvaluator >> correctAnswer [
-        ^ correctAnswer.
+        ^ correctAnswer
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #accessing,
 	#'squeak_changestamp' : 'EB 6/14/2024 11:30'
 }
 SLGAnswerEvaluator >> correctAnswer: anAnswer [ 
@@ -49,48 +53,49 @@ SLGAnswerEvaluator >> correctAnswer: anAnswer [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:23'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 7/5/2024 17:37'
 }
 SLGAnswerEvaluator >> findMatches: correctAnswer with: userAnswer [
-        "Mock implementation: find matching characters between two strings"
+        "Mock implementation: Find matching characters between two strings."
+
         | matches |
         matches := ''.
-        1 to: (correctAnswer size min: userAnswer size) do: [:i |
-            (correctAnswer at: i) = (userAnswer at: i) ifTrue: [
-                matches := matches , (correctAnswer at: i) asString.
-            ].
-        ].
+        1 to: (correctAnswer size min: userAnswer size) do: [:index |
+            (correctAnswer at: index) = (userAnswer at: index) 
+			ifTrue: [matches := matches , (correctAnswer at: index) asString]].
+		
         ^ matches
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:17'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 7/5/2024 17:34'
 }
 SLGAnswerEvaluator >> isValid: anUserInput [ 
-        "Mock implementation: returns true for non-empty strings"
+        "Mock implementation: Returns true for non-empty strings."
+
         ^ anUserInput isEmpty not
+
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:17'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 7/5/2024 17:34'
 }
 SLGAnswerEvaluator >> sendError [ 
-        "Mock implementation: returns 'Invalid Input' for invalid input"
+        "Mock implementation: Returns 'Invalid Input' for invalid input."
+
         ^ 'Invalid Input'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:18'
+	#category : #verification,
+	#'squeak_changestamp' : 'SW 7/5/2024 17:37'
 }
-SLGAnswerEvaluator >> verifyAnswer: anUserInput [ 
+SLGAnswerEvaluator >> verifyAnswer: anUserInput [
+
         | output |
-        
-        Transcript show: 'isValid: ', (self isValid: anUserInput) printString; cr.
-        
         (self isValid: anUserInput)
             ifTrue: [ output := self calculateResult: anUserInput ]
             ifFalse: [ output := self sendError ].

@@ -107,12 +107,11 @@ SLGCarouselGen >> decrementedIndex [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 7/5/2024 09:44'
+	#'squeak_changestamp' : 'SW 7/5/2024 17:38'
 }
 SLGCarouselGen >> getCurrentMorph [
 
 	| morph |
-	
 	morph := self morphs at: self incrementedIndex.
 	morph center: self center.
 	
@@ -179,12 +178,11 @@ SLGCarouselGen >> morphsSize [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'SW 7/5/2024 09:44'
+	#'squeak_changestamp' : 'SW 7/5/2024 17:38'
 }
 SLGCarouselGen >> next [
 
 	| newIndex |
-	
 	self shouldIncrementIndex
 		ifTrue: [
 				newIndex := self wrappedIncrementedIndex.
