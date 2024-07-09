@@ -44,29 +44,27 @@ SLGTopic >> description: aDescription [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/26/2024 14:33'
+	#category : #testing,
+	#'squeak_changestamp' : 'EB 7/9/2024 14:36'
 }
 SLGTopic >> isCompleted [
 
-	subtopics do: [ :each |
-		(each isCompleted) ifFalse: [ ^false ] ].
-	
-	^ true
+	^ (self subtopics detect: [ :each | 
+				each isCompleted not ] ifNone: [ nil ]) isNil
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/26/2024 14:27'
+	#category : #'event-handling',
+	#'squeak_changestamp' : 'EB 7/9/2024 14:15'
 }
 SLGTopic >> listenToSubtopicCompleted [
 	
-	subtopics do: [:each |
+	self subtopics do: [:each |
 		each when: #subtopicCompleted send: #onSubtopicCompleted to: self ]
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'event-handling',
 	#'squeak_changestamp' : 'EB 6/26/2024 14:33'
 }
 SLGTopic >> onSubtopicCompleted [
