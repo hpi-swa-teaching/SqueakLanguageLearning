@@ -139,7 +139,7 @@ SLGLessonPageView >> initializeWithLesson: aLesson Subtopic: aSubtopic Topic: aT
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 01:44'
+	#'squeak_changestamp' : 'SW 7/4/2024 18:20'
 }
 SLGLessonPageView >> initializeWithLessons: aLessons Subtopic: aSubtopic Topic: aTopic andController: aController [
 	| taskViews nextButton col |
@@ -154,8 +154,7 @@ SLGLessonPageView >> initializeWithLessons: aLessons Subtopic: aSubtopic Topic: 
 		taskView
 	].
 
-	self carousel: (SLGCarouselGen new
-		initializeWithMorphs: taskViews).
+	self carousel: (SLGCarouselGen newCarouselWithMorphs: taskViews).
 		
 	self carousel center: self body center.
 	

@@ -1,24 +1,40 @@
+"
+This class can be used to have additional margins or padding behavior within SLGLayout.
+"
 Class {
 	#name : #SLGSpacerGen,
 	#superclass : #Morph,
-	#category : #'SqueakLanguageLearning-UI-Components'
+	#category : #'SqueakLanguageLearning-UI-Components',
+	#'squeak_changestamp' : 'SW 7/5/2024 10:24'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 16:01'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'SW 7/5/2024 08:44'
 }
-SLGSpacerGen class >> newSpacerWithDim: aPoint [
-	^self new
+SLGSpacerGen class >> newSpacerWithDimension: aPoint [
+ 
+	^ self new
 		extent: aPoint;
-		yourself. 
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:29'
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/5/2024 09:56'
+}
+SLGSpacerGen class >> spacerColor [
+
+	^ Color red
+]
+
+{
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/5/2024 09:56'
 }
 SLGSpacerGen >> initialize [
+
 	super initialize.
-	self color: Color red.
+	
+	self color: self class spacerColor
 ]

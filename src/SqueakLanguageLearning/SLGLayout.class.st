@@ -1,175 +1,225 @@
+"
+This class is a lightweight wrapper for TableLayout. It takes a list of morphs as an argument and returns a new morph with the elements ordered in a specific direction.
+"
 Class {
 	#name : #SLGLayout,
-	#superclass : #Object,
+	#superclass : #Morph,
 	#instVars : [
-		'elements',
-		'maxWidth'
+		'direction',
+		'morphs',
+		'gapSize'
 	],
-	#category : #'SqueakLanguageLearning-UI-Components'
+	#category : #'SqueakLanguageLearning-UI-Components',
+	#'squeak_changestamp' : 'SW 7/5/2024 10:22'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:15'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'SW 7/4/2024 18:45'
 }
 SLGLayout class >> columnWithMorphs: anArray [
-	| container maxWidth sumHeight |
-	
-	container := Morph new.
-	
-	maxWidth := (anArray collect: [:a | a width]) inject: 0 into: [:a :c | (a > c)
-	   ifTrue: [a]
-	   ifFalse: [c]
-	].
-	sumHeight := 0. anArray do: [:a | sumHeight := sumHeight + (a height)]. sumHeight.	
-	
-	container width: maxWidth.
-	container height: sumHeight.
-	
-	container layoutPolicy: TableLayout new.
-	container listDirection: #bottomToTop.
-	container color: Color transparent.
-	
-	anArray do: [:each |
-		container addMorph: each.
-	].
 
-	^container
+	^ self new
+		morphs: anArray;
+		direction: #bottomToTop;
+		gapSize: 0;
+		setupColumns;
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:02'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'SW 7/4/2024 19:02'
 }
-SLGLayout class >> columnWithMorphs: anArray withGap: anInt [
-	| container |
-	
-	container := self columnWithMorphs: anArray.
-	container cellGap: anInt.
-	
-	^container
+SLGLayout class >> columnWithMorphs: anArray withGap: aNumber [
+
+	^ self new
+		morphs: anArray;
+		direction: #bottomToTop;
+		gapSize: aNumber;
+		setupColumns;
+		yourself
+
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 7/3/2024 11:17'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'SW 7/4/2024 18:57'
 }
-SLGLayout class >> columnWithMorphsReversed: anArray withGap: anInt [
-	| container maxWidth sumHeight |
+SLGLayout class >> columnWithMorphsReversed: anArray withGap: aNumber [
 	
-	container := Morph new.
-	
-	maxWidth := (anArray collect: [:a | a width]) inject: 0 into: [:a :c | (a > c)
-	   ifTrue: [a]
-	   ifFalse: [c]
-	].
-	sumHeight := 0. anArray do: [:a | sumHeight := sumHeight + (a height)]. sumHeight.	
-	
-	container width: maxWidth.
-	container height: sumHeight.
-	
-	container layoutPolicy: TableLayout new.
-	container listDirection: #topToBottom.
-	container color: Color transparent.
-	
-	anArray do: [:each |
-		container addMorph: each.
-	].
-	container cellGap: anInt.
-
-	^container
+	^ self new
+		morphs: anArray;
+		direction: #topToBottom;
+		gapSize: aNumber;
+		setupColumns;
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:55'
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/5/2024 09:59'
+}
+SLGLayout class >> layoutColor [
+
+	^ Color transparent
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'SW 7/4/2024 18:47'
 }
 SLGLayout class >> rowWithMorphs: anArray [
-	| container sumWidth maxHeight |
 	
-	container := Morph new.
-	
-	sumWidth := 0. anArray do: [:a | sumWidth := sumWidth + (a width)]. sumWidth.
-	maxHeight := (anArray collect: [:a | a height]) inject: 0 into: [:a :c | (a > c)
-	   ifTrue: [a]
-	   ifFalse: [c]
-	].
-
-	container width: sumWidth.
-	container height: maxHeight.
-	
-	container layoutPolicy: TableLayout new.
-	container listDirection: #rightToLeft.
-	container color: Color transparent.
-	anArray do: [:each |
-		container addMorph: each.
-	].
-
-	^container
+	^ self new
+		morphs: anArray;
+		direction: #rightToLeft;
+		setupRows;
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:41'
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:58'
 }
-SLGLayout class >> testColumn [
-	| container submorph1 submorph2 submorph3 |
+SLGLayout >> calculateMaxHeight [
 
-	submorph1 := Morph new color: Color red; extent: 50@50.
-	submorph2 := Morph new color: Color green; extent: 50@50.
-	submorph3 := Morph new color: Color blue; extent: 50@50.
+	^ self morphs inject: 0 into: [:currentMaximum :morph | currentMaximum max: morph height]
 
-	container := SLGLayout columnWithMorphs: {submorph1.submorph2.submorph3}.
+	
+]
 
-	container openInHand.
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:59'
+}
+SLGLayout >> calculateMaxWidth [
+
+	^ self morphs inject: 0 into: [:currentMaximum :morph | currentMaximum max: morph width]
+
+	
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:59'
+}
+SLGLayout >> calculateSumHeight [
+
+	^ self morphs inject: 0 into: [:sum :morph | sum + morph height]
+
+	
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:59'
+}
+SLGLayout >> calculateSumWidth [
+
+	^ self morphs inject: 0 into: [:sum :morph | sum + morph width]
+
+	
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:17'
+	#'squeak_changestamp' : 'SW 7/4/2024 18:34'
 }
-SLGLayout >> elements [
-	^ elements
+SLGLayout >> direction [
+	^ direction
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:17'
+	#'squeak_changestamp' : 'SW 7/4/2024 18:35'
 }
-SLGLayout >> elements: anObject [
-	elements := anObject
+SLGLayout >> direction: aSymbol [
+	direction := aSymbol
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:27'
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:34'
+}
+SLGLayout >> gapSize [
+	^ gapSize
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/4/2024 18:35'
+}
+SLGLayout >> gapSize: aNumber [
+	gapSize := aNumber
+]
+
+{
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/5/2024 10:00'
 }
 SLGLayout >> initialize [
+
 	super initialize.
 	
+	self 
+		layoutPolicy: TableLayout new;
+		color: self class layoutColor
+		
+	
 	
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:28'
+	#'squeak_changestamp' : 'SW 7/4/2024 18:34'
 }
-SLGLayout >> maxWidth [
-	^ maxWidth
+SLGLayout >> morphs [
+	^ morphs
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:28'
+	#'squeak_changestamp' : 'SW 7/5/2024 09:45'
 }
-SLGLayout >> maxWidth: anObject [
-	maxWidth := anObject
+SLGLayout >> morphs: anArrayOfMorphs [
+	morphs := anArrayOfMorphs
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:29'
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 19:01'
 }
 SLGLayout >> setup [
-	
+
+	self
+		listDirection: self direction;
+		cellGap: self gapSize.
+		
+	self morphs do: [:each | self addMorph: each]
+
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 19:00'
+}
+SLGLayout >> setupColumns [
+
+	self setup.
+	self 
+		width: self calculateMaxWidth;
+		height: self calculateSumHeight
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/4/2024 19:00'
+}
+SLGLayout >> setupRows [
+
+	self setup.
+	self 
+		width: self calculateSumWidth;
+		height: self calculateMaxHeight
 ]

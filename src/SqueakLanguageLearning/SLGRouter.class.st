@@ -51,14 +51,15 @@ SLGRouter >> closeAllWindows [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:52'
+	#'squeak_changestamp' : 'SW 7/6/2024 12:46'
 }
 SLGRouter >> closeWindow [
-	| curRoute |
+	"| curRoute |
 
 	curRoute := self routeHistory last.
 	curRoute page delete.
-	self routes removeKey: curRoute path.
+	self routes removeKey: curRoute path"
+	self closeAllWindows
 ]
 
 {

@@ -11,7 +11,8 @@ Class {
 		'topicScore',
 		'subtopicScore',
 		'topicScoreDisplay',
-		'subtopicScoreDisplay'
+		'subtopicScoreDisplay',
+		'backButton'
 	],
 	#category : #'SqueakLanguageLearning-Pages'
 }
@@ -545,13 +546,14 @@ SLGAbstractPage >> refresh [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 6/15/2024 00:40'
+	#'squeak_changestamp' : 'SW 7/6/2024 14:16'
 }
 SLGAbstractPage >> resetAction [
 
 		SLGUserProgress reset.
-		SLGMainController new.
-		self controller routerController closeWindow.
+		"SLGMainController new."
+		"self controller routerController closeWindow."
+		self controller routerController navigateTo: '/home'
 ]
 
 {
