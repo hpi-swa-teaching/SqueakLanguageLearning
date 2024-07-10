@@ -1,3 +1,6 @@
+"
+This class can be used to create a Topic page(the page with all the subtopic buttons shown after clicking topic button on Home page).
+"
 Class {
 	#name : #SLGTopicPageView,
 	#superclass : #SLGAbstractPage,
@@ -5,64 +8,78 @@ Class {
 		'topic',
 		'subtopics'
 	],
-	#category : #'SqueakLanguageLearning-Pages'
+	#category : #'SqueakLanguageLearning-Pages',
+	#'squeak_changestamp' : 'yegi 7/9/2024 10:39'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 00:14'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'yegi 7/10/2024 12:23'
 }
-SLGTopicPageView class >> newWithTopic: aTopic andController: aController [
+SLGTopicPageView class >> newWithTopic: aTopicObject andController: aControllerObject [
 
-	^super basicNew initializeWithTopic: aTopic andController: aController
+	^ self new
+		controller: aControllerObject;
+		topic: aTopicObject;	
+		constructView;
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 11:23'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 12:25'
 }
 SLGTopicPageView >> constructView [
+
 	| rows cols |
-	rows := OrderedCollection new.
-	
+	self subtopics: self topic subtopics;
+		 addTitle: self topic title.
+	rows := OrderedCollection new.	
 	rows add: self getDescription.
 	rows addAll: self getSubtopicButtons.
-
-	cols := SLGLayout columnWithMorphs: rows withGap: 10px.
+	cols := SLGLayout columnWithMorphs: rows withGap: self class topicGapHeight.
+	cols center: self center + (0 @ self class iconMarginHeight * self class topicPageColumnCenterMargin).
 	
-	cols center: self center + (0 @ self class iconMarginHeight * 0.3).
-	
-	self body addMorph: cols.
+	self body addMorph: cols
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/19/2024 23:08'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:41'
 }
-SLGTopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [
-	^SLGSubtopicPageView new
-		initializeWithTopic: (self topic)
+SLGTopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [ 
+	
+	^ SLGSubtopicPageView
+		newWithTopic: self topic
 		andSubtopic: aSubtopic
 		andController: self controller
+		
+		
+		"^ SLGSubtopicPageView new
+	initializeWithTopic: (self topic)
+	andSubtopic: aSubtopic
+	andController: self controller"
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 10:18'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 12:05'
 }
 SLGTopicPageView >> getDescription [
-	^SLGMultilineTextGen new 
+	
+	^ SLGMultilineTextGen new 
 		setFontSize: self class descriptionFont;
 		width: self class descriptionWidth;
 		setText: (self topic description);
-		yourself.
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 04:00'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:39'
 }
 SLGTopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
+
 	|routeString button |
 	routeString := aString.
 	
@@ -72,43 +89,40 @@ SLGTopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aStri
 	button := SLGNavigationButtonGen new
 		label: aSubtopic title;
 		width: self class buttonWidth;
-		borderWidth: 2;
 		 onClickWithBlock: [
-			self controller routerController navigateTo: routeString. ].
+			self controller routerController navigateTo: routeString. ];
+		yourself.
 	
 	(aSubtopic isCompleted) ifTrue: [button color: self class pastelGreen.].
 	
 	aSubtopic when: #subtopicCompleted evaluate: [button color: self class pastelGreen.].
 	
-	^button
+	^ button
 
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:31'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 12:04'
 }
 SLGTopicPageView >> getSubtopicButtons [
-	^self subtopics collect: [:subtopic |
+	
+	^ self subtopics collect: [:subtopic |
 		self getSubtopicButtonWithSubtopic: subtopic
-			withRouteKey:  ('/home/', self topic title, '/', subtopic title)
-	].
+			withRouteKey:  ('/home/', self topic title, '/', subtopic title)]
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 7/1/2024 15:06'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'yegi 7/10/2024 12:30'
 }
-SLGTopicPageView >> initializeWithTopic: aTopic andController: aController [
+SLGTopicPageView >> initialize [
+
+	super initialize.
 	
-	super initializeWithController: aController.
-	self topic: aTopic.
-	self subtopics: aTopic subtopics.
-	self addTitle: aTopic title.
-	
-	self constructView.
-	
-	"aTopic when: #topicCompleted evaluate: [self updateTopicScoreDisplay]."
+	"self subtopics: self topic subtopics;
+		addTitle: self topic title."
+	"self constructView"
 	
 	
 ]

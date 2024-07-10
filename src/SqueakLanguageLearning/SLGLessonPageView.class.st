@@ -1,3 +1,6 @@
+"
+This class can be used to create a lesson page(the page with an exercise the user will answer questions).
+"
 Class {
 	#name : #SLGLessonPageView,
 	#superclass : #SLGAbstractPage,
@@ -5,48 +8,63 @@ Class {
 		'task',
 		'nextExerciseRoute',
 		'carousel',
-		'currentIndex'
+		'currentIndex',
+		'topic',
+		'subtopic',
+		'lessons'
 	],
 	#classInstVars : [
 		'taskTypeDictionary'
 	],
-	#category : #'SqueakLanguageLearning-Pages'
+	#category : #'SqueakLanguageLearning-Pages',
+	#'squeak_changestamp' : 'yegi 7/9/2024 10:43'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 6/6/2024 15:28'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'yegi 7/10/2024 13:36'
 }
 SLGLessonPageView class >> initializeTaskTypeDictionary [
-	
-	"key is a name of object class for the type of task"
-	taskTypeDictionary := Dictionary new.
-	
-    	taskTypeDictionary at: 'SLGDragAndDropTask' put: (Array with: SLGDragAndDropView with: #newWithTask:).
-	taskTypeDictionary at: 'SLGClozeTask' put: (Array with: SLGClozeView with:#newClozeUIwithTask:).
-    	taskTypeDictionary at: 'SLGMultipleChoiceTask' put: (Array with: SLGMultipleChoiceView with: #newMultipleChoiceUIwithTask:).
-    	taskTypeDictionary at: 'SLGSingleChoiceTask' put: (Array with: SLGSingleChoiceView with: #newSingleChoiceUIwithTask:).
-    	
+
+	self taskTypeDictionary: Dictionary new.
+	self taskTypeDictionary
+		at: 'SLGDragAndDropTask'
+		put: (Array with: SLGDragAndDropView with: #newWithTask:).
+	self taskTypeDictionary
+		at: 'SLGClozeTask'
+		put: (Array with: SLGClozeView with: #newClozeUIwithTask:).
+	self taskTypeDictionary
+		at: 'SLGMultipleChoiceTask'
+		put: (Array with: SLGMultipleChoiceView with: #newMultipleChoiceUIwithTask:).
+	self taskTypeDictionary
+		at: 'SLGSingleChoiceTask'
+		put: (Array with: SLGSingleChoiceView with: #newSingleChoiceUIwithTask:)
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'yegi 7/10/2024 16:14'
+}
+SLGLessonPageView class >> newWithLessons: aLessons withSubtopic: aSubtopic withTopic: aTopic withController: aController [ 
+
+	^ self new 
+		controller: aController;
+		lessons: aLessons;
+		subtopic: aSubtopic;
+		topic: aTopic;
+		constructView;
+		yourself
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 22:12'
+	#'squeak_changestamp' : 'yegi 7/10/2024 13:35'
 }
 SLGLessonPageView class >> taskTypeDictionary [
-	
-	taskTypeDictionary ifNil: [self initializeTaskTypeDictionary].
+
+	taskTypeDictionary
+		ifNil: [self initializeTaskTypeDictionary].
 	^ taskTypeDictionary
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 00:09'
-}
-SLGLessonPageView class >> taskViewExtent [
-
-	"^ (self superclass pageWidth * 0.8) @ (self superclass pageHeight * 0.7)"
-	^ 1200@800
 ]
 
 {
@@ -66,23 +84,90 @@ SLGLessonPageView >> carousel: anObject [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 13:21'
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 17:54'
 }
-SLGLessonPageView >> createViewForTask: aTask [
+SLGLessonPageView >> codeBlockOnClick [
+	
+	self carousel canSwitch
+		ifFalse: [self controller routerController navigateBack].
+	self carousel next.
+	(self lessons at: self carousel currentIndex + 1) task
+		when: #taskCompleted
+		evaluate: [self updateScoreDisplay.
+			self subtopic isCompleted
+				ifTrue: [self updateSubtopicScoreDisplay.
+					self topic isCompleted
+						ifTrue: [self updateTopicScoreDisplay]]]
+]
 
-	| dict method targetClass methodName key parameters|
-	dict := self getTaskTypeDictionary.
-	key := (aTask  class name) asString.
-	method := dict at: key ifAbsent: [].
-	targetClass := method first.			"Class name e.g SLGDragAndDropView, SLGClozeView,.."
-	methodName := method second.	"Constructor of the Class above"
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 17:34'
+}
+SLGLessonPageView >> constructView [
+
+	| taskViews nextButton col |
+	self addTitle: 'Lesson Title';
+		currentIndex: 0.
+	taskViews := self lessons
+				collect: [:lesson | 
+					| task taskView |
+					task := lesson task.
+					task
+						ifNil: [^ self].
+					taskView := self createViewForTask: task.
+					taskView].
+	self
+		carousel: (SLGCarouselGen newCarouselWithMorphs: taskViews).
+	self carousel center: self body center.
+	nextButton := self createNextButton.
+	(self lessons at: self carousel currentIndex + 1) task
+		when: #taskCompleted
+		evaluate: [self updateScoreDisplay.
+			self subtopic isCompleted
+				ifTrue: [self updateSubtopicScoreDisplay.
+					self topic isCompleted
+						ifTrue: [self updateTopicScoreDisplay]]].
+	col := SLGLayout columnWithMorphs: {self carousel. nextButton} withGap: self class topicGapHeight.
+	col center: self body center.
+	
+	self body addMorph: col
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 17:56'
+}
+SLGLessonPageView >> createNextButton [
+
+	^ SLGNavigationButtonGen new label: 'Next';
+		 height: self class nextButtonHeight;
+		 width: self class smallButtonWidth;
+		 cornerRadius: self class lessonCornerRadius;
+		 color: SLGTaskView paperBasic;
+		
+		onClickWithBlock: [self codeBlockOnClick]
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 15:27'
+}
+SLGLessonPageView >> createViewForTask: aTask [ 
+
+	| taskTypeDict method targetClass methodName key parameters |
+	taskTypeDict := self getTaskTypeDictionary.
+	key := aTask class name asString.
+	method := taskTypeDict
+				at: key
+				ifAbsent: [].
+	targetClass := method first.
+	methodName := method second.
 	parameters := Array new: 1.
 	parameters at: 1 put: aTask.
-	
-	^targetClass perform: methodName withArguments: parameters.
 
-	
+	^ targetClass perform: methodName withArguments: parameters
 ]
 
 {
@@ -102,133 +187,83 @@ SLGLessonPageView >> currentIndex: anObject [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/5/2024 16:39'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 15:02'
 }
 SLGLessonPageView >> getTaskTypeDictionary [
 	
-	^self class taskTypeDictionary
+	^ self class taskTypeDictionary
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 7/1/2024 15:05'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'yegi 7/10/2024 16:18'
 }
-SLGLessonPageView >> initializeWithLesson: aLesson Subtopic: aSubtopic Topic: aTopic andController: aController [
+SLGLessonPageView >> initialize [
 	
-	| taskView |
-	super initializeWithController: aController.
-	self addTitle: 'Lesson Title'. "TODO substitute with the one stored in DataAccessService"
+	"| taskViews nextButton col |"
+	super initialize.
 	
-	task := aLesson task.
-	task ifNil: [ ^self. ].
-	taskView := self createViewForTask: task.
-		
-	taskView 
-		center: self body center.
+	"self addTitle: 'Lesson Title';
+		currentIndex: 0.
+	taskViews := self lessons
+				collect: [:lesson | 
+					| task taskView |
+					task := lesson task.
+					task
+						ifNil: [^ self].
+					taskView := self createViewForTask: task.
+					taskView].
+	self
+		carousel: (SLGCarouselGen newCarouselWithMorphs: taskViews).
+	self carousel center: self body center."
 	
-	self body addMorph: taskView. 
-	
-	aLesson task when: #taskCompleted evaluate: 
-		[ self updateScoreDisplay. 
-			(aSubtopic isCompleted) ifTrue: [self updateSubtopicScoreDisplay.
-			(aTopic isCompleted) ifTrue: [self updateTopicScoreDisplay]] ].
-	
+	"nextButton := SLGNavigationButtonGen new label: 'Next';
+				 height: self class nextButtonHeight;
+				 width: self class smallButtonWidth;
+				 cornerRadius: self class lessonCornerRadius;
+				 color: SLGTaskView paperBasic;
+				
+				onClickWithBlock: [self carousel canSwitch
+						ifFalse: [self controller routerController navigateBack].
+					self carousel next.
+					(self lessons at: self carousel currentIndex + 1) task
+						when: #taskCompleted
+						evaluate: [self updateScoreDisplay.
+							self subtopic isCompleted
+								ifTrue: [self updateSubtopicScoreDisplay.
+									self topic isCompleted
+										ifTrue: [self updateTopicScoreDisplay]]]];
+				 yourself."
+				
+"		nextButton := self createNextButton.
+	(self lessons at: self carousel currentIndex + 1) task
+		when: #taskCompleted
+		evaluate: [self updateScoreDisplay.
+			self subtopic isCompleted
+				ifTrue: [self updateSubtopicScoreDisplay.
+					self topic isCompleted
+						ifTrue: [self updateTopicScoreDisplay]]].
+	col := SLGLayout columnWithMorphs: {self carousel. nextButton} withGap: self class topicGapHeight.
+	col center: self body center.
+	self body addMorph: col"
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 7/4/2024 18:20'
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:09'
 }
-SLGLessonPageView >> initializeWithLessons: aLessons Subtopic: aSubtopic Topic: aTopic andController: aController [
-	| taskViews nextButton col |
-	super initializeWithController: aController.
-	self addTitle: 'Lesson Title'. "TODO substitute with the one stored in DataAccessService"
-	self currentIndex: 0.
-	taskViews := aLessons collect: [:lesson |
-		| task taskView |
-		task := lesson task.
-		task ifNil: [ ^self. ].
-		taskView := self createViewForTask: task.
-		taskView
-	].
+SLGLessonPageView >> lessons [
+	^ lessons
+]
 
-	self carousel: (SLGCarouselGen newCarouselWithMorphs: taskViews).
-		
-	self carousel center: self body center.
-	
-	nextButton := SLGNavigationButtonGen new
-			label: 'Next';
-			height: self class buttonHeight * 0.8;
-			width: self class smallButtonWidth;
-			cornerRadius: 10px;
-			color: SLGTaskView paperBasic;
-			 onClickWithBlock: [
-				
-				self carousel canSwitch ifFalse: [
-					self controller routerController navigateBack.
-				].
-				self carousel next.
-				
-				(aLessons at: self carousel currentIndex +1) task when: #taskCompleted evaluate: 
-		[ self updateScoreDisplay. 
-		(aSubtopic isCompleted) ifTrue: [self updateSubtopicScoreDisplay.
-			(aTopic isCompleted) ifTrue: [self updateTopicScoreDisplay]] ].
-			].
-		
-	(aLessons at: self carousel currentIndex +1) task when: #taskCompleted evaluate: 
-		[ self updateScoreDisplay. 
-		(aSubtopic isCompleted) ifTrue: [self updateSubtopicScoreDisplay.
-			(aTopic isCompleted) ifTrue: [self updateTopicScoreDisplay]] ].
-		
-	col := SLGLayout columnWithMorphs: {self carousel.nextButton} withGap: 10.
-	
-	col center: self body center.
-	
-	self body addMorph: col.
-	
-	"task := aLessons task.
-	task ifNil: [ ^self. ].
-	taskView := self createViewForTask: task.
-	
-	view := SLGCarouselGen new
-		initializeWithMorphs: {taskView.Morph new};
-		currentIndex: anInt.
-		
-	view center: self body center.
-	
-	nextButton := SLGNavigationButtonGen new
-			label: 'Next';
-			width: self class buttonWidth;
-			 onClickWithBlock: [
-				view next.
-			].
-		
-	 col := SLGLayout columnWithMorphs: {view.nextButton} withGap: 10.
-	
-	col center: self body center.
-	
-	self body addMorph: col. "
-	
-	"nextButton := SLGNavigationButtonGen new
-			label: 'Next';
-			width: self class buttonWidth;
-			 onClickWithBlock: [
-				self controller routerController navigateToWithoutHistory: self nextExerciseRoute withCurrentPage: self.
-			].
-	
-	view := SLGLayout columnWithMorphs: {taskView.nextButton} withGap: 10.
-		
-	view center: self body center.
-	
-	self body addMorph: view. 
-	
-	aLesson task when: #taskCompleted evaluate: 
-		[ self updateScoreDisplay. 
-		(aSubtopic isCompleted) ifTrue: [self updateSubtopicScoreDisplay.
-			(aTopic isCompleted) ifTrue: [self updateTopicScoreDisplay]] ]."
-	
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:09'
+}
+SLGLessonPageView >> lessons: anObject [
+	lessons := anObject
 ]
 
 {
@@ -248,11 +283,45 @@ SLGLessonPageView >> nextExerciseRoute: anObject [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:35'
+	#category : #actions,
+	#'squeak_changestamp' : 'yegi 7/10/2024 13:34'
 }
 SLGLessonPageView >> refresh [
+
 	super refresh.
+	
 	self carousel currentIndex: self currentIndex.
-	self carousel update.
+	self carousel update
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:08'
+}
+SLGLessonPageView >> subtopic [
+	^ subtopic
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:08'
+}
+SLGLessonPageView >> subtopic: anObject [
+	subtopic := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:08'
+}
+SLGLessonPageView >> topic [
+	^ topic
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:08'
+}
+SLGLessonPageView >> topic: anObject [
+	topic := anObject
 ]

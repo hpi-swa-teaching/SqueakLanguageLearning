@@ -35,27 +35,25 @@ SLGMainController >> dataAccessService: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 15:53'
+	#'squeak_changestamp' : 'yegi 7/10/2024 11:01'
 }
 SLGMainController >> initialize [
 	super initialize.
 	
 	self dataAccessService: SLGDataAccessService new.
 	self routerController: SLGRouter new.
-	
 	self registerRoutes.
-	
 	self routerController navigateTo: '/home'.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
+	#'squeak_changestamp' : 'yegi 7/10/2024 10:02'
 }
 SLGMainController >> registerRoutes [
 	self routerController 
 		addRouteWithPath: '/home'
-		withPage: (SLGHomePageView new initializeWithController: self).
+		withPage: (SLGHomePageView newWithController: self)."new initializeWithController: self)."
 ]
 
 {

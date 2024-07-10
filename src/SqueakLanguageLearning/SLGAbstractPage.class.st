@@ -1,3 +1,6 @@
+"
+Parent class to implement pages of the app e.g Home page, lesson page etc.
+"
 Class {
 	#name : #SLGAbstractPage,
 	#superclass : #Morph,
@@ -12,47 +15,49 @@ Class {
 		'subtopicScore',
 		'topicScoreDisplay',
 		'subtopicScoreDisplay',
-		'backButton'
+		'backButton',
+		'userProgress'
 	],
-	#category : #'SqueakLanguageLearning-Pages'
+	#category : #'SqueakLanguageLearning-Pages',
+	#'squeak_changestamp' : 'yegi 7/9/2024 10:41'
 }
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/15/2024 23:41'
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:32'
 }
 SLGAbstractPage class >> buttonHeight [
 
-	^ 30px
+	^ 30 px
 	
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/15/2024 10:44'
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:51'
 }
 SLGAbstractPage class >> buttonWidth [
 
-	^ (500 * 0.4) px
+	^ 200 px
 	
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/15/2024 11:22'
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:52'
 }
 SLGAbstractPage class >> descriptionFont [
 
-	^ (35 * 0.5) px "0.55) px"
+	^ 17.5 px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:51'
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:52'
 }
 SLGAbstractPage class >> descriptionMargin [
 
-	^ (100 * 0.55) px
+	^ 55 px
 ]
 
 {
@@ -66,48 +71,117 @@ SLGAbstractPage class >> descriptionWidth [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/14/2024 17:14'
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:32'
 }
-SLGAbstractPage class >> iconMarginHeight [
+SLGAbstractPage class >> gapHeight [
 
-	^ 100px
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/14/2024 17:13'
-}
-SLGAbstractPage class >> iconMarginWidth [
-
-	^ 100px
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 00:08'
-}
-SLGAbstractPage class >> newWithController: aController [
-
-	^super basicNew initializeWithController: aController
+	^ 15 px
 	
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:32'
 }
-SLGAbstractPage class >> pageBorder [
+SLGAbstractPage class >> homeBorderWidth [
 
-	^ 2 px
+	^ 3 px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:32'
+}
+SLGAbstractPage class >> homeButtonHeightMargin [
+
+	^ 10 px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:33'
+}
+SLGAbstractPage class >> homeColumnCenterMargin [
+
+	^ 0.1
+	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:33'
+}
+SLGAbstractPage class >> homeCornerRadius [
+
+	^ 15 px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:33'
+}
+SLGAbstractPage class >> iconMarginHeight [
+
+	^ 100 px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:33'
+}
+SLGAbstractPage class >> iconMarginWidth [
+
+	^ 100 px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:33'
+}
+SLGAbstractPage class >> lessonCornerRadius [
+
+	^ 10 px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:33'
+}
+SLGAbstractPage class >> margin [
+
+	^ 2 px
+	
+]
+
+{
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'yegi 7/10/2024 11:09'
+}
+SLGAbstractPage class >> newWithController: aControllerObject [
+	
+	^ self new
+		controller: aControllerObject;
+		yourself
+	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 12:33'
+}
+SLGAbstractPage class >> nextButtonHeight [
+
+	^ 25 px
+	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:53'
 }
 SLGAbstractPage class >> pageHeight [
 
-	^ (1204 * 0.55) px
+	^ 662.2 px
 ]
 
 {
@@ -121,116 +195,150 @@ SLGAbstractPage class >> pageMargin [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:52'
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:53'
 }
 SLGAbstractPage class >> pageWidth [
 
-	^ (1604 * 0.55) px
+	^ 882.2 px
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 00:45'
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:02'
 }
 SLGAbstractPage class >> pastelGreen [
+
 	^Color r: 0.39 g: 0.81 b: 0.53
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/15/2024 22:13'
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:28'
 }
 SLGAbstractPage class >> scoreDisplayWidth [
 
-	^ 150px
+	^ 150 px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/15/2024 22:08'
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:28'
 }
 SLGAbstractPage class >> scoreFontSize [
 
-	^ 20px
+	^ 20 px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 6/20/2024 01:31'
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:28'
 }
 SLGAbstractPage class >> smallButtonWidth [
 
-	^ 60px
+	^ 60 px
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 01:02'
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 10:48'
 }
 SLGAbstractPage class >> softYellow [
+
 	^Color r: 1 g: 0.8 b: 0.5
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 01:32'
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:38'
+}
+SLGAbstractPage class >> taskViewExtent [
+
+	^ (1200 @ 800) px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:29'
+}
+SLGAbstractPage class >> topicGapHeight [
+
+	^ 11 px
+	
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:04'
+}
+SLGAbstractPage class >> topicPageColumnCenterMargin [
+
+	^ 0.3
+	
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:22'
 }
 SLGAbstractPage >> addBackButton [
 
 	| backButton |
-	
 	backButton := SLGNavigationButtonGen new
 		label: 'Back';
 		borderColor: Color orange;
 		width: self class smallButtonWidth;
 		height: self class buttonHeight;
 		onClickWithBlock: [
-			self controller routerController navigateBack.
-		].
+			self controller routerController navigateBack.];
+		yourself.
 	
-	backButton center: self header leftCenter + ((backButton width)/2 @ 0) + ((self header height - backButton height)/2 @ 0).
+	backButton center: self header leftCenter 
+							+ ((backButton width)/2 @ 0) 
+							+ ((self header height - backButton height)/2 @ 0).
 	self backButton: backButton.
-	self header addMorph: backButton.
+	self header addMorph: backButton
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 01:32'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:22'
 }
 SLGAbstractPage >> addCloseButton [
-	| closeButton |
-	
+
+	| closeButton |	
 	closeButton := SLGNavigationButtonGen new
 		label: 'Close';
 		width: self class smallButtonWidth;
 		borderColor: Color orange;
 		height: self class buttonHeight;
 		onClickWithBlock: [
-			self controller routerController closeWindow.
-		].
+			self controller routerController closeWindow.];
+		yourself.
 	
-	closeButton center: self header rightCenter - ((closeButton width)/2 @ 0) - ((self header height - closeButton height)/2 @ 0).
+	closeButton center: self header rightCenter 
+							- ((closeButton width)/2 @ 0) 
+							- ((self header height - closeButton height)/2 @ 0).
 	
-	self header addMorph: closeButton.
+	self header addMorph: closeButton
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 00:59'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:26'
 }
 SLGAbstractPage >> addHomeButton [
 
 	| imageMorph  homeButton  |
-	
 	homeButton := SLGNavigationButtonGen new
 		color: Color transparent;
 		label: '';
 		borderWidth: 0;   
 		onClickWithBlock: [
 			self controller routerController navigateTo: '/home'.
-		].
+		];
+		yourself.
 	
 	imageMorph := (((GitAssetLoader for: 'SqueakLanguageLearning') 
 										loadForm: '/assets/logo-80.png')
@@ -248,13 +356,12 @@ SLGAbstractPage >> addHomeButton [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 01:51'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:22'
 }
 SLGAbstractPage >> addResetButton [
 
 	| resetButton |
-	
 	resetButton := PluggableButtonMorph new
 					onColor: Color veryVeryLightGray offColor: Color white;
 					label: 'Reset';
@@ -263,29 +370,30 @@ SLGAbstractPage >> addResetButton [
 					borderWidth: 0;
 					cornerStyle: #rounded;
 					target: self;
-					actionSelector: #resetAction.
+					actionSelector: #resetAction;
+					yourself.
 				
 	
 	resetButton center: self footer center + (0 @ self class pageMargin * 3).
 	
-	self footer addMorph: resetButton.
+	self footer addMorph: resetButton
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 11:20'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:22'
 }
 SLGAbstractPage >> addTitle: aString [
 
 	| title |
-	
 	title := SLGTextGen new
 		setText: aString;
 		color: Color black;
 		setFontSize: 20px;
 		center: self body center - (self body width * 0.03 @ 0) ;
-		top: self body top + (self body height * 0.04).
+		top: self body top + (self body height * 0.04);
+		yourself.
 		
 
         self body addMorph: title
@@ -332,16 +440,20 @@ SLGAbstractPage >> controller [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 01:38'
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:49'
+}
+SLGAbstractPage >> controller: anObject [
+	controller := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 14:26'
 }
 SLGAbstractPage >> displayExperiencePoint [
 	
 	| cheeseImg marginwidth marginHeight |
-	
-	"adding morphs"
-	"cheeseImg := (GitAssetLoader for: 'SqueakLanguageLearning') loadImageMorph: '/assets/badge-main.png'.
-	cheeseImg scaleFactor: 0.5."	
 	cheeseImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
 										loadForm: '/assets/cheese-30.png') 
 										magnifyBy: 1px) asMorph.
@@ -358,17 +470,16 @@ SLGAbstractPage >> displayExperiencePoint [
 	cheeseImg center: self header center - (marginwidth * 0.8 @ 0) + (0 @ marginHeight * 0.2) .
  	scoreDisplay center: cheeseImg center + (marginwidth * 0.95 @ 0).
 	
-	self header addMorph: cheeseImg.
+	self header addMorph: cheeseImg
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/19/2024 23:07'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:16'
 }
 SLGAbstractPage >> displayMainBadge [
 	
 	| badgeImg marginwidth marginHeight |
-
 	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
 										loadForm: '/assets/badge-gold-30.png') 
 										magnifyBy: 1px) asMorph.
@@ -378,24 +489,23 @@ SLGAbstractPage >> displayMainBadge [
 				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
-	marginwidth := SLGAbstractPage iconMarginWidth.
-	marginHeight := SLGAbstractPage iconMarginHeight.
+	marginwidth := self class iconMarginWidth.
+	marginHeight := self class iconMarginHeight.
 	badgeImg addMorph: topicScoreDisplay.
 	badgeImg center: self header center + (marginwidth * 3 @ marginHeight  * 0.2).
  	topicScoreDisplay center: badgeImg center + (marginwidth * 0.95 @ 0).
 	
-	self header addMorph: badgeImg.
+	self header addMorph: badgeImg
 
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/19/2024 23:07'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 15:16'
 }
 SLGAbstractPage >> displaySubBadge [
 	
 	| badgeImg marginwidth marginHeight |
-
 	badgeImg := (((GitAssetLoader for: 'SqueakLanguageLearning') 
 										loadForm: '/assets/badge-silver-30.png') 
 										magnifyBy: 1px) asMorph.
@@ -405,13 +515,13 @@ SLGAbstractPage >> displaySubBadge [
 				setFontSize: self class scoreFontSize;
 				color: Color orange.
 	
-	marginwidth := SLGAbstractPage iconMarginWidth.
-	marginHeight := SLGAbstractPage iconMarginHeight.
+	marginwidth := self class iconMarginWidth.
+	marginHeight := self class iconMarginHeight.
 	badgeImg addMorph: subtopicScoreDisplay.
 	badgeImg center: self header center + (0 @ marginHeight  * 0.2) - (marginwidth * 0.05 @ 0).
  	subtopicScoreDisplay center: badgeImg center + (marginwidth * 0.95 @ 0).
 	
-	self header addMorph: badgeImg.
+	self header addMorph: badgeImg
 
 ]
 
@@ -448,60 +558,60 @@ SLGAbstractPage >> header: anObject [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+	#category : #actions,
+	#'squeak_changestamp' : 'yegi 7/9/2024 14:27'
 }
 SLGAbstractPage >> hideBackButton [
+
 	self backButton hide.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 01:34'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'yegi 7/10/2024 11:55'
 }
-SLGAbstractPage >> initializeWithController: aController [
+SLGAbstractPage >> initialize [
 	
-	| width height margin border |
-	
+	| width height margin |
 	super initialize.
+	self userProgress: SLGUserProgress userData.
 	
-	controller := aController.
-	score := SLGUserProgress userData score.
-	subtopicScore := SLGUserProgress userData subtopicScore.
-	topicScore := SLGUserProgress userData topicScore.
+	self 
+		score: self userProgress score;
+		subtopicScore: self userProgress subtopicScore;
+		topicScore: self userProgress topicScore.
 	
 	width := self class pageWidth.
 	height := self class pageHeight.
-	border := self class pageBorder.
+	margin := self class margin.
 	
 	self extent: width@height;
-		"extent: 1404@904;"
 		color: Color white; 
 		center: Display center.
-
-	margin := 2px.
 			
 	self header: (Morph new
 		width: self width - (2 * margin);
-		height: (12 * (self height - (2 * margin)))/100; "header has 10% of height of page"
+		height: (12 * (self height - (2 * margin)))/100; 
 		position: self position + (margin asPoint);
-		borderWidth: 1;
-		color: Color white).	
+		color: Color white;
+		yourself).	
 		
 	self body: (Morph new
 		width: self width - 50px;
 		height: (83 * (self height - (2 * margin)))/100; 
-		position: self position;" + (margin @ ((self header height * 3))); ""+ margin));"
+		position: self position;
 		cornerStyle: #rounded;
 		cornerRadius: 20;
-		center: self center + (0 @ self header height * 0.3); " (margin @ (self header height + margin));"
-		color: self class softYellow). 
+		center: self center + (0 @ self header height * 0.3); 
+		color: self class softYellow;
+		yourself). 
 		
 	self footer: (Morph new
 		width: self width - (2 * margin);
 		height: (5 * (self height - (2 * margin)))/100; 
 		position: self position + (margin @ (self header height + self body height + margin));
-		color: Color white).
+		color: Color white;
+		yourself).
 		
 	self addMorph: header.
 	self addMorph: body.
@@ -514,17 +624,13 @@ SLGAbstractPage >> initializeWithController: aController [
 	self displayMainBadge.
 	self addHomeButton.
 	self addResetButton.
-		
-	^self
-	
-		
-		
+
 		
 	
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'EB 6/3/2024 00:08'
 }
 SLGAbstractPage >> navigateBack [
@@ -534,69 +640,130 @@ SLGAbstractPage >> navigateBack [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:33'
+	#category : #actions,
+	#'squeak_changestamp' : 'yegi 7/9/2024 14:25'
 }
 SLGAbstractPage >> refresh [
 	"This method gets called everytime, when we navigate to this page with SLGRouter"
+	
 	self updateScoreDisplay.
 	self updateSubtopicScoreDisplay.
 	self updateTopicScoreDisplay.
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'SW 7/6/2024 14:16'
+	#category : #actions,
+	#'squeak_changestamp' : 'yegi 7/9/2024 14:25'
 }
 SLGAbstractPage >> resetAction [
 
-		SLGUserProgress reset.
-		"SLGMainController new."
-		"self controller routerController closeWindow."
-		self controller routerController navigateTo: '/home'
+	SLGUserProgress reset.
+	self controller routerController navigateTo: '/home'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/15/2024 13:14'
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:50'
+}
+SLGAbstractPage >> score [
+	^ score
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:50'
+}
+SLGAbstractPage >> score: anObject [
+	score := anObject
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'yegi 7/9/2024 14:25'
 }
 SLGAbstractPage >> showBackButton [
+	
 	self backButton show.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:04'
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:51'
+}
+SLGAbstractPage >> subtopicScore [
+	^ subtopicScore
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:51'
+}
+SLGAbstractPage >> subtopicScore: anObject [
+	subtopicScore := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:51'
+}
+SLGAbstractPage >> topicScore [
+	^ topicScore
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:51'
+}
+SLGAbstractPage >> topicScore: anObject [
+	topicScore := anObject
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'yegi 7/9/2024 14:27'
 }
 SLGAbstractPage >> updateScoreDisplay [
 	
 	score := SLGUserProgress userData score.
-	"scoreDisplay ifNotNil: [ scoreDisplay setText: score asString. ]"
-	scoreDisplay setText: score asString.
+	scoreDisplay setText: score asString
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:05'
+	#category : #updating,
+	#'squeak_changestamp' : 'yegi 7/9/2024 14:27'
 }
 SLGAbstractPage >> updateSubtopicScoreDisplay [
 	
 	subtopicScore := SLGUserProgress userData subtopicScore.
 	subtopicScoreDisplay setText: subtopicScore asString.
 	
-	Transcript show: 'You have  completed ', subtopicScore, ' subtopics!'; cr.
-	"Transcript show: 'You have earned a badge for a subtopic ""', self subtopic title, '""'; cr." 
+	Transcript show: 'You have  completed ', subtopicScore, ' subtopics!'; cr
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/14/2024 22:06'
+	#category : #updating,
+	#'squeak_changestamp' : 'yegi 7/9/2024 14:27'
 }
 SLGAbstractPage >> updateTopicScoreDisplay [
 	
 	topicScore := SLGUserProgress userData topicScore.
 	topicScoreDisplay setText: topicScore asString.
 	
-	Transcript show: 'You have completed ', topicScore, ' topics!'; cr.
-	"Transcript show: 'You have earned a badge for a topic ""', self topic title,'""'; cr."
+	Transcript show: 'You have completed ', topicScore, ' topics!'; cr
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:56'
+}
+SLGAbstractPage >> userProgress [
+	^ userProgress
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:56'
+}
+SLGAbstractPage >> userProgress: anObject [
+	userProgress := anObject
 ]

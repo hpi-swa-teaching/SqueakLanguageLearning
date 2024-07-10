@@ -1,3 +1,6 @@
+"
+This class can be used to create a Sub Topic page(the page with all the lesson buttons shown after clicking sub topic button on Topic page)
+"
 Class {
 	#name : #SLGSubtopicPageView,
 	#superclass : #SLGAbstractPage,
@@ -6,106 +9,49 @@ Class {
 		'subtopic',
 		'lessons'
 	],
-	#category : #'SqueakLanguageLearning-Pages'
+	#category : #'SqueakLanguageLearning-Pages',
+	#'squeak_changestamp' : 'yegi 7/9/2024 10:40'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/3/2024 10:41'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:44'
 }
-SLGSubtopicPageView class >> newWithSubtopic: aSubtopic andController: aController [
-	
-	^super basicNew initializeWithSubtopic: aSubtopic andController: aController
+SLGSubtopicPageView class >> newWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
+
+	^ self new 
+		controller: aController;
+		topic: aTopic;
+		subtopic: aSubtopic;
+		constructView;
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:42'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:48'
 }
 SLGSubtopicPageView >> constructView [
+
 	| rows cols |
-	
+	self addTitle: self subtopic title.
 	rows :=  OrderedCollection new.
-	
-	rows addAll: self getLessonButtons.
-	
-	cols := SLGLayout columnWithMorphs: rows withGap: 20.
-	
+	rows addAll: self getLessonButtons.	
+	cols := SLGLayout columnWithMorphs: rows withGap: self class gapHeight.
 	cols center: self center.
 	
-	self body addMorph: cols.
+	self body addMorph: cols
 	
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/19/2024 00:56'
-}
-SLGSubtopicPageView >> getLessonButtonWithLesson: aLesson withIndex: anInt withRouteKey: aString [
-	| routeKey index button | 
-	
-	routeKey := aString.
-	index := anInt.
-	
-	self controller routerController 
-		addRouteWithPath: routeKey 
-		withPage: (SLGLessonPageView new initializeWithLesson: aLesson Subtopic: self subtopic Topic: self topic andController: controller).
-		
-		button := SLGNavigationButtonGen new
-			label: ('Lesson ', index);
-			width: self class buttonWidth;
-			 onClickWithBlock: [
-				self controller routerController navigateTo: routeKey.
-			].
-		
-		((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
-			ifTrue: [button color: self class pastelGreen.].
-		
-		aLesson task when: #taskCompleted evaluate: [button color: self class pastelGreen.].
-	
-		^button
-		
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:45'
-}
-SLGSubtopicPageView >> getLessonButtonWithLessonPage: aPage withIndex: anInt withRouteKey: aString [
-	| routeKey index button | 
-	
-	routeKey := aString.
-	index := anInt.
-	
-	self controller routerController 
-		addRouteWithPath: routeKey 
-		withPage: aPage.
-		
-		button := SLGNavigationButtonGen new
-			label: ('Lesson ', index);
-			width: self class buttonWidth;
-			 onClickWithBlock: [
-				aPage currentIndex: index.
-				self controller routerController navigateTo: routeKey.
-			].
-		
-		"((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
-			ifTrue: [button color: self class pastelGreen.]."
-		
-		"aLesson task when: #taskCompleted evaluate: [button color: self class pastelGreen.]."
-	
-		^button
-		
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 10:47'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/9/2024 16:13'
 }
 SLGSubtopicPageView >> getLessonButtonWithLessonPage: aPage withLesson: aLesson withIndex: anInt withRouteKey: aString [
-	| routeKey index button | 
 	
+	| routeKey index button | 
 	routeKey := aString.
 	index := anInt.
 	
@@ -113,69 +59,63 @@ SLGSubtopicPageView >> getLessonButtonWithLessonPage: aPage withLesson: aLesson 
 		addRouteWithPath: routeKey 
 		withPage: aPage.
 		
-		button := SLGNavigationButtonGen new
-			label: ('Lesson ', index);
-			width: self class buttonWidth;
-			 onClickWithBlock: [
-				aPage currentIndex: index.
-				self controller routerController navigateTo: routeKey.
-			].
+	button := SLGNavigationButtonGen new
+		label: ('Lesson ', index);
+		width: self class buttonWidth;
+		 onClickWithBlock: [
+			aPage currentIndex: index.
+			self controller routerController navigateTo: routeKey.
+		];
+		yourself.
 		
 		((SLGUserProgress userData) completed includes: ((aLesson task) id) ) 
 			ifTrue: [button color: self class pastelGreen.].
 		
 		aLesson task when: #taskCompleted evaluate: [button color: self class pastelGreen.].
 	
-		^button
+		^ button
 		
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/19/2024 23:08'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:48'
 }
 SLGSubtopicPageView >> getLessonButtons [
+	
 	| index page |
-	
 	index := 0.
-	
-	page := SLGLessonPageView new
+	"page:= SLGLessonPageView new
 				initializeWithLessons: self subtopic lessons
 				Subtopic: self subtopic
 				Topic: self topic
-				andController: controller.
-	
-	
-	^self subtopic lessons collect: [:lesson |
+				andController: self controller."
+	page := SLGLessonPageView newWithLessons: self subtopic lessons 
+									withSubtopic: self subtopic 
+									withTopic: self topic 
+									withController: self controller.
+	^ self subtopic lessons collect: [:lesson |
 		| button currentRouteKey |
 		
 		currentRouteKey :=  ('/home/', self topic title, '/', self subtopic title, '/', 'lessons').
-		
 		button  := self getLessonButtonWithLessonPage: page
 						withLesson: lesson
 						withIndex: index
 						withRouteKey: currentRouteKey.
-			
 		index := index + 1.
-		
-		button
-	]
+		button]
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 7/1/2024 15:06'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'yegi 7/10/2024 14:43'
 }
-SLGSubtopicPageView >> initializeWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
+SLGSubtopicPageView >> initialize [
 	
-	super initializeWithController: aController.
-	self topic: aTopic.
-	self subtopic: aSubtopic.
-	self addTitle: aSubtopic title.
-	
-	self constructView.
-	
-	"aSubtopic when: #subtopicCompleted evaluate: [self updateSubtopicScoreDisplay]."
+	super initialize.
+
+	"self addTitle: self subtopic title."
+	"self constructView"
 ]
 
 {

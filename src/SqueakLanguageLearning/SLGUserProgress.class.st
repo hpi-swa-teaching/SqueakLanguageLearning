@@ -93,11 +93,11 @@ SLGUserProgress >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 7/1/2024 15:13'
+	#'squeak_changestamp' : 'yegi 7/10/2024 12:08'
 }
 SLGUserProgress >> isTaskCompleted: aTaskID [
 
-	^completed includes: aTaskID
+	^ completed includes: aTaskID
 
 	
 ]
