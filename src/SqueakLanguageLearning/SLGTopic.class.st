@@ -14,7 +14,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'EB 6/26/2024 14:27'
 }
 SLGTopic class >> newWithTitle: aTitle Description: aDescription andSubtopics: subtopics [

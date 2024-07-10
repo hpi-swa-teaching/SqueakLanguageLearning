@@ -19,7 +19,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'yegi 6/11/2024 13:46'
 }
 SLGUserProgress class >> reset [
@@ -28,7 +28,7 @@ SLGUserProgress class >> reset [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'EB 6/26/2024 15:56'
 }
 SLGUserProgress class >> subtopicScorePoint [
@@ -37,7 +37,7 @@ SLGUserProgress class >> subtopicScorePoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'EB 6/26/2024 15:56'
 }
 SLGUserProgress class >> topicScorePoint [
@@ -46,7 +46,7 @@ SLGUserProgress class >> topicScorePoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'EB 6/26/2024 15:59'
 }
 SLGUserProgress class >> userData [
@@ -56,7 +56,7 @@ SLGUserProgress class >> userData [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'EB 6/26/2024 15:55'
 }
 SLGUserProgress class >> userScoreFactor [
