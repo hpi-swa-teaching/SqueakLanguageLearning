@@ -197,7 +197,7 @@ SLGAbstractPage >> addBackButton [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 01:32'
+	#'squeak_changestamp' : 'Alexander Netz 7/10/2024 20:53'
 }
 SLGAbstractPage >> addCloseButton [
 	| closeButton |
@@ -208,7 +208,7 @@ SLGAbstractPage >> addCloseButton [
 		borderColor: Color orange;
 		height: self class buttonHeight;
 		onClickWithBlock: [
-			self controller routerController closeWindow.
+			self controller routerController closeAllWindows.
 		].
 	
 	closeButton center: self header rightCenter - ((closeButton width)/2 @ 0) - ((self header height - closeButton height)/2 @ 0).
