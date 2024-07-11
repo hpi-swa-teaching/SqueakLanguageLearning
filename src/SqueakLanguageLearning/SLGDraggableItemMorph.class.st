@@ -1,5 +1,5 @@
 "
-This class creates draggable items as Morph.
+This class represents a draggable item for SLGDragAndDropView.
 "
 Class {
 	#name : #SLGDraggableItemMorph,
@@ -11,132 +11,196 @@ Class {
 		'offset'
 	],
 	#category : #'SqueakLanguageLearning-Tasks',
-	#'squeak_changestamp' : 'xiaoshi 7/7/2024 19:01'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:25'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 15:23'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:46'
 }
 SLGDraggableItemMorph class >> newWithLabel: aString inMorph: aDragAndDropMorph [
 
-	^ self basicNew initializeWithLabel: aString inMorph: aDragAndDropMorph
+	^ self new
+		label: aString;
+		parentMorph: aDragAndDropMorph;
+		setup;
+		yourself
 	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 01:46'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:47'
 }
 SLGDraggableItemMorph class >> slotBorderWidth [
-	^2px	
+
+	^ 2 px	
 	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 01:46'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:47'
 }
 SLGDraggableItemMorph class >> slotCornerRadius [
-	^10px
+
+	^ 10 px
 	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 01:47'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:47'
 }
 SLGDraggableItemMorph class >> slotExtent [
-	^60px @ 30px
+
+	^ 60 px @ 30 px
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 11:57'
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:47'
 }
 SLGDraggableItemMorph >> drag: anEvent [
 
-        isDragging ifTrue: [
-            self position: anEvent position - offset.
-        ]
+        self isDragging ifTrue: [
+            self position: anEvent position - self offset]
 	
 	
 
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/10/2024 15:31'
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/11/2024 15:48'
 }
-SLGDraggableItemMorph >> handleDrop: anEvent [
+SLGDraggableItemMorph >> handleDrop: anEvent [ 
 
- 	| targetUnderCursor key value  |       
-	isDragging := false.
-        parentMorph ifNotNil: [
-            targetUnderCursor := parentMorph findTargetUnderCursor.
-		targetUnderCursor ifNotNil: [ parentMorph updateItemSlotMap: self atSlot: targetUnderCursor ].
-	].
-	
-	Transcript show: 'itemTargetMap after drop:'; cr.
-	parentMorph itemSlotMap keysAndValuesDo: [ :k :v |
-		key := k asString.
-		(v isNil not)
-			ifTrue: [ value := v label asString ]
-			ifFalse: [ value := 'empty' ].
-
-    Transcript show: 'Key: ', key, ', Value: ', value; cr].
+	| targetUnderCursor itemName |
+	self isDragging: false.
+	self parentMorph 
+		ifNotNil: [targetUnderCursor := self parentMorph findTargetUnderCursor.
+			targetUnderCursor
+				ifNotNil: [self parentMorph updateItemSlotMap: self atSlot: targetUnderCursor]].
+			
+	self parentMorph itemSlotMap
+		keysAndValuesDo: [:key :value | 
+			value isNil not
+				ifTrue: [itemName := value label asString]
+				ifFalse: [itemName := 'empty']]
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 01:48'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/11/2024 14:46'
 }
-SLGDraggableItemMorph >> initializeWithLabel: aString inMorph: aMorph [
+SLGDraggableItemMorph >> initialize [
 
-	| test |	
-        self initialize.
-        label := aString.
-        isDragging := false.
-        parentMorph := aMorph. "Set the parent morph"
-        self "position: 0 @ 0;" "Initial position"
-        	extent: self class slotExtent; "Set dimensions"
+	super  initialize.
+	
+	self
+		extent: self class slotExtent;
        	borderWidth: self class slotBorderWidth;
         	borderColor: Color white;
         	color: Color transparent;
 		cornerStyle: #rounded;
-		cornerRadius: self class slotCornerRadius.
-	
-	test := StringMorph contents: aString.
-	test center: self center.
-	  self addMorph: test."(StringMorph contents: aString)."
-
-        self on: #mouseDown send: #startDrag: to: self.
-        self on: #mouseUp send: #handleDrop: to: self.
-        self on: #mouseMove send: #drag: to: self.
-
-	^ self
+		cornerRadius: self class slotCornerRadius
 	
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 5/21/2024 19:29'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:13'
+}
+SLGDraggableItemMorph >> isDragging [
+	^ isDragging
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:52'
+}
+SLGDraggableItemMorph >> isDragging: aBoolean [
+	isDragging := aBoolean
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:51'
 }
 SLGDraggableItemMorph >> label [
-
 	^ label
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 5/23/2024 11:59'
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:51'
+}
+SLGDraggableItemMorph >> label: aString [
+	label := aString
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:14'
+}
+SLGDraggableItemMorph >> offset [
+	^ offset
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:52'
+}
+SLGDraggableItemMorph >> offset: aPosition [
+	offset := aPosition
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:14'
+}
+SLGDraggableItemMorph >> parentMorph [
+	^ parentMorph
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:52'
+}
+SLGDraggableItemMorph >> parentMorph: aDragAndDropMorph [
+	parentMorph := aDragAndDropMorph
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:46'
+}
+SLGDraggableItemMorph >> setup [
+
+	| text |
+	
+	text := StringMorph new contents: self label.
+	text center: self center.
+	self addMorph: text.
+	
+	self isDragging: false.
+		
+	self on: #mouseDown send: #startDrag: to: self.
+      self on: #mouseUp send: #handleDrop: to: self.
+      self on: #mouseMove send: #drag: to: self
+
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:52'
 }
 SLGDraggableItemMorph >> startDrag: anEvent [
         
-	isDragging := true.
-	offset := anEvent position - self position.
-	
+	self isDragging: true.
+	self offset: anEvent position - self position
 	
 	
 

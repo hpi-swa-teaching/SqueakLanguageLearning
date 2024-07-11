@@ -1,5 +1,5 @@
 "
-This is the abstract class for all task templates.
+This class is an abstraction for all different task types in SqueakLanguageLearning.
 "
 Class {
 	#name : #SLGTask,
@@ -14,7 +14,7 @@ Class {
 		'taskDescription'
 	],
 	#category : #'SqueakLanguageLearning-Tasks',
-	#'squeak_changestamp' : 'xiaoshi 7/7/2024 19:01'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:26'
 }
 
 {
@@ -33,13 +33,11 @@ SLGTask >> calculatePercentage: aValue with: aTotal [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 17:41'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:56'
 }
 SLGTask >> calculateResult: anUserInput [
 
 	| comparison percentage |
-	
-	Transcript show: 'No Error occured.'; cr.
 	
 	comparison := self findMatches: self correctAnswer with: anUserInput.
 	percentage := self calculatePercentage: (comparison size) with: (self correctAnswer size).
@@ -58,11 +56,11 @@ SLGTask >> code [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/10/2024 11:01'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:56'
 }
 SLGTask >> code: aCodeString [ 
 
-        aCodeString ifNotEmpty: [code:= aCodeString]
+        aCodeString ifNotEmpty: [code := aCodeString]
     
 ]
 
@@ -76,7 +74,7 @@ SLGTask >> correctAnswer [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'SW 6/8/2024 14:24'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:56'
 }
 SLGTask >> correctAnswer: anObject [
 	correctAnswer := anObject
@@ -84,11 +82,12 @@ SLGTask >> correctAnswer: anObject [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 14:33'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:56'
 }
 SLGTask >> findMatches: aReferenceArray with: anInputArray [
 
-	^ (1 to: aReferenceArray size) select: [:index | (aReferenceArray at: index) = (anInputArray at: index)] thenCollect: [:index | aReferenceArray at: index].
+	^ (1 to: aReferenceArray size) select: [:index | 
+		(aReferenceArray at: index) = (anInputArray at: index)] thenCollect: [:index | aReferenceArray at: index]
 ]
 
 {
@@ -101,19 +100,19 @@ SLGTask >> id [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/12/2024 13:48'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:57'
 }
-SLGTask >> id: anObject [
-	id := anObject
+SLGTask >> id: aString [
+	id := aString
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/12/2024 19:04'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:57'
 }
 SLGTask >> isCompleted [
 	
-	^((SLGUserProgress userData) completed includes: id)
+	^ ((SLGUserProgress userData) completed includes: self id)
 
 ]
 
@@ -136,35 +135,32 @@ SLGTask >> question [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'xiaoshi 6/11/2024 15:51'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:57'
 }
 SLGTask >> question: aQuestionString [ 
 
-        aQuestionString ifNotEmpty: [question:= aQuestionString]
+        aQuestionString ifNotEmpty: [question := aQuestionString]
     
 ]
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 17:41'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:58'
 }
 SLGTask >> sendError [
 
 	"Negative result shows, that something went wrong"
-	Transcript show: 'Error occured.'; cr.
 	
 	^ -1
 ]
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'EB 6/13/2024 13:52'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:58'
 }
 SLGTask >> verifyAnswer: anUserInput [
 
 	| output |
-	
-	Transcript show: 'isValid: ', (self isValid: anUserInput); cr.
 	
 	(self isValid: anUserInput)
 		ifTrue: [

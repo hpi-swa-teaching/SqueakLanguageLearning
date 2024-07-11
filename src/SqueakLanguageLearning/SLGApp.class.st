@@ -1,3 +1,6 @@
+"
+This class is responsible for registering the application in the menubar and initializing necessary instances during the startup process.
+"
 Class {
 	#name : #SLGApp,
 	#superclass : #Object,
@@ -5,7 +8,8 @@ Class {
 		'homepage',
 		'topicList'
 	],
-	#category : #'SqueakLanguageLearning-Controllers'
+	#category : #'SqueakLanguageLearning-Controllers',
+	#'squeak_changestamp' : 'SW 7/11/2024 15:37'
 }
 
 {

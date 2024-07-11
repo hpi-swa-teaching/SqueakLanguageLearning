@@ -1,5 +1,5 @@
 "
-This class is the UI of the cloze task template.
+This class provides the UI for the cloze task type.
 "
 Class {
 	#name : #SLGClozeView,
@@ -9,7 +9,7 @@ Class {
 		'clozeField'
 	],
 	#category : #'SqueakLanguageLearning-Tasks',
-	#'squeak_changestamp' : 'xiaoshi 7/7/2024 18:45'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:32'
 }
 
 {
@@ -90,14 +90,13 @@ SLGClozeView >> clozeField: aTextMorph [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 6/20/2024 12:14'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:17'
 }
 SLGClozeView >> createCloze [
 
 	| clozeFieldContainer |	
 		
 	self clozeField: (self createClozeFieldWithContent: self task cloze).
-"	self clozeField center: ((self center x) @( self headerLowerBound))."
 	
 	 clozeFieldContainer := Morph new					
 						extent: self class taskElementWidth @ self class clozeContainerHeight;					
@@ -106,8 +105,8 @@ SLGClozeView >> createCloze [
 						borderWidth: 1px;				
 						borderColor: self class paperBasic.		 
 								
-	clozeFieldContainer addMorph: clozeField.	
-	clozeField position:  clozeFieldContainer topLeft.	
+	clozeFieldContainer addMorph: self clozeField.	
+	self clozeField position:  clozeFieldContainer topLeft.	
 	self addMorph:  clozeFieldContainer.	
 		
 	^ clozeFieldContainer
@@ -143,23 +142,24 @@ SLGClozeView >> createClozeFieldWithContent: aString [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 13:56'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:03'
 }
 SLGClozeView >> passUserInput [
 	
-	^ self clozeField contents asString.
+	^ self clozeField contents asString
 	
 	
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'xiaoshi 6/12/2024 17:22'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:27'
 }
 SLGClozeView >> setup [
 
 	|interactive|
 	interactive := self createCloze.
+	
 	super setupWith: interactive
 ]
 

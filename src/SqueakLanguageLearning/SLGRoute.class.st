@@ -1,3 +1,6 @@
+"
+This class is used to track a route of pages.
+"
 Class {
 	#name : #SLGRoute,
 	#superclass : #Object,
@@ -5,7 +8,8 @@ Class {
 		'path',
 		'page'
 	],
-	#category : #'SqueakLanguageLearning-Controllers'
+	#category : #'SqueakLanguageLearning-Controllers',
+	#'squeak_changestamp' : 'SW 7/11/2024 15:41'
 }
 
 {

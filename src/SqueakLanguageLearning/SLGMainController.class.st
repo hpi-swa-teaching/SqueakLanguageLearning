@@ -1,3 +1,6 @@
+"
+This class manages the creation and interaction of data hierarchy and UI hierarchy, facilitating seamless integration between the application's logic and user interface.
+"
 Class {
 	#name : #SLGMainController,
 	#superclass : #Object,
@@ -5,7 +8,8 @@ Class {
 		'routerController',
 		'dataAccessService'
 	],
-	#category : #'SqueakLanguageLearning-Controllers'
+	#category : #'SqueakLanguageLearning-Controllers',
+	#'squeak_changestamp' : 'SW 7/11/2024 15:40'
 }
 
 {

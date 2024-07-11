@@ -77,12 +77,13 @@ SLGUITest >> testResetButton [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/6/2024 14:01'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:06'
 }
 SLGUITest >> testStatusErrorCloze [
 	
 	| clozeTask clozeView |	   
       clozeTask := SLGClozeTask newClozeWithQuestion: '' 
+									withCode: ''
 									withCloze: 'The class of x is __.' 
 									withAnswer: 'The class of x is Integer.' 
 									withID: 'test1'.
@@ -96,12 +97,13 @@ SLGUITest >> testStatusErrorCloze [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/6/2024 14:01'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:10'
 }
 SLGUITest >> testStatusErrorDragAndDrop [
 	
 	| dragDropTask dragDropView |	   
-     dragDropTask := SLGDragAndDropTask newWithQuestion: 'Arrange the words in alphabetical order'                                   
+     dragDropTask := SLGDragAndDropTask newWithQuestion: 'Arrange the words in alphabetical order'             
+									withCode: ''                      
 									withCorrectAnswer: #('apple' 'banana' 'cherry' 'date')                                   
 									withID: 'Task1'.
 
@@ -114,12 +116,13 @@ SLGUITest >> testStatusErrorDragAndDrop [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/6/2024 14:04'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:00'
 }
 SLGUITest >> testStatusErrorMultipleChoice [		
 	
 	| task choiceView |	   		 			      
-	task := SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Which of the following are mammals?'                                          
+	task := SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Which of the following are mammals?'      
+									withCode: ''                                    
 									withOptions: #('Dog' 'Snake' 'Whale' 'Eagle')                                          
 									withAnswers: #('Dog' 'Whale')                                          
 									withID: 'Task4'.	
@@ -132,12 +135,13 @@ SLGUITest >> testStatusErrorMultipleChoice [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/6/2024 14:04'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:02'
 }
 SLGUITest >> testStatusErrorSingleChoice [
 	
 	| task choiceView |	   		 		      
-	task := SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Which of the following are mammals?'                                          
+	task := SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Which of the following are mammals?'        
+									withCode: ''                                  
 									withOptions: #('Dog' 'Snake' 'Eagle')                                          
 									withAnswers: #('Dog')                                          
 									withID: 'Task4'.	
@@ -168,7 +172,7 @@ SLGUITest >> testStatusFailureUI [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/6/2024 13:28'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:10'
 }
 SLGUITest >> testStatusSuccessUI [	
 	
@@ -178,7 +182,8 @@ SLGUITest >> testStatusSuccessUI [
 	taskView status: (taskView createTextFieldWithContent: '' withBorder: false).	
 	taskView statusDisplay: (taskView createStatusField).		
 			
-	testTask := SLGDragAndDropTask newWithQuestion: 'Test Question'                                
+	testTask := SLGDragAndDropTask newWithQuestion: 'Test Question'
+										withCode: ''                         
 										withCorrectAnswer: #('Option 1' 'Option 2' 'Option 3')                                
 										withID: 'TestId'.
 									
