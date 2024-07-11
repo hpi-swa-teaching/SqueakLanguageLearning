@@ -4,6 +4,11 @@ This class verifies the correct functionality of logic creation within the model
 Class {
 	#name : #SLGModelTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'originalUserProgress',
+		'mockUserProgress',
+		'mockUserData'
+	],
 	#category : #'SqueakLanguageLearning-Tests',
 	#'squeak_changestamp' : 'SW 7/5/2024 17:46'
 }
@@ -15,6 +20,28 @@ Class {
 SLGModelTest class >> classNamesNotUnderTest [
 
 	^ #(SLGDataAccessService)
+]
+
+{
+	#category : #running,
+	#'squeak_changestamp' : 'EB 7/11/2024 22:48'
+}
+SLGModelTest >> setUp [
+	
+	super setUp.
+	originalUserProgress := SLGUserProgress userData copy.
+	mockUserProgress := SLGUserProgress new.
+	SLGUserProgress userData: mockUserProgress. 
+	mockUserData := SLGUserProgress userData
+]
+
+{
+	#category : #running,
+	#'squeak_changestamp' : 'EB 7/11/2024 22:48'
+}
+SLGModelTest >> tearDown [	
+	
+	SLGUserProgress userData: originalUserProgress
 ]
 
 {

@@ -5,7 +5,10 @@ Class {
 	#name : #SLGUITest,
 	#superclass : #TestCase,
 	#instVars : [
-		'page'
+		'page',
+		'originalUserProgress',
+		'mockUserProgress',
+		'mockUserData'
 	],
 	#category : #'SqueakLanguageLearning-Tests',
 	#'squeak_changestamp' : 'SW 7/6/2024 13:26'
@@ -13,25 +16,30 @@ Class {
 
 {
 	#category : #running,
-	#'squeak_changestamp' : 'EB 7/11/2024 18:03'
+	#'squeak_changestamp' : 'EB 7/11/2024 22:47'
 }
 SLGUITest >> setUp [
-
-	super setUp.
 	
+	super setUp.
+	originalUserProgress := SLGUserProgress userData copy.
+	mockUserProgress := SLGUserProgress new.
+	SLGUserProgress userData: mockUserProgress. 
+	mockUserData := SLGUserProgress userData.
+      
 	page := SLGAbstractPage newDefaultWithController: SLGMainController new
 ]
 
 {
 	#category : #running,
-	#'squeak_changestamp' : 'SW 7/6/2024 13:45'
+	#'squeak_changestamp' : 'EB 7/11/2024 22:42'
 }
 SLGUITest >> tearDown [	
-
+	
+	SLGUserProgress userData: originalUserProgress.	
 	World submorphs select: [:morph | morph isKindOf: SLGAbstractPage] 
 								thenDo: [:pageMorph | pageMorph delete].
-	
 	super tearDown
+	
 	
 	
 ]
@@ -61,18 +69,20 @@ SLGUITest >> testImagesUpload [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/6/2024 14:01'
+	#'squeak_changestamp' : 'EB 7/11/2024 21:54'
 }
 SLGUITest >> testResetButton [	
 	
 	| button |		
-	SLGUserProgress userData completed add: 'task1'.	
-	SLGUserProgress userData completed add: 'task2'.					
+	mockUserData completed add: 'task1'.	
+	mockUserData completed add: 'task2'.
+	Transcript show: 'Completed tasks in mock after adding test data: ', (mockUserData completed asArray printString); cr.					
 		 	
 	button := page footer submorphs detect: [:morph | morph isKindOf: PluggableButtonMorph].		
-	button actionSelector ifNotNil: [ page perform: button actionSelector. ].	
-		
-	self assert: (SLGUserProgress userData completed isEmpty)
+	button actionSelector ifNotNil: [ page perform: button actionSelector ].	
+	Transcript show: 'Completed tasks in mockUserData after reset action: ', (mockUserData completed asArray printString); cr.
+	Transcript show: 'Completed tasks in SLGUserProgress after reset action: ', (SLGUserProgress userData completed asArray printString); cr.
+	self assert: (SLGUserProgress userData completed isEmpty).
 ]
 
 {

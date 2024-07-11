@@ -8,8 +8,7 @@ Class {
 		'completed',
 		'score',
 		'topicScore',
-		'subtopicScore',
-		'taskList'
+		'subtopicScore'
 	],
 	#classVars : [
 		'Instance'
@@ -53,6 +52,15 @@ SLGUserProgress class >> userData [
 
 	^ Instance
 		ifNil: [Instance := self new]
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'EB 7/11/2024 22:06'
+}
+SLGUserProgress class >> userData: anInstance [
+
+        Instance := anInstance
 ]
 
 {
