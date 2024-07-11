@@ -136,8 +136,8 @@ SLGHomePageView >> topics [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:20'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:38'
 }
-SLGHomePageView >> topics: anObject [
-	topics := anObject
+SLGHomePageView >> topics: aTopicsList [
+	topics := aTopicsList
 ]
