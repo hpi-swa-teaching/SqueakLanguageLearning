@@ -256,11 +256,11 @@ SLGAbstractPage class >> nextButtonHeight [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 7/10/2024 23:33'
+	#'squeak_changestamp' : 'yegi 7/11/2024 12:59'
 }
 SLGAbstractPage class >> pageHeight [
 
-	^ 662.2
+	^ 662
 ]
 
 {
@@ -274,11 +274,11 @@ SLGAbstractPage class >> pageMargin [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 7/10/2024 23:33'
+	#'squeak_changestamp' : 'yegi 7/11/2024 12:59'
 }
 SLGAbstractPage class >> pageWidth [
 
-	^ 882.2
+	^ 882
 ]
 
 {
@@ -465,26 +465,23 @@ SLGAbstractPage >> addBackButton [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 00:01'
+	#'squeak_changestamp' : 'yegi 7/11/2024 12:59'
 }
 SLGAbstractPage >> addBasePage [
 
-	self extent: (self class pageWidth)px @ (self class pageHeight)px;
+	self extent: (self class pageWidth) px @ (self class pageHeight) px;
 		color: Color white; 
-		center: Display center;
-		header: self addHeader;
-		body: self addBody; 
-		footer: self addFooter
+		center: Display center
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 00:44'
+	#'squeak_changestamp' : 'yegi 7/11/2024 12:57'
 }
 SLGAbstractPage >> addBody [
 	
-	^ Morph new width: (self width - self class descriptionMargin) px;
-		 height: (self class bodyPercentage * (self height - self class pageMargin)) px / self class Percentage;
+	^ Morph new width: (self width - self class descriptionMargin);
+		 height: (self class bodyPercentage * (self height - self class pageMargin)) / self class Percentage;
 		 position: self position;
 		 cornerStyle: #rounded;
 		 cornerRadius: (self class cornerRadius) px;
@@ -495,13 +492,13 @@ SLGAbstractPage >> addBody [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 00:21'
+	#'squeak_changestamp' : 'yegi 7/11/2024 12:58'
 }
 SLGAbstractPage >> addCloseButton [
 
 	| closeButton |	
 	closeButton := self createButtonwithLabel: 'Close'
-				withOnClick: [self controller routerController closeWindow].
+				withOnClick: [self controller routerController closeAllWindows].
 	closeButton center: self header rightCenter 
 							- ((closeButton width) * self class half @ 0) 
 							- ((self header height - closeButton height) * self class half @ 0).
@@ -510,38 +507,41 @@ SLGAbstractPage >> addCloseButton [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 01:08'
+	#'squeak_changestamp' : 'yegi 7/11/2024 12:59'
 }
 SLGAbstractPage >> addFooter [
 	
-	^ Morph new width: (self width - self class pageMargin) px;
-		 height: (self class footerPercentage * (self height - self class pageMargin)) px / self class Percentage;
+	^ Morph new width: (self width - self class pageMargin);
+		 height: (self class footerPercentage * (self height - self class pageMargin)) / self class Percentage;
 		 position: self position 
-					+ ((self class pageMargin) px @ (self header height + self body height + self class pageMargin) px);
+					+ ((self class pageMargin) @ (self header height + self body height + self class pageMargin));
 		 color: Color white;
 		 yourself
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 00:45'
+	#'squeak_changestamp' : 'yegi 7/11/2024 12:56'
 }
 SLGAbstractPage >> addHeader [
 	
-	^ Morph new width: (self width - self class pageMargin) px;
-		 height: (self class headerPercentage * (self height - self class pageMargin)) px / self class Percentage;
-		 position: self position + (self class pageMargin) px asPoint;
+	^ Morph new width: (self width - self class pageMargin);
+		 height: (self class headerPercentage * (self height - self class pageMargin)) / self class Percentage;
+		 position: self position + (self class pageMargin) asPoint;
 		 color: Color white;
 		 yourself
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 02:25'
+	#'squeak_changestamp' : 'yegi 7/11/2024 12:43'
 }
 SLGAbstractPage >> addHeaderBodyFooter [
-
-	self addMorph: self header;
+	
+	self header: self addHeader;
+		body: self addBody; 
+		footer: self addFooter;
+		addMorph: self header;
 		addMorph: self body;
 		addMorph: self footer
 	
@@ -831,7 +831,7 @@ SLGAbstractPage >> hideBackButton [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'yegi 7/11/2024 02:07'
 }
 SLGAbstractPage >> initialize [

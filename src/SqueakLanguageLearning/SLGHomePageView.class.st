@@ -107,7 +107,7 @@ SLGHomePageView >> getTopicButtons [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'yegi 7/10/2024 11:42'
 }
 SLGHomePageView >> initialize [
