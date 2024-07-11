@@ -1,10 +1,14 @@
+"
+This class is the common interface for single and multiple choice task view.
+"
 Class {
 	#name : #SLGBaseChoiceView,
 	#superclass : #SLGTaskView,
 	#instVars : [
 		'toggleButtonList'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 18:44'
 }
 
 {

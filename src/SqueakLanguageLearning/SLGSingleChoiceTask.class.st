@@ -1,7 +1,11 @@
+"
+This class is the logic of single choice task template.
+"
 Class {
 	#name : #SLGSingleChoiceTask,
 	#superclass : #SLGBaseChoiceTask,
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 19:02'
 }
 
 {

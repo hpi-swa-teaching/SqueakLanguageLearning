@@ -43,7 +43,7 @@ SLGMainController >> initialize [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 7/11/2024 13:16'
+	#'squeak_changestamp' : 'EB 7/11/2024 15:55'
 }
 SLGMainController >> registerRoutes [
 

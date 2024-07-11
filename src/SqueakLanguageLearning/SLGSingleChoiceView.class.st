@@ -1,7 +1,11 @@
+"
+This class is the UI of single choice task template.
+"
 Class {
 	#name : #SLGSingleChoiceView,
 	#superclass : #SLGBaseChoiceView,
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 19:03'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+This class is the UI of the cloze task template.
+"
 Class {
 	#name : #SLGClozeView,
 	#superclass : #SLGTaskView,
@@ -5,7 +8,8 @@ Class {
 		'taskCloze',
 		'clozeField'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 18:45'
 }
 
 {

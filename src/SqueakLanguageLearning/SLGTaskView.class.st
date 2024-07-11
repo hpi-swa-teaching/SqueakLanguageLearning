@@ -1,3 +1,6 @@
+"
+This class is the abstract interface for all task views.
+"
 Class {
 	#name : #SLGTaskView,
 	#superclass : #Morph,
@@ -10,7 +13,8 @@ Class {
 		'headerLowerBound',
 		'statusDisplay'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 19:02'
 }
 
 {

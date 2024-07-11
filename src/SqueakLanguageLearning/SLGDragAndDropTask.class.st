@@ -1,7 +1,11 @@
+"
+This class is the logic of drag-and-drop task template.
+"
 Class {
 	#name : #SLGDragAndDropTask,
 	#superclass : #SLGTask,
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 19:02'
 }
 
 {

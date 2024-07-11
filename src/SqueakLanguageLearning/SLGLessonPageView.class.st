@@ -43,12 +43,11 @@ SLGLessonPageView class >> initializeTaskTypeDictionary [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'yegi 7/10/2024 16:14'
+	#'squeak_changestamp' : 'EB 7/11/2024 16:24'
 }
 SLGLessonPageView class >> newWithLessons: aLessons withSubtopic: aSubtopic withTopic: aTopic withController: aController [ 
 
-	^ self new 
-		controller: aController;
+	^ (self newDefaultWithController: aController)
 		lessons: aLessons;
 		subtopic: aSubtopic;
 		topic: aTopic;
@@ -85,34 +84,7 @@ SLGLessonPageView >> carousel: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 02:11'
-}
-SLGLessonPageView >> checkCompletedAndUpdateDisplay [
-	
-	(self lessons at: self carousel currentIndex + 1) task
-		when: #taskCompleted
-		evaluate: [self updateScoreDisplay.
-			self subtopic isCompleted
-				ifTrue: [self updateSubtopicScoreDisplay.
-					self topic isCompleted
-						ifTrue: [self updateTopicScoreDisplay]]]
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 02:17'
-}
-SLGLessonPageView >> codeBlockOnClick [
-	
-	self carousel canSwitch
-		ifFalse: [self controller routerController navigateBack].
-	self carousel next.
-	self checkCompletedAndUpdateDisplay
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 02:16'
+	#'squeak_changestamp' : 'EB 7/11/2024 17:12'
 }
 SLGLessonPageView >> constructView [
 
@@ -123,7 +95,7 @@ SLGLessonPageView >> constructView [
 	self carousel: (SLGCarouselGen newCarouselWithMorphs: taskViews).
 	self carousel center: self body center.
 	nextButton := self createNextButton.
-	self checkCompletedAndUpdateDisplay.
+	self updateScoreDisplayOnCompletion.
 	col := SLGLayout columnWithMorphs: {self carousel. nextButton} withGap: (self class topicGapHeight) px.
 	col center: self body center.
 	self body addMorph: col
@@ -131,7 +103,7 @@ SLGLessonPageView >> constructView [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 02:37'
+	#'squeak_changestamp' : 'EB 7/11/2024 17:10'
 }
 SLGLessonPageView >> createNextButton [
 
@@ -140,7 +112,7 @@ SLGLessonPageView >> createNextButton [
 		 width:(self class smallButtonWidth) px;
 		 cornerRadius: self class cornerRadius;
 		 color: SLGTaskView paperBasic;
-		 onClickWithBlock: [self codeBlockOnClick];
+		 onClickWithBlock: [self navigateTroughCarousel];
 		 yourself
 ]
 
@@ -202,6 +174,18 @@ SLGLessonPageView >> lessons [
 }
 SLGLessonPageView >> lessons: anObject [
 	lessons := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'EB 7/11/2024 17:12'
+}
+SLGLessonPageView >> navigateTroughCarousel [
+	
+	self carousel canSwitch
+		ifFalse: [self controller routerController navigateBack].
+	self carousel next.
+	self updateScoreDisplayOnCompletion
 ]
 
 {
@@ -277,4 +261,25 @@ SLGLessonPageView >> topic [
 }
 SLGLessonPageView >> topic: anObject [
 	topic := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'EB 7/11/2024 17:50'
+}
+SLGLessonPageView >> updateScoreDisplayOnCompletion [
+	
+	| currentLesson currentTask subtopicCompleted topicCompleted |
+    	currentLesson := self lessons at: self carousel currentIndex + 1.
+    	currentTask := currentLesson task.
+
+    	currentTask when: #taskCompleted evaluate: [
+		self updateScoreDisplay.
+        	subtopicCompleted := self subtopic isCompleted.
+        	topicCompleted := subtopicCompleted and: [ self topic isCompleted ].
+
+       topicCompleted ifTrue: [
+            self updateSubtopicScoreDisplay.
+            self updateTopicScoreDisplay ]
+	]
 ]

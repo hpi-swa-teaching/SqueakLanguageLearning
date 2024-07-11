@@ -1,10 +1,14 @@
+"
+This class is the mutual interface for single and multiple choice task.
+"
 Class {
 	#name : #SLGBaseChoiceTask,
 	#superclass : #SLGTask,
 	#instVars : [
 		'answerOptions'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 18:44'
 }
 
 {

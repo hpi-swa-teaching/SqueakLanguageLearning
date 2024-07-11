@@ -14,20 +14,19 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'yegi 7/10/2024 12:23'
+	#'squeak_changestamp' : 'EB 7/11/2024 16:25'
 }
-SLGTopicPageView class >> newWithTopic: aTopicObject andController: aControllerObject [
+SLGTopicPageView class >> newWithTopic: aTopic andController: aController [
 
-	^ self new
-		controller: aControllerObject;
-		topic: aTopicObject;	
+	^ (self newDefaultWithController: aController)
+		topic: aTopic;	
 		constructView;
 		yourself
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 01:08'
+	#'squeak_changestamp' : 'EB 7/11/2024 17:04'
 }
 SLGTopicPageView >> constructView [
 
@@ -35,7 +34,7 @@ SLGTopicPageView >> constructView [
 	self subtopics: self topic subtopics;
 		 addTitle: self topic title.
 	rows := OrderedCollection new.	
-	rows add: self getDescription.
+	rows add: self getTopicDescription.
 	rows addAll: self getSubtopicButtons.
 	cols := SLGLayout columnWithMorphs: rows withGap: (self class topicGapHeight) px.
 	cols center: self center + (0 @ (self class iconMarginHeight) px * self class topicPageColumnCenterMargin).
@@ -69,20 +68,7 @@ SLGTopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 00:56'
-}
-SLGTopicPageView >> getDescription [
-	
-	^ SLGMultilineTextGen new 
-		setFontSize: (self class descriptionFont) px;
-		width: (self class descriptionWidth) px;
-		setText: (self topic description);
-		yourself
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/10/2024 23:55'
+	#'squeak_changestamp' : 'EB 7/11/2024 17:03'
 }
 SLGTopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
 
@@ -91,7 +77,7 @@ SLGTopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aStri
 	self controller routerController addRouteWithPath: 
 		routeString withPage: (self createSubtopicPageWithSubtopic: aSubtopic).
 	button := self createSubtopicButtonWithTopic: aSubtopic withRoute: routeString.
-	self subtopicsCompletedCheck: aSubtopic withColor: button.
+	self setButtonColorForCompletedSubtopic: aSubtopic forButton: button.
 	
 	^ button
 ]
@@ -108,6 +94,29 @@ SLGTopicPageView >> getSubtopicButtons [
 ]
 
 {
+	#category : #setup,
+	#'squeak_changestamp' : 'EB 7/11/2024 17:04'
+}
+SLGTopicPageView >> getTopicDescription [
+	
+	^ SLGMultilineTextGen new 
+		setFontSize: (self class descriptionFont) px;
+		width: (self class descriptionWidth) px;
+		setText: (self topic description);
+		yourself
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'EB 7/11/2024 17:03'
+}
+SLGTopicPageView >> setButtonColorForCompletedSubtopic: aSubtopic forButton: aButton [
+
+	(aSubtopic isCompleted) ifTrue: [aButton color: self class pastelGreen].
+	aSubtopic when: #subtopicCompleted evaluate: [aButton color: self class pastelGreen]
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:47'
 }
@@ -121,16 +130,6 @@ SLGTopicPageView >> subtopics [
 }
 SLGTopicPageView >> subtopics: anObject [
 	subtopics := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 7/10/2024 23:48'
-}
-SLGTopicPageView >> subtopicsCompletedCheck: aSubtopic withColor: aButton [
-
-	(aSubtopic isCompleted) ifTrue: [aButton color: self class pastelGreen].
-	aSubtopic when: #subtopicCompleted evaluate: [aButton color: self class pastelGreen]
 ]
 
 {

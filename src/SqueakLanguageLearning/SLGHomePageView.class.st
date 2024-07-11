@@ -27,12 +27,12 @@ SLGHomePageView class >> cornerRadius [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'yegi 7/10/2024 11:10'
+	#'squeak_changestamp' : 'EB 7/11/2024 16:24'
 }
-SLGHomePageView class >> newWithController: aControllerObject [
+SLGHomePageView class >> newWithController: aController [
 	
-	^ self new
-		controller: aControllerObject;
+	^ (self newDefaultWithController: aController)
+		setupHomepage;
 		constructView;
 		yourself
 
@@ -83,7 +83,7 @@ SLGHomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/10/2024 23:45'
+	#'squeak_changestamp' : 'EB 7/11/2024 16:58'
 }
 SLGHomePageView >> getTopicButtonWithTopic: aTopic [
 
@@ -91,7 +91,7 @@ SLGHomePageView >> getTopicButtonWithTopic: aTopic [
 	routeString := '/home/' , aTopic title.
 	self controller routerController addRouteWithPath: routeString withPage: (self createTopicPageWithTopic: aTopic).
 	button := self createTopicButtonWithTopic: aTopic withRoute: routeString.
-	self topicsCompletedCheck: aTopic withColor: button.
+	self setButtonColorForCompletedTopic: aTopic forButton: button.
 	
 	^ button
 ]
@@ -107,16 +107,23 @@ SLGHomePageView >> getTopicButtons [
 ]
 
 {
-	#category : #'initialize-release',
-	#'squeak_changestamp' : 'yegi 7/10/2024 11:42'
+	#category : #setup,
+	#'squeak_changestamp' : 'EB 7/11/2024 17:02'
 }
-SLGHomePageView >> initialize [
+SLGHomePageView >> setButtonColorForCompletedTopic: aTopic forButton: aButton [
 
-	super initialize.
+	aTopic isCompleted ifTrue: [aButton color: self class pastelGreen].
+	aTopic when: #topicCompleted evaluate: [aButton color: self class pastelGreen]
+]
 
-	self hideBackButton.
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'EB 7/11/2024 16:12'
+}
+SLGHomePageView >> setupHomepage [
+
+	self backButton hide.
 	self addTitle: 'Welcome to SqueakLingo!'
-	
 ]
 
 {
@@ -133,14 +140,4 @@ SLGHomePageView >> topics [
 }
 SLGHomePageView >> topics: anObject [
 	topics := anObject
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/10/2024 23:48'
-}
-SLGHomePageView >> topicsCompletedCheck: aTopic withColor: aButton [
-
-	aTopic isCompleted ifTrue: [aButton color: self class pastelGreen].
-	aTopic when: #topicCompleted evaluate: [aButton color: self class pastelGreen]
 ]

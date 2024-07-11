@@ -1,3 +1,6 @@
+"
+This is the abstract class for all task templates.
+"
 Class {
 	#name : #SLGTask,
 	#superclass : #Object,
@@ -10,7 +13,8 @@ Class {
 	#classInstVars : [
 		'taskDescription'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 19:01'
 }
 
 {

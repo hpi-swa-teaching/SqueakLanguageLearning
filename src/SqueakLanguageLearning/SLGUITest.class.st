@@ -13,13 +13,13 @@ Class {
 
 {
 	#category : #running,
-	#'squeak_changestamp' : 'SW 7/6/2024 13:46'
+	#'squeak_changestamp' : 'EB 7/11/2024 18:03'
 }
 SLGUITest >> setUp [
 
 	super setUp.
 	
-	page := SLGAbstractPage newWithController: SLGMainController new
+	page := SLGAbstractPage newDefaultWithController: SLGMainController new
 ]
 
 {

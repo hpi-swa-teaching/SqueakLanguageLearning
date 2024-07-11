@@ -15,12 +15,11 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'yegi 7/10/2024 14:44'
+	#'squeak_changestamp' : 'EB 7/11/2024 16:25'
 }
 SLGSubtopicPageView class >> newWithTopic: aTopic andSubtopic: aSubtopic andController: aController [
 
-	^ self new 
-		controller: aController;
+	^ (self newDefaultWithController: aController)
 		topic: aTopic;
 		subtopic: aSubtopic;
 		constructView;
@@ -58,7 +57,7 @@ SLGSubtopicPageView >> createButtonWithLessonPage: aPage withIndex: anIndex with
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 00:34'
+	#'squeak_changestamp' : 'EB 7/11/2024 17:04'
 }
 SLGSubtopicPageView >> getLessonButtonWithLessonPage: aPage withLesson: aLesson withIndex: anInt withRouteKey: aString [
 	
@@ -69,7 +68,7 @@ SLGSubtopicPageView >> getLessonButtonWithLessonPage: aPage withLesson: aLesson 
 		addRouteWithPath: routeKey 
 		withPage: aPage.
 	button := self createButtonWithLessonPage: aPage withIndex: index withRouteKey: routeKey.
-	self lessonCompletedCheck: aLesson withColor: button.
+	self setButtonColorForCompletedLesson: aLesson forButton: button.
 
 	^ button
 		
@@ -94,17 +93,6 @@ SLGSubtopicPageView >> getLessonButtons [
 						withRouteKey: currentRouteKey.
 			index := index + 1.
 			button]	
-]
-
-{
-	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/11/2024 00:33'
-}
-SLGSubtopicPageView >> lessonCompletedCheck: aLesson withColor: aButton [
-
-	((SLGUserProgress userData) completed includes: ((aLesson task) id)) 
-		ifTrue: [aButton color: self class pastelGreen].
-	aLesson task when: #taskCompleted evaluate: [aButton color: self class pastelGreen]
 ]
 
 {
@@ -134,6 +122,17 @@ SLGSubtopicPageView >> pageSetup [
 		withSubtopic: self subtopic
 		withTopic: self topic
 		withController: self controller
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'EB 7/11/2024 17:04'
+}
+SLGSubtopicPageView >> setButtonColorForCompletedLesson: aLesson forButton: aButton [
+
+	(self userProgress completed includes: ((aLesson task) id)) 
+		ifTrue: [aButton color: self class pastelGreen].
+	aLesson task when: #taskCompleted evaluate: [aButton color: self class pastelGreen]
 ]
 
 {

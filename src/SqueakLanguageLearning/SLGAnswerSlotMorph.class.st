@@ -1,10 +1,14 @@
+"
+This class creates answer slots for drag-and-drop templates.
+"
 Class {
 	#name : #SLGAnswerSlotMorph,
 	#superclass : #Morph,
 	#instVars : [
 		'label'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 18:43'
 }
 
 {

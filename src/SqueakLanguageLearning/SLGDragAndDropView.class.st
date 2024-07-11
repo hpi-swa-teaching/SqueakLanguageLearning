@@ -1,3 +1,6 @@
+"
+This task is the UI of drag-and-drop task template.
+"
 Class {
 	#name : #SLGDragAndDropView,
 	#superclass : #SLGTaskView,
@@ -7,7 +10,8 @@ Class {
 		'answerSlots',
 		'itemSlotMap'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 18:46'
 }
 
 {
