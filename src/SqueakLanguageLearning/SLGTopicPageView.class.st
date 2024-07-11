@@ -27,7 +27,7 @@ SLGTopicPageView class >> newWithTopic: aTopicObject andController: aControllerO
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/10/2024 12:25'
+	#'squeak_changestamp' : 'yegi 7/11/2024 01:08'
 }
 SLGTopicPageView >> constructView [
 
@@ -37,15 +37,27 @@ SLGTopicPageView >> constructView [
 	rows := OrderedCollection new.	
 	rows add: self getDescription.
 	rows addAll: self getSubtopicButtons.
-	cols := SLGLayout columnWithMorphs: rows withGap: self class topicGapHeight.
-	cols center: self center + (0 @ self class iconMarginHeight * self class topicPageColumnCenterMargin).
-	
+	cols := SLGLayout columnWithMorphs: rows withGap: (self class topicGapHeight) px.
+	cols center: self center + (0 @ (self class iconMarginHeight) px * self class topicPageColumnCenterMargin).
 	self body addMorph: cols
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/10/2024 14:41'
+	#'squeak_changestamp' : 'yegi 7/11/2024 00:55'
+}
+SLGTopicPageView >> createSubtopicButtonWithTopic: aSubtopic withRoute: aRoute [ 
+
+	^ SLGNavigationButtonGen new 
+		label: aSubtopic title;
+		width: (self class buttonWidth) px;
+		onClickWithBlock: [self controller routerController navigateTo: aRoute];
+		yourself
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 19:55'
 }
 SLGTopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [ 
 	
@@ -53,52 +65,35 @@ SLGTopicPageView >> createSubtopicPageWithSubtopic: aSubtopic [
 		newWithTopic: self topic
 		andSubtopic: aSubtopic
 		andController: self controller
-		
-		
-		"^ SLGSubtopicPageView new
-	initializeWithTopic: (self topic)
-	andSubtopic: aSubtopic
-	andController: self controller"
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/10/2024 12:05'
+	#'squeak_changestamp' : 'yegi 7/11/2024 00:56'
 }
 SLGTopicPageView >> getDescription [
 	
 	^ SLGMultilineTextGen new 
-		setFontSize: self class descriptionFont;
-		width: self class descriptionWidth;
+		setFontSize: (self class descriptionFont) px;
+		width: (self class descriptionWidth) px;
 		setText: (self topic description);
 		yourself
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/9/2024 15:39'
+	#'squeak_changestamp' : 'yegi 7/10/2024 23:55'
 }
 SLGTopicPageView >> getSubtopicButtonWithSubtopic: aSubtopic withRouteKey: aString [
 
 	|routeString button |
 	routeString := aString.
-	
 	self controller routerController addRouteWithPath: 
-	routeString withPage: (self createSubtopicPageWithSubtopic: aSubtopic).
-	
-	button := SLGNavigationButtonGen new
-		label: aSubtopic title;
-		width: self class buttonWidth;
-		 onClickWithBlock: [
-			self controller routerController navigateTo: routeString. ];
-		yourself.
-	
-	(aSubtopic isCompleted) ifTrue: [button color: self class pastelGreen.].
-	
-	aSubtopic when: #subtopicCompleted evaluate: [button color: self class pastelGreen.].
+		routeString withPage: (self createSubtopicPageWithSubtopic: aSubtopic).
+	button := self createSubtopicButtonWithTopic: aSubtopic withRoute: routeString.
+	self subtopicsCompletedCheck: aSubtopic withColor: button.
 	
 	^ button
-
 ]
 
 {
@@ -110,21 +105,6 @@ SLGTopicPageView >> getSubtopicButtons [
 	^ self subtopics collect: [:subtopic |
 		self getSubtopicButtonWithSubtopic: subtopic
 			withRouteKey:  ('/home/', self topic title, '/', subtopic title)]
-]
-
-{
-	#category : #'initialize-release',
-	#'squeak_changestamp' : 'yegi 7/10/2024 12:30'
-}
-SLGTopicPageView >> initialize [
-
-	super initialize.
-	
-	"self subtopics: self topic subtopics;
-		addTitle: self topic title."
-	"self constructView"
-	
-	
 ]
 
 {
@@ -141,6 +121,16 @@ SLGTopicPageView >> subtopics [
 }
 SLGTopicPageView >> subtopics: anObject [
 	subtopics := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'yegi 7/10/2024 23:48'
+}
+SLGTopicPageView >> subtopicsCompletedCheck: aSubtopic withColor: aButton [
+
+	(aSubtopic isCompleted) ifTrue: [aButton color: self class pastelGreen].
+	aSubtopic when: #subtopicCompleted evaluate: [aButton color: self class pastelGreen]
 ]
 
 {

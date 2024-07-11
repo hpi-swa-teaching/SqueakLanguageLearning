@@ -16,6 +16,17 @@ Class {
 
 {
 	#category : #'instance creation',
+	#'squeak_changestamp' : 'yegi 7/11/2024 01:02'
+}
+SLGHomePageView class >> cornerRadius [
+	
+	^ 15
+		
+		
+]
+
+{
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'yegi 7/10/2024 11:10'
 }
 SLGHomePageView class >> newWithController: aControllerObject [
@@ -31,7 +42,7 @@ SLGHomePageView class >> newWithController: aControllerObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/10/2024 13:56'
+	#'squeak_changestamp' : 'yegi 7/11/2024 00:52'
 }
 SLGHomePageView >> constructView [
 
@@ -39,34 +50,24 @@ SLGHomePageView >> constructView [
 	self topics: self controller dataAccessService topics.
 	rows := OrderedCollection new.
 	rows addAll: self getTopicButtons.
-	cols := SLGLayout columnWithMorphs: rows withGap: self class gapHeight.
+	cols := SLGLayout columnWithMorphs: rows withGap: (self class gapHeight) px.
 	cols center: self body center + (0 @ self body height * self class homeColumnCenterMargin).
-	
 	self body addMorph: cols
-	
-	
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 7/10/2024 10:15'
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/11/2024 01:01'
 }
-SLGHomePageView >> createTopicButtonWithTopic: aTopic [
-
-	| routeString button |
-	routeString := ('/home/', aTopic title).
-	button := SLGNavigationButtonGen new
-		label: aTopic title;
-		width: self class buttonWidth;
-		height: self class buttonHeight + self class homeButtonHeightMargin;
-		borderWidth: self class homeBorderWidth;
-		borderColor: Color orange;
-		cornerRadius: self class homeCornerRadius;
-		onClickWithBlock: [
-			self controller routerController navigateTo: routeString];
-		yourself.
+SLGHomePageView >> createTopicButtonWithTopic: aTopic withRoute: aRoute [ 
 	
-	^ button
+	^ SLGNavigationButtonGen new label: aTopic title; width: (self class buttonWidth) px;
+		 height: (self class buttonHeight + self class homeButtonHeightMargin) px;
+		 borderWidth: (self class homeBorderWidth) px;
+		 borderColor: Color orange;
+		 cornerRadius: (self class cornerRadius) px;
+		 onClickWithBlock: [self controller routerController navigateTo: aRoute];
+		 yourself
 ]
 
 {
@@ -82,22 +83,17 @@ SLGHomePageView >> createTopicPageWithTopic: aTopic [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'yegi 7/10/2024 12:21'
+	#'squeak_changestamp' : 'yegi 7/10/2024 23:45'
 }
 SLGHomePageView >> getTopicButtonWithTopic: aTopic [
 
-	| routeString button |	
-	routeString := ('/home/', aTopic title).
+	| routeString button |
+	routeString := '/home/' , aTopic title.
+	self controller routerController addRouteWithPath: routeString withPage: (self createTopicPageWithTopic: aTopic).
+	button := self createTopicButtonWithTopic: aTopic withRoute: routeString.
+	self topicsCompletedCheck: aTopic withColor: button.
 	
-	self controller routerController
-		addRouteWithPath: routeString 
-		withPage: (self createTopicPageWithTopic: aTopic).
-	button := self createTopicButtonWithTopic: aTopic.
-		
-	(aTopic isCompleted) ifTrue: [button color: self class pastelGreen].
-	aTopic when: #topicCompleted evaluate: [button color: self class pastelGreen].
-	
-	^ button 
+	^ button
 ]
 
 {
@@ -111,7 +107,7 @@ SLGHomePageView >> getTopicButtons [
 ]
 
 {
-	#category : #'initialize-release',
+	#category : #initialization,
 	#'squeak_changestamp' : 'yegi 7/10/2024 11:42'
 }
 SLGHomePageView >> initialize [
@@ -137,4 +133,14 @@ SLGHomePageView >> topics [
 }
 SLGHomePageView >> topics: anObject [
 	topics := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'yegi 7/10/2024 23:48'
+}
+SLGHomePageView >> topicsCompletedCheck: aTopic withColor: aButton [
+
+	aTopic isCompleted ifTrue: [aButton color: self class pastelGreen].
+	aTopic when: #topicCompleted evaluate: [aButton color: self class pastelGreen]
 ]
