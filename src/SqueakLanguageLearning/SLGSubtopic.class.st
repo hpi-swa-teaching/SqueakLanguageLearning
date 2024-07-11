@@ -13,7 +13,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'EB 6/26/2024 14:26'
 }
 SLGSubtopic class >> newWithTitle: aTitle andLessons: lessons [
@@ -26,15 +26,13 @@ SLGSubtopic class >> newWithTitle: aTitle andLessons: lessons [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/26/2024 14:33'
+	#category : #testing,
+	#'squeak_changestamp' : 'EB 7/9/2024 14:36'
 }
 SLGSubtopic >> isCompleted [
-
-	lessons do: [ :each |
-		(each isCompleted) ifFalse: [ ^false ] ].
 	
-	^ true
+	^ (self lessons detect: [ :each | 
+				each isCompleted not ] ifNone: [ nil ]) isNil
 
 	
 ]
@@ -56,18 +54,18 @@ SLGSubtopic >> lessons: lessonsCollection [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/26/2024 14:25'
+	#category : #'event-handling',
+	#'squeak_changestamp' : 'EB 7/9/2024 14:16'
 }
 SLGSubtopic >> listenToTaskCompleted [
 	
-	lessons do: [:each |
+	self lessons do: [:each |
 		each task when: #taskCompleted send: #onTaskCompleted to: self ]
 	
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'event-handling',
 	#'squeak_changestamp' : 'EB 6/26/2024 14:33'
 }
 SLGSubtopic >> onTaskCompleted [

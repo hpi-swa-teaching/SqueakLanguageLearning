@@ -51,19 +51,6 @@ SLGRouter >> closeAllWindows [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 7/6/2024 12:46'
-}
-SLGRouter >> closeWindow [
-	"| curRoute |
-
-	curRoute := self routeHistory last.
-	curRoute page delete.
-	self routes removeKey: curRoute path"
-	self closeAllWindows
-]
-
-{
-	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 15:58'
 }
 SLGRouter >> getRouteWithRouteString: aString [
@@ -72,10 +59,11 @@ SLGRouter >> getRouteWithRouteString: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:36'
+	#'squeak_changestamp' : 'Alexander Netz 7/10/2024 20:58'
 }
 SLGRouter >> handleCurrentPageWithCurrentPage: aPage1 withNextPage: aPage2 [
 	| currentPage nextPage |
+	
 	currentPage := aPage1.
 	nextPage := aPage2.
 	
@@ -149,14 +137,10 @@ SLGRouter >> navigateTo: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 16:36'
+	#'squeak_changestamp' : 'Alexander Netz 7/10/2024 20:52'
 }
 SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistory: aBoolean [
 	| nextRoute |
-
-	self routeHistory size > 0 ifTrue: [
-		Transcript show: 'From "', (self routeHistory last path) ,'" navigate to "', aString, '"'; cr.
-	].
 
 	nextRoute := self getRouteWithRouteString: aString.
 	

@@ -8,7 +8,8 @@ Class {
 		'completed',
 		'score',
 		'topicScore',
-		'subtopicScore'
+		'subtopicScore',
+		'taskList'
 	],
 	#classVars : [
 		'Instance'
@@ -18,7 +19,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'yegi 6/11/2024 13:46'
 }
 SLGUserProgress class >> reset [
@@ -27,7 +28,7 @@ SLGUserProgress class >> reset [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'EB 6/26/2024 15:56'
 }
 SLGUserProgress class >> subtopicScorePoint [
@@ -36,7 +37,7 @@ SLGUserProgress class >> subtopicScorePoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'EB 6/26/2024 15:56'
 }
 SLGUserProgress class >> topicScorePoint [
@@ -45,7 +46,7 @@ SLGUserProgress class >> topicScorePoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'EB 6/26/2024 15:59'
 }
 SLGUserProgress class >> userData [
@@ -55,7 +56,7 @@ SLGUserProgress class >> userData [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'EB 6/26/2024 15:55'
 }
 SLGUserProgress class >> userScoreFactor [
@@ -80,36 +81,36 @@ SLGUserProgress >> completed: aSetOfIDs [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'EB 6/14/2024 19:33'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'EB 7/9/2024 14:21'
 }
 SLGUserProgress >> initialize [
 
-	completed := Set new.
-	score := 0.
-	topicScore := 0.
-	subtopicScore := 0.
+	self completed: Set new;
+		score: 0;
+		topicScore: 0;
+		subtopicScore: 0.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 7/10/2024 12:08'
+	#category : #testing,
+	#'squeak_changestamp' : 'EB 7/9/2024 14:17'
 }
 SLGUserProgress >> isTaskCompleted: aTaskID [
 
-	^ completed includes: aTaskID
+	^self completed includes: aTaskID
 
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 20:02'
+	#category : #updating,
+	#'squeak_changestamp' : 'EB 7/9/2024 14:18'
 }
 SLGUserProgress >> markTaskAsCompleted: aTaskID [
 
-        (completed includes: aTaskID) ifFalse: [ 
-			completed add: aTaskID. 
+        (self completed includes: aTaskID) ifFalse: [ 
+			self completed add: aTaskID. 
 			self updateScore. ]
 ]
 
@@ -162,28 +163,28 @@ SLGUserProgress >> topicScore: aScore [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/26/2024 15:56'
+	#category : #updating,
+	#'squeak_changestamp' : 'EB 7/9/2024 14:20'
 }
 SLGUserProgress >> updateScore [
 	
-	score := (completed size) * self class userScoreFactor
+	self score: (self completed size) * self class userScoreFactor
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/26/2024 15:57'
+	#category : #updating,
+	#'squeak_changestamp' : 'EB 7/9/2024 14:21'
 }
 SLGUserProgress >> updateSubtopicScore [
 
-	subtopicScore := subtopicScore + self class subtopicScorePoint
+	self subtopicScore: self subtopicScore + self class subtopicScorePoint
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/26/2024 15:57'
+	#category : #updating,
+	#'squeak_changestamp' : 'EB 7/9/2024 14:21'
 }
 SLGUserProgress >> updateTopicScore [
 
-	topicScore := topicScore + self class topicScorePoint
+	self topicScore: self topicScore + self class topicScorePoint
 ]
