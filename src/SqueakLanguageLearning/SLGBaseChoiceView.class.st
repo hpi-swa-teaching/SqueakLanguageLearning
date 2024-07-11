@@ -1,11 +1,33 @@
+"
+This class has general properties on UI for both single and multiple choice.
+"
 Class {
 	#name : #SLGBaseChoiceView,
 	#superclass : #SLGTaskView,
 	#instVars : [
 		'toggleButtonList'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'SW 7/11/2024 15:31'
 }
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:00'
+}
+SLGBaseChoiceView class >> columnSpaceExtent [
+
+	^ 0 @ 20
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:01'
+}
+SLGBaseChoiceView class >> heightFactor [
+
+	^ 6
+]
 
 {
 	#category : #constants,
@@ -18,11 +40,68 @@ SLGBaseChoiceView class >> isSingleChoice [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:00'
+}
+SLGBaseChoiceView class >> rowSpaceExtent [
+
+	^ 20 @ 0
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 5/30/2024 15:18'
 }
 SLGBaseChoiceView class >> taskDescription [
 
 	^ 'Choose the correct answers.'
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:40'
+}
+SLGBaseChoiceView class >> toggleButtonExtent [
+
+	^ (25 px @ 25 px)
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:48'
+}
+SLGBaseChoiceView >> createText: anOption [
+
+	^ SLGMultilineTextGen new
+			setText: anOption;
+			width: self class taskElementWidth - (self class heightFactor * (self class toggleButtonExtent x));
+			color: Color black
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:43'
+}
+SLGBaseChoiceView >> createToggleButton [
+
+	| toggleButton state |
+	toggleButton := SLGToggleButtonGen new 
+						extent: self class toggleButtonExtent.
+		
+	toggleButton stateUI: [
+		toggleButton state ifTrue: [
+			toggleButton color: SLGAbstractPage pastelGreen].
+
+		toggleButton state ifFalse: [
+			toggleButton color: Color white]].
+	
+	toggleButton onClickWithBlock: [
+		self class isSingleChoice 
+			ifTrue: [
+				state := toggleButton state.
+				self resetToggleButtons.
+				toggleButton state: state]].
+	
+	^ toggleButton
 ]
 
 {
@@ -52,14 +131,13 @@ SLGBaseChoiceView >> passUserInput [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 6/10/2024 09:23'
+	#'squeak_changestamp' : 'SW 7/11/2024 16:04'
 }
 SLGBaseChoiceView >> resetToggleButtons [
 
 	self toggleButtonList do: [:each |
 		each state: false.
-		each updateUI.
-	]
+		each updateUI]
 ]
 
 {
@@ -82,68 +160,28 @@ SLGBaseChoiceView >> setup [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'SW 7/5/2024 09:40'
+	#'squeak_changestamp' : 'SW 7/11/2024 16:45'
 }
 SLGBaseChoiceView >> setupToggleButtons: anOptionArray [
 
 	| rows cols |
-
 	rows := anOptionArray collect: [:option |
 		
-		| row toggleBtn text |
-		
-		toggleBtn := SLGToggleButtonGen new
-			extent: self class baseChoiceButtonExtent;
-			borderWidth: 2px;
-			borderColor: Color white;
-			cornerStyle: #rounded;
-			cornerRadius: 30;
-			color: Color white.
-		
-		toggleBtn stateUI:  [
-			toggleBtn state ifTrue: [
-				toggleBtn color: SLGAbstractPage pastelGreen.
-			].
-
-			toggleBtn state ifFalse: [
-				toggleBtn color: Color white.
-			].
-		].
-	
-		toggleBtn onClickWithBlock: [
-			| state |
+		| row toggleButton text |
+		toggleButton := self createToggleButton.
+		self toggleButtonList add: toggleButton.
+		text := self createText: option.
 			
-			self class isSingleChoice ifTrue: [
-				state := toggleBtn state.
-				self resetToggleButtons.
-				toggleBtn state: state.
-			].
-		].
-	
-		self toggleButtonList add: toggleBtn.
-		
-		text := SLGMultilineTextGen new
-			setText: option;
-			width: self class taskElementWidth - (6 * (self class baseChoiceButtonExtent x));
-			color: Color black.
-			
-		row := SLGLayout rowWithMorphs: 
-			{
-				toggleBtn.
-				SLGSpacerGen newSpacerWithDimension: (20 @ 0).
-				text
-			}.
-		
+		row := SLGLayout rowWithMorphs: {
+				toggleButton.
+				SLGSpacerGen newSpacerWithDimension: self class rowSpaceExtent.
+				text}.
 		SLGLayout columnWithMorphs: {
 			row.
-			SLGSpacerGen newSpacerWithDimension: (0 @ 20)
-		}
-	].
+			SLGSpacerGen newSpacerWithDimension: self class columnSpaceExtent}].
 
 	cols := SLGLayout columnWithMorphs: rows.
-	
-	"cols center: (self center x @ self headerLowerBound).
-	self addMorph: cols."
+
 	^ cols
 ]
 

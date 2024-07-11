@@ -1,3 +1,6 @@
+"
+This class takes care of navigation between pages, enabling the use of the next, back and close button.
+"
 Class {
 	#name : #SLGRouter,
 	#superclass : #Object,
@@ -5,11 +8,12 @@ Class {
 		'routes',
 		'routeHistory'
 	],
-	#category : #'SqueakLanguageLearning-Controllers'
+	#category : #'SqueakLanguageLearning-Controllers',
+	#'squeak_changestamp' : 'SW 7/11/2024 15:41'
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 7/11/2024 13:18'
 }
 SLGRouter >> addRouteWithPath: aString withPage: aPage [
@@ -18,7 +22,7 @@ SLGRouter >> addRouteWithPath: aString withPage: aPage [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 7/11/2024 13:19'
 }
 SLGRouter >> addRouteWithRoute: aRoute [
@@ -29,7 +33,7 @@ SLGRouter >> addRouteWithRoute: aRoute [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'SW 7/11/2024 13:20'
 }
 SLGRouter >> canNavigateWithNextRoute: aRoute [
@@ -41,7 +45,7 @@ SLGRouter >> canNavigateWithNextRoute: aRoute [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'SW 7/11/2024 13:20'
 }
 SLGRouter >> closeAllWindows [
@@ -51,7 +55,7 @@ SLGRouter >> closeAllWindows [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 7/11/2024 13:20'
 }
 SLGRouter >> getRouteWithRouteString: aString [
@@ -60,7 +64,7 @@ SLGRouter >> getRouteWithRouteString: aString [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'SW 7/11/2024 13:21'
 }
 SLGRouter >> handleCurrentPageWithCurrentPage: aPage1 withNextPage: aPage2 [
@@ -83,7 +87,7 @@ SLGRouter >> handleCurrentPageWithCurrentPage: aPage1 withNextPage: aPage2 [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'SW 7/11/2024 13:22'
 }
 SLGRouter >> hideAndPositionWithCurrentPage: aPage1 withNextPage: aPage2 [
@@ -97,7 +101,7 @@ SLGRouter >> hideAndPositionWithCurrentPage: aPage1 withNextPage: aPage2 [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'SW 7/11/2024 13:22'
 }
 SLGRouter >> initialize [
@@ -109,12 +113,12 @@ SLGRouter >> initialize [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'SW 7/11/2024 13:22'
+	#category : #actions,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:08'
 }
 SLGRouter >> navigateBack [
 	
-	| previousRoute currentRoute lastRoute lastHistorySize |
+	| previousRoute currentRoute |
 
 	self routeHistory ifEmpty: [
 		^false	
@@ -122,8 +126,6 @@ SLGRouter >> navigateBack [
 
 	currentRoute := self routeHistory last.
 	previousRoute := self routeHistory at: (self routeHistory size - 1).
-	lastRoute := self routeHistory last.
-	lastHistorySize := self routeHistory size.
 	
 	self navigateToWithPath: (previousRoute path) withCurrentPage: (currentRoute page) withEnableHistory: false.
 	self routeHistory removeLast
@@ -131,7 +133,7 @@ SLGRouter >> navigateBack [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'SW 7/11/2024 13:22'
 }
 SLGRouter >> navigateTo: aString [
@@ -140,7 +142,7 @@ SLGRouter >> navigateTo: aString [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'SW 7/11/2024 13:23'
 }
 SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistory: aBoolean [
@@ -161,7 +163,7 @@ SLGRouter >> navigateToWithPath: aString withCurrentPage: aPage withEnableHistor
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'SW 7/11/2024 13:23'
 }
 SLGRouter >> navigateToWithoutHistory: aString withCurrentPage: aPage [
@@ -202,7 +204,7 @@ SLGRouter >> routes: aDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #update,
 	#'squeak_changestamp' : 'SW 7/11/2024 13:23'
 }
 SLGRouter >> tryToRefreshPageWithPage: aPage [
@@ -217,7 +219,7 @@ SLGRouter >> tryToRefreshPageWithPage: aPage [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #update,
 	#'squeak_changestamp' : 'SW 7/11/2024 13:23'
 }
 SLGRouter >> updateHistoryWithRoute: aRoute [

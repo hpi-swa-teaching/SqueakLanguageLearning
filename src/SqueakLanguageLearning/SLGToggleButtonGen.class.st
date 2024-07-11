@@ -13,15 +13,61 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:30'
+}
+SLGToggleButtonGen class >> toggleButtonBorderColor [
+
+	^ Color white
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:30'
+}
+SLGToggleButtonGen class >> toggleButtonBorderWidth [
+
+	^ 2 px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:31'
+}
+SLGToggleButtonGen class >> toggleButtonColor [
+
+	^ Color white
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:31'
+}
+SLGToggleButtonGen class >> toggleButtonCornerRadius [
+
+	^ 30
+]
+
+{
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'SW 7/5/2024 09:44'
+	#'squeak_changestamp' : 'SW 7/11/2024 16:40'
 }
 SLGToggleButtonGen >> initialize [
 
 	super initialize.
 	
-	self state: false.
-	self label: ' '
+	self 
+		borderWidth: self class toggleButtonBorderWidth;
+		borderColor: self class toggleButtonBorderColor;
+		cornerStyle: #rounded;
+		cornerRadius: self class toggleButtonCornerRadius;
+		color: self class toggleButtonColor;
+		label: ' '.
+		
+	self state: false
+	
+	
+	
 ]
 
 {

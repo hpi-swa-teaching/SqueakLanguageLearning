@@ -65,11 +65,12 @@ SLGTopic >> listenToSubtopicCompleted [
 
 {
 	#category : #'event-handling',
-	#'squeak_changestamp' : 'EB 6/26/2024 14:33'
+	#'squeak_changestamp' : 'SW 7/11/2024 17:55'
 }
 SLGTopic >> onSubtopicCompleted [
 
-	(self isCompleted) ifTrue: [ Transcript show: 'You have earned a badge for a topic ', self title; cr.
+	(self isCompleted)
+		ifTrue: [
 			self triggerEvent: #topicCompleted.
 			SLGUserProgress userData updateTopicScore ]
 ]

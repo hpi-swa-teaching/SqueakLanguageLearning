@@ -19,12 +19,13 @@ SLGModelTest class >> classNamesNotUnderTest [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/5/2024 17:36'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:05'
 }
 SLGModelTest >> testClozeTask [
 
 	| task |
     	task := SLGClozeTask newClozeWithQuestion: 'Test Question'
+						withCode: ''
                                     withCloze: 'Test Cloze'
                                     withAnswer: 'Test Answer'
                                     withID: 'TestId'.
@@ -37,14 +38,15 @@ SLGModelTest >> testClozeTask [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/5/2024 17:36'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:09'
 }
 SLGModelTest >> testDragAndDropTask [ 
 
 	| task |
 	task := SLGDragAndDropTask newWithQuestion: 'Test Question'
-                                withCorrectAnswer: #('Option 1' 'Option 2' 'Option 3')
-                                withID: 'TestId'.
+					withCode: ''
+					withCorrectAnswer: #('Option 1' 'Option 2' 'Option 3')
+                              withID: 'TestId'.
     
 	self assert: task question = 'Test Question'.
     	self assert: task correctAnswer = #('Option 1' 'Option 2' 'Option 3').
@@ -72,15 +74,16 @@ SLGModelTest >> testLessonIsCompleted [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/5/2024 17:31'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:05'
 }
 SLGModelTest >> testLessonWithClozeTask [ 
 
         | lesson task |
         task := SLGClozeTask newClozeWithQuestion: 'Fill in the blank: The quick brown ___ jumps over the lazy dog.'
-                                     withCloze: 'fox'
-                                     withAnswer: 'fox'
-                                     withID: 'Task2'.
+							withCode: ''
+                                     	withCloze: 'fox'
+                                     	withAnswer: 'fox'
+                                     	withID: 'Task2'.
         lesson := SLGLesson newWithTask: task.
 
         self assert: lesson task = task
@@ -88,14 +91,15 @@ SLGModelTest >> testLessonWithClozeTask [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/5/2024 17:31'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:09'
 }
 SLGModelTest >> testLessonWithDragAndDropTask [
 
         | lesson task |
         task := SLGDragAndDropTask newWithQuestion: 'Arrange the words in alphabetical order'
-                                   withCorrectAnswer: #('apple' 'banana' 'cherry' 'date')
-                                   withID: 'Task1'.
+						withCode: ''
+                                   	withCorrectAnswer: #('apple' 'banana' 'cherry' 'date')
+                                   	withID: 'Task1'.
         lesson := SLGLesson newWithTask: task.
 
         self assert: lesson task = task
@@ -103,12 +107,13 @@ SLGModelTest >> testLessonWithDragAndDropTask [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/5/2024 17:31'
+	#'squeak_changestamp' : 'SW 7/11/2024 14:59'
 }
 SLGModelTest >> testLessonWithMultipleChoiceTask [ 
 
         | lesson task |
         task := SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Which of the following are mammals?'
+							withCode: ''
                                           withOptions: #('Dog' 'Snake' 'Whale' 'Eagle')
                                           withAnswers: #(true false true false)
                                           withID: 'Task4'.
@@ -119,15 +124,16 @@ SLGModelTest >> testLessonWithMultipleChoiceTask [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/5/2024 17:32'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:02'
 }
 SLGModelTest >> testLessonWithSingleChoiceTask [
 
         | lesson task |
         task := SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the capital of France?'
-                                         withOptions: #('London' 'Paris' 'Berlin' 'Madrid')
-                                         withAnswers: #(false true false false)
-                                         withID: 'Task3'.
+								withCode: ''
+                                         		withOptions: #('London' 'Paris' 'Berlin' 'Madrid')
+                                         		withAnswers: #(false true false false)
+                                         		withID: 'Task3'.
         lesson := SLGLesson newWithTask: task.
 
         self assert: lesson task = task
@@ -135,12 +141,13 @@ SLGModelTest >> testLessonWithSingleChoiceTask [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/5/2024 17:32'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:00'
 }
 SLGModelTest >> testMultipleChoiceTask [
 	
 	| task |
     	task := SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Test Question'
+							withCode: ''
                                           withOptions: #('Option 1' 'Option 2' 'Option 3' 'Option 4')
                                           withAnswers: #(true false true false)
                                           withID: 'TestId'.
@@ -154,15 +161,16 @@ SLGModelTest >> testMultipleChoiceTask [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/5/2024 17:32'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:02'
 }
 SLGModelTest >> testSingleChoiceTask [
 	
 	| task |
     	task := SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Test Question'
-                                      withOptions: #('Option 1' 'Option 2' 'Option 3')
-                                      withAnswers: #(true false false false)
-                                      withID: 'TestId'.
+							withCode: ''
+                                    	withOptions: #('Option 1' 'Option 2' 'Option 3')
+                                   		withAnswers: #(true false false false)
+                                   		withID: 'TestId'.
     
     	self assert: task question = 'Test Question'.
     	self assert: task answerOptions = #('Option 1' 'Option 2' 'Option 3').
@@ -172,20 +180,22 @@ SLGModelTest >> testSingleChoiceTask [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/6/2024 14:31'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:10'
 }
 SLGModelTest >> testSubtopicIsCompleted [
 
         | subtopic lesson1 lesson2 task1 task2 |
         task1 := SLGClozeTask newClozeWithQuestion: 'Fill in the blank: The quick brown ___ jumps over the lazy dog.'
+						 withCode: ''
                                      withCloze: 'fox'
                                      withAnswer: 'fox'
                                      withID: 'Task1'.
         SLGUserProgress userData completed add: 'Task1'.
 
         task2 := SLGDragAndDropTask newWithQuestion: 'Arrange the words in alphabetical order'
-                                   withCorrectAnswer: #('apple' 'banana' 'cherry' 'date')
-                                   withID: 'Task2'.
+						withCode: ''
+                                   	withCorrectAnswer: #('apple' 'banana' 'cherry' 'date')
+                                   	withID: 'Task2'.
         SLGUserProgress userData completed add: 'Task2'.
 
         lesson1 := SLGLesson newWithTask: task1.
@@ -199,19 +209,21 @@ SLGModelTest >> testSubtopicIsCompleted [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/5/2024 17:42'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:10'
 }
 SLGModelTest >> testSubtopicWithLessons [
 
         | subtopic lesson1 lesson2 task1 task2 |
         task1 := SLGClozeTask newClozeWithQuestion: 'Fill in the blank: The quick brown ___ jumps over the lazy dog.'
+						 withCode: ''
                                      withCloze: 'fox'
                                      withAnswer: 'fox'
                                      withID: 'Task1'.
         
         task2 := SLGDragAndDropTask newWithQuestion: 'Arrange the words in alphabetical order'
-                                   withCorrectAnswer: #('apple' 'banana' 'cherry' 'date')
-                                   withID: 'Task2'.
+						withCode: ''
+                                   	withCorrectAnswer: #('apple' 'banana' 'cherry' 'date')
+                                   	withID: 'Task2'.
 
         lesson1 := SLGLesson newWithTask: task1.
         lesson2 := SLGLesson newWithTask: task2.

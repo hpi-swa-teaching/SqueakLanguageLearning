@@ -16,7 +16,7 @@ Class {
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'EB 7/9/2024 14:46'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:09'
 }
 SLGDataAccessService >> createSubtopicsForClasses [
 
@@ -26,19 +26,19 @@ SLGDataAccessService >> createSubtopicsForClasses [
 	
 	lessonsForSubtopic := Dictionary new.	
 	lessonsForSubtopic at: (subtopicTitles first) put: ( OrderedCollection 
-		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_01') ) 
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_02') )"
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4' '5' '6') withID:'slg1_03') )).
+		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_01') ) 
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_02') )"
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4' '5' '6') withID:'slg1_03') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 2) put: ( OrderedCollection 
-		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_04') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_05') )"
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_06') )).
+		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_04') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_05') )"
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_06') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 3) put: (OrderedCollection 
-		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_07') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_08') )"
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_09') )).
+		"with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_07') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_08') )"
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg1_09') )).
 	
 	
 	subtopics := OrderedCollection new.
@@ -52,7 +52,7 @@ SLGDataAccessService >> createSubtopicsForClasses [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'EB 7/9/2024 14:49'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:11'
 }
 SLGDataAccessService >> createSubtopicsForControlFlow [
 
@@ -62,20 +62,20 @@ SLGDataAccessService >> createSubtopicsForControlFlow [
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (subtopicTitles first) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_01') ) 
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_01') ) 
 		with: (SLGLesson newWithTask: ( SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the right result value of a from following code?' withCode: '| a b |\na := 1.\nb := 2.\ntrue or: [a := b. true].' withOptions: #('1' '2' '3') withAnswers: #(true false false) withID:'slg2_02') )
 		with: (SLGLesson newWithTask: ( SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the right result value of a from following code?' withCode: '| a b |\na := 1.\nb := 2.\nfalse or: [a := b. true].' withOptions: #('1' '2' '3') withAnswers: #(false true false) withID:'slg2_03') )
 		with: (SLGLesson newWithTask: ( SLGSingleChoiceTask newSingleChoiceWithQuestion: 'What is the result value of the following code?' withCode: '| colors |\ncolors := {Color white . Color yellow. Color red . Color blue . Color orange}.\ncolors includes: Color blue. ' withOptions: #('true' 'false') withAnswers: #(true false) withID:'slg2_04') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 2) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_05') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_05') )
 		with: (SLGLesson newWithTask: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'The result value of both statements are the same?' withCode: '10 timesRepeat: [y := y * 2].\n1 to: 10 do: [:a | y := y * 2].' withOptions: #('true' 'false') withAnswers: #(true false) withID:'slg2_06') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_07') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_07') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 3) put: (OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Please select all the correct explanation about Block on Squeak' withOptions: #('Blocks are not lexical closures' 'A block is essentially an anonymous(Lambda) function' 'Blocks may take parameters' 'Blocks can not declare temporary variables') withAnswers: #(false true true false) withID:'slg2_08') )
-		with: (SLGLesson newWithTask: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Which one is correctly written?' withOptions: #('[:x :y | |z| z:= x + y. z] value:1 value:2' '[x: y: | z;  z:= x + y. z] value:1 value:2') withAnswers: #(true false) withID:'slg2_09') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_10') )).
+		with: (SLGLesson newWithTask: (SLGMultipleChoiceTask newMultipleChoiceWithQuestion: 'Please select all the correct explanation about Block on Squeak' withCode: '' withOptions: #('Blocks are not lexical closures' 'A block is essentially an anonymous(Lambda) function' 'Blocks may take parameters' 'Blocks can not declare temporary variables') withAnswers: #(false true true false) withID:'slg2_08') )
+		with: (SLGLesson newWithTask: (SLGSingleChoiceTask newSingleChoiceWithQuestion: 'Which one is correctly written?' withCode: '' withOptions: #('[:x :y | |z| z:= x + y. z] value:1 value:2' '[x: y: | z;  z:= x + y. z] value:1 value:2') withAnswers: #(true false) withID:'slg2_09') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg2_10') )).
 	
 	
 	subtopics := OrderedCollection new.
@@ -89,7 +89,7 @@ SLGDataAccessService >> createSubtopicsForControlFlow [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'EB 7/9/2024 14:50'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:12'
 }
 SLGDataAccessService >> createSubtopicsForDataStructures [
 
@@ -99,19 +99,19 @@ SLGDataAccessService >> createSubtopicsForDataStructures [
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (subtopicTitles first) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_01' ) ) 
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_02') )
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_03') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_01' ) ) 
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_02') )
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_03') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 2) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_04') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_05') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_06') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_04') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_05') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_06') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 3) put: (OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_07') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_08') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_09') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_07') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_08') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID:'slg3_09') )).
 	
 	
 	subtopics := OrderedCollection new.
@@ -178,7 +178,7 @@ SLGDataAccessService >> createSubtopicsForDataTypes [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'EB 7/9/2024 14:51'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:15'
 }
 SLGDataAccessService >> createSubtopicsForMethods [
 
@@ -188,19 +188,19 @@ SLGDataAccessService >> createSubtopicsForMethods [
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (subtopicTitles first) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_01') ) 
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_02') )
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_03') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_01') ) 
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_02') )
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_03') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 2) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_04') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_05') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_06') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_04') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_05') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_06') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 3) put: (OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_07') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_08') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_09') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_07') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_08') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg5_09') )).
 	
 	
 	subtopics := OrderedCollection new.
@@ -214,7 +214,7 @@ SLGDataAccessService >> createSubtopicsForMethods [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'EB 7/9/2024 14:52'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:18'
 }
 SLGDataAccessService >> createSubtopicsForMorphic [
 
@@ -224,19 +224,19 @@ SLGDataAccessService >> createSubtopicsForMorphic [
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (subtopicTitles first) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_01') ) 
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_02') )
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_03') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_01') ) 
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_02') )
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_03') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 2) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_04') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_05') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_06') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_04') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_05') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_06') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 3) put: (OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_07') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_08') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_09') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_07') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_08') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg6_09') )).
 	
 	
 	subtopics := OrderedCollection new.
@@ -250,7 +250,7 @@ SLGDataAccessService >> createSubtopicsForMorphic [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'EB 7/9/2024 14:52'
+	#'squeak_changestamp' : 'SW 7/11/2024 15:19'
 }
 SLGDataAccessService >> createSubtopicsForSqueak [
 
@@ -260,19 +260,19 @@ SLGDataAccessService >> createSubtopicsForSqueak [
 	
 	lessonsForSubtopic := Dictionary new.
 	lessonsForSubtopic at: (subtopicTitles first) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_01') ) 
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_02') )
-		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_03') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_01') ) 
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_02') )
+		with: (SLGLesson newWithTask: ( SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_03') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 2) put: ( OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_04') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_05') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_06') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_04') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_05') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_06') )).
 		
 	lessonsForSubtopic at: (subtopicTitles at: 3) put: (OrderedCollection 
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_07') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_08') )
-		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_09') )).
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_07') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_08') )
+		with: (SLGLesson newWithTask: (SLGDragAndDropTask newWithQuestion: 'Put the elements in the ascending order.' withCode: '' withCorrectAnswer: #('1' '2' '3' '4') withID: 'slg7_09') )).
 	
 	
 	subtopics := OrderedCollection new.
