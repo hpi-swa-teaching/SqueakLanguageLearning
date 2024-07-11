@@ -105,10 +105,10 @@ SLGSubtopicPageView >> lessons [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:39'
 }
-SLGSubtopicPageView >> lessons: anObject [
-	lessons := anObject
+SLGSubtopicPageView >> lessons: aLessonsCollection [
+	lessons := aLessonsCollection
 ]
 
 {
@@ -145,10 +145,10 @@ SLGSubtopicPageView >> subtopic [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:39'
 }
-SLGSubtopicPageView >> subtopic: anObject [
-	subtopic := anObject
+SLGSubtopicPageView >> subtopic: aSubtopicsCollection [
+	subtopic := aSubtopicsCollection
 ]
 
 {
@@ -161,8 +161,8 @@ SLGSubtopicPageView >> topic [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 14:38'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:40'
 }
-SLGSubtopicPageView >> topic: anObject [
-	topic := anObject
+SLGSubtopicPageView >> topic: aTopicsList [
+	topic := aTopicsList
 ]

@@ -76,10 +76,10 @@ SLGLessonPageView >> carousel [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:09'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:37'
 }
-SLGLessonPageView >> carousel: anObject [
-	carousel := anObject
+SLGLessonPageView >> carousel: anArrayOfMorphs [
+	carousel := anArrayOfMorphs
 ]
 
 {
@@ -144,10 +144,10 @@ SLGLessonPageView >> currentIndex [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:06'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:38'
 }
-SLGLessonPageView >> currentIndex: anObject [
-	currentIndex := anObject
+SLGLessonPageView >> currentIndex: aNumber [
+	currentIndex := aNumber
 ]
 
 {
@@ -170,10 +170,10 @@ SLGLessonPageView >> lessons [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 7/10/2024 14:09'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:19'
 }
-SLGLessonPageView >> lessons: anObject [
-	lessons := anObject
+SLGLessonPageView >> lessons: aLessonsCollection [
+	lessons := aLessonsCollection
 ]
 
 {
@@ -186,22 +186,6 @@ SLGLessonPageView >> navigateTroughCarousel [
 		ifFalse: [self controller routerController navigateBack].
 	self carousel next.
 	self updateScoreDisplayOnCompletion
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/18/2024 18:31'
-}
-SLGLessonPageView >> nextExerciseRoute [
-	^ nextExerciseRoute
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/18/2024 18:31'
-}
-SLGLessonPageView >> nextExerciseRoute: anObject [
-	nextExerciseRoute := anObject
 ]
 
 {
@@ -226,10 +210,10 @@ SLGLessonPageView >> subtopic [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 7/10/2024 14:08'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:27'
 }
-SLGLessonPageView >> subtopic: anObject [
-	subtopic := anObject
+SLGLessonPageView >> subtopic: aSubtopicsCollection [
+	subtopic := aSubtopicsCollection
 ]
 
 {
@@ -257,10 +241,10 @@ SLGLessonPageView >> topic [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 7/10/2024 14:08'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:39'
 }
-SLGLessonPageView >> topic: anObject [
-	topic := anObject
+SLGLessonPageView >> topic: aTopicsList [
+	topic := aTopicsList
 ]
 
 {

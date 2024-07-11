@@ -107,7 +107,7 @@ SLGTopicPageView >> getTopicDescription [
 ]
 
 {
-	#category : #accessing,
+	#category : #setup,
 	#'squeak_changestamp' : 'EB 7/11/2024 17:03'
 }
 SLGTopicPageView >> setButtonColorForCompletedSubtopic: aSubtopic forButton: aButton [
@@ -126,10 +126,10 @@ SLGTopicPageView >> subtopics [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:47'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:40'
 }
-SLGTopicPageView >> subtopics: anObject [
-	subtopics := anObject
+SLGTopicPageView >> subtopics: aSubtopicsCollection [
+	subtopics := aSubtopicsCollection
 ]
 
 {
@@ -142,8 +142,8 @@ SLGTopicPageView >> topic [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:22'
+	#'squeak_changestamp' : 'yegi 7/11/2024 19:40'
 }
-SLGTopicPageView >> topic: anObject [
-	topic := anObject
+SLGTopicPageView >> topic: aTopicsList [
+	topic := aTopicsList
 ]
