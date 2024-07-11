@@ -9,15 +9,6 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 10:22'
-}
-SLGMainController class >> savedOpen [
-	^SLGsavedApp 
-		ifNil: [SLGsavedApp := self new]
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:04'
 }
@@ -27,33 +18,38 @@ SLGMainController >> dataAccessService [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:04'
+	#'squeak_changestamp' : 'SW 7/11/2024 13:15'
 }
-SLGMainController >> dataAccessService: anObject [
-	dataAccessService := anObject
+SLGMainController >> dataAccessService: aDataAccessService [
+	dataAccessService := aDataAccessService
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 7/10/2024 11:01'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/11/2024 13:21'
 }
 SLGMainController >> initialize [
+
 	super initialize.
 	
-	self dataAccessService: SLGDataAccessService new.
-	self routerController: SLGRouter new.
+	self
+		dataAccessService: SLGDataAccessService new;
+		routerController: SLGRouter new.
+	
 	self registerRoutes.
-	self routerController navigateTo: '/home'.
+		
+	self routerController navigateTo: '/home'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 7/10/2024 10:02'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/11/2024 13:16'
 }
 SLGMainController >> registerRoutes [
+
 	self routerController 
 		addRouteWithPath: '/home'
-		withPage: (SLGHomePageView newWithController: self)."new initializeWithController: self)."
+		withPage: (SLGHomePageView newWithController: self)
 ]
 
 {
@@ -66,8 +62,8 @@ SLGMainController >> routerController [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:09'
+	#'squeak_changestamp' : 'SW 7/11/2024 13:16'
 }
-SLGMainController >> routerController: anObject [
-	routerController := anObject
+SLGMainController >> routerController: aRouter [
+	routerController := aRouter
 ]

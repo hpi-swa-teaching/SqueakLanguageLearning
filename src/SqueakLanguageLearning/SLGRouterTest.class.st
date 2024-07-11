@@ -35,11 +35,11 @@ SLGRouterTest >> setUp [
 
 {
 	#category : #running,
-	#'squeak_changestamp' : 'SW 7/6/2024 13:18'
+	#'squeak_changestamp' : 'SW 7/11/2024 13:07'
 }
 SLGRouterTest >> tearDown [
 	
-	router closeWindow.
+	router closeAllWindows.
 	
 	super tearDown
 ]
@@ -63,13 +63,13 @@ SLGRouterTest >> testAddRouteWithPath [
 
 {
 	#category : #tests,
-	#'squeak_changestamp' : 'SW 7/6/2024 12:49'
+	#'squeak_changestamp' : 'SW 7/11/2024 13:08'
 }
 SLGRouterTest >> testCloseWindow [
 
 	router addRouteWithPath: '1' withPage: Morph new.
 	router navigateTo: '1'.
-	router closeWindow.
+	router closeAllWindows.
 	
 	self assert: (router routes includes:  '1') not
 ]

@@ -9,10 +9,11 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 17:15'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'SW 7/11/2024 13:24'
 }
 SLGRoute class >> newRouteWithPath: aString withPage: aPage [
+
 	^self new
 		path: aString;
 		page: aPage;
@@ -29,10 +30,10 @@ SLGRoute >> page [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 16:44'
+	#'squeak_changestamp' : 'SW 7/11/2024 13:18'
 }
-SLGRoute >> page: anObject [
-	page := anObject
+SLGRoute >> page: aPage [
+	page := aPage
 ]
 
 {
@@ -45,8 +46,8 @@ SLGRoute >> path [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/4/2024 16:44'
+	#'squeak_changestamp' : 'SW 7/11/2024 13:17'
 }
-SLGRoute >> path: anObject [
-	path := anObject
+SLGRoute >> path: aString [
+	path := aString
 ]
