@@ -12,15 +12,6 @@ Class {
 }
 
 {
-	#category : #constants,
-	#'squeak_changestamp' : 'SW 7/11/2024 17:38'
-}
-SLGClozeTask class >> failure [
-	
-	^ 0
-]
-
-{
 	#category : #'instance creation',
 	#'squeak_changestamp' : 'EB 6/12/2024 22:10'
 }
@@ -38,16 +29,25 @@ SLGClozeTask class >> newClozeWithQuestion: aQuestionString withCode: aCodeStrin
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'SW 7/11/2024 17:38'
+	#'squeak_changestamp' : 'SW 7/12/2024 08:40'
 }
-SLGClozeTask class >> success [
+SLGClozeTask class >> oneHundredPercent [
 	
 	^ 100
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/12/2024 08:42'
+}
+SLGClozeTask class >> zeroPercent [
+	
+	^ 0
+]
+
+{
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 7/11/2024 17:38'
+	#'squeak_changestamp' : 'SW 7/12/2024 08:42'
 }
 SLGClozeTask >> calculateResult: anUserInput [
 
@@ -56,8 +56,8 @@ SLGClozeTask >> calculateResult: anUserInput [
 	modifiedAnswer := (self removeSpacesAndLowercase: self correctAnswer).
 
 	modifiedInput = modifiedAnswer
-		ifTrue: [output := self class success]
-		ifFalse: [output := self class failure].
+		ifTrue: [output := self class oneHundredPercent]
+		ifFalse: [output := self class zeroPercent].
 		
 	^ output
 	

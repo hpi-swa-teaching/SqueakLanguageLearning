@@ -71,6 +71,15 @@ SLGTaskView class >> lightPastelRed [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/12/2024 08:40'
+}
+SLGTaskView class >> oneHundredPercent [
+
+	^ 100
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'yegi 6/20/2024 01:37'
 }
 SLGTaskView class >> paperBasic [	
@@ -146,15 +155,6 @@ SLGTaskView class >> submitButtonHeight [
 SLGTaskView class >> submitButtonWidth [
 
 	^60px
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'SW 7/11/2024 17:39'
-}
-SLGTaskView class >> success [
-
-	^ 100
 ]
 
 {
@@ -295,11 +295,11 @@ SLGTaskView >> addQuestionFieldTo: anArray [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 7/11/2024 17:39'
+	#'squeak_changestamp' : 'SW 7/12/2024 08:40'
 }
 SLGTaskView >> checkResult [
 
-	(self result = self class success)
+	(self result = self class oneHundredPercent)
 		ifTrue: [self printSuccess.
 			self statusDisplay color: self class lightPastelGreen.
 			(SLGUserProgress userData isTaskCompleted: (self task id) ) ifFalse: [
