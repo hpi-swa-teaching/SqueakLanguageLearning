@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 7/11/2024 14:36'
 }
 SLGAnswerSlotMorph class >> newWithLabel: aLabel [
@@ -22,7 +22,7 @@ SLGAnswerSlotMorph class >> newWithLabel: aLabel [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 7/11/2024 14:35'
 }
 SLGAnswerSlotMorph class >> slotBorderColor [
@@ -30,7 +30,7 @@ SLGAnswerSlotMorph class >> slotBorderColor [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 7/11/2024 14:34'
 }
 SLGAnswerSlotMorph class >> slotBorderWidth [
@@ -38,7 +38,7 @@ SLGAnswerSlotMorph class >> slotBorderWidth [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 7/11/2024 14:34'
 }
 SLGAnswerSlotMorph class >> slotCornerRadius [
@@ -46,7 +46,7 @@ SLGAnswerSlotMorph class >> slotCornerRadius [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'yegi 6/16/2024 01:49'
 }
 SLGAnswerSlotMorph class >> slotExtent [

@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'test configuration',
 	#'squeak_changestamp' : 'EB 6/17/2024 14:37'
 }
 SLGRouterTest class >> classNamesNotUnderTest [

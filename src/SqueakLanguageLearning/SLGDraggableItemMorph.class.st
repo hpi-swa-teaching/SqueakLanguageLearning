@@ -15,7 +15,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'SW 7/11/2024 14:46'
 }
 SLGDraggableItemMorph class >> newWithLabel: aString inMorph: aDragAndDropMorph [
@@ -29,7 +29,7 @@ SLGDraggableItemMorph class >> newWithLabel: aString inMorph: aDragAndDropMorph 
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 7/11/2024 14:47'
 }
 SLGDraggableItemMorph class >> slotBorderWidth [
@@ -39,7 +39,7 @@ SLGDraggableItemMorph class >> slotBorderWidth [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 7/11/2024 14:47'
 }
 SLGDraggableItemMorph class >> slotCornerRadius [
@@ -49,7 +49,7 @@ SLGDraggableItemMorph class >> slotCornerRadius [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'SW 7/11/2024 14:47'
 }
 SLGDraggableItemMorph class >> slotExtent [

@@ -9,7 +9,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'EB 6/12/2024 22:13'
 }
 SLGDragAndDropTask class >> newWithQuestion: aQuestionString withCode: aCodeString withCorrectAnswer: anArray withID: anID [

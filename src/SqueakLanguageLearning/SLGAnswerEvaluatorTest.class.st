@@ -9,20 +9,12 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'test configuration',
 	#'squeak_changestamp' : 'EB 6/17/2024 14:25'
 }
 SLGAnswerEvaluatorTest class >> classNamesNotUnderTest [
 
 	^ #(SLGDataAccessService)
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/14/2024 11:18'
-}
-SLGAnswerEvaluatorTest class >> test [ 
-        ^self new run
 ]
 
 {
