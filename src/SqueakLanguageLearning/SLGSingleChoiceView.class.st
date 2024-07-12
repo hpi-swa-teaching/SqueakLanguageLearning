@@ -1,7 +1,11 @@
+"
+This class provides the UI for single choice.
+"
 Class {
 	#name : #SLGSingleChoiceView,
 	#superclass : #SLGBaseChoiceView,
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'SW 7/11/2024 15:33'
 }
 
 {

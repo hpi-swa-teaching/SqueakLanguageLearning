@@ -1,3 +1,6 @@
+"
+This class represents selections for SLGBaseChoiceView intercations. When clicked, a toggle button visually indicates ist active state through a color change.
+"
 Class {
 	#name : #SLGToggleButtonGen,
 	#superclass : #SLGButtonGen,
@@ -5,53 +8,78 @@ Class {
 		'state',
 		'stateUI'
 	],
-	#category : #'SqueakLanguageLearning-UI-Components'
+	#category : #'SqueakLanguageLearning-UI-Components',
+	#'squeak_changestamp' : 'SW 7/5/2024 10:47'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:49'
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:30'
 }
-SLGToggleButtonGen class >> testToggleButton [
-	| toggleBtn |
+SLGToggleButtonGen class >> toggleButtonBorderColor [
 
-	toggleBtn := SLGToggleButtonGen new.
-	
-	toggleBtn onClickWithBlock: [
-		toggleBtn state ifTrue: [
-			toggleBtn color: Color blue.
-		].
-
-		toggleBtn state ifFalse: [
-			toggleBtn color: Color green.
-		].
-	].
-
-	toggleBtn extent: (100@100).
-
-	toggleBtn openInHand.
+	^ Color white
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 17:14'
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:30'
+}
+SLGToggleButtonGen class >> toggleButtonBorderWidth [
+
+	^ 2 px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:31'
+}
+SLGToggleButtonGen class >> toggleButtonColor [
+
+	^ Color white
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 16:31'
+}
+SLGToggleButtonGen class >> toggleButtonCornerRadius [
+
+	^ 30
+]
+
+{
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/11/2024 16:40'
 }
 SLGToggleButtonGen >> initialize [
+
 	super initialize.
-	self state: false.
-	self label: ' '.
+	
+	self 
+		borderWidth: self class toggleButtonBorderWidth;
+		borderColor: self class toggleButtonBorderColor;
+		cornerStyle: #rounded;
+		cornerRadius: self class toggleButtonCornerRadius;
+		color: self class toggleButtonColor;
+		label: ' '.
+		
+	self state: false
+	
+	
+	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:15'
+	#category : #'event handling',
+	#'squeak_changestamp' : 'SW 7/5/2024 09:43'
 }
 SLGToggleButtonGen >> onClickWithBlock: aBlock [
+
 	self callback: [
 		self toggle.	
 		aBlock value.
-		self updateUI.
-	].
+		self updateUI]
 ]
 
 {
@@ -64,10 +92,10 @@ SLGToggleButtonGen >> state [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:40'
+	#'squeak_changestamp' : 'SW 7/5/2024 09:37'
 }
-SLGToggleButtonGen >> state: anObject [
-	state := anObject
+SLGToggleButtonGen >> state: aBoolean [
+	state := aBoolean
 ]
 
 {
@@ -80,24 +108,26 @@ SLGToggleButtonGen >> stateUI [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:17'
+	#'squeak_changestamp' : 'SW 7/5/2024 09:41'
 }
-SLGToggleButtonGen >> stateUI: anObject [
-	stateUI := anObject
+SLGToggleButtonGen >> stateUI: aBlock [
+	stateUI := aBlock
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:45'
+	#category : #'event handling',
+	#'squeak_changestamp' : 'SW 7/5/2024 09:43'
 }
 SLGToggleButtonGen >> toggle [
+
 	self state: (self state) not
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/8/2024 19:17'
+	#category : #'event handling',
+	#'squeak_changestamp' : 'SW 7/5/2024 09:43'
 }
 SLGToggleButtonGen >> updateUI [
-	self stateUI value.
+
+	self stateUI value
 ]

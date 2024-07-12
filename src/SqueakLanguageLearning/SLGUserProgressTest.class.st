@@ -1,42 +1,66 @@
+"
+This class tests the correct handling of completed tasks.
+"
 Class {
 	#name : #SLGUserProgressTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'progress'
+		'originalUserProgress',
+		'mockUserProgress',
+		'mockUserData'
 	],
-	#category : #'SqueakLanguageLearning-Tests'
+	#category : #'SqueakLanguageLearning-Tests',
+	#'squeak_changestamp' : 'SW 7/6/2024 14:04'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/17/2024 15:33'
+	#category : #running,
+	#'squeak_changestamp' : 'EB 7/11/2024 22:43'
 }
 SLGUserProgressTest >> setUp [ 
-        progress := SLGUserProgress new.
+
+	super setUp.
+	
+	originalUserProgress := SLGUserProgress userData copy.
+	mockUserProgress := SLGUserProgress new.
+	SLGUserProgress userData: mockUserProgress. 
+	mockUserData := SLGUserProgress userData.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/17/2024 15:45'
+	#category : #running,
+	#'squeak_changestamp' : 'EB 7/11/2024 22:44'
+}
+SLGUserProgressTest >> tearDown [
+
+	SLGUserProgress userData: originalUserProgress.
+	
+	super tearDown
+]
+
+{
+	#category : #tests,
+	#'squeak_changestamp' : 'EB 7/11/2024 22:45'
 }
 SLGUserProgressTest >> testMarkTaskAsCompleted [
 
-        progress markTaskAsCompleted: 1.
-        self assert: (progress completed includes: 1).
-        self assert: progress score = 10.
+        mockUserData markTaskAsCompleted: 1.
+
+        self assert: (mockUserData completed includes: 1).
+        self assert: mockUserData score = 10
 
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/17/2024 15:46'
+	#category : #tests,
+	#'squeak_changestamp' : 'EB 7/11/2024 22:46'
 }
 SLGUserProgressTest >> testMarkTaskAsCompletedTwice [ 
 
-        progress markTaskAsCompleted: 1.
-        progress markTaskAsCompleted: 1.
+        mockUserData markTaskAsCompleted: 1.
+        mockUserData markTaskAsCompleted: 1.
 
-        self assert: progress score = 10.
-        self assert: (progress completed select: [:each | each = 1]) size = 1.
+        self assert: mockUserData score = 10.
+        self assert: (mockUserData completed select: [:each | each = 1]) size = 1
  
 ]

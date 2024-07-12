@@ -1,3 +1,6 @@
+"
+This class manages the creation and interaction of data hierarchy and UI hierarchy, facilitating seamless integration between the application's logic and user interface.
+"
 Class {
 	#name : #SLGMainController,
 	#superclass : #Object,
@@ -5,17 +8,9 @@ Class {
 		'routerController',
 		'dataAccessService'
 	],
-	#category : #'SqueakLanguageLearning-Controllers'
+	#category : #'SqueakLanguageLearning-Controllers',
+	#'squeak_changestamp' : 'SW 7/11/2024 15:40'
 }
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 10:22'
-}
-SLGMainController class >> savedOpen [
-	^SLGsavedApp 
-		ifNil: [SLGsavedApp := self new]
-]
 
 {
 	#category : #accessing,
@@ -27,35 +22,38 @@ SLGMainController >> dataAccessService [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:04'
+	#'squeak_changestamp' : 'SW 7/11/2024 13:15'
 }
-SLGMainController >> dataAccessService: anObject [
-	dataAccessService := anObject
+SLGMainController >> dataAccessService: aDataAccessService [
+	dataAccessService := aDataAccessService
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/16/2024 15:53'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/11/2024 13:21'
 }
 SLGMainController >> initialize [
+
 	super initialize.
 	
-	self dataAccessService: SLGDataAccessService new.
-	self routerController: SLGRouter new.
+	self
+		dataAccessService: SLGDataAccessService new;
+		routerController: SLGRouter new.
 	
 	self registerRoutes.
-	
-	self routerController navigateTo: '/home'.
+		
+	self routerController navigateTo: '/home'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/20/2024 02:24'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'EB 7/11/2024 15:55'
 }
 SLGMainController >> registerRoutes [
+
 	self routerController 
 		addRouteWithPath: '/home'
-		withPage: (SLGHomePageView new initializeWithController: self).
+		withPage: (SLGHomePageView newWithController: self)
 ]
 
 {
@@ -68,8 +66,8 @@ SLGMainController >> routerController [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 19:09'
+	#'squeak_changestamp' : 'SW 7/11/2024 13:16'
 }
-SLGMainController >> routerController: anObject [
-	routerController := anObject
+SLGMainController >> routerController: aRouter [
+	routerController := aRouter
 ]

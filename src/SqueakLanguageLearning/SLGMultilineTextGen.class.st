@@ -1,29 +1,20 @@
+"
+This class allows display of longer texts wrapped on a page, e.g., used for descriptions of topics.
+"
 Class {
 	#name : #SLGMultilineTextGen,
 	#superclass : #SLGTextGen,
-	#category : #'SqueakLanguageLearning-UI-Components'
+	#category : #'SqueakLanguageLearning-UI-Components',
+	#'squeak_changestamp' : 'SW 7/5/2024 10:34'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 16:05'
-}
-SLGMultilineTextGen class >> testMultilineText [
-	| t |
-
-	t := SLGMultilineTextGen new
-		setText: 'asd asd as da sd asd as da sd asd as da sd as da sd as da sd as da da sda ds a sd ';
-		width: 400.
-	
-	t openInHand.
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:58'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/5/2024 08:43'
 }
 SLGMultilineTextGen >> initialize [
+
 	super initialize.
-	self wrapFlag: true.
-	self lock.
+	
+	self wrapFlag: true
 ]

@@ -1,24 +1,15 @@
+"
+This class represents short text locked on a page with a certain style and size, e.g., for titles for topics, subtopics and lessons on the corresponding pages.
+"
 Class {
 	#name : #SLGTextGen,
 	#superclass : #TextMorph,
 	#instVars : [
 		'content'
 	],
-	#category : #'SqueakLanguageLearning-UI-Components'
+	#category : #'SqueakLanguageLearning-UI-Components',
+	#'squeak_changestamp' : 'SW 7/5/2024 10:31'
 }
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 16:04'
-}
-SLGTextGen class >> testText [
-	| t |
-
-	t := SLGMultilineTextGen new
-		setText: 'Hello World!'.
-	
-	t openInHand.
-]
 
 {
 	#category : #accessing,
@@ -30,24 +21,26 @@ SLGTextGen >> content [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:54'
+	#'squeak_changestamp' : 'SW 7/5/2024 09:45'
 }
-SLGTextGen >> content: anObject [
-	content := anObject
+SLGTextGen >> content: aString [
+	content := aString
+]
+
+{
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/5/2024 09:50'
+}
+SLGTextGen >> initialize [
+
+	super initialize.
+	
+	self content: ' '.
+	self lock
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'yegi 6/13/2024 09:36'
-}
-SLGTextGen >> initialize [
-	super initialize.
-	self content: ' '.
-	self lock.
-]
-
-{
-	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'Alexander Netz 6/9/2024 13:05'
 }
 SLGTextGen >> setFontSize: anInteger [
@@ -57,9 +50,10 @@ SLGTextGen >> setFontSize: anInteger [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 15:56'
+	#'squeak_changestamp' : 'SW 7/5/2024 09:46'
 }
 SLGTextGen >> setText: aString [
+
 	self content: aString.
-	self contents: aString.
+	self contents: aString
 ]

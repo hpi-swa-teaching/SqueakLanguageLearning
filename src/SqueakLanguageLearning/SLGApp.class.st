@@ -1,3 +1,6 @@
+"
+This class is responsible for registering the application in the menubar and initializing necessary instances during the startup process.
+"
 Class {
 	#name : #SLGApp,
 	#superclass : #Object,
@@ -5,11 +8,12 @@ Class {
 		'homepage',
 		'topicList'
 	],
-	#category : #'SqueakLanguageLearning-Controllers'
+	#category : #'SqueakLanguageLearning-Controllers',
+	#'squeak_changestamp' : 'SW 7/11/2024 15:37'
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'system startup',
 	#'squeak_changestamp' : 'SW 5/17/2024 09:26'
 }
 SLGApp class >> initialize [
@@ -18,22 +22,12 @@ SLGApp class >> initialize [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'xiaoshi 5/12/2024 13:31'
+	#category : #'system startup',
+	#'squeak_changestamp' : 'SW 7/11/2024 13:09'
 }
 SLGApp class >> open [
-	self openWithProgress.
 	
-		
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/12/2024 10:52'
-}
-SLGApp class >> openWithProgress [
-	"read from a file in the directory"
 	SLGMainController new
 	
-	"SLGMainController savedOpen"
+		
 ]

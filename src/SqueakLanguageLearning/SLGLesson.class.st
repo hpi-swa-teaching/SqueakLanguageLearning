@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'EB 6/26/2024 14:30'
 }
 SLGLesson class >> newWithTask: aTask [
@@ -23,12 +23,12 @@ SLGLesson class >> newWithTask: aTask [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/12/2024 16:27'
+	#category : #testing,
+	#'squeak_changestamp' : 'EB 7/9/2024 14:13'
 }
 SLGLesson >> isCompleted [
 
-	^task isCompleted
+	^self task isCompleted
 
 
 ]
@@ -42,7 +42,7 @@ SLGLesson >> task [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #accessing,
 	#'squeak_changestamp' : 'EB 6/26/2024 15:46'
 }
 SLGLesson >> task: aTask [

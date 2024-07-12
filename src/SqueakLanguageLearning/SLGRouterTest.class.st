@@ -1,11 +1,18 @@
+"
+This class tests the navigation system within SqueakLanguageLearning.
+"
 Class {
 	#name : #SLGRouterTest,
 	#superclass : #TestCase,
-	#category : #'SqueakLanguageLearning-Tests'
+	#instVars : [
+		'router'
+	],
+	#category : #'SqueakLanguageLearning-Tests',
+	#'squeak_changestamp' : 'SW 7/5/2024 17:47'
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #'test configuration',
 	#'squeak_changestamp' : 'EB 6/17/2024 14:37'
 }
 SLGRouterTest class >> classNamesNotUnderTest [
@@ -14,87 +21,94 @@ SLGRouterTest class >> classNamesNotUnderTest [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/14/2024 22:10'
+	#category : #running,
+	#'squeak_changestamp' : 'SW 7/6/2024 12:04'
+}
+SLGRouterTest >> setUp [
+
+	super setUp.
+	
+	router := SLGRouter new
+
+	
+]
+
+{
+	#category : #running,
+	#'squeak_changestamp' : 'SW 7/11/2024 13:07'
+}
+SLGRouterTest >> tearDown [
+	
+	router closeAllWindows.
+	
+	super tearDown
+]
+
+{
+	#category : #tests,
+	#'squeak_changestamp' : 'SW 7/6/2024 12:49'
 }
 SLGRouterTest >> testAddRouteWithPath [
-	| router routeString page |
-	
+
+	| routeString page |
 	routeString := 'myRoute'.
 	page := SLGAbstractPage new.
-	router := SLGRouter new.
 	
 	router addRouteWithPath: routeString withPage: page.
 	
 	self assert: (router routes includesKey: routeString).
-	self assert: ((router routes at: routeString) page == page).
+	self assert: ((router routes at: routeString) page == page)
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/14/2024 22:30'
+	#category : #tests,
+	#'squeak_changestamp' : 'SW 7/11/2024 13:08'
 }
 SLGRouterTest >> testCloseWindow [
-	| router  |
-	
-	router := SLGRouter new.
-	
+
 	router addRouteWithPath: '1' withPage: Morph new.
-	
 	router navigateTo: '1'.
+	router closeAllWindows.
 	
-	router closeWindow.
-	
-	self assert: (router routes includes:  '1') not.
+	self assert: (router routes includes:  '1') not
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/14/2024 22:31'
+	#category : #tests,
+	#'squeak_changestamp' : 'SW 7/6/2024 14:00'
 }
 SLGRouterTest >> testNavigateBack [
-	| router  |
-	
-	router := SLGRouter new.
-	
+
 	router addRouteWithPath: '1' withPage: Morph new.
 	router addRouteWithPath: '2' withPage: Morph new.
 	
 	router navigateTo: '1'.
 	router navigateTo: '2'.
-	
 	router navigateBack.
 	
-	self assert: (router routeHistory last path) == '1'.
-	
-	router closeWindow.
+	self assert: (router routeHistory last path) = '1'
 
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/14/2024 22:31'
+	#category : #tests,
+	#'squeak_changestamp' : 'SW 7/6/2024 14:00'
 }
 SLGRouterTest >> testNavigateTo [
-	| router  |
-	
-	router := SLGRouter new.
-	
+
 	router addRouteWithPath: '1' withPage: Morph new.
 	router addRouteWithPath: '2' withPage: Morph new.
 	
 	router navigateTo: '1'.
 	
-	self assert: (router routeHistory last path) == '1'.
+	self assert: (router routeHistory last path) = '1'.
 	
 	router navigateTo: '2'.
 	
-	self assert: (router routeHistory last path) == '2'.
+	self assert: (router routeHistory last path) = '2'.
 	
 	router navigateTo: '1'.
 	
-	self assert: (router routeHistory last path) == '1'.
-	
-	router closeWindow.
+	self assert: (router routeHistory last path) = '1'
 ]

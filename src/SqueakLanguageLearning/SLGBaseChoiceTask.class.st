@@ -1,10 +1,14 @@
+"
+This class has general properties on logic for both single and multiple choice.
+"
 Class {
 	#name : #SLGBaseChoiceTask,
 	#superclass : #SLGTask,
 	#instVars : [
 		'answerOptions'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'SW 7/11/2024 15:29'
 }
 
 {
@@ -25,7 +29,7 @@ SLGBaseChoiceTask >> answerOptions: anArray [
 
 {
 	#category : #verification,
-	#'squeak_changestamp' : 'SW 6/8/2024 17:47'
+	#'squeak_changestamp' : 'SW 7/11/2024 13:45'
 }
 SLGBaseChoiceTask >> isValid: anOrderedCollection [
 	

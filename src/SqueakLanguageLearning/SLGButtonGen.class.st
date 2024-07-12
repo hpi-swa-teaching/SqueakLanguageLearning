@@ -1,23 +1,28 @@
+"
+This class represents the general button used in SqueakLanguageLearning. It enables multiple functions for a button by using a callback.
+"
 Class {
 	#name : #SLGButtonGen,
 	#superclass : #SimpleButtonMorph,
 	#instVars : [
 		'callback'
 	],
-	#category : #'SqueakLanguageLearning-UI-Components'
+	#category : #'SqueakLanguageLearning-UI-Components',
+	#'squeak_changestamp' : 'SW 7/5/2024 10:36'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/15/2024 23:28'
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/5/2024 09:46'
 }
 SLGButtonGen class >> buttonBorderWidth [
-	^2px
+
+	^ 2 px
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:14'
+	#'squeak_changestamp' : 'SW 7/5/2024 09:36'
 }
 SLGButtonGen >> callback [
 	^ callback value
@@ -25,27 +30,30 @@ SLGButtonGen >> callback [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:14'
+	#'squeak_changestamp' : 'SW 7/4/2024 18:01'
 }
-SLGButtonGen >> callback: anObject [
-	callback := anObject
+SLGButtonGen >> callback: aBlock [
+	callback := aBlock
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:15'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/5/2024 09:43'
 }
 SLGButtonGen >> initialize [
+
 	super initialize.
-	self
+	
+	self 
 		target: [self callback];
-		actionSelector: #value.
+		actionSelector: #value
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'Alexander Netz 6/7/2024 14:13'
+	#category : #'event handling',
+	#'squeak_changestamp' : 'SW 7/5/2024 09:43'
 }
 SLGButtonGen >> onClickWithBlock: aBlock [
-	self callback: aBlock.
+
+	self callback: aBlock
 ]

@@ -1,23 +1,52 @@
+"
+This class represents the slot to put drag an item to for SLGDragAndDropView.
+"
 Class {
 	#name : #SLGAnswerSlotMorph,
 	#superclass : #Morph,
 	#instVars : [
 		'label'
 	],
-	#category : #'SqueakLanguageLearning-Tasks'
+	#category : #'SqueakLanguageLearning-Tasks',
+	#'squeak_changestamp' : 'xiaoshi 7/7/2024 18:43'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 23:13'
+	#category : #'instance creation',
+	#'squeak_changestamp' : 'SW 7/11/2024 14:36'
 }
 SLGAnswerSlotMorph class >> newWithLabel: aLabel [
 
-	^self basicNew initializeWithLabel: aLabel
+	^ self new
+		label: aLabel
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:35'
+}
+SLGAnswerSlotMorph class >> slotBorderColor [
+	^ Color darkGray
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:34'
+}
+SLGAnswerSlotMorph class >> slotBorderWidth [
+	^ 2 px
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:34'
+}
+SLGAnswerSlotMorph class >> slotCornerRadius [
+	^ 10 px
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'yegi 6/16/2024 01:49'
 }
 SLGAnswerSlotMorph class >> slotExtent [
@@ -25,38 +54,36 @@ SLGAnswerSlotMorph class >> slotExtent [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 23:12'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'SW 7/11/2024 14:35'
 }
-SLGAnswerSlotMorph >> initializeWithLabel: aLabel [
+SLGAnswerSlotMorph >> initialize [
 
-	self initialize.
-	label := aLabel.
-	
-	self setup.
+	super initialize.
+
+	self 
+		color: Color white;
+		extent: self class slotExtent;
+		borderWidth: self class slotBorderWidth;
+		borderColor: self class slotBorderColor;
+		cornerStyle: #rounded;
+		cornerRadius: self class slotCornerRadius
+			
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'EB 6/1/2024 23:15'
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:10'
 }
 SLGAnswerSlotMorph >> label [
-
 	^ label
 	
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'yegi 6/16/2024 01:49'
+	#category : #accessing,
+	#'squeak_changestamp' : 'SW 7/11/2024 14:33'
 }
-SLGAnswerSlotMorph >> setup [
-
-	self color: Color white;
-			extent: self class slotExtent;
-			borderWidth: 2px;
-			borderColor: Color darkGray;
-			cornerStyle: #rounded;
-			cornerRadius: 10px.
-			
+SLGAnswerSlotMorph >> label: aString [
+	label := aString
 ]
