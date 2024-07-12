@@ -379,33 +379,6 @@ SLGAbstractPage class >> subBadgeIconWidthMarginRatio [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'yegi 7/11/2024 01:11'
-}
-SLGAbstractPage class >> taskViewExtent [
-
-	^ (self taskViewHeight) px @ (self taskViewWidth) px
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'yegi 7/11/2024 01:10'
-}
-SLGAbstractPage class >> taskViewHeight [
-
-	^ 1200
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'yegi 7/11/2024 01:11'
-}
-SLGAbstractPage class >> taskViewWidth [
-
-	^ 800
-]
-
-{
-	#category : #constants,
 	#'squeak_changestamp' : 'yegi 7/11/2024 01:16'
 }
 SLGAbstractPage class >> titleHeightRatio [

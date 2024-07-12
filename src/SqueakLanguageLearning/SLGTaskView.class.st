@@ -71,15 +71,6 @@ SLGTaskView class >> lightPastelRed [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:53'
-}
-SLGTaskView class >> pageExtent [
-
-	^ ((1604 * 0.55) px) @ ((1204 * 0.55) px)
-]
-
-{
-	#category : #constants,
 	#'squeak_changestamp' : 'yegi 6/20/2024 01:37'
 }
 SLGTaskView class >> paperBasic [	
@@ -93,6 +84,15 @@ SLGTaskView class >> paperBasic [
 }
 SLGTaskView class >> pastelRed [
 	^Color r: 1 g: 0.4 b: 0.4
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/12/2024 07:55'
+}
+SLGTaskView class >> scaleFactor [
+
+	^ 0.55
 ]
 
 {
@@ -177,38 +177,83 @@ SLGTaskView class >> taskDescription [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:53'
+	#'squeak_changestamp' : 'SW 7/12/2024 07:54'
+}
+SLGTaskView class >> taskElementInitialWidth [
+
+	^ 1000
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/12/2024 07:55'
 }
 SLGTaskView class >> taskElementWidth [
 
-	^ (1000 * 0.55) px
+	^ (self taskElementInitialWidth * self scaleFactor) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 14:06'
+	#'squeak_changestamp' : 'SW 7/12/2024 07:55'
+}
+SLGTaskView class >> taskElementsInitialMargin [
+
+	^ 25
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/12/2024 07:55'
 }
 SLGTaskView class >> taskElementsMargin [
 
-	^ (25 * 0.55) px
+	^ (self taskElementsInitialMargin * self scaleFactor) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:54'
+	#'squeak_changestamp' : 'SW 7/12/2024 07:56'
 }
 SLGTaskView class >> taskViewExtent [
 
-	^( 1400 * 0.55) px @ (900 * 0.55) px
+	^ (self taskViewInitialWidth * self scaleFactor) px @ (self taskViewInitialHeight * self scaleFactor) px
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'xiaoshi 6/14/2024 13:54'
+	#'squeak_changestamp' : 'SW 7/12/2024 07:51'
+}
+SLGTaskView class >> taskViewInitialHeight [
+
+	^ 900
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/12/2024 07:51'
+}
+SLGTaskView class >> taskViewInitialMargin [
+
+	^ 130 
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/12/2024 07:52'
+}
+SLGTaskView class >> taskViewInitialWidth [
+
+	^ 1200
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'SW 7/12/2024 07:57'
 }
 SLGTaskView class >> taskViewMargin [
 
-	^ (130 * 0.55) px
+	^ (self taskViewInitialMargin * self scaleFactor) px
 ]
 
 {
