@@ -68,6 +68,14 @@ SLGLessonPageView class >> taskTypeDictionary [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'AN 7/12/2024 13:06'
+}
+SLGLessonPageView class >> taskTypeDictionary: anObject [
+	taskTypeDictionary := anObject
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'Alexander Netz 6/19/2024 00:09'
 }
 SLGLessonPageView >> carousel [
