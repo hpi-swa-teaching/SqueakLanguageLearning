@@ -806,12 +806,13 @@ SLGAbstractPage >> refresh [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'EB 7/11/2024 16:32'
+	#'squeak_changestamp' : 'yegi 7/12/2024 11:53'
 }
 SLGAbstractPage >> resetProgress [
 
 	SLGUserProgress reset.
-	self controller routerController navigateTo: '/home'
+	SLGMainController new.
+	self controller routerController closeAllWindows
 ]
 
 {
